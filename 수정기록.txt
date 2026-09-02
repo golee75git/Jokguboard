@@ -1,5 +1,26 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 문서 정리 (소스 없음)
+
+PRD·plan을 현재 제품 기준으로 맞춤. 날짜별 `docs/jokgu-changelog.md`, APK별 `docs/jokgu-apk.md` 추가. 앱 HTML/JS/Android/APK는 변경하지 않음. 현재 설치는 그대로 `app-debug-0902_1746-outdisc.apk`.
+
+### APK
+변경 없음 (`app-debug-0902_1746-outdisc.apk`)
+
+### 라이선스
+문서만. 신규 npm/GPL 없음.
+
+### 보안
+문서만. 코드·권한 변경 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `docs/jokgu-prd.md`, `docs/jokgu-plan.md`
+- 신규: `docs/jokgu-changelog.md`, `docs/jokgu-apk.md`
+- 재사용: `수정기록.txt` 기존 항목
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+- 소스 미수정: `jokgu_scoreboard.html`, Android, help, `index.html`
+
+---
 ## 2026-09-02 원 바깥·크게 (JK_NET_COL / JK_DISK_GLYPH)
 
 선수 원을 가운데가 아니라 바깥(왼쪽 팀 왼쪽, 오른쪽 팀 오른쪽)에 세로로 둠. 왼쪽 아래=1, 오른쪽 위=1 유지. 원·숫자를 키우고 서브 선수 원·숫자만 더 크게, 금색 배경. 숫자 자리 이동 없음. 서브 규칙은 그대로. `C:\Score` 미수정.
