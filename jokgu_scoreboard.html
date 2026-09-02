@@ -90,6 +90,8 @@
       width: 100%;
     }
     .court.is-ends-swapped { flex-direction: row-reverse; }
+    .court.boards { gap: 10px; }
+    .side.team { border-radius: 18px; }
     .side {
       position: relative;
       flex: 1;
@@ -148,17 +150,17 @@
       border-left: 0;
       border-right: 1px solid rgba(165, 180, 252, 0.35);
     }
-    /* JK_DISK_GLYPH: 1·2·3. 되돌리: .rot-dot 블록 삭제 */
+    /* JK_DISK_GLYPH: 1·2·3·4 원. 4번은 대기. 되돌리: .rot-dot 블록 삭제 */
     .rot-dot {
-      width: clamp(44px, 10vmin, 72px);
-      height: clamp(44px, 10vmin, 72px);
-      border-radius: 12px;
+      width: clamp(40px, 9vmin, 68px);
+      height: clamp(40px, 9vmin, 68px);
+      border-radius: 50%;
       border: 2px solid rgba(103, 232, 249, 0.42);
       background: linear-gradient(155deg, rgba(15, 23, 42, 0.95), rgba(8, 145, 178, 0.7));
       color: #ecfeff;
       display: grid;
       place-items: center;
-      font-size: clamp(18px, 4vmin, 28px);
+      font-size: clamp(16px, 3.6vmin, 26px);
       cursor: pointer;
     }
     .side.ivory .rot-dot {
@@ -171,6 +173,22 @@
       border-color: var(--gold);
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
+    .rot-dot.is-bench { opacity: 0.38; cursor: default; }
+    .btn-grid { display: flex; justify-content: center; padding: 4px 0 2px; }
+    .pt-neg {
+      font: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      padding: 4px 14px;
+      background: rgba(15, 23, 42, 0.45);
+      color: inherit;
+      cursor: pointer;
+    }
+    .side.ivory .pt-neg {
+      border-color: rgba(15, 23, 42, 0.2);
+      background: rgba(255, 255, 255, 0.7);
+    }
+    body.is-simple .btn-grid { display: none; }
     .side-main {
       flex: 1;
       min-width: 0;
@@ -668,33 +686,37 @@
     </div>
     <div class="hint-line" id="statusLine"></div>
     <div class="board-wrap" id="boardWrap">
-    <div class="court" id="court">
-      <section class="side cyan" id="sideBlue" data-team="blue">
+    <div class="court boards" id="court">
+      <section class="team blue side cyan pos-swap-start" id="sideBlue" data-team="blue">
         <div class="rot-col" aria-label="rotation">
           <div class="rot-dot" data-team="blue" data-slot="1">1</div>
           <div class="rot-dot" data-team="blue" data-slot="2">2</div>
           <div class="rot-dot" data-team="blue" data-slot="3">3</div>
+          <div class="rot-dot is-bench" data-team="blue" data-slot="4">4</div>
         </div>
-        <div class="side-main">
-          <div class="team-title" id="nameBlue" data-team="blue">청</div>
-          <div class="point-num" id="scoreBlue" data-team="blue" role="button" tabindex="0">0</div>
+        <div class="side-main team-main">
+          <div class="team-title team-label" id="nameBlue" data-team="blue">청</div>
+          <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0">0</div>
+          <div class="btn-grid"><button type="button" class="pt-neg" data-team="blue">−1</button></div>
         </div>
       </section>
-      <aside class="mid">
+      <aside class="mid sets-panel">
         <div class="set-label" data-i18n="sets">세트</div>
-        <div class="set-row"><span id="setLeft">0</span> : <span id="setRight">0</span></div>
+        <div class="set-row"><span class="set-num" id="setLeft">0</span> : <span class="set-num" id="setRight">0</span></div>
         <div class="deuce-pill" id="deucePill" data-i18n="deuce">듀스</div>
         <div class="serve-guide" id="serveGuide"></div>
       </aside>
-      <section class="side ivory" id="sideWhite" data-team="white">
+      <section class="team white side ivory pos-swap-end" id="sideWhite" data-team="white">
         <div class="rot-col" aria-label="rotation">
           <div class="rot-dot" data-team="white" data-slot="1">1</div>
           <div class="rot-dot" data-team="white" data-slot="2">2</div>
           <div class="rot-dot" data-team="white" data-slot="3">3</div>
+          <div class="rot-dot is-bench" data-team="white" data-slot="4">4</div>
         </div>
-        <div class="side-main">
-          <div class="team-title" id="nameWhite" data-team="white">백</div>
-          <div class="point-num" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
+        <div class="side-main team-main">
+          <div class="team-title team-label" id="nameWhite" data-team="white">백</div>
+          <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
+          <div class="btn-grid"><button type="button" class="pt-neg" data-team="white">−1</button></div>
         </div>
       </section>
     </div>
@@ -1004,6 +1026,8 @@
     var matchSeries = "bo3_2";
     var ttsOn = false;
     var simpleMode = false;
+    var rotBlue = [1, 2, 3];
+    var rotWhite = [1, 2, 3];
     var historyStack = [];
     var lastPlusAt = { blue: 0, white: 0 };
 
@@ -1096,8 +1120,46 @@
         font: boardFont,
         series: matchSeries,
         tts: ttsOn === true,
-        simple: simpleMode === true
+        simple: simpleMode === true,
+        rotBlue: rotBlue.slice(),
+        rotWhite: rotWhite.slice()
       };
+    }
+    function normalizeRot(v) {
+      if (!v || v.length < 3) return [1, 2, 3];
+      var a = [v[0] | 0, v[1] | 0, v[2] | 0];
+      if ([1, 2, 3].every(function (n) { return a.indexOf(n) >= 0; })) return a;
+      return [1, 2, 3];
+    }
+    /* JK_ROTATE: 사이드아웃 시 1~3만 회전, 4번은 대기. 되돌리: rotateTeam·rotBlue/rotWhite 삭제 */
+    function rotateTeam(team) {
+      var cur = team === "white" ? rotWhite : rotBlue;
+      var next = cur.slice();
+      var last = next.pop();
+      next.unshift(last);
+      if (team === "white") rotWhite = next;
+      else rotBlue = next;
+    }
+    function resetRotation() {
+      rotBlue = [1, 2, 3];
+      rotWhite = [1, 2, 3];
+    }
+    function paintRotation() {
+      [["blue", rotBlue], ["white", rotWhite]].forEach(function (pair) {
+        var team = pair[0];
+        var order = pair[1];
+        document.querySelectorAll('.rot-dot[data-team="' + team + '"]').forEach(function (dot) {
+          var slot = dot.getAttribute("data-slot");
+          if (slot === "4") {
+            dot.textContent = "4";
+            dot.classList.add("is-bench");
+          } else {
+            var i = (slot | 0) - 1;
+            dot.textContent = String(order[i] || slot);
+            dot.classList.remove("is-bench");
+          }
+        });
+      });
     }
     function normalizeLook(v) {
       return LOOK_IDS.indexOf(v) >= 0 ? v : "plain";
@@ -1141,6 +1203,8 @@
       if (s.series) matchSeries = normalizeSeries(s.series);
       ttsOn = s.tts === true;
       simpleMode = s.simple === true;
+      rotBlue = normalizeRot(s.rotBlue);
+      rotWhite = normalizeRot(s.rotWhite);
     }
     function pushHistory() {
       historyStack.push(snapshot());
@@ -1186,6 +1250,7 @@
         var on = serve === team && slot === "1";
         dot.classList.toggle("is-server", on);
       });
+      paintRotation();
       elDeuce.classList.toggle("is-on", inDeuceWindow());
       if (isServePickPending()) elServeGuide.textContent = t("needServe");
       else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });
@@ -1271,6 +1336,7 @@
       scoreBlue = 0;
       scoreWhite = 0;
       serveAnchor = null;
+      resetRotation();
       if (!matchEnded && prevAnchor) {
         teamsSwapped = !teamsSwapped;
         serveChoice = opposite(prevAnchor);
@@ -1302,6 +1368,7 @@
       }
       pushHistory();
       var oldN = scoreBlue + scoreWhite;
+      var serveBefore = computeServeTeam();
       if (team === "white") scoreWhite = Math.max(0, scoreWhite + delta);
       else scoreBlue = Math.max(0, scoreBlue + delta);
       var newN = scoreBlue + scoreWhite;
@@ -1313,9 +1380,16 @@
           serveAnchor = null;
           serveChoice = null;
         }
-      } else if (oldN === 0 && delta > 0) {
-        serveAnchor = serveChoice === "blue" || serveChoice === "white" ? serveChoice : team;
-        serveChoice = null;
+      } else if (delta > 0) {
+        if (oldN === 0) {
+          var picked = serveChoice === "blue" || serveChoice === "white" ? serveChoice : team;
+          serveChoice = null;
+          if (team !== picked) rotateTeam(team);
+          serveAnchor = team;
+        } else if (serveBefore && team !== serveBefore) {
+          rotateTeam(team);
+          serveAnchor = team;
+        }
       }
       persistState();
       paint();
@@ -1360,6 +1434,7 @@
       teamsSwapped = false;
       serveChoice = null;
       serveAnchor = null;
+      resetRotation();
       persistState();
       paint();
       closeWinBanner();
@@ -1430,7 +1505,7 @@
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
       if (el.closest(".banner.is-open")) return true;
-      if (el.closest(".topbar, .rot-dot, .team-title")) return true;
+      if (el.closest(".topbar, .rot-dot, .team-title, .btn-grid")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
         return false;
@@ -1498,8 +1573,16 @@
     bindPoint(elScoreBlue);
     bindPoint(elScoreWhite);
 
+    document.querySelectorAll(".pt-neg").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        applyDelta(btn.getAttribute("data-team"), -1, "minus-btn");
+      });
+    });
+
     document.querySelectorAll(".rot-dot").forEach(function (dot) {
       dot.addEventListener("click", function () {
+        if (dot.getAttribute("data-slot") === "4") return;
         setServeChoice(dot.getAttribute("data-team"));
       });
     });
