@@ -668,6 +668,2711 @@
       body.look-cyber3d .mid,
       body.look-arena3d .mid { transform: none; }
     }
+    /* JK_SCORE_SKIN_CSS: 자체 Score 스킨 CSS를 족구 DOM에 연결. PNG·liverec 없음. 되돌리: 이 블록·JK_SCORE_SKIN_BRIDGE·SKIN_IDS 삭제 */
+    /* ===== SKIN_NEON: 네온 스킨 본체. 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-neon {
+      background-color: #03060d;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 8% 0%, rgba(6, 182, 212, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 92% 0%, rgba(251, 146, 60, 0.22), transparent 55%),
+        radial-gradient(ellipse 100% 70% at 50% 110%, rgba(2, 6, 23, 0.95), transparent 60%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='48' viewBox='0 0 56 48'><g fill='none' stroke='%2306b6d4' stroke-opacity='0.10' stroke-width='1'><polygon points='14,2 42,2 56,24 42,46 14,46 0,24'/></g></svg>");
+      background-attachment: fixed;
+    }
+
+    body.skin-neon .topbar {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.65),
+        0 0 24px rgba(6, 182, 212, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-neon .topbar {
+      color: #ecfeff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.45);
+    }
+
+    body.skin-neon .team.blue {
+      background: linear-gradient(150deg, #001b2e 0%, #002942 50%, #00121f 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 36px rgba(6, 182, 212, 0.32),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-neon .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.42), transparent 55%);
+    }
+    body.skin-neon .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.6);
+      background:
+        linear-gradient(165deg, rgba(6, 182, 212, 0.32) 0%, rgba(3, 8, 20, 0.82) 60%, rgba(8, 47, 73, 0.95) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-neon .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 12px rgba(103, 232, 249, 0.7),
+        0 0 36px rgba(6, 182, 212, 0.5);
+    }
+
+    body.skin-neon .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, #2a1300 0%, #3d1c00 50%, #1a0b00 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 36px rgba(251, 146, 60, 0.32),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-neon .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.42), transparent 55%);
+    }
+    body.skin-neon .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      background:
+        linear-gradient(165deg, rgba(251, 146, 60, 0.28) 0%, rgba(3, 8, 20, 0.82) 60%, rgba(154, 52, 18, 0.88) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+    body.skin-neon .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 12px rgba(251, 146, 60, 0.7),
+        0 0 36px rgba(234, 88, 12, 0.5);
+    }
+
+    body.skin-neon footer.card,
+    body.skin-neon .voice-card {
+      background: rgba(3, 8, 20, 0.92);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.65),
+        0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    body.skin-neon .sets-panel {
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      box-shadow:
+        var(--shadow-md),
+        0 0 18px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* ===== SKIN_ARENA: 아레나(탁구장) 스킨. 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-arena {
+      background-color: #000000;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(20, 25, 40, 0.6), transparent 70%);
+      background-attachment: fixed;
+    }
+
+    body.skin-arena .topbar {
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    body.skin-arena .topbar {
+      color: #f8fafc;
+      text-shadow: 0 0 14px rgba(255, 255, 255, 0.18);
+    }
+
+    /* 카드 공통: 검정 배경 + 둥근 모서리 */
+    body.skin-arena .team {
+      background: #000000;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+    body.skin-arena .team::before {
+      background: none;
+    }
+
+    /* 청팀(파랑 아레나): 외곽선·도트·줄무늬·하단 공을 ::after 한 장의 SVG로 */
+    body.skin-arena .team.blue {
+      color: #dbeafe;
+      background:
+        /* 좌상단 대각 줄무늬 */
+        repeating-linear-gradient(135deg, transparent 0 10px, rgba(56, 130, 246, 0.10) 10px 12px) top left / 40% 35% no-repeat,
+        /* 우측 가장자리 도트 그라데이션 */
+        radial-gradient(circle, rgba(56, 130, 246, 0.55) 1px, transparent 1.6px) right center / 8px 8px,
+        /* 우측 도트를 안쪽으로 페이드시키는 마스크용 다크 그라데이션 */
+        linear-gradient(270deg, transparent 0%, #000 45%) right center / 60% 100% no-repeat,
+        #000000;
+    }
+    body.skin-arena .team.blue::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-20%25' y='-20%25' width='140%25' height='140%25'><feGaussianBlur stdDeviation='1.6'/></filter></defs><g filter='url(%23g)'><path d='M 14,2 L 130,2 L 135,7 L 158,7 L 163,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%233282ff' stroke-width='3'/></g><path d='M 14,2 L 130,2 L 135,7 L 158,7 L 163,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%2360a5fa' stroke-width='1.5'/><circle cx='100' cy='238' r='4' fill='%23ffffff'/><circle cx='160' cy='2' r='3.5' fill='%23ffffff'/></svg>") center / 100% 100% no-repeat;
+    }
+
+    /* 백팀(빨강 아레나) — 좌우 거울 대칭으로 도트·줄무늬 위치 반전 */
+    body.skin-arena .team.white {
+      color: #fee2e2;
+      background:
+        repeating-linear-gradient(45deg, transparent 0 10px, rgba(255, 0, 64, 0.10) 10px 12px) bottom right / 40% 35% no-repeat,
+        radial-gradient(circle, rgba(255, 0, 64, 0.55) 1px, transparent 1.6px) left center / 8px 8px,
+        linear-gradient(90deg, transparent 0%, #000 45%) left center / 60% 100% no-repeat,
+        #000000;
+    }
+    body.skin-arena .team.white::before {
+      background: none;
+    }
+    body.skin-arena .team.white::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-20%25' y='-20%25' width='140%25' height='140%25'><feGaussianBlur stdDeviation='1.6'/></filter></defs><g filter='url(%23g)'><path d='M 14,2 L 70,2 L 75,7 L 98,7 L 103,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%23ff0040' stroke-width='3'/></g><path d='M 14,2 L 70,2 L 75,7 L 98,7 L 103,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%23ff6b8a' stroke-width='1.5'/><circle cx='100' cy='238' r='4' fill='%23ffffff'/><circle cx='40' cy='2' r='3.5' fill='%23ffffff'/></svg>") center / 100% 100% no-repeat;
+    }
+
+    /* 점수·라벨 등 카드 안쪽 콘텐츠는 SVG 위로 */
+    body.skin-arena .team > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.skin-arena .team.blue .team-label {
+      color: #e0ecff;
+      border: 1px solid rgba(96, 165, 250, 0.45);
+      background: rgba(20, 40, 80, 0.55);
+      box-shadow: 0 0 14px rgba(56, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    body.skin-arena .team.white .team-label {
+      color: #ffe4e6;
+      border: 1px solid rgba(255, 107, 138, 0.45);
+      background: rgba(80, 10, 30, 0.55);
+      box-shadow: 0 0 14px rgba(255, 0, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    body.skin-arena .team.blue .score {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(96, 165, 250, 0.7), 0 0 32px rgba(56, 130, 246, 0.4);
+    }
+    body.skin-arena .team.white .score {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(255, 107, 138, 0.7), 0 0 32px rgba(255, 0, 64, 0.4);
+    }
+
+    /* 중앙 탁구 네트 (세트 패널을 네트로 변환) */
+    body.skin-arena .sets-panel {
+      background:
+        repeating-linear-gradient(0deg, rgba(180, 180, 180, 0.7) 0 2px, transparent 2px 5px),
+        rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 0 14px rgba(255, 255, 255, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    body.skin-arena footer.card,
+    body.skin-arena .voice-card {
+      background: rgba(0, 0, 0, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ===== SKIN_BROADCAST: 방송용 lower-third 스킨. 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-broadcast {
+      background-color: #050810;
+      background-image:
+        radial-gradient(ellipse 90% 60% at 50% 25%, rgba(40, 60, 100, 0.45), transparent 65%),
+        radial-gradient(ellipse 50% 40% at 15% 75%, rgba(6, 182, 212, 0.12), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 75%, rgba(251, 146, 60, 0.12), transparent 60%),
+        linear-gradient(180deg, #030610 0%, #0a0e1a 60%, #050810 100%);
+      background-attachment: fixed;
+    }
+
+    body.skin-broadcast .topbar {
+      background: linear-gradient(180deg, rgba(11, 18, 32, 0.95), rgba(5, 8, 16, 0.95));
+      border: 1px solid rgba(103, 232, 249, 0.28);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 24px rgba(6, 182, 212, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    body.skin-broadcast .topbar {
+      color: #f8fafc;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.35);
+    }
+
+    /* 카드 자체는 투명·외곽선 없음. 챔퍼 모양은 SVG 오버레이가 담당 */
+    body.skin-broadcast .team {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+    body.skin-broadcast .team::before {
+      background: none;
+    }
+
+    /* 청팀(좌측 기본): 챔퍼 헥사곤 + 시안 네온 외곽선 */
+    body.skin-broadcast .team.blue::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><defs><linearGradient id='b' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23071226' stop-opacity='0.92'/><stop offset='1' stop-color='%23030610' stop-opacity='0.96'/></linearGradient><filter id='g' x='-10%25' y='-10%25' width='120%25' height='120%25'><feGaussianBlur stdDeviation='2'/></filter></defs><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='url(%23b)'/><g filter='url(%23g)'><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='none' stroke='%2367e8f9' stroke-width='3.5'/></g><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='none' stroke='%23bfeaff' stroke-width='1.4'/></svg>") center / 100% 100% no-repeat;
+    }
+
+    /* 백팀(우측 기본): 챔퍼 헥사곤 + 주황 네온 외곽선 */
+    body.skin-broadcast .team.white::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><defs><linearGradient id='r' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23200a04' stop-opacity='0.92'/><stop offset='1' stop-color='%23120705' stop-opacity='0.96'/></linearGradient><filter id='g' x='-10%25' y='-10%25' width='120%25' height='120%25'><feGaussianBlur stdDeviation='2'/></filter></defs><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='url(%23r)'/><g filter='url(%23g)'><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='none' stroke='%23fb923c' stroke-width='3.5'/></g><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='none' stroke='%23ffd5a8' stroke-width='1.4'/></svg>") center / 100% 100% no-repeat;
+    }
+
+    /* 좌우 스왑 시 챔퍼 방향도 반대로 */
+    body.skin-broadcast .is-ends-swapped .team.blue::after {
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><defs><linearGradient id='b' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23071226' stop-opacity='0.92'/><stop offset='1' stop-color='%23030610' stop-opacity='0.96'/></linearGradient><filter id='g' x='-10%25' y='-10%25' width='120%25' height='120%25'><feGaussianBlur stdDeviation='2'/></filter></defs><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='url(%23b)'/><g filter='url(%23g)'><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='none' stroke='%2367e8f9' stroke-width='3.5'/></g><path d='M 4,4 L 204,4 L 236,100 L 204,196 L 4,196 Z' fill='none' stroke='%23bfeaff' stroke-width='1.4'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-broadcast .is-ends-swapped .team.white::after {
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><defs><linearGradient id='r' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23200a04' stop-opacity='0.92'/><stop offset='1' stop-color='%23120705' stop-opacity='0.96'/></linearGradient><filter id='g' x='-10%25' y='-10%25' width='120%25' height='120%25'><feGaussianBlur stdDeviation='2'/></filter></defs><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='url(%23r)'/><g filter='url(%23g)'><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='none' stroke='%23fb923c' stroke-width='3.5'/></g><path d='M 36,4 L 236,4 L 236,196 L 36,196 L 4,100 Z' fill='none' stroke='%23ffd5a8' stroke-width='1.4'/></svg>") center / 100% 100% no-repeat;
+    }
+
+    /* 카드 내부 콘텐츠는 SVG 위 */
+    body.skin-broadcast .team > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 팀 라벨: 작은 챔퍼 펠릿 스타일 */
+    body.skin-broadcast .team.blue .team-label {
+      color: #ecfeff;
+      background: linear-gradient(180deg, rgba(8, 47, 73, 0.7), rgba(2, 17, 30, 0.85));
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      letter-spacing: 0.04em;
+    }
+    body.skin-broadcast .team.white .team-label {
+      color: #fff7ed;
+      background: linear-gradient(180deg, rgba(124, 45, 18, 0.7), rgba(50, 15, 5, 0.85));
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      box-shadow: 0 0 16px rgba(251, 146, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      letter-spacing: 0.04em;
+    }
+
+    /* 큰 점수: 흰색 + 팀 색상 글로우 */
+    body.skin-broadcast .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 14px rgba(103, 232, 249, 0.65),
+        0 0 38px rgba(6, 182, 212, 0.45);
+    }
+    body.skin-broadcast .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 14px rgba(251, 191, 36, 0.65),
+        0 0 38px rgba(251, 146, 60, 0.45);
+    }
+
+    /* 세트 패널: broadcast 중앙 뱃지 스타일 */
+    body.skin-broadcast .sets-panel {
+      background: linear-gradient(180deg, rgba(11, 18, 32, 0.95), rgba(5, 8, 16, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.65),
+        0 0 18px rgba(103, 232, 249, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    body.skin-broadcast footer.card,
+    body.skin-broadcast .voice-card {
+      background: rgba(5, 8, 16, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ===== SKIN_LIVE: 라이브 아레나(탁구장 사진 배경). 되돌리: 이 블록 전체 삭제 ===== */
+    /* SKIN_LIVE_TWEAK_v2: 관중 가시성 더 ↑. 원복값: v1(0.40/0.15/0.60) / 원본(0.55/0.25/0.75) */
+    body.skin-live {
+      background-color: #050810;
+      background-image:
+        /* TWEAK_v2: 0.40/0.15/0.60 → 0.28/0.08/0.45 */
+        linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.45) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-live .topbar {
+      background: rgba(3, 8, 20, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.28);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 24px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-live .topbar {
+      color: #ffffff;
+      text-shadow:
+        0 0 18px rgba(103, 232, 249, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* 청팀: 시안 네온 카드 (반투명 다크 + 사진이 더 잘 비침) */
+    body.skin-live .team.blue {
+      /* TWEAK_v2: 0.55/0.55/0.62 → 0.40/0.40/0.48. 원본: 0.78/0.78/0.82 */
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.40) 0%, rgba(0, 41, 66, 0.40) 50%, rgba(0, 18, 31, 0.48) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      /* TWEAK_v2: blur(4px) → blur(3px). 원본: blur(6px) saturate(1.2) */
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 40px rgba(6, 182, 212, 0.4),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.2);
+    }
+    body.skin-live .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-live .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background:
+        linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-live .team.blue .score {
+      color: #ffffff;
+      /* TWEAK_v1: 검정 그림자 2단으로 강화 (원래 1단: 0 3px 6px rgba(0,0,0,0.9)) */
+      text-shadow:
+        0 0 14px rgba(103, 232, 249, 0.8),
+        0 0 38px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 18px rgba(0, 0, 0, 0.55);
+    }
+
+    /* 백팀: 주황 네온 카드 (반투명 다크 + 사진이 더 잘 비침) */
+    body.skin-live .team.white {
+      color: #fff7ed;
+      /* TWEAK_v2: 0.55/0.55/0.62 → 0.40/0.40/0.48. 원본: 0.78/0.78/0.82 */
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.40) 0%, rgba(61, 28, 0, 0.40) 50%, rgba(26, 11, 0, 0.48) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      /* TWEAK_v2: blur(4px) → blur(3px). 원본: blur(6px) saturate(1.2) */
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 40px rgba(251, 146, 60, 0.4),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.2);
+    }
+    body.skin-live .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-live .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background:
+        linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-live .team.white .score {
+      color: #ffffff;
+      /* TWEAK_v1: 검정 그림자 2단으로 강화 (원래 1단: 0 3px 6px rgba(0,0,0,0.9)) */
+      text-shadow:
+        0 0 14px rgba(251, 191, 36, 0.8),
+        0 0 38px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 18px rgba(0, 0, 0, 0.55);
+    }
+
+    /* 세트 패널: 반투명 다크 + 블러 (사진 살짝 비침) */
+    body.skin-live .sets-panel {
+      background: rgba(5, 8, 16, 0.65);
+      border: 1px solid rgba(103, 232, 249, 0.25);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 18px rgba(103, 232, 249, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* 푸터·음성카드 */
+    body.skin-live footer.card,
+    body.skin-live .voice-card {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_CARD: 카드 스킨 (종이 카드 점수판). 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-card {
+      background-color: #0d0d0d;
+      background-image:
+        radial-gradient(ellipse 90% 60% at 50% 40%, rgba(50, 50, 50, 0.45), transparent 70%),
+        linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+      background-attachment: fixed;
+    }
+
+    body.skin-card .topbar {
+      background: linear-gradient(180deg, #2a2a2a 0%, #161616 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    body.skin-card .topbar {
+      color: #f5f5f5;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    /* 청팀: 파랑 종이 카드 */
+    body.skin-card .team.blue {
+      color: #ffffff;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+        linear-gradient(180deg, #2563b0 0%, #1d4998 60%, #163d80 100%);
+      border: 1px solid rgba(0, 0, 0, 0.45);
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.6),
+        inset 0 2px 6px rgba(255, 255, 255, 0.16),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.35);
+    }
+
+    /* 백팀: 빨강 종이 카드 */
+    body.skin-card .team.white {
+      color: #ffffff;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+        linear-gradient(180deg, #d44037 0%, #c8312a 60%, #a52720 100%);
+      border: 1px solid rgba(0, 0, 0, 0.45);
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.6),
+        inset 0 2px 6px rgba(255, 255, 255, 0.18),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.35);
+    }
+
+    /* 카드 상단 행거 클립 (회색 원 2개) — 기존 .team::before(글로우)를 오버라이드 */
+    body.skin-card .team.blue::before,
+    body.skin-card .team.white::before {
+      top: 4px;
+      left: 22%;
+      right: 22%;
+      bottom: auto;
+      height: 16px;
+      border-radius: 0;
+      opacity: 1;
+      background:
+        radial-gradient(circle at 20% 50%, #c0c0c0 0%, #6a6a6a 55%, transparent 60%) left center / 16px 16px no-repeat,
+        radial-gradient(circle at 80% 50%, #c0c0c0 0%, #6a6a6a 55%, transparent 60%) right center / 16px 16px no-repeat;
+    }
+
+    /* 팀 라벨: 카드 위 다크 배지 */
+    body.skin-card .team.blue .team-label,
+    body.skin-card .team.white .team-label {
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 큰 점수: 흰색 + 종이 위 매트한 그림자 */
+    body.skin-card .team.blue .score,
+    body.skin-card .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.35),
+        0 6px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 세트 패널: 검정 프레임 */
+    body.skin-card .sets-panel {
+      background: linear-gradient(180deg, #2a2a2a 0%, #161616 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* 세트 숫자: 좌·우 미니 카드 (좌=청팀=파랑, 우=백팀=빨강 — 좌우 스왑 대응) */
+    body.skin-card .set-num {
+      color: #ffffff;
+      border-radius: 4px;
+      padding: 2px 8px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    body.skin-card #court:not(.is-ends-swapped) #setSlotLeft,
+    body.skin-card #court.is-ends-swapped #setSlotRight {
+      background: linear-gradient(180deg, #2563b0 0%, #1d4998 100%);
+    }
+    body.skin-card #court:not(.is-ends-swapped) #setSlotRight,
+    body.skin-card #court.is-ends-swapped #setSlotLeft {
+      background: linear-gradient(180deg, #d44037 0%, #c8312a 100%);
+    }
+
+    /* 푸터·음성 카드: 검정 프레임 통일 */
+    body.skin-card footer.card,
+    body.skin-card .voice-card {
+      background: linear-gradient(180deg, #1f1f1f 0%, #121212 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===== SKIN_LIVE2: 라이브 아레나 II (front.png 사진 배경 + 챔퍼 네온 외곽선 + 좌우 측면 네온 띠). 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-live2 {
+      background-color: #050810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    /* 좌우 측면 수직 네온 띠 (body 가장자리에 고정) */
+    body.skin-live2::before,
+    body.skin-live2::after {
+      content: "";
+      position: fixed;
+      top: 6vh;
+      bottom: 6vh;
+      width: 4px;
+      pointer-events: none;
+      z-index: 5;
+      border-radius: 2px;
+      opacity: 0.78;
+    }
+    body.skin-live2::before {
+      left: 4px;
+      background: linear-gradient(180deg, rgba(6, 182, 212, 0) 0%, rgba(6, 182, 212, 0.85) 18%, rgba(6, 182, 212, 0.95) 50%, rgba(6, 182, 212, 0.85) 82%, rgba(6, 182, 212, 0) 100%);
+      box-shadow: 0 0 8px rgba(6, 182, 212, 0.7), 0 0 22px rgba(6, 182, 212, 0.45);
+    }
+    body.skin-live2::after {
+      right: 4px;
+      background: linear-gradient(180deg, rgba(251, 146, 60, 0) 0%, rgba(251, 146, 60, 0.85) 18%, rgba(251, 146, 60, 0.95) 50%, rgba(251, 146, 60, 0.85) 82%, rgba(251, 146, 60, 0) 100%);
+      box-shadow: 0 0 8px rgba(251, 146, 60, 0.7), 0 0 22px rgba(251, 146, 60, 0.45);
+    }
+
+    /* 헤더 — 다크 + 시안 테두리 */
+    body.skin-live2 .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    body.skin-live2 .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    /* 카드 공통 — 외곽선 SVG 위로 콘텐츠 올림 */
+    body.skin-live2 .team {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+    body.skin-live2 .team::before { background: none; }
+    body.skin-live2 .team > * { position: relative; z-index: 1; }
+
+    /* 청팀 — 반투명 다크(사진 비침) + 시안 네온 챔퍼 외곽선 */
+    body.skin-live2 .team.blue {
+      color: #ecfeff;
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-live2 .team.blue::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-20%25' y='-20%25' width='140%25' height='140%25'><feGaussianBlur stdDeviation='2'/></filter></defs><g filter='url(%23g)'><path d='M 14,2 L 130,2 L 135,7 L 158,7 L 163,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%2367e8f9' stroke-width='3.5'/></g><path d='M 14,2 L 130,2 L 135,7 L 158,7 L 163,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%23a5f3fc' stroke-width='1.5'/><circle cx='100' cy='238' r='4' fill='%23ffffff'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-live2 .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-live2 .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    /* 백팀 — 반투명 다크(사진 비침) + 오렌지 네온 챔퍼 외곽선 */
+    body.skin-live2 .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-live2 .team.white::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-20%25' y='-20%25' width='140%25' height='140%25'><feGaussianBlur stdDeviation='2'/></filter></defs><g filter='url(%23g)'><path d='M 14,2 L 70,2 L 75,7 L 98,7 L 103,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%23fb923c' stroke-width='3.5'/></g><path d='M 14,2 L 70,2 L 75,7 L 98,7 L 103,2 L 186,2 Q 198,2 198,14 L 198,226 Q 198,238 186,238 L 110,238 L 105,233 L 95,233 L 90,238 L 14,238 Q 2,238 2,226 L 2,14 Q 2,2 14,2 Z' fill='none' stroke='%23fed7aa' stroke-width='1.5'/><circle cx='100' cy='238' r='4' fill='%23ffffff'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-live2 .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-live2 .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    /* 세트 패널 — 어두운 챔퍼 박스 (시안 살짝 테두리) */
+    body.skin-live2 .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* 푸터·음성카드 */
+    body.skin-live2 footer.card,
+    body.skin-live2 .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_URBAN: 도심(루프탑 탁구장 사진). 되돌리: 이 블록 전체 삭제 ===== */
+    /* SKIN_URBAN_TWEAK_v2: 점수판 흐림 = 라이브 아레나 II 수준. 원복: TWEAK_v1 주석값 또는 backup */
+    body.skin-urban {
+      background-color: #0a0810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-urban .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-urban .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-urban .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-urban .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-urban .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-urban .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-urban .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-urban .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-urban .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-urban .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-urban .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-urban footer.card,
+    body.skin-urban .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_DESERT: 사막(사막 탁구장 사진). 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-desert {
+      background-color: #1a1008;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-desert .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-desert .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-desert .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-desert .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-desert .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-desert .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-desert .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-desert .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-desert .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-desert .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-desert .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-desert footer.card,
+    body.skin-desert .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_UNDERWATER: 물속(수중 탁구장 사진). 되돌리: 이 블록 전체 삭제 ===== */
+    body.skin-underwater {
+      background-color: #050a14;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-underwater .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-underwater .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-underwater .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-underwater .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-underwater .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-underwater .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-underwater .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-underwater .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-underwater .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-underwater .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-underwater .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-underwater footer.card,
+    body.skin-underwater .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_VALLEY: 계곡(대협곡 사진). 되돌리: 이 블록 전체·img/valley-bg.png 삭제 ===== */
+    body.skin-valley {
+      background-color: #141008;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-valley .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-valley .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-valley .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-valley .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-valley .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-valley .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-valley .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-valley .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-valley .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-valley .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-valley .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-valley footer.card,
+    body.skin-valley .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_WATERFALL: 폭포(폭포 사진). 되돌리: 이 블록 전체·img/waterfall-bg.png 삭제 ===== */
+    body.skin-waterfall {
+      background-color: #0a1218;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-waterfall .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-waterfall .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-waterfall .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-waterfall .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-waterfall .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-waterfall .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-waterfall .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-waterfall .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-waterfall .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-waterfall .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-waterfall .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-waterfall footer.card,
+    body.skin-waterfall .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_SPACE: 우주(우주 사진). 되돌리: 이 블록 전체·img/space-bg.png 삭제 ===== */
+    body.skin-space {
+      background-color: #050510;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-space .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-space .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-space .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-space .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-space .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-space .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-space .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-space .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-space .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-space .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-space .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-space footer.card,
+    body.skin-space .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_SNOW: 눈풍경(설산 사진). 되돌리: 이 블록 전체·img/snow-bg.png 삭제 ===== */
+    body.skin-snow {
+      background-color: #0c1420;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-snow .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-snow .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-snow .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-snow .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-snow .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-snow .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-snow .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-snow .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-snow .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-snow .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-snow .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-snow footer.card,
+    body.skin-snow .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_VEGAS: 라스베가스 야경 루프탑(첨부 사진). 되돌리: 이 블록 전체·img/vegas-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-vegas {
+      background-color: #0a0810;
+      background-image:
+        linear-gradient(180deg, rgba(35, 12, 55, 0.45) 0%, rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.58) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-vegas .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-vegas .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-vegas .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-vegas .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-vegas .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-vegas .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-vegas .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-vegas .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-vegas .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-vegas .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-vegas .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-vegas footer.card,
+    body.skin-vegas .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_TTABLE: 탁구대(탁구대 사진). 되돌리: 이 블록 전체·img/ttable-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-ttable {
+      background-color: #1a3a5c;
+      background-image:
+        linear-gradient(180deg, rgba(0, 30, 60, 0.38) 0%, rgba(0, 0, 0, 0.06) 48%, rgba(0, 0, 0, 0.48) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-ttable .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-ttable .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-ttable .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-ttable .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-ttable .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-ttable .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-ttable .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-ttable .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-ttable .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-ttable .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-ttable .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-ttable footer.card,
+    body.skin-ttable .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_TTABLE1: 탁구대1(탁구대 사진). 되돌리: 이 블록 전체·img/ttable1-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-ttable1 {
+      background-color: #1a3a5c;
+      background-image:
+        linear-gradient(180deg, rgba(0, 30, 60, 0.38) 0%, rgba(0, 0, 0, 0.06) 48%, rgba(0, 0, 0, 0.48) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-ttable1 .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-ttable1 .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-ttable1 .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-ttable1 .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-ttable1 .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-ttable1 .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-ttable1 .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-ttable1 .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-ttable1 .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-ttable1 .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-ttable1 .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-ttable1 footer.card,
+    body.skin-ttable1 .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_STADIUM: 탁구경기장(경기장 사진). 되돌리: 이 블록 전체·img/stadium-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-stadium {
+      background-color: #020810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 20, 45, 0.42) 0%, rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-stadium .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-stadium .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-stadium .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-stadium .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-stadium .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-stadium .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-stadium .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-stadium .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-stadium .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-stadium .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-stadium .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-stadium footer.card,
+    body.skin-stadium .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_STADIUM1: 탁구경기장-1(경기장 사진). 되돌리: 이 블록 전체·img/stadium1-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-stadium1 {
+      background-color: #020810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 20, 45, 0.42) 0%, rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-stadium1 .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-stadium1 .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-stadium1 .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-stadium1 .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-stadium1 .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-stadium1 .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-stadium1 .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-stadium1 .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-stadium1 .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-stadium1 .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-stadium1 .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-stadium1 footer.card,
+    body.skin-stadium1 .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_TBALL: 탁구공(탁구공 사진). 되돌리: 이 블록 전체·img/tball-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-tball {
+      background-color: #0a0810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 30, 60, 0.38) 0%, rgba(0, 0, 0, 0.08) 48%, rgba(40, 20, 0, 0.42) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-tball .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-tball .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-tball .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-tball .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-tball .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-tball .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-tball .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-tball .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-tball .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-tball .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-tball .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-tball footer.card,
+    body.skin-tball .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_SUNSET: 노을탁구(노을 탁구 사진). 되돌리: 이 블록 전체·img/sunset-bg.png·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-sunset {
+      background-color: #1a0a04;
+      background-image:
+        linear-gradient(180deg, rgba(120, 40, 0, 0.32) 0%, rgba(0, 0, 0, 0.06) 48%, rgba(40, 15, 0, 0.48) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    body.skin-sunset .topbar {
+      background: rgba(3, 8, 20, 0.82);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-sunset .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-sunset .team.blue {
+      background: linear-gradient(150deg, rgba(0, 27, 46, 0.55) 0%, rgba(0, 41, 66, 0.55) 50%, rgba(0, 18, 31, 0.62) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(6, 182, 212, 0.40),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.18);
+    }
+    body.skin-sunset .team.blue::before {
+      background: radial-gradient(circle at 22% 12%, rgba(6, 182, 212, 0.5), transparent 55%);
+    }
+    body.skin-sunset .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.65);
+      background: linear-gradient(165deg, rgba(6, 182, 212, 0.42) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(8, 47, 73, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    body.skin-sunset .team.blue .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(103, 232, 249, 0.85),
+        0 0 42px rgba(6, 182, 212, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-sunset .team.white {
+      color: #fff7ed;
+      background: linear-gradient(150deg, rgba(42, 19, 0, 0.55) 0%, rgba(61, 28, 0, 0.55) 50%, rgba(26, 11, 0, 0.62) 100%);
+      border: 1px solid rgba(251, 146, 60, 0.55);
+      -webkit-backdrop-filter: blur(3px) saturate(1.3);
+      backdrop-filter: blur(3px) saturate(1.3);
+      box-shadow:
+        var(--shadow-lg),
+        0 0 50px rgba(251, 146, 60, 0.40),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.18);
+    }
+    body.skin-sunset .team.white::before {
+      background: radial-gradient(circle at 78% 8%, rgba(251, 146, 60, 0.5), transparent 55%);
+    }
+    body.skin-sunset .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.65);
+      background: linear-gradient(165deg, rgba(251, 146, 60, 0.38) 0%, rgba(3, 8, 20, 0.85) 60%, rgba(154, 52, 18, 0.92) 100%);
+      box-shadow: 0 0 18px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    body.skin-sunset .team.white .score {
+      color: #ffffff;
+      text-shadow:
+        0 0 16px rgba(251, 191, 36, 0.85),
+        0 0 42px rgba(234, 88, 12, 0.55),
+        0 3px 8px rgba(0, 0, 0, 1.0),
+        0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    body.skin-sunset .sets-panel {
+      background: rgba(5, 8, 16, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.30);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow:
+        var(--shadow-md),
+        0 0 22px rgba(103, 232, 249, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.skin-sunset footer.card,
+    body.skin-sunset .voice-card {
+      background: rgba(3, 8, 20, 0.85);
+      border: 1px solid rgba(103, 232, 249, 0.22);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 18px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ===== SKIN_CYBER3D: 설산 고정 3D 콘솔(독립 스킨). 되돌리: 이 블록 전체·스킨 모달·applySkin·I18N 삭제 (img/snow-bg.png는 SKIN_SNOW 공용) ===== */
+    body.skin-cyber3d {
+      background-color: #0c1420;
+      background-image:
+        linear-gradient(180deg, rgba(0, 20, 40, 0.38) 0%, rgba(0, 0, 0, 0.08) 48%, rgba(0, 0, 0, 0.52) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    /* SKIN_CYBER3D_DEPTH_v2: 점수카드 입체(두께·접지·숫자압출). 되돌리: v1 값으로 복원하거나 미디어쿼리만 복원 */
+    body.skin-cyber3d #boardWrap {
+      perspective: 900px; /* SKIN_CYBER3D_TILT_v4: 원근 강화(1200→900) */
+      perspective-origin: 50% 45%;
+    }
+    body.skin-cyber3d #court {
+      transform-style: preserve-3d;
+      pointer-events: auto;
+    }
+    body.skin-cyber3d #court .sets-panel,
+    body.skin-cyber3d #court .team-header .team-label,
+    body.skin-cyber3d #court .team-main .score.score-tap-add,
+    body.skin-cyber3d #court .team-main .btn-grid button,
+    body.skin-cyber3d #court .serve-disk-host,
+    body.skin-cyber3d #court .receive-disk-host,
+    body.skin-cyber3d #court input,
+    body.skin-cyber3d #court select,
+    body.skin-cyber3d #court textarea,
+    body.skin-cyber3d #court a,
+    body.skin-cyber3d #court button {
+      pointer-events: auto;
+    }
+
+    body.skin-cyber3d .topbar {
+      background: rgba(3, 8, 20, 0.78);
+      border: 1px solid rgba(103, 232, 249, 0.32);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      backdrop-filter: blur(8px) saturate(1.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.7),
+        0 0 22px rgba(6, 182, 212, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    body.skin-cyber3d .topbar {
+      color: #ffffff;
+      text-shadow: 0 0 18px rgba(103, 232, 249, 0.55), 0 2px 4px rgba(0, 0, 0, 0.85);
+    }
+
+    body.skin-cyber3d .team {
+      border: none;
+      overflow: visible;
+      transform-style: preserve-3d;
+    }
+    body.skin-cyber3d .team::before {
+      background: none !important;
+      opacity: 0 !important;
+    }
+    /* SKIN_CYBER3D_HITFIX_v2: team-header absolute 유지(직계 * relative 제외). 되돌리: .team > * { position:relative; z-index:1 } 복원 */
+    body.skin-cyber3d .team > *:not(.team-header) {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SKIN_CYBER3D_TILT_v5: 15° 바깥쪽 열림 /\ (화면 위치 기준·바깥 모서리 축). 되돌리: v4 rotateY(±20deg) 부호 반대·20deg 로 복원 */
+    /* 화면 좌측 패널: 바깥(왼쪽) 모서리 축 → 바깥 변이 앞으로 */
+    body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-start,
+    body.skin-cyber3d .court.is-ends-swapped .pos-swap-end {
+      transform-origin: left center;
+      transform: rotateY(15deg) translateZ(14px);
+    }
+    /* 화면 우측 패널: 바깥(오른쪽) 모서리 축 → 바깥 변이 앞으로 */
+    body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-end,
+    body.skin-cyber3d .court.is-ends-swapped .pos-swap-start {
+      transform-origin: right center;
+      transform: rotateY(-15deg) translateZ(14px);
+    }
+
+    body.skin-cyber3d .team.blue {
+      color: #ecfeff;
+      background: linear-gradient(165deg, rgba(0, 40, 62, 0.38) 0%, rgba(0, 28, 48, 0.48) 45%, rgba(0, 12, 24, 0.62) 100%);
+      -webkit-backdrop-filter: blur(4px) saturate(1.35);
+      backdrop-filter: blur(4px) saturate(1.35);
+      box-shadow:
+        0 28px 24px -18px rgba(0, 0, 0, 0.88),
+        0 14px 40px rgba(0, 0, 0, 0.5),
+        0 0 48px rgba(6, 182, 212, 0.42),
+        inset 0 14px 28px rgba(255, 255, 255, 0.1),
+        inset 0 -20px 32px rgba(0, 0, 0, 0.48),
+        inset 0 0 0 1px rgba(103, 232, 249, 0.28);
+      filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.4));
+    }
+    /* 프레임: 어두운 금속 단면(두께) + 네온 외곽 — SVG 한 장 */
+    body.skin-cyber3d .team.blue::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-30%25' y='-30%25' width='160%25' height='160%25'><feGaussianBlur stdDeviation='2.6'/></filter></defs><path d='M 18,7 L 78,7 L 84,15 L 116,15 L 122,7 L 182,7 Q 193,7 193,18 L 193,222 Q 193,233 182,233 L 118,233 L 112,225 L 88,225 L 82,233 L 18,233 Q 7,233 7,222 L 7,18 Q 7,7 18,7 Z' fill='none' stroke='%23060f18' stroke-width='11'/><path d='M 17,6 L 78,6 L 84,14 L 116,14 L 122,6 L 183,6 Q 194,6 194,17 L 194,223 Q 194,234 183,234 L 118,234 L 112,226 L 88,226 L 82,234 L 17,234 Q 6,234 6,223 L 6,17 Q 6,6 17,6 Z' fill='none' stroke='%230a3344' stroke-width='7'/><g filter='url(%23g)'><path d='M 16,4 L 78,4 L 84,12 L 116,12 L 122,4 L 184,4 Q 196,4 196,16 L 196,224 Q 196,236 184,236 L 118,236 L 112,228 L 88,228 L 82,236 L 16,236 Q 4,236 4,224 L 4,16 Q 4,4 16,4 Z' fill='none' stroke='%2306b6d4' stroke-width='5.5'/></g><path d='M 16,4 L 78,4 L 84,12 L 116,12 L 122,4 L 184,4 Q 196,4 196,16 L 196,224 Q 196,236 184,236 L 118,236 L 112,228 L 88,228 L 82,236 L 16,236 Q 4,236 4,224 L 4,16 Q 4,4 16,4 Z' fill='none' stroke='%2367e8f9' stroke-width='2'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-cyber3d .team.blue .team-label {
+      color: #ecfeff;
+      border: 1px solid rgba(103, 232, 249, 0.75);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(34, 211, 238, 0.55) 0%, rgba(6, 182, 212, 0.35) 28%, rgba(3, 8, 20, 0.92) 70%, rgba(8, 47, 73, 0.96) 100%);
+      box-shadow:
+        0 8px 14px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(6, 182, 212, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.4);
+    }
+    body.skin-cyber3d .team.blue .score,
+    body.skin-cyber3d .team.blue .score-value {
+      color: #f8feff;
+      text-shadow:
+        1px 1px 0 #0e5a70,
+        2px 2px 0 #0c4d60,
+        3px 3px 0 #0a4050,
+        4px 4px 0 #083545,
+        5px 5px 0 #062a38,
+        0 10px 16px rgba(0, 0, 0, 0.75),
+        0 0 22px rgba(103, 232, 249, 0.65);
+    }
+
+    body.skin-cyber3d .team.white {
+      color: #fff7ed;
+      background: linear-gradient(165deg, rgba(70, 32, 0, 0.38) 0%, rgba(50, 22, 0, 0.48) 45%, rgba(24, 10, 0, 0.62) 100%);
+      -webkit-backdrop-filter: blur(4px) saturate(1.35);
+      backdrop-filter: blur(4px) saturate(1.35);
+      box-shadow:
+        0 28px 24px -18px rgba(0, 0, 0, 0.88),
+        0 14px 40px rgba(0, 0, 0, 0.5),
+        0 0 48px rgba(251, 146, 60, 0.42),
+        inset 0 14px 28px rgba(255, 255, 255, 0.09),
+        inset 0 -20px 32px rgba(0, 0, 0, 0.48),
+        inset 0 0 0 1px rgba(251, 146, 60, 0.28);
+      filter: drop-shadow(0 0 12px rgba(251, 146, 60, 0.4));
+    }
+    body.skin-cyber3d .team.white::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><defs><filter id='g' x='-30%25' y='-30%25' width='160%25' height='160%25'><feGaussianBlur stdDeviation='2.6'/></filter></defs><path d='M 18,7 L 78,7 L 84,15 L 116,15 L 122,7 L 182,7 Q 193,7 193,18 L 193,222 Q 193,233 182,233 L 118,233 L 112,225 L 88,225 L 82,233 L 18,233 Q 7,233 7,222 L 7,18 Q 7,7 18,7 Z' fill='none' stroke='%23120804' stroke-width='11'/><path d='M 17,6 L 78,6 L 84,14 L 116,14 L 122,6 L 183,6 Q 194,6 194,17 L 194,223 Q 194,234 183,234 L 118,234 L 112,226 L 88,226 L 82,234 L 17,234 Q 6,234 6,223 L 6,17 Q 6,6 17,6 Z' fill='none' stroke='%234a2208' stroke-width='7'/><g filter='url(%23g)'><path d='M 16,4 L 78,4 L 84,12 L 116,12 L 122,4 L 184,4 Q 196,4 196,16 L 196,224 Q 196,236 184,236 L 118,236 L 112,228 L 88,228 L 82,236 L 16,236 Q 4,236 4,224 L 4,16 Q 4,4 16,4 Z' fill='none' stroke='%23ea580c' stroke-width='5.5'/></g><path d='M 16,4 L 78,4 L 84,12 L 116,12 L 122,4 L 184,4 Q 196,4 196,16 L 196,224 Q 196,236 184,236 L 118,236 L 112,228 L 88,228 L 82,236 L 16,236 Q 4,236 4,224 L 4,16 Q 4,4 16,4 Z' fill='none' stroke='%23fb923c' stroke-width='2'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-cyber3d .team.white .team-label {
+      color: #fff7ed;
+      border: 1px solid rgba(251, 146, 60, 0.75);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(251, 191, 36, 0.5) 0%, rgba(251, 146, 60, 0.32) 28%, rgba(3, 8, 20, 0.92) 70%, rgba(154, 52, 18, 0.96) 100%);
+      box-shadow:
+        0 8px 14px rgba(0, 0, 0, 0.55),
+        0 0 22px rgba(251, 146, 60, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -8px 14px rgba(0, 0, 0, 0.4);
+    }
+    body.skin-cyber3d .team.white .score,
+    body.skin-cyber3d .team.white .score-value {
+      color: #fffaf5;
+      text-shadow:
+        1px 1px 0 #9a4a0b,
+        2px 2px 0 #85400a,
+        3px 3px 0 #703608,
+        4px 4px 0 #5c2d07,
+        5px 5px 0 #4a2406,
+        0 10px 16px rgba(0, 0, 0, 0.75),
+        0 0 22px rgba(251, 191, 36, 0.55);
+    }
+
+    body.skin-cyber3d .team .btn-grid button.pt.neg {
+      background: linear-gradient(180deg, rgba(51, 65, 85, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e2e8f0;
+      box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.55),
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -6px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    /* SKIN_CYBER3D_SERVE_FRAME_BLINK_v1: 서브 팀 카드 네온 프레임 점멸(opacity 맥박). 되돌리: 이 블록 삭제 */
+    @keyframes cyber3dServeFrameBlink {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.35;
+      }
+    }
+    body.skin-cyber3d .team.is-serving::after {
+      animation: cyber3dServeFrameBlink 1.4s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.skin-cyber3d .team.is-serving::after {
+        animation: none;
+      }
+    }
+
+    /* SKIN_CYBER3D_SETS_Z_v2: 가운데 패널을 카드 안쪽 변 깊이(-95px)로 → 겉보기 크기 일치. 클릭은 HIT_PLANE_v2(pointer-events)로 유지. 되돌리: translateZ(28px) */
+    body.skin-cyber3d .sets-panel {
+      background: linear-gradient(180deg, rgba(18, 22, 36, 0.94) 0%, rgba(5, 8, 16, 0.96) 100%);
+      border: 1px solid rgba(103, 232, 249, 0.28);
+      -webkit-backdrop-filter: blur(10px) saturate(1.2);
+      backdrop-filter: blur(10px) saturate(1.2);
+      box-shadow:
+        0 24px 22px -16px rgba(0, 0, 0, 0.85),
+        0 14px 28px rgba(0, 0, 0, 0.55),
+        0 0 20px rgba(103, 232, 249, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -10px 18px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 6;
+      transform: translateZ(-95px);
+    }
+    body.skin-cyber3d .sets-panel #btnReset.ctrl.danger,
+    body.skin-cyber3d .sets-panel button,
+    body.skin-cyber3d .sets-panel .set-num,
+    body.skin-cyber3d .sets-panel a {
+      position: relative;
+      z-index: 7;
+      transform: translateZ(12px);
+    }
+    body.skin-cyber3d .serve-rail,
+    body.skin-cyber3d .serve-disk-host {
+      position: relative;
+      z-index: 8;
+      transform: translateZ(36px);
+    }
+
+    /* SKIN_CYBER3D_SETS_3D_v1: 가운데 패널 입체(6° 기울기·네온 프레임·세트 숫자 압출). 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d .sets-panel {
+      overflow: visible;
+      transform-style: preserve-3d;
+      transform: translateZ(-85px) rotateX(6deg);
+    }
+    body.skin-cyber3d .sets-panel::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 240' preserveAspectRatio='none'><defs><filter id='g' x='-30%25' y='-30%25' width='160%25' height='160%25'><feGaussianBlur stdDeviation='2.4'/></filter></defs><rect x='7' y='7' width='106' height='226' rx='12' fill='none' stroke='%23060f18' stroke-width='10'/><rect x='6' y='6' width='108' height='228' rx='12' fill='none' stroke='%230a3344' stroke-width='6'/><g filter='url(%23g)'><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%2306b6d4' stroke-width='5'/></g><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%2367e8f9' stroke-width='1.8'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-cyber3d .sets-panel .set-num {
+      color: #f8feff;
+      text-shadow:
+        1px 1px 0 #0e5a70,
+        2px 2px 0 #0c4d60,
+        3px 3px 0 #0a4050,
+        4px 4px 0 #083545,
+        0 8px 12px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(103, 232, 249, 0.5);
+    }
+
+    /* SKIN_CYBER3D_SETS_SERVE_COLOR_v1: 가운데 네온 프레임·세트 숫자 색 = 서브 팀. 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d #court:has(.team.white.is-serving) .sets-panel::after {
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 240' preserveAspectRatio='none'><defs><filter id='g' x='-30%25' y='-30%25' width='160%25' height='160%25'><feGaussianBlur stdDeviation='2.4'/></filter></defs><rect x='7' y='7' width='106' height='226' rx='12' fill='none' stroke='%23120804' stroke-width='10'/><rect x='6' y='6' width='108' height='228' rx='12' fill='none' stroke='%234a2208' stroke-width='6'/><g filter='url(%23g)'><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%23ea580c' stroke-width='5'/></g><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%23fb923c' stroke-width='1.8'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-cyber3d #court:has(.team.white.is-serving) .sets-panel .set-num {
+      color: #fffaf5;
+      text-shadow:
+        1px 1px 0 #9a4a0b,
+        2px 2px 0 #85400a,
+        3px 3px 0 #703608,
+        4px 4px 0 #5c2d07,
+        0 8px 12px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(251, 191, 36, 0.5);
+    }
+    body.skin-cyber3d #court:has(.team.blue.is-serving) .sets-panel::after {
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 240' preserveAspectRatio='none'><defs><filter id='g' x='-30%25' y='-30%25' width='160%25' height='160%25'><feGaussianBlur stdDeviation='2.4'/></filter></defs><rect x='7' y='7' width='106' height='226' rx='12' fill='none' stroke='%23060f18' stroke-width='10'/><rect x='6' y='6' width='108' height='228' rx='12' fill='none' stroke='%230a3344' stroke-width='6'/><g filter='url(%23g)'><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%2306b6d4' stroke-width='5'/></g><rect x='5' y='5' width='110' height='230' rx='12' fill='none' stroke='%2367e8f9' stroke-width='1.8'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.skin-cyber3d #court:has(.team.blue.is-serving) .sets-panel .set-num {
+      color: #f8feff;
+      text-shadow:
+        1px 1px 0 #0e5a70,
+        2px 2px 0 #0c4d60,
+        3px 3px 0 #0a4050,
+        4px 4px 0 #083545,
+        0 8px 12px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(103, 232, 249, 0.5);
+    }
+
+    /* SKIN_CYBER3D_NAME_CENTER_v1: 팀명 카드 상단 중앙(클릭 복구). 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d .team-header {
+      position: absolute !important;
+      top: clamp(6px, 1.4vmin, 12px);
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%);
+      z-index: 30;
+      justify-content: center;
+      max-width: min(70%, 280px);
+      pointer-events: none;
+    }
+    body.skin-cyber3d .team-header .team-label {
+      pointer-events: auto !important;
+      cursor: pointer;
+      position: relative;
+      z-index: 31;
+      transform: none;
+    }
+
+    /* SKIN_CYBER3D_NAME_15X_v1: 3D 콘솔 팀명 박스·텍스트 1.5배. 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d .team-header {
+      max-width: min(85%, 420px);
+    }
+    body.skin-cyber3d .team-header .team-label {
+      font-size: clamp(1.5rem, 3.9vw, 2.1rem);
+      padding: clamp(9px, 2.1vmin, 15px) clamp(18px, 4.5vmin, 30px);
+      border-radius: clamp(12px, 2.1vmin, 18px);
+    }
+
+    /* SKIN_CYBER3D_NEG_OUTER_HIT_v1: −1을 카드 바깥쪽 아래로·absolute 복원. 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d .team-main {
+      transform-style: preserve-3d;
+    }
+    body.skin-cyber3d .team-main .score.score-tap-add {
+      z-index: 1;
+    }
+    body.skin-cyber3d .team .team-main .btn-grid {
+      position: absolute !important;
+      bottom: clamp(8px, 1.8vmin, 14px);
+      z-index: 40 !important;
+      width: auto;
+      margin: 0;
+      padding: 0;
+      pointer-events: auto !important;
+      transform: none;
+    }
+    body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-start .team-main .btn-grid,
+    body.skin-cyber3d .court.is-ends-swapped .pos-swap-end .team-main .btn-grid {
+      left: clamp(8px, 1.8vmin, 16px);
+      right: auto;
+    }
+    body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-end .team-main .btn-grid,
+    body.skin-cyber3d .court.is-ends-swapped .pos-swap-start .team-main .btn-grid {
+      right: clamp(8px, 1.8vmin, 16px);
+      left: auto;
+    }
+    body.skin-cyber3d .team .btn-grid button.pt.neg {
+      position: relative;
+      z-index: 41;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+    }
+
+    body.skin-cyber3d .sets-panel #btnReset.ctrl.danger {
+      background: linear-gradient(180deg, #f87171 0%, #ef4444 35%, #b91c1c 100%);
+      border: 1px solid rgba(254, 202, 202, 0.5);
+      box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.45),
+        0 0 18px rgba(239, 68, 68, 0.55),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -6px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    body.skin-cyber3d footer.card,
+    body.skin-cyber3d .voice-card,
+    body.skin-cyber3d .status-bar {
+      background: rgba(3, 8, 20, 0.88);
+      border: 1px solid rgba(103, 232, 249, 0.2);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      backdrop-filter: blur(8px) saturate(1.2);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 16px rgba(6, 182, 212, 0.1);
+    }
+
+    /* SKIN_CYBER3D_DEPTH_v3: 불투명 전면판 + 어긋난 후면판 + 글자비례 압출. 되돌리: 이 블록만 삭제 */
+    body.skin-cyber3d .team {
+      isolation: isolate;
+      filter: none;
+    }
+    body.skin-cyber3d .team::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      z-index: -1;
+      display: block;
+      opacity: 1 !important;
+      pointer-events: none;
+      border-radius: calc(var(--radius) + 3px);
+      transform: translate(13px, 15px);
+    }
+    body.skin-cyber3d .team.blue::before {
+      background:
+        linear-gradient(145deg, #24495a 0%, #071721 38%, #02070b 72%, #001018 100%) !important;
+      border: 2px solid #06141c;
+      box-shadow:
+        5px 7px 0 #010406,
+        9px 13px 18px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(6, 182, 212, 0.35);
+    }
+    body.skin-cyber3d .team.white::before {
+      background:
+        linear-gradient(145deg, #604326 0%, #211307 38%, #090502 72%, #1a0c02 100%) !important;
+      border: 2px solid #211006;
+      box-shadow:
+        5px 7px 0 #050301,
+        9px 13px 18px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(251, 146, 60, 0.35);
+    }
+
+    body.skin-cyber3d .team.blue {
+      background:
+        linear-gradient(150deg, rgba(14, 70, 91, 0.93) 0%, rgba(3, 34, 50, 0.91) 42%, rgba(1, 17, 27, 0.95) 100%);
+      -webkit-backdrop-filter: blur(1px) saturate(1.1);
+      backdrop-filter: blur(1px) saturate(1.1);
+      box-shadow:
+        0 30px 22px -18px rgba(0, 0, 0, 0.95),
+        0 16px 36px rgba(0, 0, 0, 0.65),
+        0 0 38px rgba(6, 182, 212, 0.48),
+        inset 0 0 0 3px #071a24,
+        inset 0 0 0 8px rgba(6, 182, 212, 0.44),
+        inset 0 0 0 11px #05131b,
+        inset 0 18px 24px rgba(255, 255, 255, 0.13),
+        inset 0 -26px 34px rgba(0, 0, 0, 0.58);
+    }
+    body.skin-cyber3d .team.white {
+      background:
+        linear-gradient(150deg, rgba(104, 54, 15, 0.93) 0%, rgba(54, 27, 7, 0.91) 42%, rgba(25, 11, 2, 0.95) 100%);
+      -webkit-backdrop-filter: blur(1px) saturate(1.1);
+      backdrop-filter: blur(1px) saturate(1.1);
+      box-shadow:
+        0 30px 22px -18px rgba(0, 0, 0, 0.95),
+        0 16px 36px rgba(0, 0, 0, 0.65),
+        0 0 38px rgba(251, 146, 60, 0.48),
+        inset 0 0 0 3px #231206,
+        inset 0 0 0 8px rgba(251, 146, 60, 0.44),
+        inset 0 0 0 11px #1a0d04,
+        inset 0 18px 24px rgba(255, 255, 255, 0.12),
+        inset 0 -26px 34px rgba(0, 0, 0, 0.58);
+    }
+
+    body.skin-cyber3d .team.blue .score-value {
+      color: #f8feff;
+      -webkit-text-stroke: 1px rgba(220, 252, 255, 0.45);
+      text-shadow:
+        0.012em 0.012em 0 #1b7890,
+        0.024em 0.024em 0 #126279,
+        0.036em 0.036em 0 #0b4d61,
+        0.048em 0.048em 0 #073a4a,
+        0.06em 0.06em 0 #042834,
+        0.075em 0.085em 0.055em rgba(0, 0, 0, 0.78),
+        0 0 0.07em rgba(103, 232, 249, 0.52);
+    }
+    body.skin-cyber3d .team.white .score-value {
+      color: #fffaf5;
+      -webkit-text-stroke: 1px rgba(255, 247, 237, 0.42);
+      text-shadow:
+        0.012em 0.012em 0 #b75b12,
+        0.024em 0.024em 0 #98470d,
+        0.036em 0.036em 0 #7a3509,
+        0.048em 0.048em 0 #5d2706,
+        0.06em 0.06em 0 #431b04,
+        0.075em 0.085em 0.055em rgba(0, 0, 0, 0.78),
+        0 0 0.07em rgba(251, 191, 36, 0.46);
+    }
+
+    /* 폰 세로만 기울기 끔 — 카드 두께·숫자 압출·그림자는 유지 */
+    @media (max-width: 700px) and (orientation: portrait) {
+      body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-start,
+      body.skin-cyber3d .court.is-ends-swapped .pos-swap-end,
+      body.skin-cyber3d .court:not(.is-ends-swapped) .pos-swap-end,
+      body.skin-cyber3d .court.is-ends-swapped .pos-swap-start {
+        transform: none;
+      }
+      body.skin-cyber3d .sets-panel {
+        transform: none;
+      }
+    }
+    /* ===== /SKIN_CYBER3D ===== */
+
+    /* ===== SKIN_ARENA3D: 경기장 사진 + 3D 콘솔(SKIN_CYBER3D UI 공유·배경만 교체). 되돌리: 이 블록·스킨 모달·applySkin·I18N 삭제 ===== */
+    body.skin-arena3d {
+      background-color: #050810;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.45) 100%),
+        linear-gradient(180deg, rgba(8,16,28,0.35), rgba(8,16,28,0.35));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    /* ===== /SKIN_ARENA3D ===== */
+
+    /* JK_SCORE_SKIN_BRIDGE: 족구 클릭·원 유지. 보드 전체 pointer-events:none 금지. 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d #court,
+    body.skin-arena3d #court { pointer-events: auto !important; }
+    body[class*="skin-"] .rot-dot,
+    body[class*="skin-"] .side,
+    body[class*="skin-"] .mid,
+    body[class*="skin-"] .score { pointer-events: auto; }
+    body[class*="skin-"] .side { overflow: visible; }
+
   </style>
 </head>
 <body>
@@ -1010,6 +3715,17 @@
       "vegas", "ttable", "ttable1", "stadium", "stadium1", "tball", "sunset",
       "cyber3d", "arena3d"
     ];
+    var SKIN_IDS = [
+      "neon", "arena", "broadcast", "live", "card", "live2", "urban", "desert",
+      "underwater", "valley", "waterfall", "space", "snow", "vegas", "ttable",
+      "ttable1", "stadium", "stadium1", "tball", "sunset", "cyber3d", "arena3d"
+    ];
+    function lookToSkin(look) {
+      if (look === "glow") return "neon";
+      if (look === "paper") return "card";
+      if (look === "plain" || look === "field") return null;
+      return SKIN_IDS.indexOf(look) >= 0 ? look : null;
+    }
 
     var scoreBlue = 0;
     var scoreWhite = 0;
@@ -1171,8 +3887,12 @@
       return SERIES_WINS[v] ? v : "bo3_2";
     }
     function applyLook() {
+      var skin = lookToSkin(boardLook);
       LOOK_IDS.forEach(function (id) {
-        document.body.classList.toggle("look-" + id, boardLook === id);
+        document.body.classList.toggle("look-" + id, boardLook === id && lookToSkin(id) == null);
+      });
+      SKIN_IDS.forEach(function (id) {
+        document.body.classList.toggle("skin-" + id, skin === id);
       });
     }
     function applyFont() {
@@ -1244,6 +3964,8 @@
       var serve = computeServeTeam();
       elSideBlue.classList.toggle("is-serve-now", serve === "blue");
       elSideWhite.classList.toggle("is-serve-now", serve === "white");
+      elSideBlue.classList.toggle("is-serving", serve === "blue");
+      elSideWhite.classList.toggle("is-serving", serve === "white");
       document.querySelectorAll(".rot-dot").forEach(function (dot) {
         var team = dot.getAttribute("data-team");
         var slot = dot.getAttribute("data-slot");

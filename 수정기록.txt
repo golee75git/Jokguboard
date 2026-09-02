@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 Score 스킨 CSS 연결 (JK_SCORE_SKIN_CSS)
+
+자체 `C:\Score\voice_scoreboard.html`의 스킨 CSS만 추출해 족구 DOM에 연결. Score 폴더는 수정하지 않음. HTML·JS·카메라·마이크·Pro 자막·단복식·핸디·11점은 이식하지 않음. PNG `url("img/…")`와 `skin-liverec`은 제외. `#court`에 `pointer-events: none`을 두지 않음.
+
+`glow`→`skin-neon`, `paper`→`skin-card`, 나머지 look id는 같은 이름 `skin-*`. `plain`·`field`는 기존 look 팔레트만. 서브 표시에 `is-serving`을 함께 둠.
+
+### APK
+`app-debug-0902_1519-skins.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL: Noto Sans KR · Jua · Do Hyeon · Orbitron.
+AndroidX Core/AppCompat/WebKit (Apache-2.0). Kotlin/AGP (Apache-2.0).
+스킨 CSS는 이 제품군의 자체 Score 파일에서 재사용. 제3자 GitHub 구현 아님.
+
+### 보안
+CSS·class만 추가. 팀명은 `textContent`. 카메라·마이크 권한 없음. 외부 URL PNG 요청 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html` (JK_SCORE_SKIN_CSS · JK_SCORE_SKIN_BRIDGE · applyLook), `help.html`, `help_en.html`, `help_zh.html`, `index.html`, `docs/jokgu-plan.md`, Android assets www
+- 재사용: 자체 Score 스킨 CSS 구간 (NEON~ARENA3D, 변환 후)
+- 신규 파일 없음 (추출 스크립트는 TEMP만, 저장소 미포함)
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 세트 후 자동 엔드 스왑·다음 서브
+- 점수 TTS 문구 타이밍
+- 3D 카드 기울기·스킨 프레임 표시
+
+---
 ## 2026-09-02 Score형 보드 클래스·1~4 원·사이드아웃 로테이션 (JK_ROTATE)
 
 `voice_scoreboard.html` 미복사. 단복식·핸디·11점·카메라·마이크·Pro 자막 없음.

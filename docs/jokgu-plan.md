@@ -4,7 +4,7 @@
 
 ## 접근
 
-`voice_scoreboard.html` 전체 복사를 하지 않는다. 단일 HTML로 족구 코어만 작성한다.
+`voice_scoreboard.html` 전체 복사를 하지 않는다. 스킨 CSS 구간(NEON~ARENA3D, liverec·PNG 제외)만 족구 DOM 선택자로 연결한다 (`JK_SCORE_SKIN_CSS`).
 
 참고한 패턴(자체 재작성): `applyDelta`, `historyStack`/`undo`, `persistState`, APK L/R 길게 −1.
 
@@ -23,7 +23,7 @@
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`
 
 ## 검증
 
