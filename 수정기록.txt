@@ -1,5 +1,13 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 보드 모습 4종 (JK_LOOK_PACK)
+
+설정에서 기본·네온·카드·경기장. Score 스킨 CSS 미복사. 카메라 없음. 규칙 무변.
+
+### APK
+`app-debug-0902_1408-look-pack.apk`
+
+---
 ## 2026-09-02 보드 모습 (JK_BOARD_LOOK)
 
 탁구 `voice_scoreboard.html` 미복사. 족구 HTML만 청 어두운 카드·백 밝은 카드·바깥 서브 띠로 다시 그림. 규칙·localStorage 키 무변. Score 미수정.

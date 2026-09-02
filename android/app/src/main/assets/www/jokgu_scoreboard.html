@@ -285,6 +285,95 @@
       .court, .court.is-ends-swapped { flex-direction: column; }
       .mid { flex: 0 0 auto; flex-direction: row; justify-content: space-around; }
     }
+    /* JK_LOOK_PACK: 기본·네온·카드·경기장. 되돌리: 이 블록·inLook·boardLook 삭제 */
+    body.look-glow {
+      background-color: #020308;
+      background-image:
+        repeating-linear-gradient(115deg, rgba(0, 255, 210, 0.07) 0 2px, transparent 2px 18px),
+        radial-gradient(ellipse at 12% 10%, rgba(0, 255, 210, 0.18), transparent 45%),
+        radial-gradient(ellipse at 88% 18%, rgba(255, 60, 160, 0.16), transparent 42%);
+    }
+    body.look-glow .topbar {
+      background: #05070f;
+      border-color: rgba(0, 255, 210, 0.35);
+    }
+    body.look-glow .side.cyan {
+      background: #041018;
+      border: 2px solid #00ffd2;
+      box-shadow: 0 0 24px rgba(0, 255, 210, 0.28);
+      color: #d7fff6;
+    }
+    body.look-glow .side.ivory {
+      background: #120814;
+      border: 2px solid #ff4fc3;
+      box-shadow: 0 0 24px rgba(255, 79, 195, 0.25);
+      color: #ffe6f6;
+    }
+    body.look-glow .side.ivory .point-num,
+    body.look-glow .side.ivory .team-title { color: #ffe6f6; }
+    body.look-glow .mid {
+      background: #05070f;
+      border: 1px solid rgba(0, 255, 210, 0.4);
+      color: #d7fff6;
+    }
+    body.look-glow .set-row { color: #00ffd2; }
+    body.look-paper {
+      background: #cbb79a;
+      background-image: linear-gradient(180deg, #d8c6a8, #b89a72);
+      color: #2a2118;
+    }
+    body.look-paper .topbar {
+      background: #3b2f22;
+      border-color: #7a6248;
+    }
+    body.look-paper .hint-line { color: #4a3b2c; }
+    body.look-paper .side.cyan,
+    body.look-paper .side.ivory {
+      background: #f4ead6;
+      border: 3px solid #2a2118;
+      box-shadow: 6px 6px 0 #2a2118;
+      color: #2a2118;
+    }
+    body.look-paper .side.cyan .point-num,
+    body.look-paper .side.ivory .point-num { color: #1a140e; }
+    body.look-paper .side.cyan .team-title,
+    body.look-paper .side.ivory .team-title {
+      color: #1a140e;
+      background: #efe3cc;
+      border-color: #2a2118;
+    }
+    body.look-paper .mid {
+      background: #3b2f22;
+      border: 3px solid #2a2118;
+      color: #f4ead6;
+    }
+    body.look-paper .set-row { color: #e2b15a; }
+    body.look-paper .serve-guide { color: #e8dcc6; }
+    body.look-field {
+      background-color: #0b1a10;
+      background-image:
+        radial-gradient(ellipse at 50% 120%, rgba(80, 180, 70, 0.28), transparent 50%),
+        linear-gradient(180deg, #102414, #071208);
+    }
+    body.look-field .topbar {
+      background: rgba(8, 22, 12, 0.92);
+      border-color: rgba(140, 210, 90, 0.35);
+    }
+    body.look-field .side.cyan {
+      background: linear-gradient(160deg, #12301c, #08150c);
+      border: 2px solid #8cd25a;
+      color: #e8ffe0;
+    }
+    body.look-field .side.ivory {
+      background: linear-gradient(160deg, #f3f7ea, #dce8c8);
+      border: 2px solid #8cd25a;
+      color: #143018;
+    }
+    body.look-field .mid {
+      background: #102414;
+      border: 2px solid rgba(140, 210, 90, 0.45);
+    }
+    body.look-field .set-row { color: #b6f07a; }
   </style>
 </head>
 <body>
@@ -354,6 +443,13 @@
       <select id="inSeries">
         <option value="bo3_2">3세트 2선승</option>
       </select>
+      <label for="inLook" data-i18n="look">보드 모습</label>
+      <select id="inLook">
+        <option value="plain" data-i18n="look.plain">기본</option>
+        <option value="glow" data-i18n="look.glow">네온</option>
+        <option value="paper" data-i18n="look.paper">카드</option>
+        <option value="field" data-i18n="look.field">경기장</option>
+      </select>
       <div class="row-btns">
         <button type="button" class="ghost" id="setupCancel" data-i18n="cancel">취소</button>
         <button type="submit" data-i18n="save">저장</button>
@@ -398,7 +494,12 @@
         nothingUndo: "되돌릴 기록이 없습니다.",
         saved: "설정을 저장했습니다.",
         plus: "{name} +1",
-        minus: "{name} −1"
+        minus: "{name} −1",
+        look: "보드 모습",
+        "look.plain": "기본",
+        "look.glow": "네온",
+        "look.paper": "카드",
+        "look.field": "경기장"
       },
       en: {
         undo: "Undo",
@@ -424,7 +525,12 @@
         nothingUndo: "Nothing to undo.",
         saved: "Settings saved.",
         plus: "{name} +1",
-        minus: "{name} −1"
+        minus: "{name} −1",
+        look: "Board look",
+        "look.plain": "Default",
+        "look.glow": "Neon",
+        "look.paper": "Card",
+        "look.field": "Stadium"
       },
       zh: {
         undo: "撤销",
@@ -450,7 +556,12 @@
         nothingUndo: "没有可撤销的记录。",
         saved: "设置已保存。",
         plus: "{name} +1",
-        minus: "{name} −1"
+        minus: "{name} −1",
+        look: "外观",
+        "look.plain": "默认",
+        "look.glow": "霓虹",
+        "look.paper": "卡片",
+        "look.field": "球场"
       }
     };
 
@@ -471,6 +582,8 @@
     var serveChoice = null;
     var serveAnchor = null;
     var lang = "ko";
+    var boardLook = "plain";
+    var LOOK_IDS = ["plain", "glow", "paper", "field"];
     var historyStack = [];
     var lastPlusAt = { blue: 0, white: 0 };
 
@@ -554,8 +667,17 @@
         swapped: teamsSwapped === true,
         serveChoice: serveChoice,
         serveAnchor: serveAnchor,
-        lang: lang
+        lang: lang,
+        look: boardLook
       };
+    }
+    function normalizeLook(v) {
+      return LOOK_IDS.indexOf(v) >= 0 ? v : "plain";
+    }
+    function applyLook() {
+      LOOK_IDS.forEach(function (id) {
+        document.body.classList.toggle("look-" + id, boardLook === id);
+      });
     }
     function restore(s) {
       if (!s) return;
@@ -569,6 +691,7 @@
       serveChoice = s.serveChoice === "white" || s.serveChoice === "blue" ? s.serveChoice : null;
       serveAnchor = s.serveAnchor === "white" || s.serveAnchor === "blue" ? s.serveAnchor : null;
       if (s.lang === "en" || s.lang === "zh" || s.lang === "ko") lang = s.lang;
+      if (s.look) boardLook = normalizeLook(s.look);
     }
     function pushHistory() {
       historyStack.push(snapshot());
@@ -619,6 +742,7 @@
       else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });
       else elServeGuide.textContent = "";
       document.body.classList.toggle("is-apk-match", isApkMatchLr());
+      applyLook();
       applyLang();
     }
 
@@ -889,6 +1013,7 @@
     document.getElementById("btnSetup").addEventListener("click", function () {
       document.getElementById("inNameBlue").value = nameBlue;
       document.getElementById("inNameWhite").value = nameWhite;
+      document.getElementById("inLook").value = boardLook;
       elSetupBanner.classList.add("is-open");
     });
     document.getElementById("setupCancel").addEventListener("click", function () {
@@ -899,6 +1024,7 @@
       pushHistory();
       nameBlue = String(document.getElementById("inNameBlue").value || "청").slice(0, 20);
       nameWhite = String(document.getElementById("inNameWhite").value || "백").slice(0, 20);
+      boardLook = normalizeLook(document.getElementById("inLook").value);
       persistState();
       paint();
       elSetupBanner.classList.remove("is-open");
