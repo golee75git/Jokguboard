@@ -304,6 +304,11 @@
       color: #fff;
     }
     .row-btns button.ghost { background: #e2e8f0; color: #222; }
+    /* JK_FRESH_BANNER: 새 경기 확인 카드. 되돌리: 이 블록 삭제 */
+    #freshBanner { z-index: 45; }
+    #freshBanner .banner-card { text-align: center; padding: 28px 22px; }
+    #freshBanner .row-btns { justify-content: stretch; }
+    #freshBanner .row-btns button { flex: 1; min-height: 48px; font-weight: 700; }
     .help-frame {
       width: min(820px, 96vw);
       height: min(70vh, 640px);
@@ -3448,6 +3453,17 @@
     </div>
   </div>
 
+  <div class="banner" id="freshBanner" aria-hidden="true">
+    <div class="banner-card">
+      <h2 data-i18n="fresh">새 경기</h2>
+      <p data-i18n="confirmFresh">점수를 모두 지우고 새 경기를 시작할까요?</p>
+      <div class="row-btns">
+        <button type="button" class="ghost" id="freshNo" data-i18n="cancel">취소</button>
+        <button type="button" id="freshYes" data-i18n="ok">확인</button>
+      </div>
+    </div>
+  </div>
+
   <div class="banner" id="setupBanner" aria-hidden="true">
     <form class="sheet" id="setupForm">
       <h2 data-i18n="setup">설정</h2>
@@ -3840,6 +3856,7 @@
     var elServeGuide = document.getElementById("serveGuide");
     var elStatus = document.getElementById("statusLine");
     var elWinBanner = document.getElementById("winBanner");
+    var elFreshBanner = document.getElementById("freshBanner");
     var elSetupBanner = document.getElementById("setupBanner");
     var elHelpBanner = document.getElementById("helpBanner");
 
@@ -3927,6 +3944,9 @@
     }
     function isWinBannerOpen() {
       return elWinBanner.classList.contains("is-open");
+    }
+    function isFreshBannerOpen() {
+      return elFreshBanner && elFreshBanner.classList.contains("is-open");
     }
     function inDeuceWindow() {
       if (sportType === "futnet") {
@@ -4260,7 +4280,7 @@
     /* JK_DELTA: 족구 사이드아웃·Futnet 득점자 서브. 되돌리: applyDelta 삭제 */
     function applyDelta(team, delta, sourceTag) {
       if (!delta) return;
-      if (isWinBannerOpen()) return;
+      if (isWinBannerOpen() || isFreshBannerOpen()) return;
       if (delta > 0 && isMatchLocked()) {
         setStatus(t("matchLocked"));
         return;
@@ -4334,8 +4354,20 @@
       setStatus(t("undone"));
     }
 
+    /* JK_FRESH_BANNER: window.confirm 대신 보드 배너. 되돌리: open/close 삭제·freshMatch에 confirm 복원 */
+    function openFreshBanner() {
+      elFreshBanner.classList.add("is-open");
+      elFreshBanner.setAttribute("aria-hidden", "false");
+    }
+    function closeFreshBanner() {
+      elFreshBanner.classList.remove("is-open");
+      elFreshBanner.setAttribute("aria-hidden", "true");
+    }
     function freshMatch() {
-      if (!window.confirm(t("confirmFresh"))) return;
+      openFreshBanner();
+    }
+    function runFreshMatch() {
+      closeFreshBanner();
       pushHistory();
       scoreBlue = 0;
       scoreWhite = 0;
@@ -4518,6 +4550,14 @@
     document.getElementById("btnUndo").addEventListener("click", undoLast);
     document.getElementById("btnFresh").addEventListener("click", freshMatch);
     document.getElementById("winOk").addEventListener("click", closeWinBanner);
+    document.getElementById("freshNo").addEventListener("click", closeFreshBanner);
+    document.getElementById("freshYes").addEventListener("click", runFreshMatch);
+    elFreshBanner.addEventListener("click", function (e) {
+      if (e.target === elFreshBanner) closeFreshBanner();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && isFreshBannerOpen()) closeFreshBanner();
+    });
 
     document.getElementById("btnSetup").addEventListener("click", function () {
       document.getElementById("inNameBlue").value = nameBlue;

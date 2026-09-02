@@ -1,5 +1,37 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 새 경기 확인 배너 (JK_FRESH_BANNER)
+
+가운데 **새 경기**를 누르면 브라우저 `confirm` 대신 기존 `.banner` 카드에서 취소·확인을 고릅니다. 확인 시에만 점수·세트·서브·회전을 지웁니다. 팀명·종목·모습은 유지. `C:\Score` 미수정. Score HTML/CSS/JS는 복사하지 않음.
+
+### APK
+`app-debug-0902_1631-fresh.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron.
+AndroidX Core/AppCompat/WebKit (Apache-2.0).
+
+### 보안
+문구는 `textContent`/기존 I18N. 사용자 입력 HTML 삽입 없음. 배너가 열린 동안 +1/−1 차단. 카메라·마이크 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, `help.html`, `help_en.html`, `help_zh.html`, `index.html`, `docs/jokgu-plan.md`, Android assets www
+- 신규 파일 없음 (APK `downloads/app-debug-0902_1631-fresh.apk`)
+- 재사용: 기존 `.banner` / `confirmFresh` / `freshMatch` 초기화 로직
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_FRESH_BANNER`, `runFreshMatch`, `isFreshBannerOpen` — 공개 GitHub에서 동일 식별자 묶음 미발견(검색일 2026-09-02). 취소/확인 오버레이는 관용 UI.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+청구항 대조는 법률 자문이 아니다.
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 세트 후 자동 엔드 스왑
+
+일반 확인 대화상자는 관용적 UI이다.
+
+---
 ## 2026-09-02 족구 4인·Futnet 종목 전환 (JK_SPORT_RULES)
 
 한 HTML에서 설정으로 `jokgu` / `futnet`만 바꿉니다. 족구는 코트 4명·15점·3세트 2선승, 사이드아웃 시 1→2→3→4. Futnet은 11점·최대 15·항상 3세트 2선승, 득점자 서브, 더블/트리플은 원 탭으로 서브 표시, 싱글은 ①+짝수 R/홀수 L. 종목 변경 시 확인 후 점수만 초기화. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 신규 npm/GPL 없음.
