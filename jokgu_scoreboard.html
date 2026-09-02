@@ -240,6 +240,9 @@
       color: #f1f5f9;
       border-radius: 22px;
       padding: 12px 8px;
+      position: relative;
+      z-index: 12;
+      isolation: isolate;
     }
     .set-label { font-size: 12px; letter-spacing: 0.08em; color: #94a3b8; }
     .set-row {
@@ -3400,6 +3403,7 @@
     body[class*="skin-"] .side,
     body[class*="skin-"] .mid,
     body[class*="skin-"] .score { pointer-events: auto; }
+    body[class*="skin-"] .mid { position: relative; z-index: 12; }
     body[class*="skin-"] #btnFresh { pointer-events: auto !important; z-index: 8; }
     body[class*="skin-"] .side { overflow: visible; }
 
@@ -4457,7 +4461,7 @@
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
       if (el.closest(".banner.is-open")) return true;
-      if (el.closest(".topbar, .rot-dot, .team-title, #btnFresh")) return true;
+      if (el.closest(".topbar, .mid, .rot-dot, .team-title, #btnFresh")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
         return false;
@@ -4476,7 +4480,7 @@
       if (!isApkMatchLr() && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       var team = e.button === 0 ? leftTeam() : rightTeam();
       if (isServePickPending()) {
-        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner, #btnFresh")) return;
+        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner, .mid, #btnFresh")) return;
         mouseHoldTeam = team;
         e.preventDefault();
         return;
@@ -4486,7 +4490,7 @@
         if (!elCourt.contains(e.target)) return;
       } else if (scoreTargetBlocked(e.target) && !isApkMatchLr()) {
         return;
-      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, .banner, #btnFresh")) {
+      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, .banner, .mid, #btnFresh")) {
         return;
       }
       if (!isApkMatchLr() && !elCourt.contains(e.target)) return;
@@ -4501,7 +4505,7 @@
       mouseHoldTeam = null;
       if (isServePickPending()) {
         cancelLong();
-        if (e.target.closest && e.target.closest("#btnFresh, .topbar, .banner")) return;
+        if (e.target.closest && e.target.closest("#btnFresh, .mid, .topbar, .banner")) return;
         setServeChoice(team);
         e.preventDefault();
         return;
@@ -4559,6 +4563,12 @@
     });
 
     document.getElementById("btnUndo").addEventListener("click", undoLast);
+    document.getElementById("btnFresh").addEventListener("pointerdown", function (e) {
+      e.stopPropagation();
+    });
+    document.getElementById("btnFresh").addEventListener("mousedown", function (e) {
+      e.stopPropagation();
+    });
     document.getElementById("btnFresh").addEventListener("click", freshMatch);
     document.getElementById("winOk").addEventListener("click", closeWinBanner);
     document.getElementById("freshNo").addEventListener("click", closeFreshBanner);

@@ -1,5 +1,32 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 가운데 칸을 점수 위에 (JK_FRESH_HIT)
+
+스킨에서 좌우 큰 점수가 가운데 **새 경기**를 덮어 클릭이 점수/선서브로 가던 문제를 수정. `.mid` z-index 12. APK L/R에서 `.mid` 전체 제외. `C:\Score` 미수정.
+
+### APK
+`app-debug-0902_1646-midz.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0.
+
+### 보안
+기존과 동일. 카메라·마이크 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, Android assets www
+- 신규 파일 없음 (APK `downloads/app-debug-0902_1646-midz.apk`)
+- 재사용: `#btnFresh` / `#freshBanner`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+가운데 스택 z-index는 관용 CSS. `JK_FRESH_HIT` 묶음 공개 구현 미발견(검색일 2026-09-02).
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+
+---
 ## 2026-09-02 새 경기 클릭·금색 큰 버튼 (JK_FRESH_HIT)
 
 0:0 선서브 대기에서 화면 L/R이 `#btnFresh` 클릭을 가로채던 것을 제외. 가운데 버튼을 키우고 금색 배경. `C:\Score` 미수정.
