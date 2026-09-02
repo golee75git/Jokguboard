@@ -23,13 +23,14 @@
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`
 
 ## 검증
 
 - 14:13 미종료, 15:13 승, 14:14→16:14, 2세트 선승
 - undo, 새 경기, ko/en/zh, help 3종
 - `serve.ps1` · APK L/R
+- 세트제 2/3/4선승, 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
 
 ## 배포
 

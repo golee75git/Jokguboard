@@ -5,8 +5,10 @@ families from Google Fonts (CSS stylesheet only):
 
   - Noto Sans KR  https://fonts.google.com/noto/specimen/Noto+Sans+KR
   - Jua           https://fonts.google.com/specimen/Jua
+  - Do Hyeon      https://fonts.google.com/specimen/Do+Hyeon
+  - Orbitron      https://fonts.google.com/specimen/Orbitron
 
-Both families are published under the SIL Open Font License 1.1.
+All four families are published under the SIL Open Font License 1.1.
 No GPL font or GPL JavaScript library is included.
 
 If the stylesheet cannot load (offline APK without network), the UI falls

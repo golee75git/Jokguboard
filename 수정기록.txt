@@ -1,5 +1,43 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 TTS·BLE·스킨·심플·서체·세트제 (JK_SKIN_REMAP / JK_SIMPLE / JK_TTS / JK_BLE)
+
+자체 코드만 확장. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. `voice_scoreboard.html` 미복사.
+
+### 한 일
+- 보드 모습을 족구 DOM(`.side.cyan` / `.side.ivory` / `.mid`)용 팔레트로 추가. liverec·탁구장 사진 없음. live/live2는 나중에 사진 교체 가능한 단색 배경.
+- 심플 모드(큰 점수·세트, 크롬 숨김). 선서브 후 진입.
+- OFL 글꼴: Jua, Noto Sans KR, Do Hyeon, Orbitron.
+- 세트제: 2/3/4선승(기본 `bo3_2`).
+- TTS: 득점·서브·세트·경기. Android `AndroidTTS`, 웹은 `speechSynthesis`. MP3 팩·마이크 없음.
+- BLE: Score 시계와 같은 GATT UUID·패킷 v2 `[2, L게임, R게임, L세트, R세트]`. JS `AndroidBleScore.setBoardScore` / `setBoardScoreForce`.
+
+### APK
+`app-debug-0902_1430-tts-ble.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL: Noto Sans KR · Jua · Do Hyeon · Orbitron.
+AndroidX Core/AppCompat/WebKit (Apache-2.0). Kotlin/AGP (Apache-2.0).
+재사용: `BleScoreSpikeServer.kt`를 이 저장소 패키지(`com.jokgu.scoreboard`)로 이식. UUID는 시계 호환을 위해 동일.
+
+### 보안
+팀명 `textContent`. 점수는 기기 localStorage만. 마이크·카메라 없음.
+BLE는 페어링된 기기만 read/notify. Android 12+ `BLUETOOTH_CONNECT`·`BLUETOOTH_ADVERTISE` 런타임 요청.
+Play 스토어: BLE advertise 권한 고지 필요. `RECORD_AUDIO` 없음.
+
+### 신규 / 재사용
+- 변경: `jokgu_scoreboard.html`, `index.html`, `help.html`, `help_en.html`, `help_zh.html`, `LICENSE-FONTS.txt`, `docs/jokgu-plan.md`, `android/app` Manifest·MainActivity, Android assets www
+- 신규: `android/app/src/main/java/com/jokgu/scoreboard/BleScoreSpikeServer.kt` (자체 Score 서버 이식)
+- 재사용: Gradle wrapper, AndroidX
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 세트 후 자동 엔드 스왑·다음 서브
+- 점수 TTS 문구 타이밍
+
+---
 ## 2026-09-02 보드 모습 4종 (JK_LOOK_PACK)
 
 설정에서 기본·네온·카드·경기장. Score 스킨 CSS 미복사. 카메라 없음. 규칙 무변.

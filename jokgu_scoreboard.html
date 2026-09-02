@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#07090f" />
   <title>족구 점수판</title>
-  <!-- JK_OFL_FONTS: Noto Sans KR · Jua (SIL OFL 1.1). 되돌리: 이 link 삭제 -->
+  <!-- JK_OFL_FONTS: Noto Sans KR · Jua · Do Hyeon · Orbitron (SIL OFL 1.1). 되돌리: 이 link 삭제 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&family=Do+Hyeon&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     /* JK_BOARD_LOOK: 청 어두운 카드·백 밝은 카드·바깥 서브 띠. 되돌리: 이 style을 이전 커밋으로 복원 */
     :root {
@@ -250,6 +250,14 @@
     }
     .banner-card h2, .sheet h2 { margin: 0 0 12px; }
     .sheet label { display: block; margin: 10px 0 4px; font-size: 13px; }
+    .sheet .chk {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 4px;
+      font-size: 13px;
+    }
+    .sheet .chk input { width: auto; }
     .sheet input, .sheet select {
       width: 100%;
       font: inherit;
@@ -374,12 +382,116 @@
       border: 2px solid rgba(140, 210, 90, 0.45);
     }
     body.look-field .set-row { color: #b6f07a; }
+    /* JK_SIMPLE: 큰 점수·세트만. 되돌리: 이 블록·#btnSimple·simpleMode 삭제 */
+    body.is-simple .topbar button:not(#btnUndo):not(#btnSimple),
+    body.is-simple .lang-pack,
+    body.is-simple .rot-col,
+    body.is-simple .hint-line { display: none; }
+    body.is-simple .point-num { font-size: clamp(96px, 24vw, 280px); }
+    body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
+    body.is-simple .team-title { font-size: clamp(18px, 3vw, 32px); }
+    /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
+    body.look-arena { background: #12100c; }
+    body.look-arena .side.cyan { background: #1a1408; border-color: #e8a317; color: #fff3d6; }
+    body.look-arena .side.ivory { background: #f4ead6; border-color: #8a6a2a; color: #1a1408; }
+    body.look-arena .mid { background: #1a1408; border-color: #e8a317; }
+    body.look-arena .set-row { color: #e8a317; }
+    body.look-broadcast { background: #0a0c10; }
+    body.look-broadcast .side.cyan { background: #0d1b2a; border-color: #4cc9f0; }
+    body.look-broadcast .side.ivory { background: #f7f7f2; border-color: #c1121f; color: #111; }
+    body.look-broadcast .mid { background: #111; border-color: #f5f5f5; }
+    body.look-broadcast .set-row { color: #ffd60a; }
+    body.look-live,
+    body.look-live2 {
+      background-color: #142414;
+      background-image: linear-gradient(180deg, #1c3320, #0c180e);
+    }
+    body.look-live .side.cyan,
+    body.look-live2 .side.cyan { background: rgba(12, 40, 18, 0.92); border-color: #9ae66e; }
+    body.look-live .side.ivory,
+    body.look-live2 .side.ivory { background: rgba(244, 248, 232, 0.94); border-color: #6a8f3a; color: #143018; }
+    body.look-live .mid,
+    body.look-live2 .mid { background: #102010; }
+    body.look-live .set-row,
+    body.look-live2 .set-row { color: #c6f07a; }
+    body.look-urban { background: #1b1d22; }
+    body.look-urban .side.cyan { background: #23262e; border-color: #7dd3fc; }
+    body.look-urban .side.ivory { background: #eceff3; border-color: #64748b; color: #111827; }
+    body.look-urban .mid { background: #111318; }
+    body.look-desert { background: #3a2a18; }
+    body.look-desert .side.cyan { background: #4a3218; border-color: #e2b15a; color: #fff4d6; }
+    body.look-desert .side.ivory { background: #f3e2c4; border-color: #a67c3a; color: #3a2410; }
+    body.look-desert .mid { background: #2a1c10; }
+    body.look-desert .set-row { color: #e2b15a; }
+    body.look-underwater { background: #062033; }
+    body.look-underwater .side.cyan { background: #08344d; border-color: #22d3ee; }
+    body.look-underwater .side.ivory { background: #d7f3ff; border-color: #38bdf8; color: #082f45; }
+    body.look-underwater .mid { background: #041824; }
+    body.look-valley { background: #14220f; }
+    body.look-valley .side.cyan { background: #1c3314; border-color: #86efac; }
+    body.look-valley .side.ivory { background: #eef6e4; border-color: #65a30d; color: #1a2e10; }
+    body.look-valley .mid { background: #101c0c; }
+    body.look-waterfall { background: #0c1c28; }
+    body.look-waterfall .side.cyan { background: #123044; border-color: #67e8f9; }
+    body.look-waterfall .side.ivory { background: #e8f4fb; border-color: #38bdf8; color: #0f2740; }
+    body.look-waterfall .mid { background: #0a1620; }
+    body.look-space { background: #05060c; }
+    body.look-space .side.cyan { background: #0b1020; border-color: #818cf8; }
+    body.look-space .side.ivory { background: #eef0ff; border-color: #6366f1; color: #1e1b4b; }
+    body.look-space .mid { background: #070812; }
+    body.look-space .set-row { color: #c4b5fd; }
+    body.look-snow { background: #9bb4c8; }
+    body.look-snow .side.cyan { background: #1e3a5f; border-color: #e2e8f0; }
+    body.look-snow .side.ivory { background: #f8fafc; border-color: #94a3b8; color: #0f172a; }
+    body.look-snow .mid { background: #1e293b; }
+    body.look-vegas { background: #1a0810; }
+    body.look-vegas .side.cyan { background: #2a0c18; border-color: #fbbf24; color: #fff7d6; }
+    body.look-vegas .side.ivory { background: #fff1f2; border-color: #fb7185; color: #4c0519; }
+    body.look-vegas .mid { background: #12040a; }
+    body.look-vegas .set-row { color: #fbbf24; }
+    body.look-ttable,
+    body.look-ttable1 { background: #143018; }
+    body.look-ttable .side.cyan,
+    body.look-ttable1 .side.cyan { background: #0b2744; border-color: #38bdf8; }
+    body.look-ttable .side.ivory,
+    body.look-ttable1 .side.ivory { background: #f4f1ea; border-color: #cbd5e1; color: #111; }
+    body.look-ttable .mid,
+    body.look-ttable1 .mid { background: #102414; }
+    body.look-stadium,
+    body.look-stadium1 { background: #101410; }
+    body.look-stadium .side.cyan,
+    body.look-stadium1 .side.cyan { background: #17301c; border-color: #86efac; }
+    body.look-stadium .side.ivory,
+    body.look-stadium1 .side.ivory { background: #f3f7ea; border-color: #4ade80; color: #143018; }
+    body.look-stadium .mid,
+    body.look-stadium1 .mid { background: #0c140c; }
+    body.look-tball { background: #102018; }
+    body.look-tball .side.cyan { background: #163024; border-color: #facc15; }
+    body.look-tball .side.ivory { background: #fffbeb; border-color: #ca8a04; color: #422006; }
+    body.look-tball .mid { background: #0c1810; }
+    body.look-tball .set-row { color: #facc15; }
+    body.look-sunset { background: #2a1210; }
+    body.look-sunset .side.cyan { background: #3a1814; border-color: #fb923c; color: #fff7ed; }
+    body.look-sunset .side.ivory { background: #fff1e6; border-color: #f97316; color: #431407; }
+    body.look-sunset .mid { background: #1a0c0a; }
+    body.look-sunset .set-row { color: #fdba74; }
+    body.look-cyber3d { background: #050816; }
+    body.look-cyber3d .side.cyan { background: #081428; border: 2px solid #22d3ee; box-shadow: 0 0 18px rgba(34, 211, 238, 0.35); }
+    body.look-cyber3d .side.ivory { background: #120824; border: 2px solid #c084fc; color: #f5e8ff; }
+    body.look-cyber3d .side.ivory .point-num,
+    body.look-cyber3d .side.ivory .team-title { color: #f5e8ff; }
+    body.look-cyber3d .mid { background: #050816; border-color: #22d3ee; }
+    body.look-arena3d { background: #0c0c0c; }
+    body.look-arena3d .side.cyan { background: #16120c; border: 2px solid #fbbf24; }
+    body.look-arena3d .side.ivory { background: #f8f1e0; border: 2px solid #78716c; color: #1c1917; }
+    body.look-arena3d .mid { background: #111; border-color: #fbbf24; }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="topbar">
       <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
+      <button type="button" id="btnSimple" data-i18n="simple">심플</button>
       <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
       <button type="button" id="btnSetup" data-i18n="setup">설정</button>
       <button type="button" id="btnHelp" data-i18n="help">도움말</button>
@@ -441,7 +553,16 @@
       <input id="inNameWhite" maxlength="20" autocomplete="off" />
       <label for="inSeries" data-i18n="series">세트 규칙</label>
       <select id="inSeries">
-        <option value="bo3_2">3세트 2선승</option>
+        <option value="bo3_2" data-i18n="series.bo3_2">3세트 2선승</option>
+        <option value="bo5_3" data-i18n="series.bo5_3">5세트 3선승</option>
+        <option value="bo7_4" data-i18n="series.bo7_4">7세트 4선승</option>
+      </select>
+      <label for="inFont" data-i18n="font">글꼴</label>
+      <select id="inFont">
+        <option value="jua" data-i18n="font.jua">주아 (Jua)</option>
+        <option value="noto" data-i18n="font.noto">노토 (Noto Sans KR)</option>
+        <option value="dohyeon" data-i18n="font.dohyeon">도현 (Do Hyeon)</option>
+        <option value="orbitron" data-i18n="font.orbitron">오비트론 (Orbitron)</option>
       </select>
       <label for="inLook" data-i18n="look">보드 모습</label>
       <select id="inLook">
@@ -449,7 +570,28 @@
         <option value="glow" data-i18n="look.glow">네온</option>
         <option value="paper" data-i18n="look.paper">카드</option>
         <option value="field" data-i18n="look.field">경기장</option>
+        <option value="arena" data-i18n="look.arena">아레나</option>
+        <option value="broadcast" data-i18n="look.broadcast">중계</option>
+        <option value="live" data-i18n="look.live">잔디</option>
+        <option value="live2" data-i18n="look.live2">잔디2</option>
+        <option value="urban" data-i18n="look.urban">도시</option>
+        <option value="desert" data-i18n="look.desert">사막</option>
+        <option value="underwater" data-i18n="look.underwater">수중</option>
+        <option value="valley" data-i18n="look.valley">계곡</option>
+        <option value="waterfall" data-i18n="look.waterfall">폭포</option>
+        <option value="space" data-i18n="look.space">우주</option>
+        <option value="snow" data-i18n="look.snow">눈</option>
+        <option value="vegas" data-i18n="look.vegas">야간</option>
+        <option value="ttable" data-i18n="look.ttable">코트</option>
+        <option value="ttable1" data-i18n="look.ttable1">코트2</option>
+        <option value="stadium" data-i18n="look.stadium">스탠드</option>
+        <option value="stadium1" data-i18n="look.stadium1">스탠드2</option>
+        <option value="tball" data-i18n="look.tball">공</option>
+        <option value="sunset" data-i18n="look.sunset">노을</option>
+        <option value="cyber3d" data-i18n="look.cyber3d">사이버</option>
+        <option value="arena3d" data-i18n="look.arena3d">링</option>
       </select>
+      <label class="chk"><input type="checkbox" id="inTts" /> <span data-i18n="tts">점수 읽기</span></label>
       <div class="row-btns">
         <button type="button" class="ghost" id="setupCancel" data-i18n="cancel">취소</button>
         <button type="submit" data-i18n="save">저장</button>
@@ -487,7 +629,7 @@
         serving: "{name} 서브",
         gameWin: "{name} 세트 승",
         courtChange: "코트를 바꿔 주세요.",
-        matchWin: "{name} 경기 승 (2선승)",
+        matchWin: "{name} 경기 승 ({wins}선승)",
         matchLocked: "경기가 이미 끝났습니다. 새 경기를 시작하세요.",
         confirmFresh: "점수를 모두 지우고 새 경기를 시작할까요?",
         undone: "직전 동작을 되돌렸습니다.",
@@ -499,7 +641,39 @@
         "look.plain": "기본",
         "look.glow": "네온",
         "look.paper": "카드",
-        "look.field": "경기장"
+        "look.field": "경기장",
+        "look.arena": "아레나",
+        "look.broadcast": "중계",
+        "look.live": "잔디",
+        "look.live2": "잔디2",
+        "look.urban": "도시",
+        "look.desert": "사막",
+        "look.underwater": "수중",
+        "look.valley": "계곡",
+        "look.waterfall": "폭포",
+        "look.space": "우주",
+        "look.snow": "눈",
+        "look.vegas": "야간",
+        "look.ttable": "코트",
+        "look.ttable1": "코트2",
+        "look.stadium": "스탠드",
+        "look.stadium1": "스탠드2",
+        "look.tball": "공",
+        "look.sunset": "노을",
+        "look.cyber3d": "사이버",
+        "look.arena3d": "링",
+        "series.bo3_2": "3세트 2선승",
+        "series.bo5_3": "5세트 3선승",
+        "series.bo7_4": "7세트 4선승",
+        font: "글꼴",
+        "font.jua": "주아 (Jua)",
+        "font.noto": "노토 (Noto Sans KR)",
+        "font.dohyeon": "도현 (Do Hyeon)",
+        "font.orbitron": "오비트론 (Orbitron)",
+        tts: "점수 읽기",
+        simple: "심플",
+        simpleOff: "전체",
+        simpleNeedServe: "선서브를 고른 뒤에 심플을 켤 수 있습니다."
       },
       en: {
         undo: "Undo",
@@ -518,7 +692,7 @@
         serving: "{name} serving",
         gameWin: "{name} wins the set",
         courtChange: "Please change ends.",
-        matchWin: "{name} wins the match (first to 2)",
+        matchWin: "{name} wins the match (first to {wins})",
         matchLocked: "Match already finished. Start a new match.",
         confirmFresh: "Clear all scores and start a new match?",
         undone: "Last action undone.",
@@ -530,7 +704,39 @@
         "look.plain": "Default",
         "look.glow": "Neon",
         "look.paper": "Card",
-        "look.field": "Stadium"
+        "look.field": "Stadium",
+        "look.arena": "Arena",
+        "look.broadcast": "Broadcast",
+        "look.live": "Turf",
+        "look.live2": "Turf 2",
+        "look.urban": "Urban",
+        "look.desert": "Desert",
+        "look.underwater": "Underwater",
+        "look.valley": "Valley",
+        "look.waterfall": "Waterfall",
+        "look.space": "Space",
+        "look.snow": "Snow",
+        "look.vegas": "Night",
+        "look.ttable": "Court",
+        "look.ttable1": "Court 2",
+        "look.stadium": "Stand",
+        "look.stadium1": "Stand 2",
+        "look.tball": "Ball",
+        "look.sunset": "Sunset",
+        "look.cyber3d": "Cyber",
+        "look.arena3d": "Ring",
+        "series.bo3_2": "Best of 3 (first to 2)",
+        "series.bo5_3": "Best of 5 (first to 3)",
+        "series.bo7_4": "Best of 7 (first to 4)",
+        font: "Font",
+        "font.jua": "Jua",
+        "font.noto": "Noto Sans KR",
+        "font.dohyeon": "Do Hyeon",
+        "font.orbitron": "Orbitron",
+        tts: "Read scores",
+        simple: "Simple",
+        simpleOff: "Full",
+        simpleNeedServe: "Choose first serve before simple mode."
       },
       zh: {
         undo: "撤销",
@@ -549,7 +755,7 @@
         serving: "{name} 发球",
         gameWin: "{name} 赢得本局",
         courtChange: "请交换场地。",
-        matchWin: "{name} 赢得比赛（先胜两局）",
+        matchWin: "{name} 赢得比赛（先胜 {wins} 局）",
         matchLocked: "比赛已结束。请开始新比赛。",
         confirmFresh: "清除全部分数并开始新比赛？",
         undone: "已撤销上一步。",
@@ -561,16 +767,60 @@
         "look.plain": "默认",
         "look.glow": "霓虹",
         "look.paper": "卡片",
-        "look.field": "球场"
+        "look.field": "球场",
+        "look.arena": "赛场",
+        "look.broadcast": "转播",
+        "look.live": "草坪",
+        "look.live2": "草坪2",
+        "look.urban": "都市",
+        "look.desert": "沙漠",
+        "look.underwater": "水下",
+        "look.valley": "山谷",
+        "look.waterfall": "瀑布",
+        "look.space": "太空",
+        "look.snow": "雪",
+        "look.vegas": "夜",
+        "look.ttable": "场地",
+        "look.ttable1": "场地2",
+        "look.stadium": "看台",
+        "look.stadium1": "看台2",
+        "look.tball": "球",
+        "look.sunset": "晚霞",
+        "look.cyber3d": "赛博",
+        "look.arena3d": "擂台",
+        "series.bo3_2": "三局两胜",
+        "series.bo5_3": "五局三胜",
+        "series.bo7_4": "七局四胜",
+        font: "字体",
+        "font.jua": "Jua",
+        "font.noto": "Noto Sans KR",
+        "font.dohyeon": "Do Hyeon",
+        "font.orbitron": "Orbitron",
+        tts: "朗读分数",
+        simple: "简洁",
+        simpleOff: "完整",
+        simpleNeedServe: "请先选择发球后再开启简洁模式。"
       }
     };
 
     var LS_KEY = "jokgu_scoreboard_state_v1";
-    var WINS_NEEDED = 2;
     var GAME_TARGET = 15;
     var DEUCE_FLOOR = 14;
     var LONG_PRESS_MS = 500;
     var PLUS_COOLDOWN_MS = 1500;
+    var SERIES_WINS = { bo3_2: 2, bo5_3: 3, bo7_4: 4 };
+    var FONT_FAM = {
+      jua: '"Jua", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
+      noto: '"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
+      dohyeon: '"Do Hyeon", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
+      orbitron: '"Orbitron", "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif'
+    };
+    var LOOK_IDS = [
+      "plain", "glow", "paper", "field", "arena", "broadcast", "live", "live2",
+      "urban", "desert", "underwater", "valley", "waterfall", "space", "snow",
+      "vegas", "ttable", "ttable1", "stadium", "stadium1", "tball", "sunset",
+      "cyber3d", "arena3d"
+    ];
 
     var scoreBlue = 0;
     var scoreWhite = 0;
@@ -583,7 +833,10 @@
     var serveAnchor = null;
     var lang = "ko";
     var boardLook = "plain";
-    var LOOK_IDS = ["plain", "glow", "paper", "field"];
+    var boardFont = "jua";
+    var matchSeries = "bo3_2";
+    var ttsOn = false;
+    var simpleMode = false;
     var historyStack = [];
     var lastPlusAt = { blue: 0, white: 0 };
 
@@ -630,8 +883,12 @@
       if (b >= DEUCE_FLOOR && w >= DEUCE_FLOOR && hi - lo >= 2) return true;
       return false;
     }
+    function winsNeeded() {
+      return SERIES_WINS[matchSeries] || 2;
+    }
     function isMatchSeriesWon(sb, sw) {
-      return sb >= WINS_NEEDED || sw >= WINS_NEEDED;
+      var n = winsNeeded();
+      return sb >= n || sw >= n;
     }
     function gameWinnerTeam(b, w) {
       return b > w ? "blue" : "white";
@@ -668,16 +925,37 @@
         serveChoice: serveChoice,
         serveAnchor: serveAnchor,
         lang: lang,
-        look: boardLook
+        look: boardLook,
+        font: boardFont,
+        series: matchSeries,
+        tts: ttsOn === true,
+        simple: simpleMode === true
       };
     }
     function normalizeLook(v) {
       return LOOK_IDS.indexOf(v) >= 0 ? v : "plain";
     }
+    function normalizeFont(v) {
+      return FONT_FAM[v] ? v : "jua";
+    }
+    function normalizeSeries(v) {
+      return SERIES_WINS[v] ? v : "bo3_2";
+    }
     function applyLook() {
       LOOK_IDS.forEach(function (id) {
         document.body.classList.toggle("look-" + id, boardLook === id);
       });
+    }
+    function applyFont() {
+      document.documentElement.style.setProperty("--font", FONT_FAM[boardFont] || FONT_FAM.jua);
+    }
+    function applySimpleMode() {
+      document.body.classList.toggle("is-simple", simpleMode === true);
+      var btn = document.getElementById("btnSimple");
+      if (btn) {
+        btn.textContent = simpleMode ? t("simpleOff") : t("simple");
+        btn.setAttribute("aria-pressed", simpleMode ? "true" : "false");
+      }
     }
     function restore(s) {
       if (!s) return;
@@ -692,6 +970,10 @@
       serveAnchor = s.serveAnchor === "white" || s.serveAnchor === "blue" ? s.serveAnchor : null;
       if (s.lang === "en" || s.lang === "zh" || s.lang === "ko") lang = s.lang;
       if (s.look) boardLook = normalizeLook(s.look);
+      if (s.font) boardFont = normalizeFont(s.font);
+      if (s.series) matchSeries = normalizeSeries(s.series);
+      ttsOn = s.tts === true;
+      simpleMode = s.simple === true;
     }
     function pushHistory() {
       historyStack.push(snapshot());
@@ -743,7 +1025,54 @@
       else elServeGuide.textContent = "";
       document.body.classList.toggle("is-apk-match", isApkMatchLr());
       applyLook();
+      applyFont();
       applyLang();
+      applySimpleMode();
+      pushBle(false);
+    }
+
+    /* JK_BLE_PUSH: 화면 좌·우 점수를 시계 GATT로. 되돌리: pushBle·AndroidBleScore 호출 삭제 */
+    function pushBle(force) {
+      if (!window.AndroidBleScore) return;
+      var lg = teamsSwapped ? scoreWhite : scoreBlue;
+      var rg = teamsSwapped ? scoreBlue : scoreWhite;
+      var ls = teamsSwapped ? setWhite : setBlue;
+      var rs = teamsSwapped ? setBlue : setWhite;
+      try {
+        if (force && AndroidBleScore.setBoardScoreForce) {
+          AndroidBleScore.setBoardScoreForce(lg, rg, ls, rs);
+        } else if (AndroidBleScore.setBoardScore) {
+          AndroidBleScore.setBoardScore(lg, rg, ls, rs);
+        }
+      } catch (err) {}
+    }
+
+    /* JK_TTS: 점수·서브·세트·경기. 되돌리: speakPhrase 호출 삭제 */
+    function speakPhrase(text) {
+      if (!ttsOn || !text) return;
+      var tag = lang === "zh" ? "zh-CN" : lang === "en" ? "en-US" : "ko-KR";
+      var uid = "jk-" + Date.now();
+      if (window.AndroidTTS && AndroidTTS.speak) {
+        try {
+          AndroidTTS.speak(text, tag, uid);
+          return;
+        } catch (err) {}
+      }
+      if (window.speechSynthesis) {
+        try {
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = tag;
+          speechSynthesis.cancel();
+          speechSynthesis.speak(u);
+        } catch (err) {}
+      }
+    }
+    function speakScoreNow() {
+      var leftN = teamsSwapped ? nameWhite : nameBlue;
+      var rightN = teamsSwapped ? nameBlue : nameWhite;
+      var lg = teamsSwapped ? scoreWhite : scoreBlue;
+      var rg = teamsSwapped ? scoreBlue : scoreWhite;
+      speakPhrase(leftN + " " + lg + ", " + rightN + " " + rg);
     }
 
     function setStatus(msg) {
@@ -784,9 +1113,11 @@
       persistState();
       paint();
       if (matchEnded) {
-        openWinBanner(fill("matchWin", { name: nameFor(winner) }), "");
+        openWinBanner(fill("matchWin", { name: nameFor(winner), wins: String(winsNeeded()) }), "");
+        speakPhrase(fill("matchWin", { name: nameFor(winner), wins: String(winsNeeded()) }));
       } else {
         openWinBanner(fill("gameWin", { name: nameFor(winner) }), t("courtChange"));
+        speakPhrase(fill("gameWin", { name: nameFor(winner) }));
       }
     }
 
@@ -822,7 +1153,11 @@
       persistState();
       paint();
       setStatus(fill(delta > 0 ? "plus" : "minus", { name: nameFor(team === "white" ? "white" : "blue") }));
-      if (delta > 0) maybeFinishGame();
+      if (delta > 0) {
+        var setsBefore = setBlue + setWhite;
+        maybeFinishGame();
+        if (setBlue + setWhite === setsBefore) speakScoreNow();
+      }
     }
 
     function setServeChoice(team) {
@@ -833,6 +1168,7 @@
       persistState();
       paint();
       setStatus(fill("serving", { name: nameFor(team) }));
+      speakPhrase(fill("serving", { name: nameFor(team) }));
     }
 
     function undoLast() {
@@ -861,6 +1197,7 @@
       paint();
       closeWinBanner();
       setStatus(t("needServe"));
+      pushBle(true);
     }
 
     function allowPlus(team) {
@@ -1013,7 +1350,10 @@
     document.getElementById("btnSetup").addEventListener("click", function () {
       document.getElementById("inNameBlue").value = nameBlue;
       document.getElementById("inNameWhite").value = nameWhite;
+      document.getElementById("inSeries").value = matchSeries;
+      document.getElementById("inFont").value = boardFont;
       document.getElementById("inLook").value = boardLook;
+      document.getElementById("inTts").checked = ttsOn === true;
       elSetupBanner.classList.add("is-open");
     });
     document.getElementById("setupCancel").addEventListener("click", function () {
@@ -1024,11 +1364,24 @@
       pushHistory();
       nameBlue = String(document.getElementById("inNameBlue").value || "청").slice(0, 20);
       nameWhite = String(document.getElementById("inNameWhite").value || "백").slice(0, 20);
+      matchSeries = normalizeSeries(document.getElementById("inSeries").value);
+      boardFont = normalizeFont(document.getElementById("inFont").value);
       boardLook = normalizeLook(document.getElementById("inLook").value);
+      ttsOn = document.getElementById("inTts").checked === true;
       persistState();
       paint();
       elSetupBanner.classList.remove("is-open");
       setStatus(t("saved"));
+    });
+
+    document.getElementById("btnSimple").addEventListener("click", function () {
+      if (!simpleMode && isServePickPending()) {
+        setStatus(t("simpleNeedServe"));
+        return;
+      }
+      simpleMode = !simpleMode;
+      persistState();
+      paint();
     });
 
     document.getElementById("btnHelp").addEventListener("click", function () {
