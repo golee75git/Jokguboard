@@ -1,5 +1,30 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 하단 메뉴·설정 언어·큰 점수 (JK_DOCK)
+
+메뉴(되돌리기·심플·새 경기·설정·도움말)를 보드 아래 한 줄 오른쪽으로. 한국어·English·中文은 설정 저장. 양팀 −1 버튼 삭제(길게 −1 유지). 일반 점수 2배, 심플 1.5배. `C:\Score` 미수정.
+
+### APK
+`app-debug-0902_1550-dock.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL: Noto Sans KR · Jua · Do Hyeon · Orbitron.
+AndroidX Core/AppCompat/WebKit (Apache-2.0).
+
+### 보안
+팀명 `textContent`. 언어는 설정 select의 ko/en/zh만 허용. 카메라·마이크 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, `help.html`, `help_en.html`, `help_zh.html`, `index.html`, `docs/jokgu-plan.md`, Android assets www
+- 신규 파일 없음
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 세트 후 자동 엔드 스왑·다음 서브
+
+---
 ## 2026-09-02 Score 스킨 CSS 연결 (JK_SCORE_SKIN_CSS)
 
 자체 `C:\Score\voice_scoreboard.html`의 스킨 CSS만 추출해 족구 DOM에 연결. Score 폴더는 수정하지 않음. HTML·JS·카메라·마이크·Pro 자막·단복식·핸디·11점은 이식하지 않음. PNG `url("img/…")`와 `skin-liverec`은 제외. `#court`에 `pointer-events: none`을 두지 않음.

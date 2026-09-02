@@ -42,19 +42,24 @@
       gap: 8px;
       padding: calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
     }
+    /* JK_DOCK: 메뉴를 보드 아래 한 줄 오른쪽. 되돌리: .shell 안 .topbar를 보드 위로, lang-pack 복원 */
     .topbar {
       display: flex;
       gap: 6px;
       align-items: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
       flex-shrink: 0;
+      margin-left: auto;
+      max-width: 100%;
+      overflow-x: auto;
       background: rgba(10, 14, 26, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       color: #fff;
       padding: 8px 10px;
     }
-    .topbar button, .lang-btn {
+    .topbar button {
       font: inherit;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 10px;
@@ -62,14 +67,9 @@
       background: rgba(255, 255, 255, 0.06);
       color: #e2e8f0;
       cursor: pointer;
+      white-space: nowrap;
     }
-    .topbar button:hover, .lang-btn:hover { background: rgba(34, 211, 238, 0.16); }
-    .lang-pack { margin-left: auto; display: flex; gap: 4px; }
-    .lang-btn.is-on {
-      background: rgba(34, 211, 238, 0.22);
-      border-color: rgba(34, 211, 238, 0.45);
-      color: #ecfeff;
-    }
+    .topbar button:hover { background: rgba(34, 211, 238, 0.16); }
     .hint-line {
       min-height: 1.3em;
       padding: 2px 6px;
@@ -174,21 +174,6 @@
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
     .rot-dot.is-bench { opacity: 0.38; cursor: default; }
-    .btn-grid { display: flex; justify-content: center; padding: 4px 0 2px; }
-    .pt-neg {
-      font: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 8px;
-      padding: 4px 14px;
-      background: rgba(15, 23, 42, 0.45);
-      color: inherit;
-      cursor: pointer;
-    }
-    .side.ivory .pt-neg {
-      border-color: rgba(15, 23, 42, 0.2);
-      background: rgba(255, 255, 255, 0.7);
-    }
-    body.is-simple .btn-grid { display: none; }
     .side-main {
       flex: 1;
       min-width: 0;
@@ -217,7 +202,7 @@
       flex: 1;
       display: grid;
       place-items: center;
-      font-size: clamp(64px, 16vw, 200px);
+      font-size: clamp(128px, 32vw, 400px);
       line-height: 0.9;
       cursor: pointer;
       font-variant-numeric: tabular-nums;
@@ -408,10 +393,9 @@
     body.look-field .set-row { color: #b6f07a; }
     /* JK_SIMPLE: 큰 점수·세트만. 되돌리: 이 블록·#btnSimple·simpleMode 삭제 */
     body.is-simple .topbar button:not(#btnUndo):not(#btnSimple),
-    body.is-simple .lang-pack,
     body.is-simple .rot-col,
     body.is-simple .hint-line { display: none; }
-    body.is-simple .point-num { font-size: clamp(96px, 24vw, 280px); }
+    body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
     body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
     body.is-simple .team-title { font-size: clamp(18px, 3vw, 32px); }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
@@ -3377,18 +3361,6 @@
 </head>
 <body>
   <div class="shell">
-    <div class="topbar">
-      <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
-      <button type="button" id="btnSimple" data-i18n="simple">심플</button>
-      <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
-      <button type="button" id="btnSetup" data-i18n="setup">설정</button>
-      <button type="button" id="btnHelp" data-i18n="help">도움말</button>
-      <div class="lang-pack">
-        <button type="button" class="lang-btn" data-lang="ko">한국어</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="zh">中文</button>
-      </div>
-    </div>
     <div class="hint-line" id="statusLine"></div>
     <div class="board-wrap" id="boardWrap">
     <div class="court boards" id="court">
@@ -3402,7 +3374,6 @@
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameBlue" data-team="blue">청</div>
           <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0">0</div>
-          <div class="btn-grid"><button type="button" class="pt-neg" data-team="blue">−1</button></div>
         </div>
       </section>
       <aside class="mid sets-panel">
@@ -3421,10 +3392,16 @@
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameWhite" data-team="white">백</div>
           <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
-          <div class="btn-grid"><button type="button" class="pt-neg" data-team="white">−1</button></div>
         </div>
       </section>
     </div>
+    </div>
+    <div class="topbar">
+      <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
+      <button type="button" id="btnSimple" data-i18n="simple">심플</button>
+      <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
+      <button type="button" id="btnSetup" data-i18n="setup">설정</button>
+      <button type="button" id="btnHelp" data-i18n="help">도움말</button>
     </div>
   </div>
 
@@ -3450,6 +3427,12 @@
         <option value="bo3_2" data-i18n="series.bo3_2">3세트 2선승</option>
         <option value="bo5_3" data-i18n="series.bo5_3">5세트 3선승</option>
         <option value="bo7_4" data-i18n="series.bo7_4">7세트 4선승</option>
+      </select>
+      <label for="inLang" data-i18n="lang">언어</label>
+      <select id="inLang">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
       </select>
       <label for="inFont" data-i18n="font">글꼴</label>
       <select id="inFont">
@@ -3560,6 +3543,7 @@
         "series.bo5_3": "5세트 3선승",
         "series.bo7_4": "7세트 4선승",
         font: "글꼴",
+        lang: "언어",
         "font.jua": "주아 (Jua)",
         "font.noto": "노토 (Noto Sans KR)",
         "font.dohyeon": "도현 (Do Hyeon)",
@@ -3623,6 +3607,7 @@
         "series.bo5_3": "Best of 5 (first to 3)",
         "series.bo7_4": "Best of 7 (first to 4)",
         font: "Font",
+        lang: "Language",
         "font.jua": "Jua",
         "font.noto": "Noto Sans KR",
         "font.dohyeon": "Do Hyeon",
@@ -3686,6 +3671,7 @@
         "series.bo5_3": "五局三胜",
         "series.bo7_4": "七局四胜",
         font: "字体",
+        lang: "语言",
         "font.jua": "Jua",
         "font.noto": "Noto Sans KR",
         "font.dohyeon": "Do Hyeon",
@@ -3947,9 +3933,6 @@
       document.documentElement.lang = lang === "zh" ? "zh-Hans" : lang;
       document.querySelectorAll("[data-i18n]").forEach(function (el) {
         el.textContent = t(el.getAttribute("data-i18n"));
-      });
-      document.querySelectorAll(".lang-btn").forEach(function (btn) {
-        btn.classList.toggle("is-on", btn.getAttribute("data-lang") === lang);
       });
     }
 
@@ -4227,7 +4210,7 @@
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
       if (el.closest(".banner.is-open")) return true;
-      if (el.closest(".topbar, .rot-dot, .team-title, .btn-grid")) return true;
+      if (el.closest(".topbar, .rot-dot, .team-title")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
         return false;
@@ -4295,13 +4278,6 @@
     bindPoint(elScoreBlue);
     bindPoint(elScoreWhite);
 
-    document.querySelectorAll(".pt-neg").forEach(function (btn) {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        applyDelta(btn.getAttribute("data-team"), -1, "minus-btn");
-      });
-    });
-
     document.querySelectorAll(".rot-dot").forEach(function (dot) {
       dot.addEventListener("click", function () {
         if (dot.getAttribute("data-slot") === "4") return;
@@ -4325,6 +4301,7 @@
       document.getElementById("inSeries").value = matchSeries;
       document.getElementById("inFont").value = boardFont;
       document.getElementById("inLook").value = boardLook;
+      document.getElementById("inLang").value = (lang === "en" || lang === "zh") ? lang : "ko";
       document.getElementById("inTts").checked = ttsOn === true;
       elSetupBanner.classList.add("is-open");
     });
@@ -4339,6 +4316,8 @@
       matchSeries = normalizeSeries(document.getElementById("inSeries").value);
       boardFont = normalizeFont(document.getElementById("inFont").value);
       boardLook = normalizeLook(document.getElementById("inLook").value);
+      var nextLang = document.getElementById("inLang").value;
+      lang = nextLang === "en" || nextLang === "zh" ? nextLang : "ko";
       ttsOn = document.getElementById("inTts").checked === true;
       persistState();
       paint();
@@ -4363,14 +4342,6 @@
     });
     document.getElementById("helpClose").addEventListener("click", function () {
       elHelpBanner.classList.remove("is-open");
-    });
-
-    document.querySelectorAll(".lang-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        lang = btn.getAttribute("data-lang") || "ko";
-        persistState();
-        paint();
-      });
     });
 
     loadState();
