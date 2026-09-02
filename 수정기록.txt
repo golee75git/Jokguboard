@@ -1,5 +1,33 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 네트쪽 세로 원·서브 번호 고정 (JK_NET_COL / JK_ROTATE)
+
+선수 원을 네트 쪽에 세로로 둠. 왼쪽 팀은 아래가 1번, 오른쪽 팀은 위가 1번. 원 숫자는 자리를 옮기지 않고 서브만 금색 배경. 족구는 랠리 득점, 사이드아웃 시 직전 서브 팀만 1→2→3→4. Futnet 강제 회전 없음. `C:\Score` 미수정.
+
+### APK
+`app-debug-0902_1738-netcol.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0.
+
+### 보안
+기존과 동일. 카메라·마이크 없음. 팀명 `textContent`. 사용자 입력 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, `docs/jokgu-prd.md`, `docs/jokgu-plan.md`, `scripts/check-win-rules.js`, Android assets www
+- 신규 파일 없음 (APK `downloads/app-debug-0902_1738-netcol.apk`)
+- 재사용: 기존 `.rot-dot` / `serveIdxBlue` / `serveIdxWhite` / `#btnFresh`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_NET_COL` + `bumpServeIdx` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-02). `flex-direction: column-reverse` 는 관용 CSS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 3D 스킨(원근·카드 기울기) 구성
+
+---
 ## 2026-09-02 사이버·링 새 경기 클릭 (JK_FRESH_HIT)
 
 사이버·링 모습에서 가운데 칸이 3D로 뒤로 밀려 새 경기가 좌우 점수에 가려지던 문제를 수정. 가운데 `.mid` / `.sets-panel` 과 버튼만 `transform`을 해제. 좌우 카드 3D는 유지. `C:\Score` 미수정.

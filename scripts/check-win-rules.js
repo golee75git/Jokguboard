@@ -53,6 +53,25 @@ expect("futnet 14:15 lose", isSetWon("futnet", 14, 15), false);
 expect("futnet 15:13 cap", isSetWon("futnet", 15, 13), true);
 expect("futnet 8:0 open", isSetWon("futnet", 8, 0), false);
 
+function bumpIdx(idx, n) {
+  if (n < 2) return idx;
+  return (idx + 1) % n;
+}
+var sb = 0, sw = 0, n = 4;
+expect("hold serve same idx", sb, 0);
+sb = bumpIdx(sb, n);
+expect("sideout first-serve team next", sb, 1);
+expect("receive first serve idx", sw, 0);
+sw = bumpIdx(sw, n);
+expect("first-serve team back on 2", sb, 1);
+expect("receive team next", sw, 1);
+sb = bumpIdx(sb, n);
+expect("wrap step 3", sb, 2);
+sb = bumpIdx(sb, n);
+expect("wrap step 4", sb, 3);
+sb = bumpIdx(sb, n);
+expect("wrap to 1", sb, 0);
+
 if (fails.length) {
   console.error(fails.join("\n"));
   process.exit(1);
