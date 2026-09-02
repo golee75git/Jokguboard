@@ -76,12 +76,18 @@
       color: #94a3b8;
       font-size: 13px;
     }
+    .board-wrap {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+    }
     .court {
       flex: 1;
       display: flex;
       flex-direction: row;
       gap: 8px;
       min-height: 0;
+      width: 100%;
     }
     .court.is-ends-swapped { flex-direction: row-reverse; }
     .side {
@@ -475,16 +481,175 @@
     body.look-sunset .side.ivory { background: #fff1e6; border-color: #f97316; color: #431407; }
     body.look-sunset .mid { background: #1a0c0a; }
     body.look-sunset .set-row { color: #fdba74; }
-    body.look-cyber3d { background: #050816; }
-    body.look-cyber3d .side.cyan { background: #081428; border: 2px solid #22d3ee; box-shadow: 0 0 18px rgba(34, 211, 238, 0.35); }
-    body.look-cyber3d .side.ivory { background: #120824; border: 2px solid #c084fc; color: #f5e8ff; }
+    /* JK_FRAME_SVG: 아레나·중계 카드 테두리. 되돌리: 이 블록 삭제 */
+    body.look-arena .side,
+    body.look-broadcast .side,
+    body.look-cyber3d .side,
+    body.look-arena3d .side { overflow: visible; }
+    body.look-arena .side > *,
+    body.look-broadcast .side > *,
+    body.look-cyber3d .side > *,
+    body.look-arena3d .side > *,
+    body.look-cyber3d .mid > *,
+    body.look-arena3d .mid > * { position: relative; z-index: 1; }
+    body.look-arena .side.cyan {
+      color: #dbeafe;
+      background:
+        repeating-linear-gradient(135deg, transparent 0 10px, rgba(56, 130, 246, 0.10) 10px 12px) top left / 40% 35% no-repeat,
+        #000;
+      border: 0;
+    }
+    body.look-arena .side.ivory {
+      color: #fee2e2;
+      background:
+        repeating-linear-gradient(45deg, transparent 0 10px, rgba(255, 0, 64, 0.10) 10px 12px) bottom right / 40% 35% no-repeat,
+        #000;
+      border: 0;
+    }
+    body.look-arena .side.ivory .point-num,
+    body.look-arena .side.ivory .team-title { color: #fee2e2; }
+    body.look-arena .side.cyan::after,
+    body.look-arena .side.ivory::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body.look-arena .side.cyan::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><path d='M12 8h176q8 0 8 8v208q0 8-8 8H12q-8 0-8-8V16q0-8 8-8z' fill='none' stroke='%2360a5fa' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-arena .side.ivory::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><path d='M12 8h176q8 0 8 8v208q0 8-8 8H12q-8 0-8-8V16q0-8 8-8z' fill='none' stroke='%23ff6b8a' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-arena .mid { background: #111; border-color: #3282ff; }
+    body.look-broadcast { background: #050810; }
+    body.look-broadcast .side { border: 0; background: transparent; }
+    body.look-broadcast .side.cyan { color: #ecfeff; }
+    body.look-broadcast .side.ivory { color: #fff7ed; }
+    body.look-broadcast .side.ivory .point-num,
+    body.look-broadcast .side.ivory .team-title { color: #fff7ed; }
+    body.look-broadcast .side.cyan::after,
+    body.look-broadcast .side.ivory::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body.look-broadcast .court:not(.is-ends-swapped) .side.cyan::after,
+    body.look-broadcast .court.is-ends-swapped .side.ivory::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><path d='M36 8h196v184H36L8 100z' fill='%23071226' fill-opacity='0.94' stroke='%2367e8f9' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-broadcast .court:not(.is-ends-swapped) .side.ivory::after,
+    body.look-broadcast .court.is-ends-swapped .side.cyan::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200' preserveAspectRatio='none'><path d='M8 8h196l28 92-28 92H8z' fill='%23200a04' fill-opacity='0.94' stroke='%23fb923c' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-broadcast .mid {
+      background: linear-gradient(180deg, rgba(11, 18, 32, 0.95), rgba(5, 8, 16, 0.95));
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    body.look-broadcast .set-row { color: #67e8f9; }
+    /* JK_BOARD_DEPTH: cyber3d·arena3d 원근. 탁구장 사진 없음. 되돌리: 이 블록·.board-wrap 삭제 */
+    body.look-cyber3d,
+    body.look-arena3d {
+      background-color: #0c1420;
+      background-image: linear-gradient(180deg, rgba(0, 20, 40, 0.45) 0%, rgba(0, 0, 0, 0.12) 48%, rgba(0, 0, 0, 0.55) 100%);
+    }
+    body.look-arena3d {
+      background-color: #1a140c;
+      background-image: linear-gradient(180deg, rgba(40, 24, 8, 0.45) 0%, rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.62) 100%);
+    }
+    body.look-cyber3d .board-wrap,
+    body.look-arena3d .board-wrap {
+      perspective: 900px;
+      perspective-origin: 50% 45%;
+    }
+    body.look-cyber3d .court,
+    body.look-arena3d .court { transform-style: preserve-3d; }
+    body.look-cyber3d .court:not(.is-ends-swapped) .side.cyan,
+    body.look-cyber3d .court.is-ends-swapped .side.ivory,
+    body.look-arena3d .court:not(.is-ends-swapped) .side.cyan,
+    body.look-arena3d .court.is-ends-swapped .side.ivory {
+      transform-origin: left center;
+      transform: rotateY(15deg) translateZ(14px);
+    }
+    body.look-cyber3d .court:not(.is-ends-swapped) .side.ivory,
+    body.look-cyber3d .court.is-ends-swapped .side.cyan,
+    body.look-arena3d .court:not(.is-ends-swapped) .side.ivory,
+    body.look-arena3d .court.is-ends-swapped .side.cyan {
+      transform-origin: right center;
+      transform: rotateY(-15deg) translateZ(14px);
+    }
+    body.look-cyber3d .side.cyan {
+      color: #ecfeff;
+      border: 0;
+      background: linear-gradient(165deg, rgba(0, 40, 62, 0.55) 0%, rgba(0, 12, 24, 0.78) 100%);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 36px rgba(6, 182, 212, 0.35);
+    }
+    body.look-cyber3d .side.ivory {
+      color: #fff7ed;
+      border: 0;
+      background: linear-gradient(165deg, rgba(70, 32, 0, 0.55) 0%, rgba(24, 10, 0, 0.78) 100%);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 36px rgba(251, 146, 60, 0.35);
+    }
     body.look-cyber3d .side.ivory .point-num,
-    body.look-cyber3d .side.ivory .team-title { color: #f5e8ff; }
-    body.look-cyber3d .mid { background: #050816; border-color: #22d3ee; }
-    body.look-arena3d { background: #0c0c0c; }
-    body.look-arena3d .side.cyan { background: #16120c; border: 2px solid #fbbf24; }
-    body.look-arena3d .side.ivory { background: #f8f1e0; border: 2px solid #78716c; color: #1c1917; }
-    body.look-arena3d .mid { background: #111; border-color: #fbbf24; }
+    body.look-cyber3d .side.ivory .team-title { color: #fff7ed; }
+    body.look-cyber3d .side.cyan::after,
+    body.look-cyber3d .side.ivory::after,
+    body.look-arena3d .side.cyan::after,
+    body.look-arena3d .side.ivory::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body.look-cyber3d .side.cyan::after,
+    body.look-arena3d .side.cyan::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><path d='M16 10h168q8 0 8 8v204q0 8-8 8H16q-8 0-8-8V18q0-8 8-8z' fill='none' stroke='%2367e8f9' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-cyber3d .side.ivory::after,
+    body.look-arena3d .side.ivory::after {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 240' preserveAspectRatio='none'><path d='M16 10h168q8 0 8 8v204q0 8-8 8H16q-8 0-8-8V18q0-8 8-8z' fill='none' stroke='%23fb923c' stroke-width='3'/></svg>") center / 100% 100% no-repeat;
+    }
+    body.look-cyber3d .mid,
+    body.look-arena3d .mid {
+      overflow: visible;
+      transform: translateZ(-72px) rotateX(6deg);
+      background: linear-gradient(180deg, rgba(18, 22, 36, 0.94), rgba(5, 8, 16, 0.96));
+      border-color: rgba(103, 232, 249, 0.28);
+    }
+    body.look-arena3d .side.cyan {
+      color: #fff7ed;
+      border: 0;
+      background: linear-gradient(165deg, rgba(62, 40, 0, 0.55), rgba(24, 14, 0, 0.8));
+    }
+    body.look-arena3d .side.ivory {
+      color: #1c1917;
+      border: 0;
+      background: linear-gradient(165deg, #f8f1e0, #e7dcc4);
+    }
+    body.look-arena3d .mid { border-color: rgba(251, 191, 36, 0.45); }
+    body.look-arena3d .set-row { color: #fbbf24; }
+    @keyframes jkServeFramePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    body.look-cyber3d .side.is-serve-now::after,
+    body.look-arena3d .side.is-serve-now::after {
+      animation: jkServeFramePulse 1.4s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.look-cyber3d .side.is-serve-now::after,
+      body.look-arena3d .side.is-serve-now::after { animation: none; }
+    }
+    @media (max-width: 720px) {
+      body.look-cyber3d .side,
+      body.look-arena3d .side,
+      body.look-cyber3d .mid,
+      body.look-arena3d .mid { transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -502,6 +667,7 @@
       </div>
     </div>
     <div class="hint-line" id="statusLine"></div>
+    <div class="board-wrap" id="boardWrap">
     <div class="court" id="court">
       <section class="side cyan" id="sideBlue" data-team="blue">
         <div class="rot-col" aria-label="rotation">
@@ -531,6 +697,7 @@
           <div class="point-num" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
         </div>
       </section>
+    </div>
     </div>
   </div>
 
