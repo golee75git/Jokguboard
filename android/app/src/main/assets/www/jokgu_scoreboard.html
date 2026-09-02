@@ -3406,6 +3406,19 @@
     body[class*="skin-"] .mid { position: relative; z-index: 12; }
     body[class*="skin-"] #btnFresh { pointer-events: auto !important; z-index: 8; }
     body[class*="skin-"] .side { overflow: visible; }
+    /* JK_FRESH_HIT: 사이버·링 가운데 3D 뒤로 밀림 해제 → 새 경기 클릭. 되돌리: 이 4선택자 삭제 */
+    body.look-cyber3d .mid,
+    body.look-arena3d .mid,
+    body.skin-cyber3d .sets-panel,
+    body.skin-arena3d .sets-panel {
+      transform: none !important;
+    }
+    body.look-cyber3d .mid #btnFresh,
+    body.look-arena3d .mid #btnFresh,
+    body.skin-cyber3d .sets-panel button,
+    body.skin-arena3d .sets-panel button {
+      transform: none !important;
+    }
 
   </style>
 </head>

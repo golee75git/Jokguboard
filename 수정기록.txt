@@ -1,5 +1,33 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 사이버·링 새 경기 클릭 (JK_FRESH_HIT)
+
+사이버·링 모습에서 가운데 칸이 3D로 뒤로 밀려 새 경기가 좌우 점수에 가려지던 문제를 수정. 가운데 `.mid` / `.sets-panel` 과 버튼만 `transform`을 해제. 좌우 카드 3D는 유지. `C:\Score` 미수정.
+
+### APK
+`app-debug-0902_1712-cyberhit.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0.
+
+### 보안
+기존과 동일. 카메라·마이크 없음. CSS만 변경, 사용자 입력 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, Android assets www
+- 신규 파일 없음 (APK `downloads/app-debug-0902_1712-cyberhit.apk`)
+- 재사용: 기존 `#btnFresh` / `#freshBanner` / `JK_SCORE_SKIN_BRIDGE`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_FRESH_HIT` + `look-cyber3d` + `btnFresh` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-02). `transform: none` 은 관용 CSS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 3D 스킨(원근·카드 기울기) 구성
+
+---
 ## 2026-09-02 가운데 칸을 점수 위에 (JK_FRESH_HIT)
 
 스킨에서 좌우 큰 점수가 가운데 **새 경기**를 덮어 클릭이 점수/선서브로 가던 문제를 수정. `.mid` z-index 12. APK L/R에서 `.mid` 전체 제외. `C:\Score` 미수정.
