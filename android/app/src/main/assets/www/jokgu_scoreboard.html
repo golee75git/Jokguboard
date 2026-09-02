@@ -322,17 +322,26 @@
       padding: 4px 8px;
       color: #cbd5e1;
     }
+    /* JK_FRESH_HIT: 가운데 새 경기 크게·금색. 되돌리: padding 8px·연한 배경 */
     .mid #btnFresh {
+      position: relative;
+      z-index: 8;
       font: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 10px;
-      padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #e2e8f0;
+      font-size: clamp(16px, 2.6vmin, 22px);
+      font-weight: 700;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      min-height: 52px;
+      width: 100%;
+      max-width: 240px;
+      background: #e8a317;
+      color: #1a1408;
       cursor: pointer;
       white-space: nowrap;
+      pointer-events: auto;
     }
-    .mid #btnFresh:hover { background: rgba(34, 211, 238, 0.16); }
+    .mid #btnFresh:hover { background: #f4c44a; }
     @media (max-width: 720px) {
       .court, .court.is-ends-swapped { flex-direction: column; }
       .mid { flex: 0 0 auto; flex-direction: row; justify-content: space-around; }
@@ -3391,6 +3400,7 @@
     body[class*="skin-"] .side,
     body[class*="skin-"] .mid,
     body[class*="skin-"] .score { pointer-events: auto; }
+    body[class*="skin-"] #btnFresh { pointer-events: auto !important; z-index: 8; }
     body[class*="skin-"] .side { overflow: visible; }
 
   </style>
@@ -4466,7 +4476,7 @@
       if (!isApkMatchLr() && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       var team = e.button === 0 ? leftTeam() : rightTeam();
       if (isServePickPending()) {
-        if (e.target.closest && e.target.closest(".rot-dot")) return;
+        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner, #btnFresh")) return;
         mouseHoldTeam = team;
         e.preventDefault();
         return;
@@ -4491,6 +4501,7 @@
       mouseHoldTeam = null;
       if (isServePickPending()) {
         cancelLong();
+        if (e.target.closest && e.target.closest("#btnFresh, .topbar, .banner")) return;
         setServeChoice(team);
         e.preventDefault();
         return;
