@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">족구 점수판</string>
+    <string name="exit_confirm">앱을 종료할까요?</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_ok">확인</string>
+</resources>

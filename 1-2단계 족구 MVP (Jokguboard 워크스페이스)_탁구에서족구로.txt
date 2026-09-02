@@ -1,0 +1,78 @@
+1단계: 족구 MVP (Jokguboard 워크스페이스)
+C:\Jokguboard 그린필드로 족구 점수판 MVP를 구현해줘. Score(탁구) repo는 이번 단계에서 수정하지 마.
+## 목표
+- 족구 전용 웹 점수판 + Android WebView APK
+- 규칙: 15점·2점 차(14:14 듀스)·3세트 2선승(bo3_2)
+- 배포 후 별도 URL에서 동작 (Vercel 정적, 빌드 없음)
+## 필수 제약 (C:\Jokguboard\최소수정-족구.txt)
+- 최소 수정, MARKER 주석으로 블록 경계·롤백 가능하게
+- ko / en / zh (I18N + help.html, help_en.html, help_zh.html)
+- OFL 글꼴만 사용, 외부 라이브러리 추가 금지
+- C:\Score, C:\PickleBoard, C:\sports_scoreboard 수정 금지
+- 수정기록.txt에 작업 기록
+- 작업 끝: git commit → push → npx vercel --prod
+- APK: app-debug-MMDD_HHMM-설명.apk 형식, downloads/ + help·index에 파일명 표시
+## 코드 전략
+- voice_scoreboard.html(21k) 전체 복사 금지. 그린필드 MVP (~3.5k~5k lines 목표)
+- 탁구는 패턴만 참고: applyDelta, historyStack/undo, persistState, L/R 클리커(MOUSE_APK_SCORE_LR2 유사)
+- localStorage 키: jokgu_scoreboard_state_v1 (Score와 충돌 방지)
+## 파일 구조 (신규)
+- jokgu_scoreboard.html (메인, 단일 HTML 권장)
+- serve.ps1 → http://127.0.0.1:8080/jokgu_scoreboard.html
+- vercel.json → /play → jokgu_scoreboard.html
+- index.html (간단 랜딩·APK 다운로드)
+- help.html / help_en.html / help_zh.html
+- docs/jokgu-prd.md, docs/jokgu-plan.md
+- android/ (WebView, 패키지 com.jokgu.scoreboard, 시작 URL jokgu_scoreboard.html)
+- downloads/ (공개 APK)
+## 코어 로직
+- isGameWin: 15+ & 2점 차, 14:14 이후 듀스
+- maybeFinishGame: 세트+1, 세트 종료 시 teamsSwapped(코트 교대)
+- isMatchSeriesWon: 2세트 선승
+- 0:0 선서브 serveChoice 터치 선택 → 첫 득점 시 serveAnchor
+- applyDelta: 탁구 전용 분기(단복식, deciding 5, handicap, Pro sync 등) 없음
+## UI
+- 청/백 대형 점수 + 세트 점수
+- undo, 새 경기, 설정(팀명·세트 규칙), 도움말
+- 팀당 선수 원: 세로 배치, disk-glyph 숫자 1·2·3 (족구 3인 로테이션). 서브 칸 강조.
+  Phase 2에서 사이드아웃·로테이션 로직 연결. MVP는 선서브 + 원 UI 표시까지.
+- 스킨: default 1개만
+- APK 경기 중: 화면 L/R +1, 길게 −1 (탁구 APK 정책과 동일 UX)
+## 제외 (MVP)
+- Pro TV sync, 카메라, team-event, club, 다중 스킨, 음성/TTS
+- BLE·wear-remote는 MVP 이후 (AndroidBleScore 인터페이스는 나중에 동일 시그니처로 추가 가능)
+## 검증
+- 14:13 미종료, 15:13 승, 14:14→16:14, 2세트 선승 매치 종료
+- undo, 새 경기, ko/en/zh, help 3종
+- 로컬 serve.ps1 + APK L/R 클리커
+## 산출물
+- 동작하는 jokgu_scoreboard.html + android APK + Vercel 배포 URL
+- 수정기록.txt, docs, git push 완료
+
+
+2단계: Score 허브 링크만 (배포 URL 확정 후, Score 워크스페이스)
+Jokguboard 배포 URL: https://[여기에-실제-URL].vercel.app/
+Score repo에서 족구 허브 연동만 최소 수정해줘. voice_scoreboard.html은 수정 금지.
+## 변경 범위
+- index.html: 4번째 종목 HUB_JK_ICON_LINK (.hot-jk-icon) + HUB_SPORT_ICON_MAP 좌표
+  (mainimg v5 없으면 임시 텍스트 링크 또는 기존 이미지 우측 여백 좌표 — 배드민턴·피클볼 패턴 참고)
+- docs/download-hub.md: 족구 행 추가
+- docs/changelog-by-date.md: 허브 링크 추가 기록
+- MARKER: HUB_JK_ICON_LINK (되돌리기 주석)
+## 하지 말 것
+- vercel.json에 /jokgu rewrite 추가 안 함
+- Score downloads/에 족구 APK 넣지 않음
+- 탁구 소스·APK 변경 없음
+커밋·푸시·vercel --prod (Score)까지 해줘.
+선택 옵션 (원하면 1단계에 한 줄 추가)
+4칸 원(1~4)을 팀당 넣고 싶을 때:
+
+팀당 선수 원을 세로 4개(번호 1~4)로 하고, 4번은 교체/비활성 슬롯으로 두고 MVP는 1~3만 로테이션에 사용.
+3칸만 (권장):
+
+팀당 선수 원 세로 3개(번호 1·2·3), 족구 3인 로테이션 전제.
+사용 팁
+Cursor에서 File → Open Folder → C:\Jokguboard
+Agent 모드 + 1단계 프롬프트 실행
+Vercel URL 받은 뒤 Score 폴더 열고 2단계 실행
+원하면 1단계만 더 짧은 “한 줄 버전”도 만들어 줄 수 있습니다.

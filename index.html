@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jokguboard — 족구 점수판</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background: #0b2744;
+      color: #f3efe4;
+      line-height: 1.55;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+    a { color: #f0c14b; }
+    .card {
+      background: #123152;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .apk-name { font-family: ui-monospace, Consolas, monospace; background: #0b2744; padding: 2px 8px; border-radius: 6px; }
+    .btn {
+      display: inline-block;
+      background: #e8a317;
+      color: #1a1408;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin: 6px 8px 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>족구 점수판</h1>
+    <p>15점 · 2점 차(14:14 듀스) · 3세트 2선승. 웹과 Android 태블릿에서 사용합니다.</p>
+    <p>
+      <a class="btn" href="/play">점수판 열기</a>
+      <a class="btn" href="/jokgu_scoreboard.html">직접 열기</a>
+    </p>
+    <div class="card">
+      <h2>Android APK</h2>
+      <p>현재 설치 파일: <span class="apk-name" id="apkName">app-debug-0902_1334-jokgu-mvp.apk</span></p>
+      <p><a href="/downloads/app-debug-0902_1334-jokgu-mvp.apk">APK 다운로드</a></p>
+      <p>설치 안내: 위 파일명을 확인한 뒤 다운로드합니다. 출처를 모르는 APK는 설치하지 마세요.</p>
+    </div>
+    <div class="card">
+      <h2>도움말</h2>
+      <p>
+        <a href="/help.html">한국어</a> ·
+        <a href="/help_en.html">English</a> ·
+        <a href="/help_zh.html">中文</a>
+      </p>
+    </div>
+  </main>
+</body>
+</html>

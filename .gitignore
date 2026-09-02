@@ -1,0 +1,14 @@
+# JK_GITIGNORE: 로컬·빌드 산출물. 되돌리: 이 파일 삭제
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+.idea/
+*.iml
+.DS_Store
+node_modules/
+.vercel/
+.bkit/
+*.log
+.kotlin/

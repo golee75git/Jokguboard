@@ -1,0 +1,29 @@
+# 수정기록 — Jokguboard
+
+## 2026-09-02 족구 MVP (1단계)
+
+그린필드 신규. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.
+
+### 한 일
+- `jokgu_scoreboard.html` 단일 점수판 (15점·14:14 듀스·3세트 2선승)
+- 선서브 `serveChoice` → 첫 득점 `serveAnchor`, 세트 종료 코트 교대
+- 되돌리기 · 새 경기 · 설정(팀명) · ko/en/zh · 도움말 3종
+- 선수 원 1·2·3 표시(로테이션 로직은 다음 단계)
+- Android WebView `com.jokgu.scoreboard`, 경기 중 L/R 클리커
+- Vercel `/play`, `serve.ps1`, `jokgu_scoreboard_state_v1`
+
+### APK
+`app-debug-0902_1334-jokgu-mvp.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL: Noto Sans KR · Jua. AndroidX AppCompat/WebKit(Apache-2.0).
+
+### 보안
+팀명 `textContent`. 점수는 기기 localStorage만. 마이크·카메라·BLE 권한 없음.
+
+### 신규 / 재사용
+- 신규: 이 저장소의 웹·Android·docs 전부
+- 재사용 파일 없음 (Gradle wrapper JAR는 Gradle 배포본)
+
+### 특허
+침해 없음을 보장하지 않음. 클리커 L/R·자동 엔드 스왑은 검토 여지 있음.
