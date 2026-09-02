@@ -1,5 +1,42 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 족구 4인·Futnet 종목 전환 (JK_SPORT_RULES)
+
+한 HTML에서 설정으로 `jokgu` / `futnet`만 바꿉니다. 족구는 코트 4명·15점·3세트 2선승, 사이드아웃 시 1→2→3→4. Futnet은 11점·최대 15·항상 3세트 2선승, 득점자 서브, 더블/트리플은 원 탭으로 서브 표시, 싱글은 ①+짝수 R/홀수 L. 종목 변경 시 확인 후 점수만 초기화. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 신규 npm/GPL 없음.
+
+### APK
+`app-debug-0902_1618-sport.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (Google Fonts CSS만 로드).
+AndroidX Core/AppCompat/WebKit, Android Gradle Plugin, Kotlin — Apache-2.0.
+
+### 보안
+종목·유형 id는 `jokgu|futnet`, `single|double|triple`만 허용. 팀명 `textContent`. `confirm` 후 기록 초기화. 카메라·마이크 없음. innerHTML로 사용자 입력 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, `scripts/check-win-rules.js`, `help.html`, `help_en.html`, `help_zh.html`, `index.html`, `docs/jokgu-plan.md`, `docs/jokgu-prd.md`, Android assets www
+- 신규 파일 없음 (APK 산출물 `downloads/app-debug-0902_1618-sport.apk`)
+- 재사용: 기존 `applyDelta` / `snapshot` / `restore` / `paint`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_SPORT_RULES`, `isFutnetSetWon` — 공개 GitHub에서 동일 식별자·동일 구현 미발견(검색일 2026-09-02). 일반 승패 비교식은 관용 코드.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+청구항 대조는 법률 자문이 아니다.
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 세트 후 자동 엔드 스왑·다음 서브
+- 한 화면에서 종목 전환 시 점수 초기화 + 선수 원 개수 변경
+- 사이드아웃 회전 vs 득점자 서브 전환
+
+일반 점수 표시·15점/11점 듀스 규칙은 종목 규칙의 관용적 구현이다.
+
+### Play Store 참고
+디버그 APK는 스토어 제출용이 아님. 신규 GPL 없음. 카메라·마이크 권한 없음. 스토어 등록 시에는 release 서명·개인정보 문구가 별도로 필요하다.
+
+---
 ## 2026-09-02 가운데 새 경기·서브 원 금색 (JK_MID_PANEL)
 
 가운데 세트 칸 폭 확대. 새 경기를 세트 칸으로 이동. 심플에서는 새 경기 숨김, 하단은 되돌리기·전체표시. 서브 원 금색 배경. `C:\Score` 미수정.

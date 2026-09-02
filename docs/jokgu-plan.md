@@ -23,14 +23,15 @@
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 ## 검증
 
-- 14:13 미종료, 15:13 승, 14:14→16:14, 2세트 선승
+- 족구: 14:13 미종료, 15:13 승, 14:14→16:14, 3세트 2선승
+- Futnet: 11:9 승, 10:10·11:10 계속, 12:10 승, 14:14 계속, 15:14 종료
 - undo, 새 경기, ko/en/zh, help 3종
 - `serve.ps1` · APK L/R
-- 세트제 2/3/4선승, 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
+- 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
 
 ## 배포
 

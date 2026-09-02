@@ -150,7 +150,7 @@
       border-left: 0;
       border-right: 1px solid rgba(165, 180, 252, 0.35);
     }
-    /* JK_DISK_GLYPH: 1·2·3·4 원. 4번은 대기. 되돌리: .rot-dot 블록 삭제 */
+    /* JK_DISK_GLYPH: 1·2·3·4 원. 되돌리: .rot-dot 블록 삭제 */
     .rot-dot {
       width: clamp(40px, 9vmin, 68px);
       height: clamp(40px, 9vmin, 68px);
@@ -170,13 +170,28 @@
     }
     .rot-dot.is-server,
     .side.ivory .rot-dot.is-server {
-      transform: scale(1.12);
+      transform: scale(1.2);
       border-color: #fde68a;
       color: #1a1408;
       background: linear-gradient(155deg, #fbbf24, #b45309);
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
     .rot-dot.is-bench { opacity: 0.38; cursor: default; }
+    body.players-1 .rot-dot[data-slot="2"],
+    body.players-1 .rot-dot[data-slot="3"],
+    body.players-1 .rot-dot[data-slot="4"],
+    body.players-2 .rot-dot[data-slot="3"],
+    body.players-2 .rot-dot[data-slot="4"],
+    body.players-3 .rot-dot[data-slot="4"] { display: none; }
+    .serve-lr {
+      display: none;
+      margin-top: 4px;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #fde68a;
+    }
+    body.sport-futnet-single .serve-lr.is-on { display: block; }
+    .rule-note { margin: 8px 0 0; font-size: 13px; color: #475569; }
     .side-main {
       flex: 1;
       min-width: 0;
@@ -3385,7 +3400,8 @@
           <div class="rot-dot" data-team="blue" data-slot="1">1</div>
           <div class="rot-dot" data-team="blue" data-slot="2">2</div>
           <div class="rot-dot" data-team="blue" data-slot="3">3</div>
-          <div class="rot-dot is-bench" data-team="blue" data-slot="4">4</div>
+          <div class="rot-dot" data-team="blue" data-slot="4">4</div>
+          <span class="serve-lr" id="serveLrBlue">R</span>
         </div>
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameBlue" data-team="blue">청</div>
@@ -3404,7 +3420,8 @@
           <div class="rot-dot" data-team="white" data-slot="1">1</div>
           <div class="rot-dot" data-team="white" data-slot="2">2</div>
           <div class="rot-dot" data-team="white" data-slot="3">3</div>
-          <div class="rot-dot is-bench" data-team="white" data-slot="4">4</div>
+          <div class="rot-dot" data-team="white" data-slot="4">4</div>
+          <span class="serve-lr" id="serveLrWhite">R</span>
         </div>
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameWhite" data-team="white">백</div>
@@ -3438,12 +3455,23 @@
       <input id="inNameBlue" maxlength="20" autocomplete="off" />
       <label for="inNameWhite" data-i18n="nameWhite">백 팀명</label>
       <input id="inNameWhite" maxlength="20" autocomplete="off" />
-      <label for="inSeries" data-i18n="series">세트 규칙</label>
-      <select id="inSeries">
-        <option value="bo3_2" data-i18n="series.bo3_2">3세트 2선승</option>
-        <option value="bo5_3" data-i18n="series.bo5_3">5세트 3선승</option>
-        <option value="bo7_4" data-i18n="series.bo7_4">7세트 4선승</option>
+      <label for="inSport" data-i18n="sport">경기 종목</label>
+      <select id="inSport">
+        <option value="jokgu" data-i18n="sport.jokgu">족구</option>
+        <option value="futnet" data-i18n="sport.futnet">Futnet</option>
       </select>
+      <div id="jokguBlock">
+        <p class="rule-note" id="jokguHint" data-i18n="rule.jokgu">4인 경기 · 15점 · 3세트 2선승</p>
+      </div>
+      <div id="futnetBlock" hidden>
+        <label for="inDiscipline" data-i18n="discipline">Futnet 경기 유형</label>
+        <select id="inDiscipline">
+          <option value="double" data-i18n="discipline.double">더블 2 vs 2</option>
+          <option value="single" data-i18n="discipline.single">싱글 1 vs 1</option>
+          <option value="triple" data-i18n="discipline.triple">트리플 3 vs 3</option>
+        </select>
+        <p class="rule-note" id="futnetHint">2인 경기 · 11점 · 최대 15점</p>
+      </div>
       <label for="inLang" data-i18n="lang">언어</label>
       <select id="inLang">
         <option value="ko">한국어</option>
@@ -3567,7 +3595,19 @@
         tts: "점수 읽기",
         simple: "심플",
         simpleOff: "전체표시",
-        simpleNeedServe: "선서브를 고른 뒤에 심플을 켤 수 있습니다."
+        simpleNeedServe: "선서브를 고른 뒤에 심플을 켤 수 있습니다.",
+        sport: "경기 종목",
+        "sport.jokgu": "족구",
+        "sport.futnet": "Futnet",
+        discipline: "Futnet 경기 유형",
+        "discipline.single": "싱글 1 vs 1",
+        "discipline.double": "더블 2 vs 2",
+        "discipline.triple": "트리플 3 vs 3",
+        "rule.jokgu": "4인 경기 · 15점 · 3세트 2선승",
+        "rule.futnet.single": "1인 경기 · 11점 · 최대 15점",
+        "rule.futnet.double": "2인 경기 · 11점 · 최대 15점",
+        "rule.futnet.triple": "3인 경기 · 11점 · 최대 15점",
+        confirmSport: "경기 종목을 변경하면 현재 경기 기록이 초기화됩니다. 변경하시겠습니까?"
       },
       en: {
         undo: "Undo",
@@ -3631,7 +3671,19 @@
         tts: "Read scores",
         simple: "Simple",
         simpleOff: "Full view",
-        simpleNeedServe: "Choose first serve before simple mode."
+        simpleNeedServe: "Choose first serve before simple mode.",
+        sport: "Sport",
+        "sport.jokgu": "Jokgu",
+        "sport.futnet": "Futnet",
+        discipline: "Futnet type",
+        "discipline.single": "Single 1 vs 1",
+        "discipline.double": "Double 2 vs 2",
+        "discipline.triple": "Triple 3 vs 3",
+        "rule.jokgu": "4 players · 15 points · first to 2 sets",
+        "rule.futnet.single": "1 player · 11 points · cap 15",
+        "rule.futnet.double": "2 players · 11 points · cap 15",
+        "rule.futnet.triple": "3 players · 11 points · cap 15",
+        confirmSport: "Changing sport clears the current match. Change anyway?"
       },
       zh: {
         undo: "撤销",
@@ -3695,16 +3747,38 @@
         tts: "朗读分数",
         simple: "简洁",
         simpleOff: "完整显示",
-        simpleNeedServe: "请先选择发球后再开启简洁模式。"
+        simpleNeedServe: "请先选择发球后再开启简洁模式。",
+        sport: "项目",
+        "sport.jokgu": "脚球",
+        "sport.futnet": "Futnet",
+        discipline: "Futnet 类型",
+        "discipline.single": "单打 1 vs 1",
+        "discipline.double": "双打 2 vs 2",
+        "discipline.triple": "三人 3 vs 3",
+        "rule.jokgu": "4人 · 15分 · 三局两胜",
+        "rule.futnet.single": "1人 · 11分 · 最高15分",
+        "rule.futnet.double": "2人 · 11分 · 最高15分",
+        "rule.futnet.triple": "3人 · 11分 · 最高15分",
+        confirmSport: "更改项目将清空当前比赛记录。确定更改吗？"
       }
     };
 
     var LS_KEY = "jokgu_scoreboard_state_v1";
+    /* JK_SPORT_RULES: 족구/Futnet 규칙 표. 되돌리: 이 객체·sportType·isSetWon 삭제 */
+    var SPORT_RULES = {
+      jokgu: { players: 4, pointsToWin: 15, maxPoints: null, serverType: "sideout" },
+      futnet: { pointsToWin: 11, maxPoints: 15, serverType: "lastPointWinner" }
+    };
+    var FUTNET_DISCIPLINES = {
+      single: { players: 1, maxTouches: 2 },
+      double: { players: 2, maxTouches: 3 },
+      triple: { players: 3, maxTouches: 3 }
+    };
     var GAME_TARGET = 15;
     var DEUCE_FLOOR = 14;
     var LONG_PRESS_MS = 500;
     var PLUS_COOLDOWN_MS = 1500;
-    var SERIES_WINS = { bo3_2: 2, bo5_3: 3, bo7_4: 4 };
+    var SERIES_WINS = { bo3_2: 2 };
     var FONT_FAM = {
       jua: '"Jua", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
       noto: '"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif',
@@ -3744,8 +3818,12 @@
     var matchSeries = "bo3_2";
     var ttsOn = false;
     var simpleMode = false;
-    var rotBlue = [1, 2, 3];
-    var rotWhite = [1, 2, 3];
+    var sportType = "jokgu";
+    var futnetDiscipline = "double";
+    var rotBlue = [1, 2, 3, 4];
+    var rotWhite = [1, 2, 3, 4];
+    var serveIdxBlue = 0;
+    var serveIdxWhite = 0;
     var historyStack = [];
     var lastPlusAt = { blue: 0, white: 0 };
 
@@ -3783,7 +3861,34 @@
       return team === "white" ? "blue" : "white";
     }
 
-    /* JK_CORE: 15점·2점 차·14:14 듀스. 되돌리: isGameWin·maybeFinishGame 삭제 */
+    function normalizeSport(v) {
+      return v === "futnet" ? "futnet" : "jokgu";
+    }
+    function normalizeDiscipline(v) {
+      return FUTNET_DISCIPLINES[v] ? v : "double";
+    }
+    function getPlayersPerSide() {
+      if (sportType === "futnet") {
+        var d = FUTNET_DISCIPLINES[futnetDiscipline] || FUTNET_DISCIPLINES.double;
+        return d.players;
+      }
+      return SPORT_RULES.jokgu.players;
+    }
+    function clampServeIndexes() {
+      var n = getPlayersPerSide();
+      if (sportType === "futnet" && futnetDiscipline === "single") {
+        serveIdxBlue = 0;
+        serveIdxWhite = 0;
+        return;
+      }
+      serveIdxBlue = Math.max(0, Math.min(n - 1, serveIdxBlue | 0));
+      serveIdxWhite = Math.max(0, Math.min(n - 1, serveIdxWhite | 0));
+    }
+    function isFutnetSetWon(my, opp) {
+      if (my >= 15) return true;
+      return my >= 11 && my - opp >= 2;
+    }
+    /* JK_CORE: 족구 15점·2점 차·14:14 듀스. Futnet은 isSetWon. 되돌리: isGameWin·isSetWon·maybeFinishGame 삭제 */
     function isGameWin(b, w) {
       if (b === w) return false;
       var hi = Math.max(b, w);
@@ -3791,6 +3896,13 @@
       if (hi >= GAME_TARGET && lo <= DEUCE_FLOOR - 1) return true;
       if (b >= DEUCE_FLOOR && w >= DEUCE_FLOOR && hi - lo >= 2) return true;
       return false;
+    }
+    function isSetWon(sport, my, opp) {
+      if (sport === "futnet") return isFutnetSetWon(my, opp);
+      return isGameWin(my, opp) && my > opp;
+    }
+    function isCurrentSetOver() {
+      return isSetWon(sportType, scoreBlue, scoreWhite) || isSetWon(sportType, scoreWhite, scoreBlue);
     }
     function winsNeeded() {
       return SERIES_WINS[matchSeries] || 2;
@@ -3817,9 +3929,15 @@
       return elWinBanner.classList.contains("is-open");
     }
     function inDeuceWindow() {
+      if (sportType === "futnet") {
+        return scoreBlue >= 10 && scoreWhite >= 10 && !isCurrentSetOver();
+      }
       var hi = Math.max(scoreBlue, scoreWhite);
       var lo = Math.min(scoreBlue, scoreWhite);
       return scoreBlue >= DEUCE_FLOOR && scoreWhite >= DEUCE_FLOOR && hi - lo < 2;
+    }
+    function matchHasProgress() {
+      return !!(scoreBlue || scoreWhite || setBlue || setWhite || serveChoice || serveAnchor);
     }
 
     function snapshot() {
@@ -3839,17 +3957,26 @@
         series: matchSeries,
         tts: ttsOn === true,
         simple: simpleMode === true,
+        sport: sportType,
+        discipline: futnetDiscipline,
+        serveIdxBlue: serveIdxBlue,
+        serveIdxWhite: serveIdxWhite,
         rotBlue: rotBlue.slice(),
         rotWhite: rotWhite.slice()
       };
     }
     function normalizeRot(v) {
-      if (!v || v.length < 3) return [1, 2, 3];
-      var a = [v[0] | 0, v[1] | 0, v[2] | 0];
-      if ([1, 2, 3].every(function (n) { return a.indexOf(n) >= 0; })) return a;
-      return [1, 2, 3];
+      if (!v || !v.length) return [1, 2, 3, 4];
+      if (v.length === 3) {
+        var old = [v[0] | 0, v[1] | 0, v[2] | 0];
+        if ([1, 2, 3].every(function (n) { return old.indexOf(n) >= 0; })) return old.concat([4]);
+        return [1, 2, 3, 4];
+      }
+      var a = [v[0] | 0, v[1] | 0, v[2] | 0, v[3] | 0];
+      if ([1, 2, 3, 4].every(function (n) { return a.indexOf(n) >= 0; })) return a;
+      return [1, 2, 3, 4];
     }
-    /* JK_ROTATE: 사이드아웃 시 1~3만 회전, 4번은 대기. 되돌리: rotateTeam·rotBlue/rotWhite 삭제 */
+    /* JK_ROTATE: 족구 사이드아웃 시 1→2→3→4 회전. Futnet은 강제 회전 없음. 되돌리: rotateTeam 삭제 */
     function rotateTeam(team) {
       var cur = team === "white" ? rotWhite : rotBlue;
       var next = cur.slice();
@@ -3859,25 +3986,73 @@
       else rotBlue = next;
     }
     function resetRotation() {
-      rotBlue = [1, 2, 3];
-      rotWhite = [1, 2, 3];
+      rotBlue = [1, 2, 3, 4];
+      rotWhite = [1, 2, 3, 4];
+      serveIdxBlue = 0;
+      serveIdxWhite = 0;
     }
     function paintRotation() {
       [["blue", rotBlue], ["white", rotWhite]].forEach(function (pair) {
         var team = pair[0];
         var order = pair[1];
         document.querySelectorAll('.rot-dot[data-team="' + team + '"]').forEach(function (dot) {
-          var slot = dot.getAttribute("data-slot");
-          if (slot === "4") {
-            dot.textContent = "4";
-            dot.classList.add("is-bench");
-          } else {
-            var i = (slot | 0) - 1;
-            dot.textContent = String(order[i] || slot);
-            dot.classList.remove("is-bench");
-          }
+          var i = (dot.getAttribute("data-slot") | 0) - 1;
+          dot.textContent = String(order[i] || (i + 1));
+          dot.classList.remove("is-bench");
         });
       });
+    }
+    function serverSlotFor(team) {
+      if (sportType === "futnet") {
+        if (futnetDiscipline === "single") return "1";
+        var idx = team === "white" ? serveIdxWhite : serveIdxBlue;
+        return String(idx + 1);
+      }
+      return "1";
+    }
+    function paintServeLr() {
+      [["blue", scoreBlue, "serveLrBlue"], ["white", scoreWhite, "serveLrWhite"]].forEach(function (row) {
+        var el = document.getElementById(row[2]);
+        if (!el) return;
+        var serve = computeServeTeam();
+        var on = sportType === "futnet" && futnetDiscipline === "single" && serve === row[0];
+        el.classList.toggle("is-on", on);
+        if (on) el.textContent = (row[1] % 2 === 0) ? "R" : "L";
+      });
+    }
+    function applySportClasses() {
+      var n = getPlayersPerSide();
+      document.body.classList.toggle("players-1", n === 1);
+      document.body.classList.toggle("players-2", n === 2);
+      document.body.classList.toggle("players-3", n === 3);
+      document.body.classList.toggle("players-4", n === 4);
+      document.body.classList.toggle("sport-futnet", sportType === "futnet");
+      document.body.classList.toggle("sport-futnet-single", sportType === "futnet" && futnetDiscipline === "single");
+    }
+    function resetMatchKeepPrefs() {
+      scoreBlue = 0;
+      scoreWhite = 0;
+      setBlue = 0;
+      setWhite = 0;
+      teamsSwapped = false;
+      serveChoice = null;
+      serveAnchor = null;
+      resetRotation();
+    }
+    function syncSetupSportUi() {
+      var sportEl = document.getElementById("inSport");
+      var discEl = document.getElementById("inDiscipline");
+      var sport = sportEl ? sportEl.value : "jokgu";
+      var fut = sport === "futnet";
+      var jokguBlock = document.getElementById("jokguBlock");
+      var futnetBlock = document.getElementById("futnetBlock");
+      if (jokguBlock) jokguBlock.hidden = fut;
+      if (futnetBlock) futnetBlock.hidden = !fut;
+      var hint = document.getElementById("futnetHint");
+      if (hint && discEl) {
+        var d = normalizeDiscipline(discEl.value);
+        hint.textContent = t("rule.futnet." + d);
+      }
     }
     function normalizeLook(v) {
       return LOOK_IDS.indexOf(v) >= 0 ? v : "plain";
@@ -3922,11 +4097,16 @@
       if (s.lang === "en" || s.lang === "zh" || s.lang === "ko") lang = s.lang;
       if (s.look) boardLook = normalizeLook(s.look);
       if (s.font) boardFont = normalizeFont(s.font);
-      if (s.series) matchSeries = normalizeSeries(s.series);
+      if (s.series) matchSeries = "bo3_2";
       ttsOn = s.tts === true;
       simpleMode = s.simple === true;
+      sportType = normalizeSport(s.sport);
+      futnetDiscipline = normalizeDiscipline(s.discipline);
+      serveIdxBlue = s.serveIdxBlue | 0;
+      serveIdxWhite = s.serveIdxWhite | 0;
       rotBlue = normalizeRot(s.rotBlue);
       rotWhite = normalizeRot(s.rotWhite);
+      clampServeIndexes();
     }
     function pushHistory() {
       historyStack.push(snapshot());
@@ -3965,13 +4145,15 @@
       elSideWhite.classList.toggle("is-serve-now", serve === "white");
       elSideBlue.classList.toggle("is-serving", serve === "blue");
       elSideWhite.classList.toggle("is-serving", serve === "white");
+      applySportClasses();
       document.querySelectorAll(".rot-dot").forEach(function (dot) {
         var team = dot.getAttribute("data-team");
         var slot = dot.getAttribute("data-slot");
-        var on = serve === team && slot === "1";
+        var on = serve === team && slot === serverSlotFor(team);
         dot.classList.toggle("is-server", on);
       });
       paintRotation();
+      paintServeLr();
       elDeuce.classList.toggle("is-on", inDeuceWindow());
       if (isServePickPending()) elServeGuide.textContent = t("needServe");
       else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });
@@ -4044,7 +4226,7 @@
     }
 
     function maybeFinishGame() {
-      if (!isGameWin(scoreBlue, scoreWhite)) {
+      if (!isCurrentSetOver()) {
         paint();
         persistState();
         return;
@@ -4053,14 +4235,14 @@
       if (winner === "blue") setBlue += 1;
       else setWhite += 1;
       var matchEnded = isMatchSeriesWon(setBlue, setWhite);
-      var prevAnchor = serveAnchor === "blue" || serveAnchor === "white" ? serveAnchor : null;
+      var prevAnchor = serveAnchor === "blue" || serveAnchor === "white" ? serveAnchor : winner;
       scoreBlue = 0;
       scoreWhite = 0;
       serveAnchor = null;
       resetRotation();
       if (!matchEnded && prevAnchor) {
         teamsSwapped = !teamsSwapped;
-        serveChoice = opposite(prevAnchor);
+        serveChoice = sportType === "futnet" ? prevAnchor : opposite(prevAnchor);
       } else {
         serveChoice = null;
       }
@@ -4075,7 +4257,7 @@
       }
     }
 
-    /* JK_DELTA: 족구 전용 가산. 탁구 단복식·핸디·Pro 없음. 되돌리: applyDelta 삭제 */
+    /* JK_DELTA: 족구 사이드아웃·Futnet 득점자 서브. 되돌리: applyDelta 삭제 */
     function applyDelta(team, delta, sourceTag) {
       if (!delta) return;
       if (isWinBannerOpen()) return;
@@ -4102,7 +4284,14 @@
           serveChoice = null;
         }
       } else if (delta > 0) {
-        if (oldN === 0) {
+        if (sportType === "futnet") {
+          serveChoice = null;
+          serveAnchor = team;
+          if (futnetDiscipline === "single") {
+            serveIdxBlue = 0;
+            serveIdxWhite = 0;
+          }
+        } else if (oldN === 0) {
           var picked = serveChoice === "blue" || serveChoice === "white" ? serveChoice : team;
           serveChoice = null;
           if (team !== picked) rotateTeam(team);
@@ -4296,8 +4485,27 @@
 
     document.querySelectorAll(".rot-dot").forEach(function (dot) {
       dot.addEventListener("click", function () {
-        if (dot.getAttribute("data-slot") === "4") return;
-        setServeChoice(dot.getAttribute("data-team"));
+        var team = dot.getAttribute("data-team");
+        var slot = dot.getAttribute("data-slot") | 0;
+        var n = getPlayersPerSide();
+        if (slot < 1 || slot > n) return;
+        if (isServePickPending()) {
+          setServeChoice(team);
+          if (sportType === "futnet" && futnetDiscipline !== "single") {
+            if (team === "white") serveIdxWhite = slot - 1;
+            else serveIdxBlue = slot - 1;
+            persistState();
+            paint();
+          }
+          return;
+        }
+        if (sportType === "futnet" && futnetDiscipline !== "single") {
+          pushHistory();
+          if (team === "white") serveIdxWhite = slot - 1;
+          else serveIdxBlue = slot - 1;
+          persistState();
+          paint();
+        }
       });
     });
     elNameBlue.addEventListener("click", function () {
@@ -4314,27 +4522,39 @@
     document.getElementById("btnSetup").addEventListener("click", function () {
       document.getElementById("inNameBlue").value = nameBlue;
       document.getElementById("inNameWhite").value = nameWhite;
-      document.getElementById("inSeries").value = matchSeries;
+      document.getElementById("inSport").value = sportType;
+      document.getElementById("inDiscipline").value = futnetDiscipline;
       document.getElementById("inFont").value = boardFont;
       document.getElementById("inLook").value = boardLook;
       document.getElementById("inLang").value = (lang === "en" || lang === "zh") ? lang : "ko";
       document.getElementById("inTts").checked = ttsOn === true;
+      syncSetupSportUi();
       elSetupBanner.classList.add("is-open");
     });
     document.getElementById("setupCancel").addEventListener("click", function () {
       elSetupBanner.classList.remove("is-open");
     });
+    document.getElementById("inSport").addEventListener("change", syncSetupSportUi);
+    document.getElementById("inDiscipline").addEventListener("change", syncSetupSportUi);
     document.getElementById("setupForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      var nextSport = normalizeSport(document.getElementById("inSport").value);
+      var nextDisc = normalizeDiscipline(document.getElementById("inDiscipline").value);
+      var sportChanged = nextSport !== sportType || (nextSport === "futnet" && nextDisc !== futnetDiscipline);
+      if (sportChanged && matchHasProgress() && !window.confirm(t("confirmSport"))) return;
       pushHistory();
       nameBlue = String(document.getElementById("inNameBlue").value || "청").slice(0, 20);
       nameWhite = String(document.getElementById("inNameWhite").value || "백").slice(0, 20);
-      matchSeries = normalizeSeries(document.getElementById("inSeries").value);
+      matchSeries = "bo3_2";
       boardFont = normalizeFont(document.getElementById("inFont").value);
       boardLook = normalizeLook(document.getElementById("inLook").value);
       var nextLang = document.getElementById("inLang").value;
       lang = nextLang === "en" || nextLang === "zh" ? nextLang : "ko";
       ttsOn = document.getElementById("inTts").checked === true;
+      sportType = nextSport;
+      futnetDiscipline = nextSport === "futnet" ? nextDisc : "double";
+      if (sportChanged) resetMatchKeepPrefs();
+      clampServeIndexes();
       persistState();
       paint();
       elSetupBanner.classList.remove("is-open");
