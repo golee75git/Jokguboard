@@ -1,5 +1,14 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-02 보드 모습 (JK_BOARD_LOOK)
+
+탁구 `voice_scoreboard.html` 미복사. 족구 HTML만 청 어두운 카드·백 밝은 카드·바깥 서브 띠로 다시 그림. 규칙·localStorage 키 무변. Score 미수정.
+
+### APK
+`app-debug-0902_1357-board-look.apk`
+
+---
+
 ## 2026-09-02 족구 MVP (1단계)
 
 그린필드 신규. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.
