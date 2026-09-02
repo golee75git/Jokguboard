@@ -168,9 +168,12 @@
       background: linear-gradient(155deg, #312e81, #1e1b4b);
       color: #eef2ff;
     }
-    .rot-dot.is-server {
+    .rot-dot.is-server,
+    .side.ivory .rot-dot.is-server {
       transform: scale(1.12);
-      border-color: var(--gold);
+      border-color: #fde68a;
+      color: #1a1408;
+      background: linear-gradient(155deg, #fbbf24, #b45309);
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
     .rot-dot.is-bench { opacity: 0.38; cursor: default; }
@@ -209,8 +212,9 @@
     }
     .side.cyan .point-num { color: #f8fafc; }
     .side.ivory .point-num { color: #0f172a; }
+    /* JK_MID_PANEL: 가운데 폭·새 경기. 되돌리: clamp 120/18/190, #btnFresh를 .topbar로 */
     .mid {
-      flex: 0 0 clamp(120px, 18vmin, 190px);
+      flex: 0 0 clamp(168px, 26vmin, 260px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -298,6 +302,17 @@
       padding: 4px 8px;
       color: #cbd5e1;
     }
+    .mid #btnFresh {
+      font: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mid #btnFresh:hover { background: rgba(34, 211, 238, 0.16); }
     @media (max-width: 720px) {
       .court, .court.is-ends-swapped { flex-direction: column; }
       .mid { flex: 0 0 auto; flex-direction: row; justify-content: space-around; }
@@ -393,6 +408,7 @@
     body.look-field .set-row { color: #b6f07a; }
     /* JK_SIMPLE: 큰 점수·세트만. 되돌리: 이 블록·#btnSimple·simpleMode 삭제 */
     body.is-simple .topbar button:not(#btnUndo):not(#btnSimple),
+    body.is-simple #btnFresh,
     body.is-simple .rot-col,
     body.is-simple .hint-line { display: none; }
     body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
@@ -3381,6 +3397,7 @@
         <div class="set-row"><span class="set-num" id="setLeft">0</span> : <span class="set-num" id="setRight">0</span></div>
         <div class="deuce-pill" id="deucePill" data-i18n="deuce">듀스</div>
         <div class="serve-guide" id="serveGuide"></div>
+        <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
       </aside>
       <section class="team white side ivory pos-swap-end" id="sideWhite" data-team="white">
         <div class="rot-col" aria-label="rotation">
@@ -3399,7 +3416,6 @@
     <div class="topbar">
       <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
       <button type="button" id="btnSimple" data-i18n="simple">심플</button>
-      <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
       <button type="button" id="btnSetup" data-i18n="setup">설정</button>
       <button type="button" id="btnHelp" data-i18n="help">도움말</button>
     </div>
@@ -3550,7 +3566,7 @@
         "font.orbitron": "오비트론 (Orbitron)",
         tts: "점수 읽기",
         simple: "심플",
-        simpleOff: "전체",
+        simpleOff: "전체표시",
         simpleNeedServe: "선서브를 고른 뒤에 심플을 켤 수 있습니다."
       },
       en: {
@@ -3614,7 +3630,7 @@
         "font.orbitron": "Orbitron",
         tts: "Read scores",
         simple: "Simple",
-        simpleOff: "Full",
+        simpleOff: "Full view",
         simpleNeedServe: "Choose first serve before simple mode."
       },
       zh: {
@@ -3678,7 +3694,7 @@
         "font.orbitron": "Orbitron",
         tts: "朗读分数",
         simple: "简洁",
-        simpleOff: "完整",
+        simpleOff: "完整显示",
         simpleNeedServe: "请先选择发球后再开启简洁模式。"
       }
     };
@@ -4210,7 +4226,7 @@
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
       if (el.closest(".banner.is-open")) return true;
-      if (el.closest(".topbar, .rot-dot, .team-title")) return true;
+      if (el.closest(".topbar, .rot-dot, .team-title, #btnFresh")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
         return false;
@@ -4239,7 +4255,7 @@
         if (!elCourt.contains(e.target)) return;
       } else if (scoreTargetBlocked(e.target) && !isApkMatchLr()) {
         return;
-      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, .banner")) {
+      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, .banner, #btnFresh")) {
         return;
       }
       if (!isApkMatchLr() && !elCourt.contains(e.target)) return;
