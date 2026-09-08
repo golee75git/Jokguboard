@@ -315,6 +315,14 @@
       color: #fff;
     }
     .row-btns button.ghost { background: #e2e8f0; color: #222; }
+    /* JK_PAD_ALIGN: APK 설정 맨 아래 패드 칸. 되돌리: 이 블록·#padBox·jkHid* 삭제 */
+    .sheet { max-height: 88vh; overflow: auto; }
+    #padBox { display: none; margin-top: 16px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+    #padBox.is-on { display: block; }
+    #padBox h3 { margin: 0 0 6px; font-size: 15px; }
+    #padHint, #padRound { margin: 0 0 8px; font-size: 13px; color: #475569; }
+    .pad-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .pad-row button.ghost { background: #e2e8f0; color: #222; }
     /* JK_FRESH_BANNER: 새 경기 확인 카드. 되돌리: 이 블록 삭제 */
     #freshBanner { z-index: 45; }
     #freshBanner .banner-card { text-align: center; padding: 28px 22px; }
@@ -3564,6 +3572,15 @@
         <option value="arena3d" data-i18n="look.arena3d">링</option>
       </select>
       <label class="chk"><input type="checkbox" id="inTts" /> <span data-i18n="tts">점수 읽기</span></label>
+      <div id="padBox">
+        <h3 data-i18n="pad.title">위·가운데·아래 버튼 리모컨</h3>
+        <p id="padRound" data-i18n="pad.round">원형은 해당 없음</p>
+        <p id="padHint"></p>
+        <div class="pad-row">
+          <button type="button" id="padAlign" data-i18n="pad.align">위·아래 위치 맞추기</button>
+          <button type="button" class="ghost" id="padClear" data-i18n="pad.reset">다시 맞추기</button>
+        </div>
+      </div>
       <div class="row-btns">
         <button type="button" class="ghost" id="setupCancel" data-i18n="cancel">취소</button>
         <button type="submit" data-i18n="save">저장</button>
@@ -3658,7 +3675,17 @@
         "rule.futnet.single": "1인 경기 · 11점 · 최대 15점",
         "rule.futnet.double": "2인 경기 · 11점 · 최대 15점",
         "rule.futnet.triple": "3인 경기 · 11점 · 최대 15점",
-        confirmSport: "경기 종목을 변경하면 현재 경기 기록이 초기화됩니다. 변경하시겠습니까?"
+        confirmSport: "경기 종목을 변경하면 현재 경기 기록이 초기화됩니다. 변경하시겠습니까?",
+        "pad.title": "위·가운데·아래 버튼 리모컨",
+        "pad.round": "원형은 해당 없음",
+        "pad.align": "위·아래 위치 맞추기",
+        "pad.reset": "다시 맞추기",
+        "pad.idle": "위 버튼을 짧게 한 번, 이어서 아래 버튼을 짧게 한 번 눌러 이 기기에 위치를 저장합니다.",
+        "pad.hi": "위 버튼을 짧게 한 번 누르세요.",
+        "pad.lo": "아래 버튼을 짧게 한 번 누르세요.",
+        "pad.gap": "위·아래가 너무 가깝습니다. 아래를 다시 누르세요.",
+        "pad.ok": "이 기기에 위치를 저장했습니다.",
+        "pad.off": "저장한 위치를 지웠습니다."
       },
       en: {
         undo: "Undo",
@@ -3734,7 +3761,17 @@
         "rule.futnet.single": "1 player · 11 points · cap 15",
         "rule.futnet.double": "2 players · 11 points · cap 15",
         "rule.futnet.triple": "3 players · 11 points · cap 15",
-        confirmSport: "Changing sport clears the current match. Change anyway?"
+        confirmSport: "Changing sport clears the current match. Change anyway?",
+        "pad.title": "Up / middle / down button pad",
+        "pad.round": "Round pads are not used here",
+        "pad.align": "Match up and down positions",
+        "pad.reset": "Match again",
+        "pad.idle": "Short-press up once, then short-press down once. Positions stay on this device.",
+        "pad.hi": "Short-press the up button once.",
+        "pad.lo": "Short-press the down button once.",
+        "pad.gap": "Up and down are too close. Press down again.",
+        "pad.ok": "Positions saved on this device.",
+        "pad.off": "Saved positions cleared."
       },
       zh: {
         undo: "撤销",
@@ -3810,7 +3847,17 @@
         "rule.futnet.single": "1人 · 11分 · 最高15分",
         "rule.futnet.double": "2人 · 11分 · 最高15分",
         "rule.futnet.triple": "3人 · 11分 · 最高15分",
-        confirmSport: "更改项目将清空当前比赛记录。确定更改吗？"
+        confirmSport: "更改项目将清空当前比赛记录。确定更改吗？",
+        "pad.title": "上 / 中 / 下 按键板",
+        "pad.round": "圆形板在此不适用",
+        "pad.align": "对齐上、下位置",
+        "pad.reset": "重新对齐",
+        "pad.idle": "先短按上键一次，再短按下键一次。位置仅保存在本机。",
+        "pad.hi": "请短按上键一次。",
+        "pad.lo": "请短按下键一次。",
+        "pad.gap": "上、下太近。请再按下键。",
+        "pad.ok": "已将位置保存在本机。",
+        "pad.off": "已清除保存的位置。"
       }
     };
 
@@ -3877,6 +3924,8 @@
     var serveIdxWhite = 0;
     var historyStack = [];
     var lastPlusAt = { blue: 0, white: 0 };
+    var jkHidPlusUntil = 0;
+    var jkPadCode = "idle";
 
     var elCourt = document.getElementById("court");
     var elScoreBlue = document.getElementById("scoreBlue");
@@ -4176,6 +4225,7 @@
       document.querySelectorAll("[data-i18n]").forEach(function (el) {
         el.textContent = t(el.getAttribute("data-i18n"));
       });
+      jkPadNote(jkPadCode);
     }
 
     function paint() {
@@ -4421,6 +4471,59 @@
     function leftTeam() { return teamsSwapped ? "white" : "blue"; }
     function rightTeam() { return teamsSwapped ? "blue" : "white"; }
 
+    /* JK_HID_PAD: APK 외부 키·패드만. 되돌리: jkHid*·jkPad*·#padBox 삭제 */
+    function jkPadNote(code) {
+      jkPadCode = code || "idle";
+      var el = document.getElementById("padHint");
+      if (!el) return;
+      var map = { hi: "pad.hi", lo: "pad.lo", gap: "pad.gap", ok: "pad.ok", off: "pad.off" };
+      el.textContent = t(map[jkPadCode] || "pad.idle");
+    }
+    function jkHidPoint(side) {
+      var team = side === "R" ? rightTeam() : leftTeam();
+      if (isWinBannerOpen() || isFreshBannerOpen()) return;
+      if (isServePickPending()) {
+        setServeChoice(team);
+        return;
+      }
+      if (Date.now() < jkHidPlusUntil) return;
+      if (isMatchLocked()) {
+        setStatus(t("matchLocked"));
+        return;
+      }
+      if (!allowPlus(team)) return;
+      applyDelta(team, 1, "hid");
+      var now = Date.now();
+      lastPlusAt.blue = now;
+      lastPlusAt.white = now;
+      jkHidPlusUntil = now + PLUS_COOLDOWN_MS;
+    }
+    function jkHidUndo(gate) {
+      if (gate && Date.now() < jkHidPlusUntil) return;
+      undoLast();
+    }
+    function refreshPadBox() {
+      var box = document.getElementById("padBox");
+      if (!box) return;
+      if (!window.AndroidPad) {
+        box.classList.remove("is-on");
+        return;
+      }
+      box.classList.add("is-on");
+      try {
+        var st = JSON.parse(window.AndroidPad.markState());
+        if (st.step === 1) jkPadNote("hi");
+        else if (st.step === 2) jkPadNote("lo");
+        else if (st.on) jkPadNote("ok");
+        else jkPadNote("idle");
+      } catch (err) {
+        jkPadNote("idle");
+      }
+    }
+    window.jkHidPoint = jkHidPoint;
+    window.jkHidUndo = jkHidUndo;
+    window.jkPadNote = jkPadNote;
+
     /* JK_APK_LR: 경기 중 화면 L/R +1, 길게 −1. 되돌리: 이 블록 삭제 */
     function isAndroidApk() {
       return !!(window.AndroidShell);
@@ -4602,6 +4705,7 @@
       document.getElementById("inLang").value = (lang === "en" || lang === "zh") ? lang : "ko";
       document.getElementById("inTts").checked = ttsOn === true;
       syncSetupSportUi();
+      refreshPadBox();
       elSetupBanner.classList.add("is-open");
     });
     document.getElementById("setupCancel").addEventListener("click", function () {
@@ -4634,6 +4738,13 @@
       setStatus(t("saved"));
     });
 
+    document.getElementById("padAlign").addEventListener("click", function () {
+      if (window.AndroidPad) window.AndroidPad.beginMarks();
+    });
+    document.getElementById("padClear").addEventListener("click", function () {
+      if (window.AndroidPad) window.AndroidPad.clearMarks();
+    });
+
     document.getElementById("btnSimple").addEventListener("click", function () {
       if (!simpleMode && isServePickPending()) {
         setStatus(t("simpleNeedServe"));
@@ -4655,6 +4766,7 @@
 
     loadState();
     paint();
+    refreshPadBox();
     if (isServePickPending()) setStatus(t("needServe"));
   </script>
 </body>

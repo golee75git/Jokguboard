@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
-**정리일:** 2026-09-02  
-**현재 설치 APK:** `app-debug-0902_1746-outdisc.apk`
+**정리일:** 2026-09-08  
+**현재 설치 APK:** `app-debug-0908_2010-hidpad.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -32,6 +32,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
+| APK 위·중·아래 패드 · 외부 BT 음량 | 완료 |
 | 대회 설정 UI · 라이브 핸디 | 나중 |
 
 ## 파일
@@ -52,7 +53,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 
@@ -63,6 +64,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 - 사이드아웃 시 직전 서브 팀 인덱스 1→2→3→4 순환 (`scripts/check-win-rules.js`)
 - undo, 새 경기(0:0에서도 클릭, 보드 확인 배너), ko/en/zh, help 3종
 - `serve.ps1` · APK L/R · 사이버·링에서 새 경기 클릭
+- APK 설정 패드 칸은 `AndroidPad`가 있을 때만 표시
 - 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
 
 ## 배포

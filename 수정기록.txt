@@ -1,24 +1,37 @@
 # 수정기록 — Jokguboard
 
-## 2026-09-02 문서 정리 (소스 없음)
+## 2026-09-08 HID 패드 (JK_HID_PAD / JK_PAD_ALIGN)
 
-PRD·plan을 현재 제품 기준으로 맞춤. 날짜별 `docs/jokgu-changelog.md`, APK별 `docs/jokgu-apk.md` 추가. 앱 HTML/JS/Android/APK는 변경하지 않음. 현재 설치는 그대로 `app-debug-0902_1746-outdisc.apk`.
+족구 보드 자체 코드만 확장. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+APK에서만 설정 맨 아래에 「위·가운데·아래 버튼 리모컨」 칸을 둔다. 웹에는 칸 없음. 「위·아래 위치 맞추기」는 위 짧게 한 번, 아래 짧게 한 번. 간격이 작으면 아래만 다시. 「다시 맞추기」는 이 기기 SharedPreferences(`jokgu_pad_marks`)만 지움. 맞춘 뒤 그 세로줄: 위=화면 오른쪽 +1, 가운데=되돌리기, 아래=화면 왼쪽 +1. 애매하면 삼키고 팀명 클릭이 나가지 않음. 맞추기 전 위·중·아래를 점수로 쓰지 않음. USB 마우스 좌우는 세로줄 밖에서 기존 `JK_APK_LR`. 손가락 터치는 기존 그대로.
+
+원형 재생/일시정지(85)·이전(88)·다음(87) 짧게=되돌리기. 스캔 320은 점수·되돌리기 없음. 외부 BT 음량만: 짧게 25=왼쪽 +1, 짧게 24=오른쪽 +1, 길게=되돌리기. 본체 음량은 OS. HID +1 후 1.5초 동안 다음 HID 득점과 음량 길게 되돌리기 차단. 가운데 되돌리기는 차단하지 않음. 득점 규칙은 기존 `applyDelta`.
 
 ### APK
-변경 없음 (`app-debug-0902_1746-outdisc.apk`)
+`app-debug-0908_2010-hidpad.apk`
 
 ### 라이선스
-문서만. 신규 npm/GPL 없음.
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0 (`core-ktx` 1.12.0, `appcompat` 1.6.1, `webkit` 1.10.0). Play 스토어 제출용이 아닌 debug APK.
 
 ### 보안
-문서만. 코드·권한 변경 없음.
+카메라·마이크 없음. `AndroidPad`는 이 기기 SharedPreferences 실수 좌표만. `evaluateJavascript`는 고정 리터럴(`L`/`R`/undo 플래그). 팀명 `textContent`. 사용자 HTML 삽입 없음.
 
 ### 신규 / 재사용 / 변경
-- 변경: `docs/jokgu-prd.md`, `docs/jokgu-plan.md`
-- 신규: `docs/jokgu-changelog.md`, `docs/jokgu-apk.md`
-- 재사용: `수정기록.txt` 기존 항목
+- 변경: `jokgu_scoreboard.html`, `MainActivity.kt`, help 3종, `index.html`, `docs/jokgu-prd.md`, `docs/jokgu-plan.md`, `docs/jokgu-apk.md`, `docs/jokgu-changelog.md`, Android assets www
+- 신규 파일: `downloads/app-debug-0908_2010-hidpad.apk`
+- 재사용: 기존 `applyDelta` / `undoLast` / `JK_APK_LR` / `AndroidShell` / 설정 시트
 - 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
-- 소스 미수정: `jokgu_scoreboard.html`, Android, help, `index.html`
+
+### GitHub 코드 검색
+`JK_HID_PAD` + `jkHidPoint` + `jokgu_pad_marks` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-08). `dispatchKeyEvent` / `SharedPreferences` / `evaluateJavascript`는 Android 관용 API.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 3D 스킨(원근·카드 기울기) 구성
+- HID 미디어/음량 키를 점수·되돌리기에 연결
+- 포인터 Y 두 점을 저장한 뒤 위/중/아래로 분류
 
 ---
 ## 2026-09-02 원 바깥·크게 (JK_NET_COL / JK_DISK_GLYPH)

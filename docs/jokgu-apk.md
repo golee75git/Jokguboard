@@ -1,9 +1,9 @@
 # APK 버전별 수정사항
 
 **제품:** Jokguboard  
-**정리일:** 2026-09-02  
-**현재 설치:** `app-debug-0902_1746-outdisc.apk`  
-**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0902_1746-outdisc.apk  
+**정리일:** 2026-09-08  
+**현재 설치:** `app-debug-0908_2010-hidpad.apk`  
+**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0908_2010-hidpad.apk  
 
 랜딩(`/`)과 도움말 3종 상단에 현재 파일명을 표시한다. 모두 debug 빌드이며 Play 스토어 제출용이 아니다.
 
@@ -29,15 +29,17 @@
 | `app-debug-0902_1712-cyberhit.apk` | 17:12 | 사이버·링 새 경기 클릭 | `039928b` |
 | `app-debug-0902_1738-netcol.apk` | 17:38 | 숫자 고정·사이드아웃 1→2→3→4 | `d2ff148` |
 | `app-debug-0902_1746-outdisc.apk` | 17:46 | 원 바깥·크게, 서브 원 더 큼 | `ca92738` |
+| `app-debug-0908_2010-hidpad.apk` | 20:10 | APK 위·중·아래 패드·외부 BT 음량 | (이 커밋) |
 
 ## 현재 버전에서 쓰는 것
 
-`app-debug-0902_1746-outdisc.apk`가 위 표를 모두 이은 최신이다.
+`app-debug-0908_2010-hidpad.apk`가 위 표를 모두 이은 최신이다.
 
 - 족구 랠리 득점, 사이드아웃 시 직전 서브 팀만 1→2→3→4
 - Futnet 11점 캡 15, 득점자 서브
 - 원 바깥 세로(왼쪽 아래 1, 오른쪽 위 1), 숫자 고정, 서브 금색·더 큰 원
 - 새 경기 보드 확인, 사이버·링에서도 클릭
 - 심플, TTS, BLE, 스킨, 하단 메뉴
+- APK 전용 위·가운데·아래 버튼 패드 위치 맞추기, 외부 BT 음량 좌우 득점
 
 이전 APK는 `downloads/`에 보관한다. 설치 안내는 최신 파일명만 가리킨다.

@@ -1,8 +1,8 @@
 # 족구 점수판 PRD
 
 **제품:** Jokguboard  
-**정리일:** 2026-09-02  
-**현재 설치 APK:** `app-debug-0902_1746-outdisc.apk`  
+**정리일:** 2026-09-08  
+**현재 설치 APK:** `app-debug-0908_2010-hidpad.apk`  
 **웹:** https://jokguboard.vercel.app  
 **저장소:** https://github.com/golee75git/Jokguboard.git  
 
@@ -50,6 +50,7 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 - 심플 모드(선서브 후). 심플에서는 새 경기 숨김
 - 하단 메뉴: 되돌리기 · 심플 · 설정 · 도움말
 - APK 경기 중 화면 L/R +1, 길게 −1. 가운데 칸·새 경기는 L/R에서 제외
+- APK 전용: 설정 맨 아래 위·가운데·아래 버튼 패드 위치 맞추기(이 기기 SharedPreferences). 웹에는 칸 없음. 외부 BT 음량 짧게 좌우 득점, 길게 되돌리기. 원형 미디어 짧게 되돌리기.
 - localStorage 키 `jokgu_scoreboard_state_v1`
 - Vercel 정적 (`/` 랜딩, `/play` → `jokgu_scoreboard.html`)
 - TTS: 득점·서브·세트·경기. Android `AndroidTTS`, 웹 `speechSynthesis`. MP3 팩·마이크 없음
@@ -86,5 +87,7 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 - 3D 스킨(원근·카드 기울기)
 - 한 화면에서 종목 전환 시 점수 초기화 + 선수 원 개수 변경
 - 사이드아웃 회전 vs 득점자 서브
+- HID 미디어/음량 키를 점수·되돌리기에 연결
+- 포인터 Y 두 점을 저장한 뒤 위/중/아래로 분류
 
 일반 점수 표시·15점/11점 듀스·확인 배너는 종목 규칙·관용 UI이다.
