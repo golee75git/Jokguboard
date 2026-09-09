@@ -7,7 +7,7 @@
 세트 안내 창(`is-match-over` 아님)이 열려 있어도 `jkHidPoint`/`applyDelta`가 득점을 삼키지 않고 안내만 닫는다. 경기 승 창과 새 경기 확인 창에서는 기존처럼 막는다. 위 버튼 인식 Kotlin은 손대지 않음.
 
 ### APK
-`app-debug-0909_2331-padwin.apk`
+`app-debug-0909_2331-padwin.apk` (`775a49a`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
