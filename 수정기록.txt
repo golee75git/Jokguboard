@@ -1,5 +1,35 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-09 팀명 세트쪽·터치수정·새경기 선서브 (JK_NAME_MID / JK_NAME_EDIT)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt`·패드 제스처(`JK_PAD_GESTURE`) 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+팀명을 가운데 세트 쪽으로 옮기고 글자 크기를 2배로 함. 사이버 스킨은 위치를 위쪽 가운데로 두고 글자만 2배. 팀명 터치는 항상 이름 수정(최대 20자, `textContent`/`value`만). 선서브는 원·화면 좌우 점수·패드 위(오른쪽)·아래(왼쪽). 새 경기 카드는 취소 또는 팀명 선서브 버튼. 경기 승 창의 새 경기도 같은 카드.
+
+### APK
+`app-debug-0909_2357-nameserve.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`와 input `value`만. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0909_2357-nameserve.apk`
+- 재사용: 기존 `.banner` / `setServeChoice` / `jkHidPoint` / `applyDelta` / `JK_PAD_GESTURE`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`paintFreshServeBtns` + `openNameBanner` + `startFreshWithServe` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-09).
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+
+---
 ## 2026-09-09 패드 고정·세트 안내 중 득점 (JK_WIN_FLOW)
 
 `MainActivity.kt`는 `app-debug-0909_2234-padgesture.apk`(`JK_PAD_GESTURE`)와 동일하게 유지. 점수판 HTML만 수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.

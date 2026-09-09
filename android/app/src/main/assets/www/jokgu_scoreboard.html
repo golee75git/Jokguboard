@@ -200,10 +200,20 @@
       grid-column: 1 / -1;
       grid-row: 1;
       justify-self: center;
-      font-size: clamp(16px, 2.2vw, 24px);
+      font-size: clamp(32px, 4.4vw, 48px);
       cursor: pointer;
       padding: 6px 14px;
       border-radius: 10px;
+      z-index: 5;
+    }
+    /* JK_NAME_MID: 팀명 세트쪽. 사이버는 가운데 유지. 되돌리: 이 블록 삭제, font-size clamp(16px, 2.2vw, 24px) */
+    .court:not(.is-ends-swapped) #sideBlue .team-title,
+    .court.is-ends-swapped #sideWhite .team-title { justify-self: end; }
+    .court:not(.is-ends-swapped) #sideWhite .team-title,
+    .court.is-ends-swapped #sideBlue .team-title { justify-self: start; }
+    body.skin-cyber3d .team-title {
+      justify-self: center !important;
+      font-size: clamp(32px, 4.4vw, 48px);
     }
     .side.cyan .team-title {
       color: #ecfeff;
@@ -323,8 +333,20 @@
     /* JK_FRESH_BANNER: 새 경기 확인 카드. 되돌리: 이 블록 삭제 */
     #freshBanner { z-index: 45; }
     #freshBanner .banner-card { text-align: center; padding: 28px 22px; }
-    #freshBanner .row-btns { justify-content: stretch; }
-    #freshBanner .row-btns button { flex: 1; min-height: 48px; font-weight: 700; }
+    #freshBanner .row-btns { justify-content: stretch; flex-wrap: wrap; }
+    #freshBanner .row-btns button { flex: 1; min-height: 48px; font-weight: 700; min-width: 28%; }
+    /* JK_NAME_EDIT: 팀명 터치 수정 카드. 되돌리: 이 블록·#nameBanner 삭제 */
+    #nameBanner { z-index: 46; }
+    #nameBanner .banner-card { text-align: center; padding: 28px 22px; }
+    #nameBanner input {
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
+      font-size: clamp(22px, 4vmin, 32px);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
     .help-frame {
       width: min(820px, 96vw);
       height: min(70vh, 640px);
@@ -460,7 +482,7 @@
     body.is-simple .hint-line { display: none; }
     body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
     body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
-    body.is-simple .team-title { font-size: clamp(18px, 3vw, 32px); }
+    body.is-simple .team-title { font-size: clamp(36px, 6vw, 64px); }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
     body.look-arena { background: #12100c; }
     body.look-arena .side.cyan { background: #1a1408; border-color: #e8a317; color: #fff3d6; }
@@ -3444,7 +3466,7 @@
     <div class="court boards" id="court">
       <section class="team blue side cyan pos-swap-start" id="sideBlue" data-team="blue">
         <div class="side-main team-main">
-          <div class="team-title team-label" id="nameBlue" data-team="blue">청</div>
+          <div class="team-title team-label" id="nameBlue" data-team="blue" role="button" tabindex="0">청</div>
           <div class="rot-col" aria-label="rotation">
             <div class="rot-dot" data-team="blue" data-slot="1">1</div>
             <div class="rot-dot" data-team="blue" data-slot="2">2</div>
@@ -3464,7 +3486,7 @@
       </aside>
       <section class="team white side ivory pos-swap-end" id="sideWhite" data-team="white">
         <div class="side-main team-main">
-          <div class="team-title team-label" id="nameWhite" data-team="white">백</div>
+          <div class="team-title team-label" id="nameWhite" data-team="white" role="button" tabindex="0">백</div>
           <div class="rot-col" aria-label="rotation">
             <div class="rot-dot" data-team="white" data-slot="1">1</div>
             <div class="rot-dot" data-team="white" data-slot="2">2</div>
@@ -3499,10 +3521,22 @@
   <div class="banner" id="freshBanner" aria-hidden="true">
     <div class="banner-card">
       <h2 data-i18n="fresh">새 경기</h2>
-      <p data-i18n="confirmFresh">점수를 모두 지우고 새 경기를 시작할까요?</p>
+      <p data-i18n="confirmFresh">점수를 지우고 선서브 팀을 고르면 새 경기가 시작됩니다.</p>
       <div class="row-btns">
         <button type="button" class="ghost" id="freshNo" data-i18n="cancel">취소</button>
-        <button type="button" id="freshYes" data-i18n="ok">확인</button>
+        <button type="button" id="freshServeBlue">청 선서브</button>
+        <button type="button" id="freshServeWhite">백 선서브</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner" id="nameBanner" aria-hidden="true">
+    <div class="banner-card">
+      <h2 data-i18n="editName">팀명</h2>
+      <input id="inNameTap" maxlength="20" autocomplete="off" />
+      <div class="row-btns">
+        <button type="button" class="ghost" id="nameEditNo" data-i18n="cancel">취소</button>
+        <button type="button" id="nameEditYes" data-i18n="save">저장</button>
       </div>
     </div>
   </div>
@@ -3614,13 +3648,15 @@
         nameBlue: "청 팀명",
         nameWhite: "백 팀명",
         series: "세트 규칙",
-        needServe: "0:0 — 선서브를 고르세요 (팀·원·화면 좌우)",
+        editName: "팀명",
+        needServe: "0:0 — 선서브를 고르세요 (원·화면 좌우·패드 위·아래)",
         serving: "{name} 서브",
         gameWin: "{name} 세트 승",
         courtChange: "코트를 바꿔 주세요. 5초 후 이어집니다.",
         matchWin: "{name} 경기 승 ({wins}선승)",
         matchLocked: "경기가 이미 끝났습니다. 새 경기를 시작하세요.",
-        confirmFresh: "점수를 모두 지우고 새 경기를 시작할까요?",
+        confirmFresh: "점수를 지우고 선서브 팀을 고르면 새 경기가 시작됩니다.",
+        freshServeAs: "{name} 선서브",
         undone: "직전 동작을 되돌렸습니다.",
         nothingUndo: "되돌릴 기록이 없습니다.",
         saved: "설정을 저장했습니다.",
@@ -3700,13 +3736,15 @@
         nameBlue: "Blue name",
         nameWhite: "White name",
         series: "Series",
-        needServe: "0–0 — choose first serve (team, disc, or L/R)",
+        editName: "Team name",
+        needServe: "0–0 — choose first serve (disc, L/R, or pad up/down)",
         serving: "{name} serving",
         gameWin: "{name} wins the set",
         courtChange: "Please change ends. Play continues in 5 seconds.",
         matchWin: "{name} wins the match (first to {wins})",
         matchLocked: "Match already finished. Start a new match.",
-        confirmFresh: "Clear all scores and start a new match?",
+        confirmFresh: "Clear scores, then pick who serves first to start.",
+        freshServeAs: "{name} serve first",
         undone: "Last action undone.",
         nothingUndo: "Nothing to undo.",
         saved: "Settings saved.",
@@ -3786,13 +3824,15 @@
         nameBlue: "青队名称",
         nameWhite: "白队名称",
         series: "局制",
-        needServe: "0:0 — 请选择先发球（队伍、圆点或左右键）",
+        editName: "队名",
+        needServe: "0:0 — 请选择先发球（圆点、左右或遥控上/下）",
         serving: "{name} 发球",
         gameWin: "{name} 赢得本局",
         courtChange: "请交换场地。5 秒后继续。",
         matchWin: "{name} 赢得比赛（先胜 {wins} 局）",
         matchLocked: "比赛已结束。请开始新比赛。",
-        confirmFresh: "清除全部分数并开始新比赛？",
+        confirmFresh: "清除分数后选择先发球一方即可开始新比赛。",
+        freshServeAs: "{name} 先发球",
         undone: "已撤销上一步。",
         nothingUndo: "没有可撤销的记录。",
         saved: "设置已保存。",
@@ -3941,6 +3981,7 @@
     var elStatus = document.getElementById("statusLine");
     var elWinBanner = document.getElementById("winBanner");
     var elFreshBanner = document.getElementById("freshBanner");
+    var elNameBanner = document.getElementById("nameBanner");
     var elSetupBanner = document.getElementById("setupBanner");
     var elHelpBanner = document.getElementById("helpBanner");
 
@@ -4038,6 +4079,9 @@
     }
     function isFreshBannerOpen() {
       return elFreshBanner && elFreshBanner.classList.contains("is-open");
+    }
+    function isNameBannerOpen() {
+      return elNameBanner && elNameBanner.classList.contains("is-open");
     }
     function inDeuceWindow() {
       if (sportType === "futnet") {
@@ -4266,6 +4310,7 @@
       applyFont();
       applyLang();
       applySimpleMode();
+      if (isFreshBannerOpen()) paintFreshServeBtns();
       pushBle(false);
     }
 
@@ -4382,14 +4427,14 @@
     /* JK_DELTA: 족구 사이드아웃·Futnet 득점자 서브. 되돌리: applyDelta 삭제 */
     function applyDelta(team, delta, sourceTag) {
       if (!delta) return;
-      if (isFreshBannerOpen() || isMatchWinBannerOpen()) return;
+      if (isFreshBannerOpen() || isMatchWinBannerOpen() || isNameBannerOpen()) return;
       clearSetWinNotice();
       if (delta > 0 && isMatchLocked()) {
         setStatus(t("matchLocked"));
         return;
       }
       if (delta > 0 && computeServeTeam() == null) {
-        setStatus(t("needServe"));
+        setServeChoice(team === "white" ? "white" : "blue");
         return;
       }
       pushHistory();
@@ -4463,7 +4508,14 @@
     }
 
     /* JK_FRESH_BANNER: window.confirm 대신 보드 배너. 되돌리: open/close 삭제·freshMatch에 confirm 복원 */
+    function paintFreshServeBtns() {
+      var b = document.getElementById("freshServeBlue");
+      var w = document.getElementById("freshServeWhite");
+      if (b) b.textContent = fill("freshServeAs", { name: nameBlue });
+      if (w) w.textContent = fill("freshServeAs", { name: nameWhite });
+    }
     function openFreshBanner() {
+      paintFreshServeBtns();
       elFreshBanner.classList.add("is-open");
       elFreshBanner.setAttribute("aria-hidden", "false");
     }
@@ -4472,7 +4524,45 @@
       elFreshBanner.setAttribute("aria-hidden", "true");
     }
     function freshMatch() {
+      closeNameBanner();
       openFreshBanner();
+    }
+    function startFreshWithServe(team) {
+      closeFreshBanner();
+      runFreshMatch();
+      setServeChoice(team);
+    }
+    /* JK_NAME_EDIT: 팀명 터치 수정. 되돌리: 이 함수들·#nameBanner 클릭 연결 삭제 */
+    var nameEditTeam = null;
+    function openNameBanner(team) {
+      nameEditTeam = team === "white" ? "white" : "blue";
+      var inp = document.getElementById("inNameTap");
+      if (inp) {
+        inp.value = nameEditTeam === "white" ? nameWhite : nameBlue;
+      }
+      elNameBanner.classList.add("is-open");
+      elNameBanner.setAttribute("aria-hidden", "false");
+      if (inp) {
+        try { inp.focus(); inp.select(); } catch (err) {}
+      }
+    }
+    function closeNameBanner() {
+      nameEditTeam = null;
+      elNameBanner.classList.remove("is-open");
+      elNameBanner.setAttribute("aria-hidden", "true");
+    }
+    function saveNameBanner() {
+      if (nameEditTeam !== "white" && nameEditTeam !== "blue") return;
+      var inp = document.getElementById("inNameTap");
+      var raw = inp ? String(inp.value || "") : "";
+      var next = raw.slice(0, 20);
+      if (!next) next = nameEditTeam === "white" ? "백" : "청";
+      pushHistory();
+      if (nameEditTeam === "white") nameWhite = next;
+      else nameBlue = next;
+      persistState();
+      paint();
+      closeNameBanner();
     }
     function runFreshMatch() {
       closeFreshBanner();
@@ -4519,7 +4609,7 @@
     }
     function jkHidPoint(side) {
       var team = side === "R" ? rightTeam() : leftTeam();
-      if (isFreshBannerOpen() || isMatchWinBannerOpen()) return;
+      if (isFreshBannerOpen() || isMatchWinBannerOpen() || isNameBannerOpen()) return;
       clearSetWinNotice();
       if (isServePickPending()) {
         setServeChoice(team);
@@ -4614,7 +4704,7 @@
 
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
-      if (el.closest("#freshBanner.is-open, #winBanner.is-match-over")) return true;
+      if (el.closest("#freshBanner.is-open, #winBanner.is-match-over, #nameBanner.is-open")) return true;
       if (el.closest(".topbar, .mid, .rot-dot, .team-title, #btnFresh")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
@@ -4634,7 +4724,7 @@
       if (!isApkMatchLr() && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       var team = e.button === 0 ? leftTeam() : rightTeam();
       if (isServePickPending()) {
-        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner.is-match-over, #freshBanner, .mid, #btnFresh")) return;
+        if (e.target.closest && e.target.closest(".rot-dot, .team-title, .topbar, .banner.is-match-over, #freshBanner, #nameBanner, .mid, #btnFresh")) return;
         mouseHoldTeam = team;
         e.preventDefault();
         return;
@@ -4644,7 +4734,7 @@
         if (!elCourt.contains(e.target)) return;
       } else if (scoreTargetBlocked(e.target) && !isApkMatchLr()) {
         return;
-      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, #freshBanner.is-open, #winBanner.is-match-over, .mid, #btnFresh")) {
+      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, #freshBanner.is-open, #winBanner.is-match-over, #nameBanner.is-open, .mid, #btnFresh, .team-title")) {
         return;
       }
       if (!isApkMatchLr() && !elCourt.contains(e.target)) return;
@@ -4659,7 +4749,7 @@
       mouseHoldTeam = null;
       if (isServePickPending()) {
         cancelLong();
-        if (e.target.closest && e.target.closest("#btnFresh, .mid, .topbar, #freshBanner.is-open, #winBanner.is-match-over")) return;
+        if (e.target.closest && e.target.closest("#btnFresh, .mid, .topbar, .team-title, #freshBanner.is-open, #winBanner.is-match-over, #nameBanner.is-open")) return;
         setServeChoice(team);
         e.preventDefault();
         return;
@@ -4709,11 +4799,25 @@
         }
       });
     });
-    elNameBlue.addEventListener("click", function () {
-      if (isServePickPending()) setServeChoice("blue");
+    elNameBlue.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openNameBanner("blue");
     });
-    elNameWhite.addEventListener("click", function () {
-      if (isServePickPending()) setServeChoice("white");
+    elNameWhite.addEventListener("click", function (e) {
+      e.stopPropagation();
+      openNameBanner("white");
+    });
+    elNameBlue.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openNameBanner("blue");
+      }
+    });
+    elNameWhite.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openNameBanner("white");
+      }
     });
 
     document.getElementById("btnUndo").addEventListener("click", undoLast);
@@ -4725,14 +4829,32 @@
     });
     document.getElementById("btnFresh").addEventListener("click", freshMatch);
     document.getElementById("winOk").addEventListener("click", closeWinBanner);
-    document.getElementById("winFresh").addEventListener("click", runFreshMatch);
+    document.getElementById("winFresh").addEventListener("click", freshMatch);
     document.getElementById("freshNo").addEventListener("click", closeFreshBanner);
-    document.getElementById("freshYes").addEventListener("click", runFreshMatch);
+    document.getElementById("freshServeBlue").addEventListener("click", function () {
+      startFreshWithServe("blue");
+    });
+    document.getElementById("freshServeWhite").addEventListener("click", function () {
+      startFreshWithServe("white");
+    });
     elFreshBanner.addEventListener("click", function (e) {
       if (e.target === elFreshBanner) closeFreshBanner();
     });
+    document.getElementById("nameEditNo").addEventListener("click", closeNameBanner);
+    document.getElementById("nameEditYes").addEventListener("click", saveNameBanner);
+    document.getElementById("inNameTap").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveNameBanner();
+      }
+    });
+    elNameBanner.addEventListener("click", function (e) {
+      if (e.target === elNameBanner) closeNameBanner();
+    });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && isFreshBannerOpen()) closeFreshBanner();
+      if (e.key !== "Escape") return;
+      if (isNameBannerOpen()) closeNameBanner();
+      else if (isFreshBannerOpen()) closeFreshBanner();
     });
 
     document.getElementById("btnSetup").addEventListener("click", function () {
