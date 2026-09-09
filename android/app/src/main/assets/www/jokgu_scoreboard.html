@@ -117,42 +117,24 @@
     }
     .side.is-serve-now { box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.55), 0 18px 40px rgba(0, 0, 0, 0.4); }
     .side.ivory.is-serve-now { box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.45), 0 10px 28px rgba(15, 23, 42, 0.2); }
-    /* JK_NET_COL: 원 세로, 바깥쪽. 왼쪽 아래=1, 오른쪽 위=1. 되돌리: order·column-reverse 삭제 */
-    #sideBlue .rot-col { order: 0; flex-direction: column-reverse; }
-    #sideBlue .side-main { order: 1; }
-    #sideWhite .side-main { order: 0; }
-    #sideWhite .rot-col { order: 1; }
-    .court.is-ends-swapped #sideBlue .rot-col { order: 1; flex-direction: column; }
-    .court.is-ends-swapped #sideBlue .side-main { order: 0; }
-    .court.is-ends-swapped #sideWhite .rot-col { order: 0; flex-direction: column-reverse; }
-    .court.is-ends-swapped #sideWhite .side-main { order: 1; }
-    .rot-col {
-      flex: 0 0 clamp(84px, 18vmin, 128px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 6px;
-    }
-    .side.cyan .rot-col {
-      border-right: 1px solid rgba(56, 189, 248, 0.22);
-      border-left: 0;
-      background: linear-gradient(180deg, rgba(6, 182, 212, 0.08), rgba(15, 23, 42, 0.28));
-    }
-    .side.ivory .rot-col {
-      border-left: 1px solid rgba(165, 180, 252, 0.35);
-      border-right: 0;
-      background: linear-gradient(180deg, rgba(129, 140, 248, 0.1), rgba(241, 245, 249, 0.7));
-    }
-    .court.is-ends-swapped .side.cyan .rot-col {
-      border-right: 0;
-      border-left: 1px solid rgba(56, 189, 248, 0.22);
-    }
-    .court.is-ends-swapped .side.ivory .rot-col {
-      border-left: 0;
-      border-right: 1px solid rgba(165, 180, 252, 0.35);
-    }
+    /* JK_COURT_DISC: 점수 위·아래 2×2. 화면 왼쪽 3·4/2·1, 오른쪽 1·2/4·3. 되돌리: JK_NET_COL 바깥 세로 */
+    .rot-col { display: contents; }
+    #sideBlue .rot-dot[data-slot="3"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="3"] { grid-row: 2; grid-column: 1; }
+    #sideBlue .rot-dot[data-slot="4"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="4"] { grid-row: 2; grid-column: 2; }
+    #sideBlue .rot-dot[data-slot="2"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="2"] { grid-row: 4; grid-column: 1; }
+    #sideBlue .rot-dot[data-slot="1"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="1"] { grid-row: 4; grid-column: 2; }
+    #sideWhite .rot-dot[data-slot="1"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="1"] { grid-row: 2; grid-column: 1; }
+    #sideWhite .rot-dot[data-slot="2"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="2"] { grid-row: 2; grid-column: 2; }
+    #sideWhite .rot-dot[data-slot="4"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="4"] { grid-row: 4; grid-column: 1; }
+    #sideWhite .rot-dot[data-slot="3"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="3"] { grid-row: 4; grid-column: 2; }
     /* JK_DISK_GLYPH: 1·2·3·4 원. 되돌리: .rot-dot 블록 삭제 */
     .rot-dot {
       width: clamp(56px, 13vmin, 96px);
@@ -167,6 +149,7 @@
       font-weight: 700;
       line-height: 1;
       cursor: pointer;
+      z-index: 3;
     }
     .side.ivory .rot-dot {
       border-color: rgba(165, 180, 252, 0.55);
@@ -178,7 +161,7 @@
       width: clamp(72px, 17vmin, 120px);
       height: clamp(72px, 17vmin, 120px);
       font-size: clamp(34px, 8vmin, 56px);
-      z-index: 2;
+      z-index: 4;
       border-color: #fde68a;
       color: #1a1408;
       background: linear-gradient(155deg, #fbbf24, #b45309);
@@ -193,6 +176,11 @@
     body.players-3 .rot-dot[data-slot="4"] { display: none; }
     .serve-lr {
       display: none;
+      grid-column: 1 / -1;
+      grid-row: 3;
+      align-self: end;
+      justify-self: center;
+      z-index: 4;
       margin-top: 4px;
       font-size: 13px;
       letter-spacing: 0.06em;
@@ -203,12 +191,15 @@
     .side-main {
       flex: 1;
       min-width: 0;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
       padding: 10px 12px 14px;
     }
     .team-title {
-      align-self: center;
+      grid-column: 1 / -1;
+      grid-row: 1;
+      justify-self: center;
       font-size: clamp(16px, 2.2vw, 24px);
       cursor: pointer;
       padding: 6px 14px;
@@ -225,7 +216,9 @@
       background: linear-gradient(180deg, #fff, #f1f5f9);
     }
     .point-num {
-      flex: 1;
+      grid-column: 1 / -1;
+      grid-row: 3;
+      min-height: 0;
       display: grid;
       place-items: center;
       font-size: clamp(128px, 32vw, 400px);
@@ -458,6 +451,8 @@
     body.is-simple .topbar button:not(#btnUndo):not(#btnSimple),
     body.is-simple #btnFresh,
     body.is-simple .rot-col,
+    body.is-simple .rot-dot,
+    body.is-simple .serve-lr,
     body.is-simple .hint-line { display: none; }
     body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
     body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
@@ -3444,15 +3439,15 @@
     <div class="board-wrap" id="boardWrap">
     <div class="court boards" id="court">
       <section class="team blue side cyan pos-swap-start" id="sideBlue" data-team="blue">
-        <div class="rot-col" aria-label="rotation">
-          <div class="rot-dot" data-team="blue" data-slot="1">1</div>
-          <div class="rot-dot" data-team="blue" data-slot="2">2</div>
-          <div class="rot-dot" data-team="blue" data-slot="3">3</div>
-          <div class="rot-dot" data-team="blue" data-slot="4">4</div>
-          <span class="serve-lr" id="serveLrBlue">R</span>
-        </div>
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameBlue" data-team="blue">청</div>
+          <div class="rot-col" aria-label="rotation">
+            <div class="rot-dot" data-team="blue" data-slot="1">1</div>
+            <div class="rot-dot" data-team="blue" data-slot="2">2</div>
+            <div class="rot-dot" data-team="blue" data-slot="3">3</div>
+            <div class="rot-dot" data-team="blue" data-slot="4">4</div>
+            <span class="serve-lr" id="serveLrBlue">R</span>
+          </div>
           <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0">0</div>
         </div>
       </section>
@@ -3464,15 +3459,15 @@
         <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
       </aside>
       <section class="team white side ivory pos-swap-end" id="sideWhite" data-team="white">
-        <div class="rot-col" aria-label="rotation">
-          <div class="rot-dot" data-team="white" data-slot="1">1</div>
-          <div class="rot-dot" data-team="white" data-slot="2">2</div>
-          <div class="rot-dot" data-team="white" data-slot="3">3</div>
-          <div class="rot-dot" data-team="white" data-slot="4">4</div>
-          <span class="serve-lr" id="serveLrWhite">R</span>
-        </div>
         <div class="side-main team-main">
           <div class="team-title team-label" id="nameWhite" data-team="white">백</div>
+          <div class="rot-col" aria-label="rotation">
+            <div class="rot-dot" data-team="white" data-slot="1">1</div>
+            <div class="rot-dot" data-team="white" data-slot="2">2</div>
+            <div class="rot-dot" data-team="white" data-slot="3">3</div>
+            <div class="rot-dot" data-team="white" data-slot="4">4</div>
+            <span class="serve-lr" id="serveLrWhite">R</span>
+          </div>
           <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
         </div>
       </section>
@@ -4412,6 +4407,11 @@
       if (team !== "blue" && team !== "white") return;
       pushHistory();
       serveChoice = team;
+      /* JK_SERVE_ONE: 선서브 금색은 1번. 되돌리: 아래 두 줄 삭제 */
+      if (sportType !== "futnet") {
+        serveIdxBlue = 0;
+        serveIdxWhite = 0;
+      }
       persistState();
       paint();
       setStatus(fill("serving", { name: nameFor(team) }));

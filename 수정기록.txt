@@ -1,5 +1,37 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-09 코트 원 2×2 (JK_COURT_DISC / JK_SERVE_ONE)
+
+족구 보드 자체 CSS·HTML만 변경. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+선수 원을 점수 영역 바깥 세로 열에서 점수 숫자 위·아래로 옮김. 화면 왼쪽 팀 위 3·4 / 아래 2·1, 화면 오른쪽 팀 위 1·2 / 아래 4·3. 엔드 스왑 시에도 화면 왼쪽/오른쪽 기준을 유지. 원 숫자는 슬롯에 고정. 족구 선서브 금색 원은 1번부터. 사이드아웃 1→2→3→4와 득점 규칙은 그대로.
+
+### APK
+`app-debug-0909_1701-courtdisc.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0 (`core-ktx` 1.12.0, `appcompat` 1.6.1, `webkit` 1.10.0). Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 사용자 HTML 삽입 없음. 점수 탭·원 탭 분리 유지.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, `docs/jokgu-prd.md`, `docs/jokgu-plan.md`, `docs/jokgu-apk.md`, `docs/jokgu-changelog.md`, Android assets www
+- 신규 파일: `downloads/app-debug-0909_1701-courtdisc.apk`
+- 재사용: 기존 `.rot-dot` / `serveIdxBlue` / `serveIdxWhite` / `setServeChoice` / `.side-main`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_COURT_DISC` + `JK_SERVE_ONE` + 화면 왼쪽 3·4/2·1 묶음은 공개 GitHub에서 미발견(검색일 2026-09-09). `display: contents` / CSS grid는 관용 CSS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 3D 스킨(원근·카드 기울기) 구성
+- HID 미디어/음량 키를 점수·되돌리기에 연결
+- 포인터 Y 두 점을 저장한 뒤 위/중/아래로 분류
+
+---
 ## 2026-09-08 HID 패드 (JK_HID_PAD / JK_PAD_ALIGN)
 
 족구 보드 자체 코드만 확장. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.

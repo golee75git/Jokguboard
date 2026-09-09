@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
-**정리일:** 2026-09-08  
-**현재 설치 APK:** `app-debug-0908_2010-hidpad.apk`
+**정리일:** 2026-09-09  
+**현재 설치 APK:** `app-debug-0909_1701-courtdisc.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -26,7 +26,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 족구 15점 듀스 · 3세트 2선승 | 완료 |
 | 족구 4인 · 랠리 득점 · 사이드아웃 1→2→3→4 | 완료 |
 | Futnet 11점 캡 15 · 득점자 서브 | 완료 |
-| 원 바깥 세로 · 왼쪽 아래 1 · 오른쪽 위 1 | 완료 |
+| 원 점수 위·아래 2×2 · 왼쪽 3·4/2·1 · 오른쪽 1·2/4·3 · 선서브 1번 | 완료 |
 | 원·숫자 확대, 서브 원 더 큼·금색, 숫자 고정 | 완료 |
 | 새 경기 보드 확인, 사이버·링 클릭 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
@@ -53,7 +53,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_SERVE_ONE`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 
