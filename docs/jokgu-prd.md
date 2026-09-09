@@ -2,7 +2,7 @@
 
 **제품:** Jokguboard  
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0909_2234-padgesture.apk`  
+**현재 설치 APK:** `app-debug-0909_2256-winflow.apk`  
 **웹:** https://jokguboard.vercel.app  
 **저장소:** https://github.com/golee75git/Jokguboard.git  
 
@@ -40,7 +40,8 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 ### 공통
 
 - 0:0에서 선서브 선택(팀명·원·화면 좌우).
-- 세트 종료 후 코트 교대(`teamsSwapped`).
+- 세트 종료 후 코트 교대(`teamsSwapped`). 안내 창은 5초 후 자동으로 닫힘(확인 없음).
+- 경기 종료 창: 확인(결과 유지) 또는 새 경기(바로 초기화).
 - 종목 또는 Futnet 유형 변경 시 확인 후 현재 점수 초기화.
 
 ## 포함 (현재)

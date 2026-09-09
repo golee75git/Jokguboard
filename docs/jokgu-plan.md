@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0909_2234-padgesture.apk`
+**현재 설치 APK:** `app-debug-0909_2256-winflow.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -53,7 +53,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_SERVE_ONE`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 
@@ -62,7 +62,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 - 족구: 14:13 미종료, 15:13 승, 14:14→16:14, 3세트 2선승
 - Futnet: 11:9 승, 10:10·11:10 계속, 12:10 승, 14:14 계속, 15:14 종료
 - 사이드아웃 시 직전 서브 팀 인덱스 1→2→3→4 순환 (`scripts/check-win-rules.js`)
-- undo, 새 경기(0:0에서도 클릭, 보드 확인 배너), ko/en/zh, help 3종
+- undo, 새 경기(0:0에서도 클릭, 보드 확인 배너), 세트 창 5초 자동 닫힘, 경기 승 창 확인+새 경기, ko/en/zh, help 3종
 - `serve.ps1` · APK L/R · 사이버·링에서 새 경기 클릭
 - APK 설정 패드 칸은 `AndroidPad`가 있을 때만 표시
 - 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2

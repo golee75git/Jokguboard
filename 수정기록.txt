@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-09 세트 자동 닫힘·경기 승 새 경기 (JK_WIN_FLOW)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt`·패드 제스처(`JK_PAD_GESTURE`) 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+세트 종료 안내 창은 확인 버튼을 숨기고 5초 뒤 자동으로 닫혀 다음 세트를 칠 수 있게 한다. 경기 전체가 끝나면 같은 창에 확인(결과만 닫기)과 새 경기(바로 초기화, 두 번째 확인 없음)를 둔다. 기존 `runFreshMatch` / `closeWinBanner` 재사용.
+
+### APK
+`app-debug-0909_2256-winflow.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 사용자 HTML 삽입 없음. `setTimeout`으로 로컬 타이머만.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, `docs/jokgu-prd.md`, `docs/jokgu-plan.md`, `docs/jokgu-apk.md`, `docs/jokgu-changelog.md`, Android assets www
+- 신규 파일: `downloads/app-debug-0909_2256-winflow.apk`
+- 재사용: 기존 `openWinBanner` / `closeWinBanner` / `runFreshMatch` / `#winBanner`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`. `MainActivity.kt` 미수정
+
+### GitHub 코드 검색
+`JK_WIN_FLOW` + `WIN_AUTO_MS` + `is-match-over` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-09). `setTimeout`은 관용 JS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- APK L/R 클릭·길게 −1
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+
+---
 ## 2026-09-09 위·가운데·아래 패드 제스처 인식 — 실기기 확인 완료 (JK_PAD_GESTURE)
 
 **최종본. 아래 두 항목(`JK_PAD_CAL3`, `JK_HID_PAD_LOCK`/`JK_HID_BAR_GUARD`의 위 버튼 처리)을 대체한다.**

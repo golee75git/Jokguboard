@@ -308,6 +308,10 @@
       color: #fff;
     }
     .row-btns button.ghost { background: #e2e8f0; color: #222; }
+    /* JK_WIN_FLOW: 세트 창은 버튼 없음, 경기 승은 확인+새 경기. 되돌리: 이 블록 삭제 */
+    #winBanner:not(.is-match-over) .row-btns { display: none; }
+    #winBanner.is-match-over .row-btns { justify-content: stretch; }
+    #winBanner.is-match-over .row-btns button { flex: 1; min-height: 48px; font-weight: 700; }
     /* JK_PAD_ALIGN: APK 설정 맨 아래 패드 칸. 되돌리: 이 블록·#padBox·jkHid* 삭제 */
     .sheet { max-height: 88vh; overflow: auto; }
     #padBox { display: none; margin-top: 16px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
@@ -3486,7 +3490,8 @@
       <h2 id="winTitle"></h2>
       <p id="winBody"></p>
       <div class="row-btns">
-        <button type="button" id="winOk" data-i18n="ok">확인</button>
+        <button type="button" class="ghost" id="winOk" data-i18n="ok">확인</button>
+        <button type="button" id="winFresh" data-i18n="fresh">새 경기</button>
       </div>
     </div>
   </div>
@@ -3612,7 +3617,7 @@
         needServe: "0:0 — 선서브를 고르세요 (팀·원·화면 좌우)",
         serving: "{name} 서브",
         gameWin: "{name} 세트 승",
-        courtChange: "코트를 바꿔 주세요.",
+        courtChange: "코트를 바꿔 주세요. 5초 후 이어집니다.",
         matchWin: "{name} 경기 승 ({wins}선승)",
         matchLocked: "경기가 이미 끝났습니다. 새 경기를 시작하세요.",
         confirmFresh: "점수를 모두 지우고 새 경기를 시작할까요?",
@@ -3698,7 +3703,7 @@
         needServe: "0–0 — choose first serve (team, disc, or L/R)",
         serving: "{name} serving",
         gameWin: "{name} wins the set",
-        courtChange: "Please change ends.",
+        courtChange: "Please change ends. Play continues in 5 seconds.",
         matchWin: "{name} wins the match (first to {wins})",
         matchLocked: "Match already finished. Start a new match.",
         confirmFresh: "Clear all scores and start a new match?",
@@ -3784,7 +3789,7 @@
         needServe: "0:0 — 请选择先发球（队伍、圆点或左右键）",
         serving: "{name} 发球",
         gameWin: "{name} 赢得本局",
-        courtChange: "请交换场地。",
+        courtChange: "请交换场地。5 秒后继续。",
         matchWin: "{name} 赢得比赛（先胜 {wins} 局）",
         matchLocked: "比赛已结束。请开始新比赛。",
         confirmFresh: "清除全部分数并开始新比赛？",
@@ -4305,14 +4310,33 @@
       elStatus.textContent = msg || "";
     }
 
-    function openWinBanner(title, body) {
+    /* JK_WIN_FLOW: 세트=5초 후 닫힘, 경기 승=확인+새 경기. 되돌리: winAutoTimer·is-match-over 삭제, 확인만 */
+    var winAutoTimer = null;
+    var WIN_AUTO_MS = 5000;
+    function clearWinAutoTimer() {
+      if (winAutoTimer) {
+        clearTimeout(winAutoTimer);
+        winAutoTimer = null;
+      }
+    }
+    function openWinBanner(title, body, matchOver) {
+      clearWinAutoTimer();
       document.getElementById("winTitle").textContent = title;
       document.getElementById("winBody").textContent = body || "";
+      elWinBanner.classList.toggle("is-match-over", matchOver === true);
       elWinBanner.classList.add("is-open");
       elWinBanner.setAttribute("aria-hidden", "false");
+      if (matchOver !== true) {
+        winAutoTimer = setTimeout(function () {
+          winAutoTimer = null;
+          closeWinBanner();
+        }, WIN_AUTO_MS);
+      }
     }
     function closeWinBanner() {
+      clearWinAutoTimer();
       elWinBanner.classList.remove("is-open");
+      elWinBanner.classList.remove("is-match-over");
       elWinBanner.setAttribute("aria-hidden", "true");
     }
 
@@ -4340,10 +4364,10 @@
       persistState();
       paint();
       if (matchEnded) {
-        openWinBanner(fill("matchWin", { name: nameFor(winner), wins: String(winsNeeded()) }), "");
+        openWinBanner(fill("matchWin", { name: nameFor(winner), wins: String(winsNeeded()) }), "", true);
         speakPhrase(fill("matchWin", { name: nameFor(winner), wins: String(winsNeeded()) }));
       } else {
-        openWinBanner(fill("gameWin", { name: nameFor(winner) }), t("courtChange"));
+        openWinBanner(fill("gameWin", { name: nameFor(winner) }), t("courtChange"), false);
         speakPhrase(fill("gameWin", { name: nameFor(winner) }));
       }
     }
@@ -4692,6 +4716,7 @@
     });
     document.getElementById("btnFresh").addEventListener("click", freshMatch);
     document.getElementById("winOk").addEventListener("click", closeWinBanner);
+    document.getElementById("winFresh").addEventListener("click", runFreshMatch);
     document.getElementById("freshNo").addEventListener("click", closeFreshBanner);
     document.getElementById("freshYes").addEventListener("click", runFreshMatch);
     elFreshBanner.addEventListener("click", function (e) {
