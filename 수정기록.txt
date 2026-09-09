@@ -7,7 +7,7 @@
 원 번호(왼쪽 3·4/2·1, 오른쪽 1·2/4·3)는 유지. 원 쌍을 점수 가운데로 모음. 큰 점수는 남은 칸(`cqw`/`cqh`)에 맞춤. 칸 쿼리를 못 쓰는 환경은 기존 clamp.
 
 ### APK
-`app-debug-0910_0029-discscore.apk`
+`app-debug-0910_0029-discscore.apk` (`5bcba58`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.

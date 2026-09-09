@@ -35,7 +35,7 @@
 | `app-debug-0909_2256-winflow.apk` | 22:56 | 세트 5초 자동 닫힘·경기 승 새 경기 | `a2d20fb` |
 | `app-debug-0909_2331-padwin.apk` | 23:31 | 패드 고정+세트 안내 중에도 득점 | `775a49a` |
 | `app-debug-0909_2357-nameserve.apk` | 23:57 | 팀명 세트쪽·터치수정·새경기 선서브 | `d405b89` |
-| `app-debug-0910_0029-discscore.apk` | 00:29 | 원 간격·점수 칸 맞춤 | |
+| `app-debug-0910_0029-discscore.apk` | 00:29 | 원 간격·점수 칸 맞춤 | `5bcba58` |
 
 ## 현재 버전에서 쓰는 것
 
