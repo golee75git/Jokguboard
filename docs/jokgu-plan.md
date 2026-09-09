@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0909_2256-winflow.apk`
+**현재 설치 APK:** `app-debug-0909_2331-padwin.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -62,7 +62,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 - 족구: 14:13 미종료, 15:13 승, 14:14→16:14, 3세트 2선승
 - Futnet: 11:9 승, 10:10·11:10 계속, 12:10 승, 14:14 계속, 15:14 종료
 - 사이드아웃 시 직전 서브 팀 인덱스 1→2→3→4 순환 (`scripts/check-win-rules.js`)
-- undo, 새 경기(0:0에서도 클릭, 보드 확인 배너), 세트 창 5초 자동 닫힘, 경기 승 창 확인+새 경기, ko/en/zh, help 3종
+- undo, 새 경기(0:0에서도 클릭, 보드 확인 배너), 세트 창 5초 자동 닫힘(안내 중에도 패드 득점), 경기 승 창 확인+새 경기, ko/en/zh, help 3종
 - `serve.ps1` · APK L/R · 사이버·링에서 새 경기 클릭
 - APK 설정 패드 칸은 `AndroidPad`가 있을 때만 표시
 - 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2

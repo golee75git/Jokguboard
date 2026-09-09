@@ -4029,6 +4029,13 @@
     function isWinBannerOpen() {
       return elWinBanner.classList.contains("is-open");
     }
+    /* JK_WIN_FLOW: 세트 안내 중에도 패드 득점. 되돌리: isMatchWinBannerOpen·clearSetWinNotice 삭제 */
+    function isMatchWinBannerOpen() {
+      return isWinBannerOpen() && elWinBanner.classList.contains("is-match-over");
+    }
+    function clearSetWinNotice() {
+      if (isWinBannerOpen() && !elWinBanner.classList.contains("is-match-over")) closeWinBanner();
+    }
     function isFreshBannerOpen() {
       return elFreshBanner && elFreshBanner.classList.contains("is-open");
     }
@@ -4375,7 +4382,8 @@
     /* JK_DELTA: 족구 사이드아웃·Futnet 득점자 서브. 되돌리: applyDelta 삭제 */
     function applyDelta(team, delta, sourceTag) {
       if (!delta) return;
-      if (isWinBannerOpen() || isFreshBannerOpen()) return;
+      if (isFreshBannerOpen() || isMatchWinBannerOpen()) return;
+      clearSetWinNotice();
       if (delta > 0 && isMatchLocked()) {
         setStatus(t("matchLocked"));
         return;
@@ -4511,7 +4519,8 @@
     }
     function jkHidPoint(side) {
       var team = side === "R" ? rightTeam() : leftTeam();
-      if (isWinBannerOpen() || isFreshBannerOpen()) return;
+      if (isFreshBannerOpen() || isMatchWinBannerOpen()) return;
+      clearSetWinNotice();
       if (isServePickPending()) {
         setServeChoice(team);
         return;
@@ -4605,7 +4614,7 @@
 
     function scoreTargetBlocked(el) {
       if (!el || !el.closest) return false;
-      if (el.closest(".banner.is-open")) return true;
+      if (el.closest("#freshBanner.is-open, #winBanner.is-match-over")) return true;
       if (el.closest(".topbar, .mid, .rot-dot, .team-title, #btnFresh")) return true;
       if (isApkMatchLr()) {
         if (el.closest("input, textarea, select")) return true;
@@ -4625,7 +4634,7 @@
       if (!isApkMatchLr() && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       var team = e.button === 0 ? leftTeam() : rightTeam();
       if (isServePickPending()) {
-        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner, .mid, #btnFresh")) return;
+        if (e.target.closest && e.target.closest(".rot-dot, .topbar, .banner.is-match-over, #freshBanner, .mid, #btnFresh")) return;
         mouseHoldTeam = team;
         e.preventDefault();
         return;
@@ -4635,7 +4644,7 @@
         if (!elCourt.contains(e.target)) return;
       } else if (scoreTargetBlocked(e.target) && !isApkMatchLr()) {
         return;
-      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, .banner, .mid, #btnFresh")) {
+      } else if (isApkMatchLr() && e.target.closest && e.target.closest(".topbar, #freshBanner.is-open, #winBanner.is-match-over, .mid, #btnFresh")) {
         return;
       }
       if (!isApkMatchLr() && !elCourt.contains(e.target)) return;
@@ -4650,7 +4659,7 @@
       mouseHoldTeam = null;
       if (isServePickPending()) {
         cancelLong();
-        if (e.target.closest && e.target.closest("#btnFresh, .mid, .topbar, .banner")) return;
+        if (e.target.closest && e.target.closest("#btnFresh, .mid, .topbar, #freshBanner.is-open, #winBanner.is-match-over")) return;
         setServeChoice(team);
         e.preventDefault();
         return;
