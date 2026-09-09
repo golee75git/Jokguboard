@@ -7,7 +7,7 @@
 팀명을 가운데 세트 쪽으로 옮기고 글자 크기를 2배로 함. 사이버 스킨은 위치를 위쪽 가운데로 두고 글자만 2배. 팀명 터치는 항상 이름 수정(최대 20자, `textContent`/`value`만). 선서브는 원·화면 좌우 점수·패드 위(오른쪽)·아래(왼쪽). 새 경기 카드는 취소 또는 팀명 선서브 버튼. 경기 승 창의 새 경기도 같은 카드.
 
 ### APK
-`app-debug-0909_2357-nameserve.apk`
+`app-debug-0909_2357-nameserve.apk` (`d405b89`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
