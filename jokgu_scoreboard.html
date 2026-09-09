@@ -196,6 +196,31 @@
       grid-template-rows: auto auto minmax(0, 1fr) auto;
       padding: 10px 12px 14px;
     }
+    /* JK_DISC_GAP: 원 쌍을 점수 가운데로. 번호 칸은 JK_COURT_DISC 유지. 되돌리: 이 블록 삭제 */
+    .side-main {
+      grid-template-columns: 1fr auto auto 1fr;
+      column-gap: clamp(8px, 1.8vmin, 22px);
+    }
+    .rot-dot {
+      justify-self: center;
+      align-self: center;
+    }
+    #sideBlue .rot-dot[data-slot="3"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="3"],
+    #sideBlue .rot-dot[data-slot="2"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="2"],
+    #sideWhite .rot-dot[data-slot="1"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="1"],
+    #sideWhite .rot-dot[data-slot="4"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="4"] { grid-column: 2; }
+    #sideBlue .rot-dot[data-slot="4"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="4"],
+    #sideBlue .rot-dot[data-slot="1"],
+    .court.is-ends-swapped #sideWhite .rot-dot[data-slot="1"],
+    #sideWhite .rot-dot[data-slot="2"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="2"],
+    #sideWhite .rot-dot[data-slot="3"],
+    .court.is-ends-swapped #sideBlue .rot-dot[data-slot="3"] { grid-column: 3; }
     .team-title {
       grid-column: 1 / -1;
       grid-row: 1;
@@ -228,13 +253,37 @@
     .point-num {
       grid-column: 1 / -1;
       grid-row: 3;
+      min-width: 0;
       min-height: 0;
+      width: 100%;
+      height: 100%;
+      align-self: stretch;
+      justify-self: stretch;
       display: grid;
       place-items: center;
       font-size: clamp(128px, 32vw, 400px);
-      line-height: 0.9;
+      line-height: 0.85;
       cursor: pointer;
       font-variant-numeric: tabular-nums;
+      overflow: hidden;
+    }
+    /* JK_SCORE_FILL: 남은 점수 칸에 맞춤. 되돌리: 이 블록·.score-glyph 삭제, font-size를 .point-num에 */
+    .point-num .score-glyph {
+      font-size: inherit;
+      line-height: inherit;
+    }
+    @supports (font-size: 1cqh) {
+      .point-num {
+        container-type: size;
+        font-size: 16px;
+      }
+      .point-num .score-glyph {
+        font-size: min(78cqw, 82cqh);
+        line-height: 0.85;
+      }
+      body.is-simple .point-num .score-glyph {
+        font-size: min(86cqw, 90cqh);
+      }
     }
     .side.cyan .point-num { color: #f8fafc; }
     .side.ivory .point-num { color: #0f172a; }
@@ -3474,7 +3523,7 @@
             <div class="rot-dot" data-team="blue" data-slot="4">4</div>
             <span class="serve-lr" id="serveLrBlue">R</span>
           </div>
-          <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0">0</div>
+          <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0"><span class="score-glyph">0</span></div>
         </div>
       </section>
       <aside class="mid sets-panel">
@@ -3494,7 +3543,7 @@
             <div class="rot-dot" data-team="white" data-slot="4">4</div>
             <span class="serve-lr" id="serveLrWhite">R</span>
           </div>
-          <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0">0</div>
+          <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0"><span class="score-glyph">0</span></div>
         </div>
       </section>
     </div>
@@ -4280,8 +4329,12 @@
     }
 
     function paint() {
-      elScoreBlue.textContent = String(scoreBlue);
-      elScoreWhite.textContent = String(scoreWhite);
+      var gBlue = elScoreBlue.querySelector(".score-glyph");
+      var gWhite = elScoreWhite.querySelector(".score-glyph");
+      if (gBlue) gBlue.textContent = String(scoreBlue);
+      else elScoreBlue.textContent = String(scoreBlue);
+      if (gWhite) gWhite.textContent = String(scoreWhite);
+      else elScoreWhite.textContent = String(scoreWhite);
       elNameBlue.textContent = nameBlue;
       elNameWhite.textContent = nameWhite;
       elSetLeft.textContent = String(teamsSwapped ? setWhite : setBlue);
