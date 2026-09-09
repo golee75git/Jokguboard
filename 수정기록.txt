@@ -7,7 +7,7 @@
 기본 모습 점수에 획(stroke)과 층 그림자를 넣음. Jua는 단일 굵기라 `font-weight: 800`만으로는 두꺼워지지 않아 획+그림자로 처리. Noto Sans KR ExtraBold(800)는 글꼴을 Noto로 고른 경우에만 적용(SIL OFL 1.1). +1(`applyDelta` delta>0)일 때 숫자 확대(`jkBumpGrow`)와 `+1` 표식 상승(`jkBumpLift`). −1은 연출 없음. 사이버 스킨의 기존 입체 그림자는 그대로.
 
 ### APK
-`app-debug-0910_0628-scorebump.apk`
+`app-debug-0910_0628-scorebump.apk` (`3193fcb`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR 400/700/800, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
