@@ -1,5 +1,101 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-09 위·가운데·아래 패드 제스처 인식 — 실기기 확인 완료 (JK_PAD_GESTURE)
+
+**최종본. 아래 두 항목(`JK_PAD_CAL3`, `JK_HID_PAD_LOCK`/`JK_HID_BAR_GUARD`의 위 버튼 처리)을 대체한다.**
+`android/app/src/main/java/com/jokgu/scoreboard/MainActivity.kt` 변경. 갤럭시 탭 S9+(SM-X816N)에서 실제 리모컨으로 반복 테스트한 결과, 이 리모컨은 좌표를 찍는 방식이 아예 아니었다.
+
+- **위 버튼**: 좌표가 있는 터치가 전혀 오지 않는다. OS가 상태 바 노출 제스처로 통째로 가져가며, 앱에는 좌표 없는 단독 `ACTION_OUTSIDE` 이벤트 하나만 온다(`FLAG_WATCH_OUTSIDE_TOUCH` 필요). 이 "눌림 없이 OUTSIDE 하나만 왔다"는 패턴 자체가 위 버튼 신호다. 이전 시도(상태 바 노출을 `WindowInsets` 리스너로 감지)는 타이밍이 안 맞아 작동하지 않았다.
+- **가운데·아래**: 좌표 비교가 아니라 눌림→뗌 사이 경과시간·이동거리로 구분되는 제스처(탭=가운데/되돌리기, 아래로 스와이프=아래/왼쪽 득점)다. 그래서 3점을 아무리 정확히 찍어도(`JK_PAD_CAL3`) 좌표 판정 자체가 틀린 모델이라 안 맞았다.
+- 보정은 가운데→아래 2단계만 남긴다(좌표는 "켬" 상태 확인용으로만 저장, 판정에는 쓰지 않음).
+
+`C:\PickleBoard\android\app\src\main\java\com\pickleboard\app\MainActivity.kt`의 `HID_UD_BTN_GESTURE_v1`/`HID_UD_BTN_OUTSIDE_v1`가 겪은 것과 같은 문제였다. 동작 방식만 이해하고 코드는 Jokguboard 스타일로 새로 작성했다(변수명·함수 구조 다름, 볼륨 키 재주입 대신 기존 `jkHidPoint`/`jkHidUndo` 직접 호출).
+
+### 실기기 확인
+갤럭시 탭 S9+(SM-X816N)에 설치, 위·가운데·아래 각각 눌러 정상 동작(오른쪽 득점·되돌리기·왼쪽 득점) 확인 완료.
+
+### APK
+`app-debug-0909_2234-padgesture.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. 새 의존성 없음.
+
+### 보안
+터치 좌표·타이밍만 다루는 로컬 로직. 네트워크 전송 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `MainActivity.kt`(`takeAlign`/`maybePadEvent`/`classifyPadGesture`/`emitPadZone`, dispatch* 전면 재작성), `jokgu_scoreboard.html`(+ Android assets 사본, `pad.*` i18n), `index.html`, `help.html`/`help_en.html`/`help_zh.html`(+ Android assets 사본), `docs/jokgu-prd.md`, `docs/jokgu-plan.md`, `docs/jokgu-apk.md`
+- 재사용: 기존 `jkHidPoint`/`jkHidUndo`/`padPrefs`/`applyImmersive`
+- 참고만 하고 코드는 복사하지 않음: `C:\PickleBoard`의 `HID_UD_BTN_GESTURE_v1`/`HID_UD_BTN_OUTSIDE_v1`(제스처 분류·단독 OUTSIDE 인식 개념)
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분해 서로 다른 버튼으로 매핑
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+
+### GitHub 코드 검색
+`JK_PAD_GESTURE` + `ACTION_OUTSIDE` 기반 3버튼 리모컨 매핑 조합은 공개 GitHub에서 미발견(검색일 2026-09-09). `FLAG_WATCH_OUTSIDE_TOUCH`/`MotionEvent` 액션 분류는 Android 관용 API.
+
+---
+## 2026-09-09 위·가운데·아래 패드 3점 실측 보정 (JK_PAD_CAL3, 대체됨 — 위 항목 참고)
+
+`android/app/src/main/java/com/jokgu/scoreboard/MainActivity.kt`, `jokgu_scoreboard.html`(+Android assets 사본) 변경. 실기기(갤럭시 탭 S9+, SM-X816N)에 설치해 테스트한 결과 "위/가운데/아래를 다 눌러봤는데 잘 안됨" 확인. 기존 `JK_HID_PAD`는 위·아래 두 점만 찍고 가운데(되돌리기) 판정은 두 점의 평균 좌표로 계산했는데, 실제 리모컨의 가운데 버튼 좌표가 기하학적 중간이 아니어서 판정이 어긋난 것으로 보인다. `C:\PickleBoard`가 겪었던 것과 같은 종류의 문제(`HID_UD_BTN_CAL_v1`, 위·가운데·아래 3점을 각각 실측)를 참고해 동작 방식만 이해하고 코드는 새로 작성했다.
+
+- 보정 단계를 2단계(위→아래)에서 3단계(위→가운데→아래)로 변경. 각 버튼을 실제로 눌러 좌표를 각각 저장.
+- 판정(`laneHit`)도 계산된 중간점이 아니라 저장된 세 점 중 가장 가까운 쪽으로 분류.
+- 설정 화면 안내 문구·다국어(ko/en/zh)를 3단계에 맞게 갱신.
+
+### APK
+`android/app/build/outputs/apk/debug/app-debug.apk` 빌드 성공, 실기기(SM-X816N)에 설치해 UI·보정 흐름(위→가운데→아래 안내 전환)까지 확인. 저장소 `downloads/`에 정식 등록은 사용자가 실제 리모컨으로 최종 확인한 뒤 진행.
+
+### 라이선스
+신규 npm 없음. GPL 없음. 새 의존성 없음.
+
+### 보안
+좌표만 다루는 로컬 로직. 네트워크 전송 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `MainActivity.kt`(`takeAlign`/`laneHit`), `jokgu_scoreboard.html`(+ Android assets 사본, `pad.*` i18n·`jkPadNote`·`refreshPadBox`)
+- 참고만 하고 코드는 복사하지 않음: `C:\PickleBoard`의 `HID_UD_BTN_CAL_v1`(3점 실측 개념)
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 포인터 Y 세 점을 각각 실측해 위/중/아래로 분류 (기존 "두 점" 항목을 세 점으로 갱신)
+
+---
+## 2026-09-09 위·가운데·아래 패드 신뢰성 개선 (JK_HID_PAD_LOCK / JK_HID_BAR_GUARD / JK_IMMERSIVE_REAPPLY)
+
+**`JK_HID_BAR_GUARD`의 "상태 바 노출 감지 → 위 버튼 이김" 부분은 이후 `JK_PAD_GESTURE`(맨 위 항목)로 대체됨. `JK_HID_PAD_LOCK`·`JK_IMMERSIVE_REAPPLY`·`JK_HID_BAR_GUARD`의 "바 재숨김" 부분은 계속 유효.**
+`android/app/src/main/java/com/jokgu/scoreboard/MainActivity.kt`만 변경. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. `C:\PickleBoard`가 겪었던 것과 같은 종류의 문제(같은 리모컨 눌림이 두 경로로 중복 도착, 몰입 모드 중 시스템 바가 살짝 열려 위 버튼 눌림을 앱이 못 받는 기기)를 참고해 동작 방식만 이해하고 코드는 Jokguboard 자체 스타일로 새로 작성했다. 기존 `JK_HID_PAD`(위·가운데·아래 좌표 2점 보정, 위=오른쪽 이김·가운데=되돌리기·아래=왼쪽 이김)는 아직 이 저장소에서 실기기로 검증 전이라, 문제를 겪기 전에 다음 3가지를 미리 반영했다.
+
+- `JK_HID_PAD_LOCK`: 패드 터치·볼륨키·미디어키 중 같은 눌림이 두 경로로 들어와도 짧은 잠금(400ms)으로 한 번만 반영. 득점·되돌리기 각각 별도 타이머.
+- `JK_HID_BAR_GUARD`: 몰입 모드 중 상태·내비 바가 살짝 보이면 280ms 뒤 다시 숨김. 맞추기가 끝났고 가운데·아래 입력이 최근(450ms) 없었는데 바가 새로 보이면, OS가 위 버튼 터치를 통째로 가로챈 것으로 보고 위 버튼 이김(오른쪽 +1)으로 대신 처리.
+- `JK_IMMERSIVE_REAPPLY`: 설정 화면 등에서 포커스를 되찾을 때도 몰입 모드 재적용.
+
+### APK
+빌드 없음(코드만 변경, 이 세션에서 새 APK 산출 없음). 실기기 확인 후 `app-debug-MMDD_HHMM-` 이름으로 새로 빌드해 `downloads/`에 추가하고 이 파일·`jokgu-apk.md`·`jokgu-plan.md`·`jokgu-prd.md`·`index.html`/`help*.html`의 현재 파일명을 함께 갱신할 것.
+
+### 라이선스
+신규 npm 없음. GPL 없음. 새 AndroidX 의존성 없음(기존 core-ktx/appcompat/webkit만 사용).
+
+### 보안
+좌표·타이밍만 다루는 로컬 로직. 네트워크 전송 없음. 카메라·마이크 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `android/app/src/main/java/com/jokgu/scoreboard/MainActivity.kt`, `docs/jokgu-prd.md`, `docs/jokgu-plan.md`
+- 재사용: 기존 `padPrefs`/`laneHit`/`takeAlign`/`boardJs`/`applyImmersive`
+- 참고만 하고 코드는 복사하지 않음: `C:\PickleBoard\android\app\src\main\java\com\pickleboard\app\MainActivity.kt`의 `HID_UD_BTN_*` 계열 마커(디바운스, WindowInsets 감지, 몰입 재적용 개념)
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 포인터 Y 두 점을 저장한 뒤 위/중/아래로 분류 (기존 항목, 계속 적용)
+- 시스템 바 노출을 감지해 보정된 버튼 눌림으로 대체 처리
+- 서로 다른 입력 경로(터치 좌표·볼륨키·미디어키)의 중복 눌림을 짧은 잠금 창으로 병합
+
+### 확인 (2026-09-09 갤럭시 탭 S9+ 실기기)
+로컬 Gradle 빌드가 처음엔 Cursor Kotlin 언어 서버가 빌드 산출물(`R.jar`)을 점유해 `processDebugResources`에서 막혔다(코드 문제 아님, 파일 잠금 — 언어 서버 프로세스 종료 후 정상 빌드). 빌드 성공 후 실기기에 설치·실행해 크래시 없음, `JK_HID_BAR_GUARD`의 상태 바 재숨김을 스와이프로 직접 재현해 확인. 다만 위·가운데·아래 실사용 테스트에서 보정이 어긋나는 문제가 나와 `JK_PAD_CAL3`(위 항목)로 이어졌다.
+
+---
 ## 2026-09-09 코트 원 2×2 (JK_COURT_DISC / JK_SERVE_ONE)
 
 족구 보드 자체 CSS·HTML만 변경. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.

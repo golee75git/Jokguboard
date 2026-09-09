@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.view.InputDevice
@@ -25,6 +27,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -48,6 +51,26 @@ class MainActivity : AppCompatActivity() {
     private var volDownAt = 0L
     private var volDownCode = 0
 
+    /* JK_HID_PAD_LOCK: 리모컨 한 번 누름이 포인터·볼륨 두 경로로 동시에 들어와도 한 번만 반영.
+     * 되돌리: 이 2필드·scoreLocked/markScored/undoLocked/markUndone·호출부 잠금 분기 삭제 */
+    private var lastScoreSignalAt = 0L
+    private var lastUndoSignalAt = 0L
+
+    /* JK_HID_BAR_GUARD: 몰입 모드 중 상태·내비 바가 살짝 노출되면 다시 숨긴다(위 버튼 인식은
+     * JK_PAD_GESTURE의 단독 ACTION_OUTSIDE가 전담). 되돌리: 이 3필드·onCreate insets 리스너
+     * 블록·scheduleBarRehide 삭제 */
+    private var systemBarsWereVisible = false
+    private val barGuardHandler = Handler(Looper.getMainLooper())
+    private var pendingBarRehide: Runnable? = null
+
+    /* JK_PAD_GESTURE: 이 리모컨은 좌표 클릭이 아니라 눌림-뗌 사이 경과시간·이동거리로 구분되는
+     * 제스처(탭·상하 스와이프)를 보낸다. 위 버튼은 좌표 없는 단독 ACTION_OUTSIDE로만 온다
+     * (FLAG_WATCH_OUTSIDE_TOUCH 필요). 되돌리: 이 3필드·classifyPadGesture/maybePadEvent 삭제,
+     * dispatch*를 laneHit 좌표 판정으로 복원 */
+    private var padGestureActive = false
+    private var padGestureStartY = 0f
+    private var padGestureStartAt = 0L
+
     private companion object {
         private const val REQ_BLE = 2001
         private const val PREF = "jokgu_pad_marks"
@@ -55,6 +78,14 @@ class MainActivity : AppCompatActivity() {
         private const val HOVER_FRESH_MS = 48L
         private const val VOL_HOLD_MS = 480L
         private const val SCAN_SKIP = 320
+        /* JK_HID_PAD_LOCK */
+        private const val CROSS_INPUT_LOCK_MS = 400L
+        /* JK_HID_BAR_GUARD */
+        private const val BAR_REHIDE_DELAY_MS = 280L
+        /* JK_PAD_GESTURE: 탭(가운데)=250ms 이내·화면 긴 축 8% 이내 이동. 스와이프(아래)=20% 이상 이동 */
+        private const val PAD_GESTURE_TAP_MAX_MS = 250L
+        private const val PAD_GESTURE_TAP_MAX_DY_FRAC = 0.08f
+        private const val PAD_GESTURE_SWIPE_MIN_DY_FRAC = 0.20f
     }
 
     inner class AndroidShellBridge {
@@ -127,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         fun beginMarks() {
             runOnUiThread {
                 alignStep = 1
-                boardJs("jkPadNote('hi')")
+                boardJs("jkPadNote('mid')")
             }
         }
 
@@ -161,11 +192,26 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         applyImmersive()
+        /* JK_PAD_GESTURE: 위 버튼 눌림이 상태 바 제스처로 앱 밖까지 나가도 단독 ACTION_OUTSIDE로
+         * 받기 위함. 되돌리: 이 한 줄 삭제 */
+        window.addFlags(WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH)
+
+        /* JK_HID_BAR_GUARD: 상태·내비 바가 살짝 노출되면 다시 숨김. 되돌리: 이 리스너 블록 삭제 */
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
+            val barsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
+            if (barsVisible && !systemBarsWereVisible) {
+                scheduleBarRehide()
+            }
+            systemBarsWereVisible = barsVisible
+            insets
+        }
 
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
-            cacheMode = WebSettings.LOAD_DEFAULT
+            /* JK_NO_WEBVIEW_CACHE: 번들 자산 HTML은 앱 업데이트마다 바뀌므로 캐시하지 않음.
+             * 되돌리: WebSettings.LOAD_DEFAULT로 복원 */
+            cacheMode = WebSettings.LOAD_NO_CACHE
             builtInZoomControls = false
         }
 
@@ -244,6 +290,29 @@ class MainActivity : AppCompatActivity() {
         webView.evaluateJavascript(code, null)
     }
 
+    /* JK_HID_PAD_LOCK: 포인터·볼륨 중 먼저 들어온 쪽만 반영 */
+    private fun scoreLocked(): Boolean =
+        System.currentTimeMillis() - lastScoreSignalAt < CROSS_INPUT_LOCK_MS
+
+    private fun markScored() {
+        lastScoreSignalAt = System.currentTimeMillis()
+    }
+
+    private fun undoLocked(): Boolean =
+        System.currentTimeMillis() - lastUndoSignalAt < CROSS_INPUT_LOCK_MS
+
+    private fun markUndone() {
+        lastUndoSignalAt = System.currentTimeMillis()
+    }
+
+    /* JK_HID_BAR_GUARD: 살짝 노출된 시스템 바를 짧은 지연 뒤 다시 숨김 */
+    private fun scheduleBarRehide() {
+        pendingBarRehide?.let { barGuardHandler.removeCallbacks(it) }
+        val task = Runnable { applyImmersive() }
+        pendingBarRehide = task
+        barGuardHandler.postDelayed(task, BAR_REHIDE_DELAY_MS)
+    }
+
     private fun phoneSideKeys(device: InputDevice?): Boolean {
         if (device == null || device.isVirtual) return true
         val n = device.name.lowercase()
@@ -290,17 +359,20 @@ class MainActivity : AppCompatActivity() {
         return x to y
     }
 
+    /* JK_PAD_CAL_MIDLOW: 위 버튼은 좌표 보정이 없음(JK_PAD_GESTURE가 전담 인식). 가운데·아래만
+     * 눌러서 이 기기를 "켬" 상태로 저장(좌표 자체는 판정에 쓰지 않고 참고용). 되돌리: alignStep
+     * 3단계(hi→mid→lo)로, laneHit 좌표 판정으로 복원 */
     private fun takeAlign(x: Float, y: Float): Boolean {
         val p = padPrefs()
         if (alignStep == 1) {
-            p.edit().putFloat("hiX", x).putFloat("hiY", y).apply()
+            p.edit().putFloat("midX", x).putFloat("midY", y).apply()
             alignStep = 2
             boardJs("jkPadNote('lo')")
             return true
         }
         if (alignStep == 2) {
-            val hiY = p.getFloat("hiY", 0f)
-            if (abs(y - hiY) < MIN_SPAN) {
+            val midY = p.getFloat("midY", 0f)
+            if (abs(y - midY) < MIN_SPAN) {
                 boardJs("jkPadNote('gap')")
                 return true
             }
@@ -316,27 +388,103 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    private fun laneHit(x: Float, y: Float): String {
-        val p = padPrefs()
-        if (!p.getBoolean("on", false)) return ""
-        val hiX = p.getFloat("hiX", 0f)
-        val hiY = p.getFloat("hiY", 0f)
-        val loX = p.getFloat("loX", 0f)
-        val loY = p.getFloat("loY", 0f)
-        val midX = (hiX + loX) * 0.5f
-        val midY = (hiY + loY) * 0.5f
-        val spanY = abs(loY - hiY)
-        if (spanY < MIN_SPAN) return ""
-        val lane = maxOf(48f, abs(hiX - loX) + 52f)
-        if (abs(x - midX) > lane) return ""
-        val dHi = abs(y - hiY)
-        val dLo = abs(y - loY)
-        val dMid = abs(y - midY)
-        val band = spanY * 0.35f
-        if (dHi < dMid && dHi < dLo) return "R"
-        if (dLo < dMid && dLo < dHi) return "L"
-        if (dMid <= dHi && dMid <= dLo && dMid <= band) return "U"
-        return "X"
+    /* JK_PAD_GESTURE: 이 기기(외부 리모컨)의 실제 눌림인지 판별. 폰 자체 화면 손가락 터치는 제외 */
+    private fun isExternalOrUnknownMotion(ev: MotionEvent): Boolean {
+        val device = ev.device ?: return true
+        if (device.isVirtual) return false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !device.isExternal) return false
+        return true
+    }
+
+    private fun padPointerSpaceHeight(): Float =
+        maxOf(resources.displayMetrics.widthPixels, resources.displayMetrics.heightPixels)
+            .toFloat()
+            .coerceAtLeast(1f)
+
+    /* 탭(짧고 거의 안 움직임)=가운데, 아래로 크게 스와이프=아래, 위로 크게 스와이프=위 */
+    private fun classifyPadGesture(startY: Float, endY: Float, elapsedMs: Long): String {
+        val h = padPointerSpaceHeight()
+        val deltaY = endY - startY
+        if (elapsedMs <= PAD_GESTURE_TAP_MAX_MS && abs(deltaY) <= h * PAD_GESTURE_TAP_MAX_DY_FRAC) {
+            return "U"
+        }
+        val swipeMin = h * PAD_GESTURE_SWIPE_MIN_DY_FRAC
+        if (deltaY >= swipeMin) return "L"
+        if (deltaY <= -swipeMin) return "R"
+        return ""
+    }
+
+    private fun emitPadZone(zone: String): Boolean {
+        when (zone) {
+            "U" -> if (!undoLocked()) {
+                markUndone()
+                boardJs("jkHidUndo(false)")
+            }
+            "L" -> if (!scoreLocked()) {
+                markScored()
+                boardJs("jkHidPoint('L')")
+            }
+            "R" -> if (!scoreLocked()) {
+                markScored()
+                boardJs("jkHidPoint('R')")
+            }
+            else -> return false
+        }
+        return true
+    }
+
+    /* JK_PAD_GESTURE: 가운데·아래는 눌림→뗌 사이 제스처로, 위는 단독 ACTION_OUTSIDE로 판정.
+     * 되돌리: 이 함수 삭제, dispatch*를 laneHit 좌표 판정 호출로 복원 */
+    private fun maybePadEvent(event: MotionEvent): Boolean {
+        if (!isExternalOrUnknownMotion(event)) return false
+        val masked = event.actionMasked
+
+        if (alignStep != 0) {
+            if (masked == MotionEvent.ACTION_DOWN ||
+                masked == MotionEvent.ACTION_POINTER_DOWN ||
+                masked == MotionEvent.ACTION_BUTTON_PRESS
+            ) {
+                val xy = pressXY(event)
+                if (xy != null) takeAlign(xy.first, xy.second)
+            }
+            return true
+        }
+
+        if (masked == MotionEvent.ACTION_OUTSIDE) {
+            if (!padPrefs().getBoolean("on", false)) return false
+            if (padGestureActive) {
+                padGestureActive = false
+                val elapsed = System.currentTimeMillis() - padGestureStartAt
+                return emitPadZone(classifyPadGesture(padGestureStartY, event.rawY, elapsed))
+            }
+            return emitPadZone("R")
+        }
+
+        if (!padPrefs().getBoolean("on", false)) return false
+
+        if (masked == MotionEvent.ACTION_DOWN ||
+            masked == MotionEvent.ACTION_POINTER_DOWN ||
+            masked == MotionEvent.ACTION_BUTTON_PRESS
+        ) {
+            padGestureActive = true
+            padGestureStartY = event.rawY
+            padGestureStartAt = System.currentTimeMillis()
+            return true
+        }
+        if (masked == MotionEvent.ACTION_MOVE) {
+            return padGestureActive
+        }
+        if (masked == MotionEvent.ACTION_UP ||
+            masked == MotionEvent.ACTION_POINTER_UP ||
+            masked == MotionEvent.ACTION_BUTTON_RELEASE ||
+            masked == MotionEvent.ACTION_CANCEL
+        ) {
+            if (!padGestureActive) return false
+            padGestureActive = false
+            val elapsed = System.currentTimeMillis() - padGestureStartAt
+            return emitPadZone(classifyPadGesture(padGestureStartY, event.rawY, elapsed))
+        }
+        return false
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -355,12 +503,19 @@ class MainActivity : AppCompatActivity() {
             KeyEvent.KEYCODE_MEDIA_PLAY,
             KeyEvent.KEYCODE_MEDIA_PAUSE,
             KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
-                if (event.action == KeyEvent.ACTION_UP) boardJs("jkHidUndo(false)")
+                /* JK_HID_PAD_LOCK: 같은 눌림이 포인터 되돌리기로도 들어왔으면 한 번만 */
+                if (event.action == KeyEvent.ACTION_UP && !undoLocked()) {
+                    markUndone()
+                    boardJs("jkHidUndo(false)")
+                }
                 return true
             }
             KeyEvent.KEYCODE_MEDIA_PREVIOUS,
             KeyEvent.KEYCODE_MEDIA_NEXT -> {
-                if (event.action == KeyEvent.ACTION_UP) boardJs("jkHidUndo(false)")
+                if (event.action == KeyEvent.ACTION_UP && !undoLocked()) {
+                    markUndone()
+                    boardJs("jkHidUndo(false)")
+                }
                 return true
             }
             KeyEvent.KEYCODE_VOLUME_UP,
@@ -373,12 +528,22 @@ class MainActivity : AppCompatActivity() {
                 if (event.action == KeyEvent.ACTION_UP && volDownCode == event.keyCode) {
                     val held = System.currentTimeMillis() - volDownAt
                     volDownCode = 0
+                    /* JK_HID_PAD_LOCK: 포인터·볼륨 중 먼저 반영된 쪽만 인정, 나머지는 삼킴 */
                     if (held >= VOL_HOLD_MS) {
-                        boardJs("jkHidUndo(true)")
+                        if (!undoLocked()) {
+                            markUndone()
+                            boardJs("jkHidUndo(true)")
+                        }
                     } else if (event.keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-                        boardJs("jkHidPoint('R')")
+                        if (!scoreLocked()) {
+                            markScored()
+                            boardJs("jkHidPoint('R')")
+                        }
                     } else {
-                        boardJs("jkHidPoint('L')")
+                        if (!scoreLocked()) {
+                            markScored()
+                            boardJs("jkHidPoint('L')")
+                        }
                     }
                     return true
                 }
@@ -389,46 +554,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun dispatchGenericMotionEvent(event: MotionEvent): Boolean {
-        if (!fingerTouch(event)) {
-            if (event.actionMasked == MotionEvent.ACTION_HOVER_MOVE ||
-                event.actionMasked == MotionEvent.ACTION_HOVER_ENTER
-            ) {
-                rememberHover(event)
-            }
+        if (event.actionMasked == MotionEvent.ACTION_HOVER_MOVE ||
+            event.actionMasked == MotionEvent.ACTION_HOVER_ENTER
+        ) {
+            if (!fingerTouch(event)) rememberHover(event)
         }
+        if (maybePadEvent(event)) return true
         return super.dispatchGenericMotionEvent(event)
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (fingerTouch(event)) return super.dispatchTouchEvent(event)
         if (event.actionMasked == MotionEvent.ACTION_HOVER_MOVE ||
             event.actionMasked == MotionEvent.ACTION_HOVER_ENTER
         ) {
-            rememberHover(event)
+            if (!fingerTouch(event)) rememberHover(event)
             return super.dispatchTouchEvent(event)
         }
-        if (event.actionMasked != MotionEvent.ACTION_DOWN) {
-            if (alignStep != 0 || padPrefs().getBoolean("on", false)) {
-                val p = pressXY(event) ?: return super.dispatchTouchEvent(event)
-                if (alignStep != 0) return true
-                val hit = laneHit(p.first, p.second)
-                if (hit.isNotEmpty()) return true
-            }
+        if (event.actionMasked == MotionEvent.ACTION_DOWN &&
+            (event.buttonState and MotionEvent.BUTTON_SECONDARY != 0)
+        ) {
             return super.dispatchTouchEvent(event)
         }
-        if (event.buttonState and MotionEvent.BUTTON_SECONDARY != 0) {
+        if (fingerTouch(event) && event.actionMasked != MotionEvent.ACTION_OUTSIDE) {
             return super.dispatchTouchEvent(event)
         }
-        val xy = pressXY(event) ?: return super.dispatchTouchEvent(event)
-        if (takeAlign(xy.first, xy.second)) return true
-        val hit = laneHit(xy.first, xy.second)
-        if (hit.isEmpty()) return super.dispatchTouchEvent(event)
-        when (hit) {
-            "R" -> boardJs("jkHidPoint('R')")
-            "L" -> boardJs("jkHidPoint('L')")
-            "U" -> boardJs("jkHidUndo(false)")
-        }
-        return true
+        if (maybePadEvent(event)) return true
+        return super.dispatchTouchEvent(event)
     }
 
     private fun requestBleAndStart() {
@@ -472,6 +623,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /* JK_IMMERSIVE_REAPPLY: 설정 화면 등에서 돌아와 포커스를 되찾을 때도 몰입 모드 유지.
+     * 되돌리: 이 오버라이드 삭제 */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) applyImmersive()
+    }
+
     override fun onResume() {
         super.onResume()
         applyImmersive()
@@ -486,6 +644,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        pendingBarRehide?.let { barGuardHandler.removeCallbacks(it) }
         bleScoreSpikeServer?.stop()
         tts?.stop()
         tts?.shutdown()

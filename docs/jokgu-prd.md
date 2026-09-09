@@ -2,7 +2,7 @@
 
 **제품:** Jokguboard  
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0909_1701-courtdisc.apk`  
+**현재 설치 APK:** `app-debug-0909_2234-padgesture.apk`  
 **웹:** https://jokguboard.vercel.app  
 **저장소:** https://github.com/golee75git/Jokguboard.git  
 
@@ -50,7 +50,9 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 - 심플 모드(선서브 후). 심플에서는 새 경기 숨김
 - 하단 메뉴: 되돌리기 · 심플 · 설정 · 도움말
 - APK 경기 중 화면 L/R +1, 길게 −1. 가운데 칸·새 경기는 L/R에서 제외
-- APK 전용: 설정 맨 아래 위·가운데·아래 버튼 패드 위치 맞추기(이 기기 SharedPreferences). 웹에는 칸 없음. 외부 BT 음량 짧게 좌우 득점, 길게 되돌리기. 원형 미디어 짧게 되돌리기.
+- APK 전용: 설정 맨 아래 가운데·아래 버튼 패드 위치 맞추기(이 기기 SharedPreferences). 웹에는 칸 없음. 외부 BT 음량 짧게 좌우 득점, 길게 되돌리기. 원형 미디어 짧게 되돌리기.
+- 이 리모컨은 좌표 클릭이 아니라 제스처를 보낸다: 가운데·아래는 눌림→뗌 사이 경과시간·이동거리로 탭/스와이프 구분, 위는 좌표 없는 단독 시스템 터치-아웃사이드 신호로만 옴(`JK_PAD_GESTURE`)
+- 패드·볼륨·미디어 키 중 같은 눌림이 두 경로로 들어와도 한 번만 반영(교차 입력 잠금). 몰입 모드 중 상태·내비 바가 살짝 보이면 다시 숨김(`JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`)
 - localStorage 키 `jokgu_scoreboard_state_v1`
 - Vercel 정적 (`/` 랜딩, `/play` → `jokgu_scoreboard.html`)
 - TTS: 득점·서브·세트·경기. Android `AndroidTTS`, 웹 `speechSynthesis`. MP3 팩·마이크 없음
@@ -88,6 +90,8 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 - 한 화면에서 종목 전환 시 점수 초기화 + 선수 원 개수 변경
 - 사이드아웃 회전 vs 득점자 서브
 - HID 미디어/음량 키를 점수·되돌리기에 연결
-- 포인터 Y 두 점을 저장한 뒤 위/중/아래로 분류
+- 외부 리모컨의 눌림→뗌 사이 경과시간·이동거리로 탭/스와이프(가운데/아래)를 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼(위) 눌림으로 해석
+- 같은 물리 버튼 눌림이 서로 다른 입력 경로(터치 제스처·볼륨키)로 중복 도착할 때 한 번만 반영(교차 입력 잠금)
 
 일반 점수 표시·15점/11점 듀스·확인 배너는 종목 규칙·관용 UI이다.

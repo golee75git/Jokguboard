@@ -51,7 +51,7 @@ C:\Jokguboard 그린필드로 족구 점수판 MVP를 구현해줘. Score(탁구
 
 
 2단계: Score 허브 링크만 (배포 URL 확정 후, Score 워크스페이스)
-Jokguboard 배포 URL: https://[여기에-실제-URL].vercel.app/
+Jokguboard 배포 URL: https://jokguboard.vercel.app/
 Score repo에서 족구 허브 연동만 최소 수정해줘. voice_scoreboard.html은 수정 금지.
 ## 변경 범위
 - index.html: 4번째 종목 HUB_JK_ICON_LINK (.hot-jk-icon) + HUB_SPORT_ICON_MAP 좌표

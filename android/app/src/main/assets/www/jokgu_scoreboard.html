@@ -3572,7 +3572,7 @@
         <p id="padRound" data-i18n="pad.round">원형은 해당 없음</p>
         <p id="padHint"></p>
         <div class="pad-row">
-          <button type="button" id="padAlign" data-i18n="pad.align">위·아래 위치 맞추기</button>
+          <button type="button" id="padAlign" data-i18n="pad.align">가운데·아래 위치 맞추기</button>
           <button type="button" class="ghost" id="padClear" data-i18n="pad.reset">다시 맞추기</button>
         </div>
       </div>
@@ -3673,12 +3673,12 @@
         confirmSport: "경기 종목을 변경하면 현재 경기 기록이 초기화됩니다. 변경하시겠습니까?",
         "pad.title": "위·가운데·아래 버튼 리모컨",
         "pad.round": "원형은 해당 없음",
-        "pad.align": "위·아래 위치 맞추기",
+        "pad.align": "가운데·아래 위치 맞추기",
         "pad.reset": "다시 맞추기",
-        "pad.idle": "위 버튼을 짧게 한 번, 이어서 아래 버튼을 짧게 한 번 눌러 이 기기에 위치를 저장합니다.",
-        "pad.hi": "위 버튼을 짧게 한 번 누르세요.",
+        "pad.idle": "가운데 버튼을 짧게 한 번, 이어서 아래 버튼을 짧게 한 번 눌러 이 기기에 위치를 저장합니다. 위 버튼은 보정 없이 자동으로 인식됩니다.",
+        "pad.mid": "가운데 버튼을 짧게 한 번 누르세요.",
         "pad.lo": "아래 버튼을 짧게 한 번 누르세요.",
-        "pad.gap": "위·아래가 너무 가깝습니다. 아래를 다시 누르세요.",
+        "pad.gap": "가운데·아래가 너무 가깝습니다. 아래를 다시 누르세요.",
         "pad.ok": "이 기기에 위치를 저장했습니다.",
         "pad.off": "저장한 위치를 지웠습니다."
       },
@@ -3759,12 +3759,12 @@
         confirmSport: "Changing sport clears the current match. Change anyway?",
         "pad.title": "Up / middle / down button pad",
         "pad.round": "Round pads are not used here",
-        "pad.align": "Match up and down positions",
+        "pad.align": "Match middle / down positions",
         "pad.reset": "Match again",
-        "pad.idle": "Short-press up once, then short-press down once. Positions stay on this device.",
-        "pad.hi": "Short-press the up button once.",
+        "pad.idle": "Short-press middle once, then short-press down once. Positions stay on this device. The up button is detected automatically, no calibration needed.",
+        "pad.mid": "Short-press the middle button once.",
         "pad.lo": "Short-press the down button once.",
-        "pad.gap": "Up and down are too close. Press down again.",
+        "pad.gap": "Middle and down are too close. Press down again.",
         "pad.ok": "Positions saved on this device.",
         "pad.off": "Saved positions cleared."
       },
@@ -3845,12 +3845,12 @@
         confirmSport: "更改项目将清空当前比赛记录。确定更改吗？",
         "pad.title": "上 / 中 / 下 按键板",
         "pad.round": "圆形板在此不适用",
-        "pad.align": "对齐上、下位置",
+        "pad.align": "对齐中、下位置",
         "pad.reset": "重新对齐",
-        "pad.idle": "先短按上键一次，再短按下键一次。位置仅保存在本机。",
-        "pad.hi": "请短按上键一次。",
+        "pad.idle": "先短按中键一次，再短按下键一次。位置仅保存在本机。上键自动识别，无需对齐。",
+        "pad.mid": "请短按中键一次。",
         "pad.lo": "请短按下键一次。",
-        "pad.gap": "上、下太近。请再按下键。",
+        "pad.gap": "中、下太近。请再按下键。",
         "pad.ok": "已将位置保存在本机。",
         "pad.off": "已清除保存的位置。"
       }
@@ -4476,7 +4476,13 @@
       jkPadCode = code || "idle";
       var el = document.getElementById("padHint");
       if (!el) return;
-      var map = { hi: "pad.hi", lo: "pad.lo", gap: "pad.gap", ok: "pad.ok", off: "pad.off" };
+      var map = {
+        mid: "pad.mid",
+        lo: "pad.lo",
+        gap: "pad.gap",
+        ok: "pad.ok",
+        off: "pad.off"
+      };
       el.textContent = t(map[jkPadCode] || "pad.idle");
     }
     function jkHidPoint(side) {
@@ -4512,7 +4518,7 @@
       box.classList.add("is-on");
       try {
         var st = JSON.parse(window.AndroidPad.markState());
-        if (st.step === 1) jkPadNote("hi");
+        if (st.step === 1) jkPadNote("mid");
         else if (st.step === 2) jkPadNote("lo");
         else if (st.on) jkPadNote("ok");
         else jkPadNote("idle");

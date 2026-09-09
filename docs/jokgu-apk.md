@@ -2,8 +2,8 @@
 
 **제품:** Jokguboard  
 **정리일:** 2026-09-09  
-**현재 설치:** `app-debug-0909_1701-courtdisc.apk`  
-**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0909_1701-courtdisc.apk  
+**현재 설치:** `app-debug-0909_2234-padgesture.apk`  
+**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0909_2234-padgesture.apk  
 
 랜딩(`/`)과 도움말 3종 상단에 현재 파일명을 표시한다. 모두 debug 빌드이며 Play 스토어 제출용이 아니다.
 
@@ -31,16 +31,19 @@
 | `app-debug-0902_1746-outdisc.apk` | 17:46 | 원 바깥·크게, 서브 원 더 큼 | `ca92738` |
 | `app-debug-0908_2010-hidpad.apk` | 20:10 | APK 위·중·아래 패드·외부 BT 음량 | `4ea331b` |
 | `app-debug-0909_1701-courtdisc.apk` | 17:01 | 점수 위·아래 원 2×2, 선서브 1번 | `11b6201` |
+| `app-debug-0909_2234-padgesture.apk` | 22:34 | 위·가운데·아래 리모컨 제스처 인식(실기기 확인) | `(다음 커밋에 기록)` |
 
 ## 현재 버전에서 쓰는 것
 
-`app-debug-0909_1701-courtdisc.apk`가 위 표를 모두 이은 최신이다.
+`app-debug-0909_2234-padgesture.apk`가 위 표를 모두 이은 최신이다.
 
 - 족구 랠리 득점, 사이드아웃 시 직전 서브 팀만 1→2→3→4
 - Futnet 11점 캡 15, 득점자 서브
 - 원 점수 위·아래 2×2(화면 왼쪽 3·4/2·1, 오른쪽 1·2/4·3), 숫자 고정, 선서브 금색은 1번, 서브 원 더 큼
 - 새 경기 보드 확인, 사이버·링에서도 클릭
 - 심플, TTS, BLE, 스킨, 하단 메뉴
-- APK 전용 위·가운데·아래 버튼 패드 위치 맞추기, 외부 BT 음량 좌우 득점
+- APK 전용 가운데·아래 버튼 패드 위치 맞추기(실측 결과 이 리모컨은 좌표 클릭이 아니라 제스처를
+  보냄: 가운데·아래는 눌림·뗌 사이 경과시간·이동거리, 위는 좌표 없는 단독 시스템 신호로 인식),
+  외부 BT 음량 좌우 득점, 갤럭시 탭 S9+(SM-X816N) 실기기 확인 완료
 
 이전 APK는 `downloads/`에 보관한다. 설치 안내는 최신 파일명만 가리킨다.
