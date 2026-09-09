@@ -8,7 +8,7 @@
   <!-- JK_OFL_FONTS: Noto Sans KR · Jua · Do Hyeon · Orbitron (SIL OFL 1.1). 되돌리: 이 link 삭제 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&family=Do+Hyeon&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;800&family=Do+Hyeon&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     /* JK_BOARD_LOOK: 청 어두운 카드·백 밝은 카드·바깥 서브 띠. 되돌리: 이 style을 이전 커밋으로 복원 */
     :root {
@@ -265,7 +265,8 @@
       line-height: 0.85;
       cursor: pointer;
       font-variant-numeric: tabular-nums;
-      overflow: hidden;
+      overflow: visible;
+      position: relative;
     }
     /* JK_SCORE_FILL: 남은 점수 칸에 맞춤. 되돌리: 이 블록·.score-glyph 삭제, font-size를 .point-num에 */
     .point-num .score-glyph {
@@ -287,6 +288,71 @@
     }
     .side.cyan .point-num { color: #f8fafc; }
     .side.ivory .point-num { color: #0f172a; }
+    /* JK_SCORE_DEPTH: 점수 굵기·층 그림자. 되돌리: 이 블록 삭제, Noto 800 가중치 제거 */
+    .point-num .score-glyph {
+      font-weight: 800;
+      -webkit-text-stroke: 0.038em currentColor;
+    }
+    .side.cyan .point-num .score-glyph {
+      text-shadow:
+        0.04em 0.05em 0 #083044,
+        0.08em 0.1em 0 #052030,
+        0.12em 0.15em 0 #041820,
+        0 0.18em 0.22em rgba(0, 0, 0, 0.48);
+    }
+    .side.ivory .point-num .score-glyph {
+      text-shadow:
+        0.04em 0.05em 0 #c7d2fe,
+        0.08em 0.1em 0 #818cf8,
+        0.12em 0.15em 0 #6366f1,
+        0 0.18em 0.22em rgba(15, 23, 42, 0.3);
+    }
+    body.skin-cyber3d .point-num .score-glyph {
+      text-shadow: inherit;
+    }
+    /* JK_SCORE_BUMP: +1 때 숫자 커짐·표식 상승. 되돌리: 이 블록·.jk-bump-tag·flashScoreBump 삭제 */
+    .jk-bump-tag {
+      position: absolute;
+      left: 50%;
+      top: 8%;
+      z-index: 6;
+      margin: 0;
+      padding: 0.08em 0.28em;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-50%);
+      font-size: clamp(22px, 4.2vmin, 36px);
+      font-weight: 800;
+      line-height: 1;
+    }
+    .side.cyan .jk-bump-tag {
+      background: rgba(8, 47, 73, 0.72);
+      color: #fde68a;
+    }
+    .side.ivory .jk-bump-tag {
+      background: rgba(255, 255, 255, 0.88);
+      color: #b45309;
+    }
+    .point-num.is-bump .score-glyph {
+      animation: jkBumpGrow 0.42s ease-out;
+    }
+    .jk-bump-tag.is-up {
+      animation: jkBumpLift 0.62s ease-out forwards;
+    }
+    @keyframes jkBumpGrow {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.22); }
+      100% { transform: scale(1); }
+    }
+    @keyframes jkBumpLift {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-1.55em) scale(0.94); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .point-num.is-bump .score-glyph,
+      .jk-bump-tag.is-up { animation: none; }
+    }
     /* JK_MID_PANEL: 가운데 폭·새 경기. 되돌리: clamp 120/18/190, #btnFresh를 .topbar로 */
     .mid {
       flex: 0 0 clamp(168px, 26vmin, 260px);
@@ -3523,7 +3589,7 @@
             <div class="rot-dot" data-team="blue" data-slot="4">4</div>
             <span class="serve-lr" id="serveLrBlue">R</span>
           </div>
-          <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0"><span class="score-glyph">0</span></div>
+          <div class="point-num score score-tap-add" id="scoreBlue" data-team="blue" role="button" tabindex="0"><span class="score-glyph">0</span><span class="jk-bump-tag" aria-hidden="true">+1</span></div>
         </div>
       </section>
       <aside class="mid sets-panel">
@@ -3543,7 +3609,7 @@
             <div class="rot-dot" data-team="white" data-slot="4">4</div>
             <span class="serve-lr" id="serveLrWhite">R</span>
           </div>
-          <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0"><span class="score-glyph">0</span></div>
+          <div class="point-num score score-tap-add" id="scoreWhite" data-team="white" role="button" tabindex="0"><span class="score-glyph">0</span><span class="jk-bump-tag" aria-hidden="true">+1</span></div>
         </div>
       </section>
     </div>
@@ -4526,10 +4592,25 @@
       paint();
       setStatus(fill(delta > 0 ? "plus" : "minus", { name: nameFor(team === "white" ? "white" : "blue") }));
       if (delta > 0) {
+        flashScoreBump(team, delta);
         var setsBefore = setBlue + setWhite;
         maybeFinishGame();
         if (setBlue + setWhite === setsBefore) speakScoreNow();
       }
+    }
+
+    /* JK_SCORE_BUMP: +1 시각 반응. 되돌리: 이 함수·applyDelta 호출 삭제 */
+    function flashScoreBump(team, delta) {
+      var el = team === "white" ? elScoreWhite : elScoreBlue;
+      if (!el) return;
+      var tag = el.querySelector(".jk-bump-tag");
+      var n = Math.floor(Number(delta));
+      if (tag) tag.textContent = "+" + (n > 0 ? n : 1);
+      el.classList.remove("is-bump");
+      if (tag) tag.classList.remove("is-up");
+      void el.offsetWidth;
+      el.classList.add("is-bump");
+      if (tag) tag.classList.add("is-up");
     }
 
     function setServeChoice(team) {

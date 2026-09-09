@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 점수 굵기·층 그림자·+1 확대 (JK_SCORE_DEPTH / JK_SCORE_BUMP)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사(배드민턴 클래스명·키프레임·주석 미사용).
+
+기본 모습 점수에 획(stroke)과 층 그림자를 넣음. Jua는 단일 굵기라 `font-weight: 800`만으로는 두꺼워지지 않아 획+그림자로 처리. Noto Sans KR ExtraBold(800)는 글꼴을 Noto로 고른 경우에만 적용(SIL OFL 1.1). +1(`applyDelta` delta>0)일 때 숫자 확대(`jkBumpGrow`)와 `+1` 표식 상승(`jkBumpLift`). −1은 연출 없음. 사이버 스킨의 기존 입체 그림자는 그대로.
+
+### APK
+`app-debug-0910_0628-scorebump.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR 400/700/800, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 사용자 HTML 삽입 없음. 표식 문구는 고정 `+`와 숫자만.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_0628-scorebump.apk`
+- 재사용: 기존 `.score-glyph` · `applyDelta` · `.point-num`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`flashScoreBump` + `jkBumpGrow` + `jk-bump-tag` 묶음은 공개 GitHub에서 미발견(검색일 2026-09-10). `text-shadow` / `@keyframes` 확대는 일반 CSS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+- 득점 시 숫자 확대와 떠오르는 표식의 시각 타이밍 조합(일반 UI 관용에 가깝지만 별도 표시)
+
+---
 ## 2026-09-10 원 간격·점수 칸 맞춤 (JK_DISC_GAP / JK_SCORE_FILL)
 
 족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.
