@@ -7,7 +7,7 @@
 링은 `skin-arena3d`만 붙고 백 칸은 기본 흰 배경이라 흰 바가 안 보였음. 검은 바를 `look-plain`·`look-field`·`look-arena3d`·`skin-arena3d`의 `.side.ivory`에 적용. 네온·사이버 등 어두운 백 칸은 흰 바 유지.
 
 ### APK
-`app-debug-0910_1512-barlight.apk`
+`app-debug-0910_1512-barlight.apk` (`9523717`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
