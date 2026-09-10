@@ -7,7 +7,7 @@
 사이버 CSS가 Score의 `.team-header`를 가리켜 팀명 클릭 복구가 적용되지 않던 점을, 족구 DOM(`.team-title` / `.point-num`)에 맞춘 히트 규칙으로 보완. 가운데 세트 칸은 빈 곳은 통과하고 버튼만 받음. 점수 층 오프셋·획은 직전 값의 약 30%.
 
 ### APK
-`app-debug-0910_1049-hitdepth.apk`
+`app-debug-0910_1049-hitdepth.apk` (`5518ad6`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
