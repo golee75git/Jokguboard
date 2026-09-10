@@ -7,7 +7,7 @@
 심플 가운데 금색 서브 원(`#jkServeMark`)을 「세트」 위로 옮김. `.jk-serve-num` 글자 `clamp(50px, 11.25vmin, 81px)`(이전 1.5배). 원 지름은 유지. 일반 모드에서는 계속 숨김.
 
 ### APK
-`app-debug-0910_1405-servetop.apk`
+`app-debug-0910_1405-servetop.apk` (`9dad1d6`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
