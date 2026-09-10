@@ -2,8 +2,8 @@
 
 **제품:** Jokguboard  
 **정리일:** 2026-09-09  
-**현재 설치:** `app-debug-0910_0628-scorebump.apk`  
-**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0910_0628-scorebump.apk  
+**현재 설치:** `app-debug-0910_1049-hitdepth.apk`  
+**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-0910_1049-hitdepth.apk  
 
 랜딩(`/`)과 도움말 3종 상단에 현재 파일명을 표시한다. 모두 debug 빌드이며 Play 스토어 제출용이 아니다.
 
@@ -37,15 +37,16 @@
 | `app-debug-0909_2357-nameserve.apk` | 23:57 | 팀명 세트쪽·터치수정·새경기 선서브 | `d405b89` |
 | `app-debug-0910_0029-discscore.apk` | 00:29 | 원 간격·점수 칸 맞춤 | `5bcba58` |
 | `app-debug-0910_0628-scorebump.apk` | 06:28 | 점수 굵기·층 그림자·+1 확대 | `3193fcb` |
+| `app-debug-0910_1049-hitdepth.apk` | 10:49 | 사이버 터치·그림자 약 30% | _(커밋 후 기입)_ |
 
 ## 현재 버전에서 쓰는 것
 
-`app-debug-0910_0628-scorebump.apk`가 위 표를 모두 이은 최신이다.
+`app-debug-0910_1049-hitdepth.apk`가 위 표를 모두 이은 최신이다.
 
 - 족구 랠리 득점, 사이드아웃 시 직전 서브 팀만 1→2→3→4
 - Futnet 11점 캡 15, 득점자 서브
 - 원 점수 위·아래 2×2(화면 왼쪽 3·4/2·1, 오른쪽 1·2/4·3), 위·아래 같은 세로줄로 점수 가운데에 모임, 숫자 고정, 선서브 금색은 1번, 서브 원 더 큼
-- 큰 점수는 남은 칸을 채움 (`JK_SCORE_FILL`). 굵기·층 그림자(`JK_SCORE_DEPTH`). +1 때 숫자 확대와 표식 상승(`JK_SCORE_BUMP`)
+- 큰 점수는 남은 칸을 채움 (`JK_SCORE_FILL`). 층 그림자 약 30%(`JK_SCORE_DEPTH`). +1 때 숫자 확대와 표식 상승(`JK_SCORE_BUMP`). 사이버·링에서 팀명·점수 터치(`JK_CYBER_HIT`)
 - 팀명은 세트 쪽(사이버는 위 가운데), 글자 2배, 터치하면 이름 수정. 선서브는 원·화면 좌우·패드 위·아래. 새 경기는 취소 또는 선서브 팀 선택
 - 새 경기 보드 확인, 사이버·링에서도 클릭. 세트 안내 창은 5초 후 자동 닫힘(안내 중에도 패드 득점). 경기 승 창은 확인+새 경기
 - 패드 Kotlin은 `2234-padgesture`와 동일(`MainActivity.kt` 미수정)

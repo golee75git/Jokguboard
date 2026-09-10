@@ -1,5 +1,35 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 사이버 터치·그림자 약 30% (JK_CYBER_HIT / JK_SCORE_DEPTH)
+
+족구 보드 자체 HTML/CSS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+사이버 CSS가 Score의 `.team-header`를 가리켜 팀명 클릭 복구가 적용되지 않던 점을, 족구 DOM(`.team-title` / `.point-num`)에 맞춘 히트 규칙으로 보완. 가운데 세트 칸은 빈 곳은 통과하고 버튼만 받음. 점수 층 오프셋·획은 직전 값의 약 30%.
+
+### APK
+`app-debug-0910_1049-hitdepth.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_1049-hitdepth.apk`
+- 재사용: 기존 `.team-title` · `.point-num` · `.mid` · `JK_SCORE_DEPTH`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_CYBER_HIT` + `team-title` + `pointer-events: none` 가운데 칸 묶음은 공개 GitHub에서 미발견(검색일 2026-09-10). `pointer-events` 통과는 일반 CSS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+
+---
 ## 2026-09-10 점수 굵기·층 그림자·+1 확대 (JK_SCORE_DEPTH / JK_SCORE_BUMP)
 
 족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사(배드민턴 클래스명·키프레임·주석 미사용).

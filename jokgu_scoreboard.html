@@ -288,24 +288,24 @@
     }
     .side.cyan .point-num { color: #f8fafc; }
     .side.ivory .point-num { color: #0f172a; }
-    /* JK_SCORE_DEPTH: 점수 굵기·층 그림자. 되돌리: 이 블록 삭제, Noto 800 가중치 제거 */
+    /* JK_SCORE_DEPTH: 점수 굵기·층 그림자(층 약 30%). 되돌리: 이 블록 삭제, Noto 800 가중치 제거 */
     .point-num .score-glyph {
       font-weight: 800;
-      -webkit-text-stroke: 0.038em currentColor;
+      -webkit-text-stroke: 0.011em currentColor;
     }
     .side.cyan .point-num .score-glyph {
       text-shadow:
-        0.04em 0.05em 0 #083044,
-        0.08em 0.1em 0 #052030,
-        0.12em 0.15em 0 #041820,
-        0 0.18em 0.22em rgba(0, 0, 0, 0.48);
+        0.012em 0.015em 0 #083044,
+        0.024em 0.03em 0 #052030,
+        0.036em 0.045em 0 #041820,
+        0 0.054em 0.066em rgba(0, 0, 0, 0.48);
     }
     .side.ivory .point-num .score-glyph {
       text-shadow:
-        0.04em 0.05em 0 #c7d2fe,
-        0.08em 0.1em 0 #818cf8,
-        0.12em 0.15em 0 #6366f1,
-        0 0.18em 0.22em rgba(15, 23, 42, 0.3);
+        0.012em 0.015em 0 #c7d2fe,
+        0.024em 0.03em 0 #818cf8,
+        0.036em 0.045em 0 #6366f1,
+        0 0.054em 0.066em rgba(15, 23, 42, 0.3);
     }
     body.skin-cyber3d .point-num .score-glyph {
       text-shadow: inherit;
@@ -3173,13 +3173,13 @@
     body.skin-cyber3d .team.blue .score-value {
       color: #f8feff;
       text-shadow:
-        1px 1px 0 #0e5a70,
-        2px 2px 0 #0c4d60,
-        3px 3px 0 #0a4050,
-        4px 4px 0 #083545,
-        5px 5px 0 #062a38,
-        0 10px 16px rgba(0, 0, 0, 0.75),
-        0 0 22px rgba(103, 232, 249, 0.65);
+        0.3px 0.3px 0 #0e5a70,
+        0.6px 0.6px 0 #0c4d60,
+        0.9px 0.9px 0 #0a4050,
+        1.2px 1.2px 0 #083545,
+        1.5px 1.5px 0 #062a38,
+        0 3px 5px rgba(0, 0, 0, 0.75),
+        0 0 7px rgba(103, 232, 249, 0.65);
     }
 
     body.skin-cyber3d .team.white {
@@ -3220,13 +3220,13 @@
     body.skin-cyber3d .team.white .score-value {
       color: #fffaf5;
       text-shadow:
-        1px 1px 0 #9a4a0b,
-        2px 2px 0 #85400a,
-        3px 3px 0 #703608,
-        4px 4px 0 #5c2d07,
-        5px 5px 0 #4a2406,
-        0 10px 16px rgba(0, 0, 0, 0.75),
-        0 0 22px rgba(251, 191, 36, 0.55);
+        0.3px 0.3px 0 #9a4a0b,
+        0.6px 0.6px 0 #85400a,
+        0.9px 0.9px 0 #703608,
+        1.2px 1.2px 0 #5c2d07,
+        1.5px 1.5px 0 #4a2406,
+        0 3px 5px rgba(0, 0, 0, 0.75),
+        0 0 7px rgba(251, 191, 36, 0.55);
     }
 
     body.skin-cyber3d .team .btn-grid button.pt.neg {
@@ -3381,7 +3381,7 @@
       transform-style: preserve-3d;
     }
     body.skin-cyber3d .team-main .score.score-tap-add {
-      z-index: 1;
+      z-index: 14;
     }
     body.skin-cyber3d .team .team-main .btn-grid {
       position: absolute !important;
@@ -3570,6 +3570,47 @@
     body.skin-cyber3d .sets-panel button,
     body.skin-arena3d .sets-panel button {
       transform: none !important;
+    }
+    /* JK_CYBER_HIT: 사이버·링 팀명·점수 터치. 되돌리: 이 블록 삭제 */
+    body.skin-cyber3d #court,
+    body.skin-arena3d #court {
+      pointer-events: none !important;
+    }
+    body.skin-cyber3d .side,
+    body.skin-arena3d .side,
+    body.skin-cyber3d .team-title,
+    body.skin-arena3d .team-title,
+    body.skin-cyber3d .point-num,
+    body.skin-arena3d .point-num,
+    body.skin-cyber3d .rot-dot,
+    body.skin-arena3d .rot-dot {
+      pointer-events: auto !important;
+    }
+    body.skin-cyber3d .team-title,
+    body.skin-arena3d .team-title {
+      position: relative;
+      z-index: 32;
+    }
+    body.skin-cyber3d .point-num,
+    body.skin-arena3d .point-num {
+      z-index: 14;
+    }
+    body.skin-cyber3d .rot-dot,
+    body.skin-arena3d .rot-dot {
+      z-index: 16;
+    }
+    body.skin-cyber3d .mid,
+    body.skin-arena3d .mid,
+    body.skin-cyber3d .sets-panel,
+    body.skin-arena3d .sets-panel {
+      pointer-events: none !important;
+      z-index: 4;
+    }
+    body.skin-cyber3d .mid > *,
+    body.skin-arena3d .mid > *,
+    body.skin-cyber3d #btnFresh,
+    body.skin-arena3d #btnFresh {
+      pointer-events: auto !important;
     }
 
   </style>
