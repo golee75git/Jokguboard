@@ -7,7 +7,7 @@
 가운데 칸 폭(`clamp` 최대 292px)은 그대로. 세트 줄의 `1fr` 남은 칸을 없애고 `align-content: center`로 「세트」·점수·시각·경기·서브·새 경기를 한 덩어리로 세로 가운데에 모음. 세트 점수는 직전 `46cqw`에서 칸 안에 들어가는 크기(`50cqw`)로 키움. 요청한 1.7배(`78cqw`)는 `0 : 0`이 좌우 큰 점수를 덮어 적용하지 않음. 칸 쿼리를 못 쓰는 환경의 `clamp` 폴백은 1.7배.
 
 ### APK
-`app-debug-0910_1145-setmid.apk`
+`app-debug-0910_1145-setmid.apk` (`caa51ae`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
