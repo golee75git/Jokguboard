@@ -1,5 +1,37 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 서브 바·원 확대·가운데 문구 제거 (JK_SIMPLE / JK_SERVE_BAR)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사. 외부 아이콘·SVG 미사용.
+
+가운데 `#serveGuide`의 `{팀명} 서브` 문구를 비움(선서브 안내는 유지). 심플 화살표 HTML/CSS 삭제. 가운데 금색 서브 원을 1.5배. 일반·심플 모두 `.side.is-serving .point-num::after`로 점수 아래 짧은 막대. 기본 청 칸 흰색·백 칸 검은색. 종이 모습은 양쪽 검은색. 네온·아레나·방송·사이버의 어두운 백 칸은 흰색. 선서브 전에는 막대 없음. `pointer-events: none`.
+
+### APK
+`app-debug-0910_1326-servebar.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 서브 번호는 `serverSlotFor`의 숫자만 `textContent`. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_1326-servebar.apk`
+- 재사용: 기존 `JK_SIMPLE` · `is-serving` · `paintJkServeMark` · `.jk-serve-num`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`jk-serve-num` + `paintJkServeMark` + `.point-num::after` 서브 막대는 이 저장소 전용 조합.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+- 서브 팀 점수 아래 짧은 막대는 일반 전광판 관용에 가깝지만 별도 표시
+
+---
+
 ## 2026-09-10 세트 안쪽 모임·심플 서브 원·화살표 (JK_MID_FIT / JK_SIMPLE)
 
 족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사. 외부 아이콘·SVG 미사용.

@@ -707,40 +707,54 @@
     body.is-simple .team-title { font-size: clamp(36px, 6vw, 64px); }
     .jk-serve-mark {
       display: none;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 8px;
     }
     body.is-simple .jk-serve-mark.is-on { display: flex; }
-    body.is-simple .jk-serve-mark.is-vis-right { flex-direction: row-reverse; }
-    .jk-serve-arrow {
-      width: 0;
-      height: 0;
-      border-style: solid;
-    }
-    .jk-serve-mark.is-vis-left .jk-serve-arrow {
-      border-width: 10px 16px 10px 0;
-      border-color: transparent #fbbf24 transparent transparent;
-    }
-    .jk-serve-mark.is-vis-right .jk-serve-arrow {
-      border-width: 10px 0 10px 16px;
-      border-color: transparent transparent transparent #fbbf24;
-    }
     .jk-serve-num {
-      width: clamp(44px, 9vmin, 72px);
-      height: clamp(44px, 9vmin, 72px);
+      width: clamp(66px, 13.5vmin, 108px);
+      height: clamp(66px, 13.5vmin, 108px);
       border-radius: 50%;
       display: grid;
       place-items: center;
       font-weight: 800;
-      font-size: clamp(22px, 5vmin, 36px);
+      font-size: clamp(33px, 7.5vmin, 54px);
       line-height: 1;
       color: #1a1408;
       background: linear-gradient(155deg, #fbbf24, #b45309);
       border: 2px solid #fde68a;
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
+    /* JK_SERVE_BAR: 서브 팀 점수 아래 짧은 막대. 되돌리: 이 블록 삭제 */
+    .point-num::after {
+      content: "";
+      display: none;
+      position: absolute;
+      left: 50%;
+      bottom: 6%;
+      z-index: 5;
+      width: 32%;
+      max-width: 7.2rem;
+      height: 10px;
+      border-radius: 5px;
+      pointer-events: none;
+      transform: translateX(-50%);
+    }
+    body.is-simple .point-num::after {
+      bottom: 8%;
+      height: 12px;
+    }
+    body.sport-futnet-single .point-num::after { bottom: 16%; }
+    .side.is-serving .point-num::after { display: block; }
+    .side.cyan .point-num::after { background: #fff; }
+    .side.ivory .point-num::after { background: #0f172a; }
+    body.look-paper .side.cyan .point-num::after,
+    body.look-paper .side.ivory .point-num::after { background: #0f172a; }
+    body.look-glow .side.ivory .point-num::after,
+    body.look-arena .side.ivory .point-num::after,
+    body.look-broadcast .side.ivory .point-num::after,
+    body.look-cyber3d .side.ivory .point-num::after { background: #fff; }
+    .serve-guide:empty { display: none; }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
     body.look-arena { background: #12100c; }
     body.look-arena .side.cyan { background: #1a1408; border-color: #e8a317; color: #fff3d6; }
@@ -3780,7 +3794,6 @@
         <div class="set-label" data-i18n="sets">세트</div>
         <div class="set-row"><span class="set-fit"><span class="set-num" id="setLeft">0</span><span class="set-colon">:</span><span class="set-num" id="setRight">0</span></span></div>
         <div class="jk-serve-mark" id="jkServeMark">
-          <span class="jk-serve-arrow" aria-hidden="true"></span>
           <span class="jk-serve-num" id="jkServeNum">1</span>
         </div>
         <div class="mid-clocks">
@@ -4471,24 +4484,20 @@
       var idx = team === "white" ? serveIdxWhite : serveIdxBlue;
       return String(idx + 1);
     }
-    /* JK_SIMPLE: 가운데 서브 번호·화살표. 되돌리: 이 함수·#jkServeMark 삭제 */
+    /* JK_SIMPLE: 가운데 서브 번호. 되돌리: 이 함수·#jkServeMark 삭제 */
     function paintJkServeMark() {
       var box = document.getElementById("jkServeMark");
       var num = document.getElementById("jkServeNum");
       if (!box || !num) return;
       var serve = computeServeTeam();
       if (!serve || isServePickPending()) {
-        box.classList.remove("is-on", "is-vis-left", "is-vis-right");
+        box.classList.remove("is-on");
         num.textContent = "1";
         box.removeAttribute("aria-label");
         return;
       }
       num.textContent = serverSlotFor(serve);
-      var visLeft = teamsSwapped ? "white" : "blue";
-      var left = serve === visLeft;
       box.classList.add("is-on");
-      box.classList.toggle("is-vis-left", left);
-      box.classList.toggle("is-vis-right", !left);
       box.setAttribute("aria-label", fill("serving", { name: nameFor(serve) }) + " " + num.textContent);
     }
     function paintServeLr() {
@@ -4645,7 +4654,6 @@
       paintJkServeMark();
       elDeuce.classList.toggle("is-on", inDeuceWindow());
       if (isServePickPending()) elServeGuide.textContent = t("needServe");
-      else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });
       else elServeGuide.textContent = "";
       paintMidClocks();
       document.body.classList.toggle("is-apk-match", isApkMatchLr());
