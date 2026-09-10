@@ -7,7 +7,7 @@
 서브 막대 기본색을 흰색으로 둠. 검은 바는 `body.look-plain .side.ivory`만. 대부분 모습은 `skin-*`라 이전 `look-*` 예외가 안 먹던 문제를 없앰.
 
 ### APK
-`app-debug-0910_1356-barwhite.apk`
+`app-debug-0910_1356-barwhite.apk` (`9e34bbe`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
