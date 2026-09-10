@@ -502,7 +502,7 @@
     /* JK_MID_FIT: 세트 칸 비율 글자·시각·새 경기. 되돌리: 이 블록·.mid-clocks·matchClockAt 삭제 */
     .mid {
       display: grid;
-      grid-template-rows: auto auto auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto auto auto;
       justify-items: center;
       align-items: center;
       align-content: center;
@@ -531,10 +531,19 @@
       font-size: clamp(61px, 12vw, 122px);
     }
     .mid .set-row .set-fit {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.06em;
       font-size: inherit;
       font-weight: inherit;
       line-height: inherit;
       white-space: nowrap;
+    }
+    .mid .set-row .set-colon {
+      margin: 0;
+      padding: 0;
+      font-weight: inherit;
     }
     .mid-clocks {
       display: flex;
@@ -592,7 +601,7 @@
         width: 100%;
         flex: 0 0 auto;
         min-height: 200px;
-        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto auto;
         align-content: center;
       }
     }
@@ -685,16 +694,53 @@
       border: 2px solid rgba(140, 210, 90, 0.45);
     }
     body.look-field .set-row { color: #b6f07a; }
-    /* JK_SIMPLE: 큰 점수·세트만. 되돌리: 이 블록·#btnSimple·simpleMode 삭제 */
+    /* JK_SIMPLE: 큰 점수·세트만. 되돌리: 이 블록·#btnSimple·simpleMode·#jkServeMark 삭제 */
     body.is-simple .topbar button:not(#btnUndo):not(#btnSimple),
     body.is-simple #btnFresh,
     body.is-simple .rot-col,
     body.is-simple .rot-dot,
     body.is-simple .serve-lr,
+    body.is-simple .serve-guide,
     body.is-simple .hint-line { display: none; }
     body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
     body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
     body.is-simple .team-title { font-size: clamp(36px, 6vw, 64px); }
+    .jk-serve-mark {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    body.is-simple .jk-serve-mark.is-on { display: flex; }
+    body.is-simple .jk-serve-mark.is-vis-right { flex-direction: row-reverse; }
+    .jk-serve-arrow {
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+    .jk-serve-mark.is-vis-left .jk-serve-arrow {
+      border-width: 10px 16px 10px 0;
+      border-color: transparent #fbbf24 transparent transparent;
+    }
+    .jk-serve-mark.is-vis-right .jk-serve-arrow {
+      border-width: 10px 0 10px 16px;
+      border-color: transparent transparent transparent #fbbf24;
+    }
+    .jk-serve-num {
+      width: clamp(44px, 9vmin, 72px);
+      height: clamp(44px, 9vmin, 72px);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: clamp(22px, 5vmin, 36px);
+      line-height: 1;
+      color: #1a1408;
+      background: linear-gradient(155deg, #fbbf24, #b45309);
+      border: 2px solid #fde68a;
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
+    }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
     body.look-arena { background: #12100c; }
     body.look-arena .side.cyan { background: #1a1408; border-color: #e8a317; color: #fff3d6; }
@@ -3732,7 +3778,11 @@
       </section>
       <aside class="mid sets-panel">
         <div class="set-label" data-i18n="sets">세트</div>
-        <div class="set-row"><span class="set-fit"><span class="set-num" id="setLeft">0</span> : <span class="set-num" id="setRight">0</span></span></div>
+        <div class="set-row"><span class="set-fit"><span class="set-num" id="setLeft">0</span><span class="set-colon">:</span><span class="set-num" id="setRight">0</span></span></div>
+        <div class="jk-serve-mark" id="jkServeMark">
+          <span class="jk-serve-arrow" aria-hidden="true"></span>
+          <span class="jk-serve-num" id="jkServeNum">1</span>
+        </div>
         <div class="mid-clocks">
           <div class="mid-clock-line"><span data-i18n="clockNow">시각</span> <span id="clockNow">00:00:00</span></div>
           <div class="mid-clock-line"><span data-i18n="clockGame">경기</span> <span id="clockGame">00:00:00</span></div>
@@ -4421,6 +4471,26 @@
       var idx = team === "white" ? serveIdxWhite : serveIdxBlue;
       return String(idx + 1);
     }
+    /* JK_SIMPLE: 가운데 서브 번호·화살표. 되돌리: 이 함수·#jkServeMark 삭제 */
+    function paintJkServeMark() {
+      var box = document.getElementById("jkServeMark");
+      var num = document.getElementById("jkServeNum");
+      if (!box || !num) return;
+      var serve = computeServeTeam();
+      if (!serve || isServePickPending()) {
+        box.classList.remove("is-on", "is-vis-left", "is-vis-right");
+        num.textContent = "1";
+        box.removeAttribute("aria-label");
+        return;
+      }
+      num.textContent = serverSlotFor(serve);
+      var visLeft = teamsSwapped ? "white" : "blue";
+      var left = serve === visLeft;
+      box.classList.add("is-on");
+      box.classList.toggle("is-vis-left", left);
+      box.classList.toggle("is-vis-right", !left);
+      box.setAttribute("aria-label", fill("serving", { name: nameFor(serve) }) + " " + num.textContent);
+    }
     function paintServeLr() {
       [["blue", scoreBlue, "serveLrBlue"], ["white", scoreWhite, "serveLrWhite"]].forEach(function (row) {
         var el = document.getElementById(row[2]);
@@ -4572,6 +4642,7 @@
       });
       paintRotation();
       paintServeLr();
+      paintJkServeMark();
       elDeuce.classList.toggle("is-on", inDeuceWindow());
       if (isServePickPending()) elServeGuide.textContent = t("needServe");
       else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });

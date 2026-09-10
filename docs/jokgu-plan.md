@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0910_1145-setmid.apk`
+**현재 설치 APK:** `app-debug-0910_1303-servemark.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -35,6 +35,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 사이버 팀명·점수 터치, 그림자 약 30% | 완료 |
 | 세트 칸 비율 글자·시각·경기시간 | 완료 |
 | 세트 점수 키움·가운데 모임 | 완료 |
+| 심플 가운데 서브 번호·화살표 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
@@ -73,7 +74,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 - APK 설정 패드 칸은 `AndroidPad`가 있을 때만 표시
 - 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
 - +1 때 점수 확대·표식 상승, −1은 없음
-- 가운데 세트 점수·라벨·시각·경기시간 비율, 선서브 후 경기시간, 새 경기에서 0, 세트 점수 키움·세로 가운데 모임
+- 가운데 세트 점수·라벨·시각·경기시간 비율, 선서브 후 경기시간, 새 경기에서 0, 세트 점수 안쪽 모임, 심플 가운데 서브 원·화살표
 
 ## 배포
 

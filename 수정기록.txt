@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 세트 안쪽 모임·심플 서브 원·화살표 (JK_MID_FIT / JK_SIMPLE)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사. 외부 아이콘·SVG 미사용.
+
+세트 점수 `font-size`는 유지하고 `.set-fit`을 `inline-flex` + 좁은 `gap`으로 콜론 쪽에 모아 칸 테두리에서 떼어 냄. 심플 모드에서 코트 `.rot-dot`은 계속 숨김. 가운데 칸에 금색 원(`#jkServeNum`)으로 서브 슬롯(1~4)을 표시하고, CSS `border` 삼각형으로 화면상 서브 팀 쪽을 가리킴(`teamsSwapped` 반영). 선서브 전에는 표시 없음. 일반 모드에서는 이 표시를 숨김.
+
+### APK
+`app-debug-0910_1303-servemark.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 서브 번호는 `serverSlotFor`의 숫자만 `textContent`. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_1303-servemark.apk`
+- 재사용: 기존 `JK_SIMPLE` · `JK_MID_FIT` · `serverSlotFor` · `computeServeTeam` · `.rot-dot.is-server` 금색
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`jk-serve-mark` + `paintJkServeMark` 묶음은 이 저장소 전용 명칭. CSS `border` 삼각형과 서브 쪽 화살표는 일반 UI 관용.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+- 서브 팀을 화살표로 가리키는 구성은 일반 점수판 관용에 가깝지만 별도 표시
+
+---
 ## 2026-09-10 세트 점수 1.7배·세로 가운데 모임 (JK_MID_FIT)
 
 족구 보드 자체 HTML/CSS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
