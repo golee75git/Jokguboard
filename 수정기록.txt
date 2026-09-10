@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 심플 서브 원 맨 위·숫자 1.5배 (JK_SIMPLE)
+
+족구 보드 자체 HTML/CSS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.
+
+심플 가운데 금색 서브 원(`#jkServeMark`)을 「세트」 위로 옮김. `.jk-serve-num` 글자 `clamp(50px, 11.25vmin, 81px)`(이전 1.5배). 원 지름은 유지. 일반 모드에서는 계속 숨김.
+
+### APK
+`app-debug-0910_1405-servetop.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 서브 번호는 `serverSlotFor` 숫자만 `textContent`.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_1405-servetop.apk`
+- 재사용: `JK_SIMPLE` · `paintJkServeMark`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`jkServeMark`를 세트 라벨 앞에 두는 배치는 이 저장소 전용.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+
+---
+
 ## 2026-09-10 서브 바 흰 칸만 검정 (JK_SERVE_BAR)
 
 족구 보드 자체 CSS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정.
