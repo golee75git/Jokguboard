@@ -272,6 +272,8 @@
     .point-num .score-glyph {
       font-size: inherit;
       line-height: inherit;
+      position: relative;
+      display: inline-block;
     }
     @supports (font-size: 1cqh) {
       .point-num {
@@ -512,11 +514,15 @@
       container-type: size;
       gap: 4px;
     }
-    .mid .set-label,
+    .mid .set-label {
+      font-size: clamp(36px, 7.2vmin, 60px);
+    }
     .mid .serve-guide,
-    .mid .mid-clocks,
     .mid .deuce-pill {
       font-size: clamp(12px, 2.4vmin, 20px);
+    }
+    .mid .mid-clocks {
+      font-size: clamp(15.6px, 3.12vmin, 26px);
     }
     .mid .set-row {
       width: 100%;
@@ -554,6 +560,9 @@
       font-variant-numeric: tabular-nums;
       line-height: 1.15;
       text-align: center;
+      transform: scaleY(1.5384615);
+      transform-origin: center center;
+      margin-block: 0.55em;
     }
     .mid .serve-guide {
       max-width: 100%;
@@ -573,11 +582,15 @@
       white-space: nowrap;
     }
     @supports (font-size: 1cqh) {
-      .mid .set-label,
+      .mid .set-label {
+        font-size: clamp(33px, 27.6cqw, 78px);
+      }
       .mid .serve-guide,
-      .mid .mid-clocks,
       .mid .deuce-pill {
         font-size: clamp(11px, 9.2cqw, 26px);
+      }
+      .mid .mid-clocks {
+        font-size: clamp(14.3px, 11.96cqw, 33.8px);
       }
       .mid .set-row {
         font-size: clamp(61px, 12vw, 122px);
@@ -725,35 +738,34 @@
       border: 2px solid #fde68a;
       box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
     }
-    /* JK_SERVE_BAR: 서브 팀 점수 아래 짧은 막대. 되돌리: 이 블록 삭제 */
-    .point-num::after {
+    /* JK_SERVE_BAR: 서브 팀 점수 글자 아래 짧은 막대. 되돌리: 이 블록 삭제 */
+    .point-num .score-glyph::after {
       content: "";
       display: none;
       position: absolute;
       left: 50%;
-      bottom: 6%;
+      top: 100%;
       z-index: 5;
-      width: 32%;
-      max-width: 7.2rem;
-      height: 10px;
-      border-radius: 5px;
+      width: 48%;
+      max-width: 10.8rem;
+      height: 15px;
+      border-radius: 7px;
       pointer-events: none;
       transform: translateX(-50%);
     }
-    body.is-simple .point-num::after {
-      bottom: 8%;
-      height: 12px;
+    @supports (width: 1cqw) {
+      .point-num .score-glyph::after { width: 48cqw; }
     }
-    body.sport-futnet-single .point-num::after { bottom: 16%; }
-    .side.is-serving .point-num::after { display: block; }
-    .side.cyan .point-num::after { background: #fff; }
-    .side.ivory .point-num::after { background: #0f172a; }
-    body.look-paper .side.cyan .point-num::after,
-    body.look-paper .side.ivory .point-num::after { background: #0f172a; }
-    body.look-glow .side.ivory .point-num::after,
-    body.look-arena .side.ivory .point-num::after,
-    body.look-broadcast .side.ivory .point-num::after,
-    body.look-cyber3d .side.ivory .point-num::after { background: #fff; }
+    body.is-simple .point-num .score-glyph::after { height: 18px; }
+    .side.is-serving .point-num .score-glyph::after { display: block; }
+    .side.cyan .point-num .score-glyph::after { background: #fff; }
+    .side.ivory .point-num .score-glyph::after { background: #0f172a; }
+    body.look-paper .side.cyan .point-num .score-glyph::after,
+    body.look-paper .side.ivory .point-num .score-glyph::after { background: #0f172a; }
+    body.look-glow .side.ivory .point-num .score-glyph::after,
+    body.look-arena .side.ivory .point-num .score-glyph::after,
+    body.look-broadcast .side.ivory .point-num .score-glyph::after,
+    body.look-cyber3d .side.ivory .point-num .score-glyph::after { background: #fff; }
     .serve-guide:empty { display: none; }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
     body.look-arena { background: #12100c; }
