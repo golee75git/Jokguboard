@@ -7,7 +7,7 @@
 세트 점수 `font-size`는 유지하고 `.set-fit`을 `inline-flex` + 좁은 `gap`으로 콜론 쪽에 모아 칸 테두리에서 떼어 냄. 심플 모드에서 코트 `.rot-dot`은 계속 숨김. 가운데 칸에 금색 원(`#jkServeNum`)으로 서브 슬롯(1~4)을 표시하고, CSS `border` 삼각형으로 화면상 서브 팀 쪽을 가리킴(`teamsSwapped` 반영). 선서브 전에는 표시 없음. 일반 모드에서는 이 표시를 숨김.
 
 ### APK
-`app-debug-0910_1303-servemark.apk`
+`app-debug-0910_1303-servemark.apk` (`01689e1`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
