@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0910_1049-hitdepth.apk`
+**현재 설치 APK:** `app-debug-0910_1118-midfit.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -33,6 +33,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 원 간격 점수 가운데·점수 칸 맞춤 | 완료 |
 | 점수 굵기·층 그림자·+1 확대/표식 | 완료 |
 | 사이버 팀명·점수 터치, 그림자 약 30% | 완료 |
+| 세트 칸 비율 글자·시각·경기시간 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
@@ -57,7 +58,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_MID_FIT`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 
@@ -71,6 +72,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 - APK 설정 패드 칸은 `AndroidPad`가 있을 때만 표시
 - 심플, OFL 글꼴 4종, TTS, BLE 패킷 v2
 - +1 때 점수 확대·표식 상승, −1은 없음
+- 가운데 세트 점수·라벨·시각·경기시간 비율, 선서브 후 경기시간, 새 경기에서 0
 
 ## 배포
 

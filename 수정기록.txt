@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-10 세트 칸 비율 글자·시각·경기시간 (JK_MID_FIT)
+
+족구 보드 자체 HTML/CSS/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.
+
+가운데 세트 칸을 세로 격자(`container-type: size`)로 두고, 「세트」·서브 안내·듀스·시각·경기 시간은 칸 너비 비율(`cqw`)로 맞춤. 세트 점수 `0 : 0`은 남은 칸(`minmax(0,1fr)` + `min(cqw,cqh)`)을 채움. 「새 경기」는 버튼 자체를 컨테이너로 두고 글자를 버튼 크기에 맞춤(버튼 높이는 `vmin`이라 순환 참조 없음). 현재 시각은 기기 시계. 경기 시간은 선서브(`setServeChoice`)에서 시작, 새 경기·종목 리셋에서 0, `localStorage` 스냅샷에 `matchClockAt` 저장. 칸 쿼리를 못 쓰는 환경은 `clamp` 폴백.
+
+### APK
+`app-debug-0910_1118-midfit.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1(Noto Sans KR, Jua, Do Hyeon, Orbitron). AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
+
+### 보안
+카메라·마이크 없음. 팀명 `textContent`. 시계 숫자는 `textContent`. 사용자 HTML 삽입 없음. 시각/경기 라벨만 `data-i18n`(시간 값은 라벨 밖에 두어 `applyLang`이 지우지 않음).
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0910_1118-midfit.apk`
+- 재사용: 기존 `.mid` · `#btnFresh` · `setServeChoice` · `runFreshMatch` · `snapshot`/`restore` · `JK_SCORE_FILL` 칸 쿼리 패턴
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`JK_MID_FIT` + `matchClockAt` + `paintMidClocks` 묶음은 공개 검색에서 미발견(검색일 2026-09-10). `container-type`/`cqw`/`cqh`와 `Date` 시계 표시는 일반 CSS/JS.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 외부 리모컨의 눌림→뗌 경과시간·이동거리로 탭/스와이프 구분
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 특정 버튼 눌림으로 해석
+- 선서브 시각을 경기 경과 원점으로 두는 구성은 일반 스톱워치 관용에 가깝지만 별도 표시
+
+---
 ## 2026-09-10 사이버 터치·그림자 약 30% (JK_CYBER_HIT / JK_SCORE_DEPTH)
 
 족구 보드 자체 HTML/CSS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정. 외부 구현 미복사.

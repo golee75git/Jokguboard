@@ -499,6 +499,100 @@
       .court, .court.is-ends-swapped { flex-direction: column; }
       .mid { flex: 0 0 auto; flex-direction: row; justify-content: space-around; }
     }
+    /* JK_MID_FIT: 세트 칸 비율 글자·시각·새 경기. 되돌리: 이 블록·.mid-clocks·matchClockAt 삭제 */
+    .mid {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto auto auto auto;
+      justify-items: center;
+      align-items: stretch;
+      min-height: 0;
+      flex: 0 0 clamp(176px, 28vmin, 292px);
+      width: clamp(176px, 28vmin, 292px);
+      container-type: size;
+      gap: 6px;
+    }
+    .mid .set-label,
+    .mid .serve-guide,
+    .mid .mid-clocks,
+    .mid .deuce-pill {
+      font-size: clamp(12px, 2.4vmin, 20px);
+    }
+    .mid .set-row {
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      line-height: 0.9;
+      font-weight: 800;
+      container-type: size;
+      font-size: clamp(36px, 7vw, 72px);
+    }
+    .mid .set-row .set-fit {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      white-space: nowrap;
+    }
+    .mid-clocks {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: #e2e8f0;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+      text-align: center;
+    }
+    .mid .serve-guide {
+      max-width: 100%;
+      line-height: 1.2;
+    }
+    .mid #btnFresh {
+      container-type: size;
+      width: 92%;
+      max-width: none;
+      height: clamp(52px, 8vmin, 88px);
+      min-height: 52px;
+      padding: 0 6px;
+      font-size: clamp(16px, 3vmin, 32px);
+    }
+    .mid #btnFresh > span {
+      font-size: inherit;
+      white-space: nowrap;
+    }
+    @supports (font-size: 1cqh) {
+      .mid .set-label,
+      .mid .serve-guide,
+      .mid .mid-clocks,
+      .mid .deuce-pill {
+        font-size: clamp(11px, 9.2cqw, 26px);
+      }
+      .mid .set-row {
+        font-size: clamp(36px, 7vw, 72px);
+      }
+      .mid .set-row .set-fit {
+        font-size: min(46cqw, 76cqh);
+      }
+      body.is-simple .mid .set-row .set-fit {
+        font-size: min(50cqw, 82cqh);
+      }
+      .mid #btnFresh {
+        font-size: clamp(16px, 3vmin, 32px);
+      }
+      .mid #btnFresh > span {
+        font-size: min(34cqw, 72cqh);
+      }
+    }
+    @media (max-width: 720px) {
+      .mid {
+        display: grid;
+        width: 100%;
+        flex: 0 0 auto;
+        min-height: 200px;
+        grid-template-rows: auto minmax(44px, 1fr) auto auto auto auto;
+      }
+    }
     /* JK_LOOK_PACK: 기본·네온·카드·경기장. 되돌리: 이 블록·inLook·boardLook 삭제 */
     body.look-glow {
       background-color: #020308;
@@ -3635,10 +3729,14 @@
       </section>
       <aside class="mid sets-panel">
         <div class="set-label" data-i18n="sets">세트</div>
-        <div class="set-row"><span class="set-num" id="setLeft">0</span> : <span class="set-num" id="setRight">0</span></div>
+        <div class="set-row"><span class="set-fit"><span class="set-num" id="setLeft">0</span> : <span class="set-num" id="setRight">0</span></span></div>
+        <div class="mid-clocks">
+          <div class="mid-clock-line"><span data-i18n="clockNow">시각</span> <span id="clockNow">00:00:00</span></div>
+          <div class="mid-clock-line"><span data-i18n="clockGame">경기</span> <span id="clockGame">00:00:00</span></div>
+        </div>
         <div class="deuce-pill" id="deucePill" data-i18n="deuce">듀스</div>
         <div class="serve-guide" id="serveGuide"></div>
-        <button type="button" id="btnFresh" data-i18n="fresh">새 경기</button>
+        <button type="button" id="btnFresh"><span data-i18n="fresh">새 경기</span></button>
       </aside>
       <section class="team white side ivory pos-swap-end" id="sideWhite" data-team="white">
         <div class="side-main team-main">
@@ -3797,6 +3895,8 @@
         setup: "설정",
         help: "도움말",
         sets: "세트",
+        clockNow: "시각",
+        clockGame: "경기",
         deuce: "듀스",
         ok: "확인",
         cancel: "취소",
@@ -3885,6 +3985,8 @@
         setup: "Settings",
         help: "Help",
         sets: "Sets",
+        clockNow: "Time",
+        clockGame: "Match",
         deuce: "Deuce",
         ok: "OK",
         cancel: "Cancel",
@@ -3973,6 +4075,8 @@
         setup: "设置",
         help: "帮助",
         sets: "局分",
+        clockNow: "时间",
+        clockGame: "比赛",
         deuce: "平分",
         ok: "确定",
         cancel: "取消",
@@ -4112,6 +4216,7 @@
     var matchSeries = "bo3_2";
     var ttsOn = false;
     var simpleMode = false;
+    var matchClockAt = 0;
     var sportType = "jokgu";
     var futnetDiscipline = "double";
     var rotBlue = [1, 2, 3, 4];
@@ -4273,7 +4378,8 @@
         serveIdxBlue: serveIdxBlue,
         serveIdxWhite: serveIdxWhite,
         rotBlue: rotBlue.slice(),
-        rotWhite: rotWhite.slice()
+        rotWhite: rotWhite.slice(),
+        matchClockAt: matchClockAt | 0
       };
     }
     function normalizeRot(v) {
@@ -4339,6 +4445,7 @@
       teamsSwapped = false;
       serveChoice = null;
       serveAnchor = null;
+      matchClockAt = 0;
       resetRotation();
     }
     function syncSetupSportUi() {
@@ -4408,6 +4515,7 @@
       serveIdxWhite = s.serveIdxWhite | 0;
       rotBlue = normalizeRot(s.rotBlue);
       rotWhite = normalizeRot(s.rotWhite);
+      matchClockAt = s.matchClockAt > 0 ? (s.matchClockAt | 0) : 0;
       clampServeIndexes();
     }
     function pushHistory() {
@@ -4465,6 +4573,7 @@
       if (isServePickPending()) elServeGuide.textContent = t("needServe");
       else if (serve) elServeGuide.textContent = fill("serving", { name: nameFor(serve) });
       else elServeGuide.textContent = "";
+      paintMidClocks();
       document.body.classList.toggle("is-apk-match", isApkMatchLr());
       applyLook();
       applyFont();
@@ -4664,6 +4773,7 @@
         serveIdxBlue = 0;
         serveIdxWhite = 0;
       }
+      if (!matchClockAt) matchClockAt = Date.now();
       persistState();
       paint();
       setStatus(fill("serving", { name: nameFor(team) }));
@@ -4749,6 +4859,7 @@
       teamsSwapped = false;
       serveChoice = null;
       serveAnchor = null;
+      matchClockAt = 0;
       resetRotation();
       persistState();
       paint();
@@ -5105,6 +5216,23 @@
     paint();
     refreshPadBox();
     if (isServePickPending()) setStatus(t("needServe"));
+    /* JK_MID_FIT: 시각·경기시간 갱신. 되돌리: 이 타이머·paintMidClocks 삭제 */
+    function padClock(n) {
+      n = Math.floor(Number(n) || 0);
+      return (n < 10 ? "0" : "") + n;
+    }
+    function formatMatchClock(ms) {
+      var s = Math.max(0, Math.floor(ms / 1000));
+      return padClock(s / 3600) + ":" + padClock((s % 3600) / 60) + ":" + padClock(s % 60);
+    }
+    function paintMidClocks() {
+      var nowEl = document.getElementById("clockNow");
+      var gameEl = document.getElementById("clockGame");
+      var d = new Date();
+      if (nowEl) nowEl.textContent = padClock(d.getHours()) + ":" + padClock(d.getMinutes()) + ":" + padClock(d.getSeconds());
+      if (gameEl) gameEl.textContent = matchClockAt ? formatMatchClock(Date.now() - matchClockAt) : "00:00:00";
+    }
+    setInterval(paintMidClocks, 1000);
   </script>
 </body>
 </html>
