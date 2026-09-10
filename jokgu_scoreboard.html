@@ -502,14 +502,15 @@
     /* JK_MID_FIT: 세트 칸 비율 글자·시각·새 경기. 되돌리: 이 블록·.mid-clocks·matchClockAt 삭제 */
     .mid {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr) auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto auto;
       justify-items: center;
-      align-items: stretch;
+      align-items: center;
+      align-content: center;
       min-height: 0;
       flex: 0 0 clamp(176px, 28vmin, 292px);
       width: clamp(176px, 28vmin, 292px);
       container-type: size;
-      gap: 6px;
+      gap: 4px;
     }
     .mid .set-label,
     .mid .serve-guide,
@@ -521,12 +522,13 @@
       width: 100%;
       min-width: 0;
       min-height: 0;
+      height: auto;
       display: grid;
       place-items: center;
       line-height: 0.9;
       font-weight: 800;
-      container-type: size;
-      font-size: clamp(36px, 7vw, 72px);
+      overflow: hidden;
+      font-size: clamp(61px, 12vw, 122px);
     }
     .mid .set-row .set-fit {
       font-size: inherit;
@@ -569,13 +571,13 @@
         font-size: clamp(11px, 9.2cqw, 26px);
       }
       .mid .set-row {
-        font-size: clamp(36px, 7vw, 72px);
+        font-size: clamp(61px, 12vw, 122px);
       }
       .mid .set-row .set-fit {
-        font-size: min(46cqw, 76cqh);
+        font-size: min(50cqw, 24cqh);
       }
       body.is-simple .mid .set-row .set-fit {
-        font-size: min(50cqw, 82cqh);
+        font-size: min(54cqw, 28cqh);
       }
       .mid #btnFresh {
         font-size: clamp(16px, 3vmin, 32px);
@@ -590,7 +592,8 @@
         width: 100%;
         flex: 0 0 auto;
         min-height: 200px;
-        grid-template-rows: auto minmax(44px, 1fr) auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto;
+        align-content: center;
       }
     }
     /* JK_LOOK_PACK: 기본·네온·카드·경기장. 되돌리: 이 블록·inLook·boardLook 삭제 */
