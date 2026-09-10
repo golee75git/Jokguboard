@@ -757,15 +757,8 @@
       .point-num .score-glyph::after { width: 48cqw; }
     }
     body.is-simple .point-num .score-glyph::after { height: 18px; }
-    .side.is-serving .point-num .score-glyph::after { display: block; }
-    .side.cyan .point-num .score-glyph::after { background: #fff; }
-    .side.ivory .point-num .score-glyph::after { background: #0f172a; }
-    body.look-paper .side.cyan .point-num .score-glyph::after,
-    body.look-paper .side.ivory .point-num .score-glyph::after { background: #0f172a; }
-    body.look-glow .side.ivory .point-num .score-glyph::after,
-    body.look-arena .side.ivory .point-num .score-glyph::after,
-    body.look-broadcast .side.ivory .point-num .score-glyph::after,
-    body.look-cyber3d .side.ivory .point-num .score-glyph::after { background: #fff; }
+    .side.is-serving .point-num .score-glyph::after { display: block; background: #fff; }
+    body.look-plain .side.ivory .point-num .score-glyph::after { background: #0f172a; }
     .serve-guide:empty { display: none; }
     /* JK_SKIN_REMAP: 족구 DOM(.side.cyan/.ivory/.mid)용 팔레트. 탁구장 사진·liverec 없음. 되돌리: 이 블록·inLook 추가분 삭제 */
     body.look-arena { background: #12100c; }

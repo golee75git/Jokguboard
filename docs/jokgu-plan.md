@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-09  
-**현재 설치 APK:** `app-debug-0910_1346-midtype.apk`
+**현재 설치 APK:** `app-debug-0910_1356-barwhite.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -38,6 +38,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 심플 가운데 서브 번호·화살표 | 완료 |
 | 서브 바·심플 원 확대·가운데 서브 문구 제거 | 완료 |
 | 서브 바 숫자 붙임·세트 3배·시계 세로2/가로1.3 | 완료 |
+| 서브 바 흰 칸만 검정·스킨 나머지 흰색 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
