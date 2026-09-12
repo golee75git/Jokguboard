@@ -7,7 +7,7 @@
 이전 200ms 반복 `hide()`는 OS 상태 바 열림 애니(대략 300~400ms)보다 먼저 끝나 호출이 씹히고, 이후 OS 일시 바가 수 초 뒤에 내려가 체감이 그대로였음. 위 버튼 판정 직후 0.8초 창만 열고, 그 안에서 시스템 바가 보이면 insets로 즉시 `applyImmersive()`, 같은 창에서 16ms 재시도. 창이 끝나면 손가락으로 연 바는 닫지 않음. 커서 숨김(`JK_PAD_POINTER_HIDE`)과 득점 규칙은 그대로.
 
 ### APK
-`app-debug-0912_1701-barwatch.apk`
+`app-debug-0912_1701-barwatch.apk` (`d4de65f`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0 (`core-ktx` 1.12.0, `appcompat` 1.6.1, `webkit` 1.10.0). Play 스토어 제출용이 아닌 debug APK. 신규 외부 라이브러리 없음.
