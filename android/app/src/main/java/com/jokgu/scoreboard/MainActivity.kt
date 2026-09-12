@@ -27,7 +27,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -56,10 +55,8 @@ class MainActivity : AppCompatActivity() {
     private var lastScoreSignalAt = 0L
     private var lastUndoSignalAt = 0L
 
-    /* JK_HID_BAR_GUARD: 몰입 모드 중 상태·내비 바가 살짝 노출되면 다시 숨긴다(위 버튼 인식은
-     * JK_PAD_GESTURE의 단독 ACTION_OUTSIDE가 전담). 되돌리: 이 3필드·onCreate insets 리스너
-     * 블록·scheduleBarRehide 삭제 */
-    private var systemBarsWereVisible = false
+    /* JK_HID_BAR_GUARD: 위 버튼으로 판정된 뒤에만 시스템 바를 다시 숨김. 손가락으로 연 바는 그대로.
+     * 되돌리: hideBarsAfterPadUp 호출 삭제, onCreate insets 리스너+항상 재숨김으로 복원 */
     private val barGuardHandler = Handler(Looper.getMainLooper())
     private var pendingBarRehide: Runnable? = null
 
@@ -196,16 +193,6 @@ class MainActivity : AppCompatActivity() {
          * 받기 위함. 되돌리: 이 한 줄 삭제 */
         window.addFlags(WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH)
 
-        /* JK_HID_BAR_GUARD: 상태·내비 바가 살짝 노출되면 다시 숨김. 되돌리: 이 리스너 블록 삭제 */
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
-            val barsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
-            if (barsVisible && !systemBarsWereVisible) {
-                scheduleBarRehide()
-            }
-            systemBarsWereVisible = barsVisible
-            insets
-        }
-
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
@@ -305,12 +292,17 @@ class MainActivity : AppCompatActivity() {
         lastUndoSignalAt = System.currentTimeMillis()
     }
 
-    /* JK_HID_BAR_GUARD: 살짝 노출된 시스템 바를 짧은 지연 뒤 다시 숨김 */
+    /* JK_HID_BAR_GUARD: 위 버튼 판정 직후 숨김. OS가 바를 한 박자 늦게 켜면 짧은 지연으로 한 번 더. */
     private fun scheduleBarRehide() {
         pendingBarRehide?.let { barGuardHandler.removeCallbacks(it) }
         val task = Runnable { applyImmersive() }
         pendingBarRehide = task
         barGuardHandler.postDelayed(task, BAR_REHIDE_DELAY_MS)
+    }
+
+    private fun hideBarsAfterPadUp() {
+        applyImmersive()
+        scheduleBarRehide()
     }
 
     private fun phoneSideKeys(device: InputDevice?): Boolean {
@@ -457,7 +449,9 @@ class MainActivity : AppCompatActivity() {
                 val elapsed = System.currentTimeMillis() - padGestureStartAt
                 return emitPadZone(classifyPadGesture(padGestureStartY, event.rawY, elapsed))
             }
-            return emitPadZone("R")
+            val applied = emitPadZone("R")
+            hideBarsAfterPadUp()
+            return applied
         }
 
         if (!padPrefs().getBoolean("on", false)) return false
