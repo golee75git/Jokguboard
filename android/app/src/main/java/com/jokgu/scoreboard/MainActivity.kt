@@ -8,11 +8,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.PointerIcon
 import android.view.WindowManager
 import android.webkit.JavascriptInterface
 import android.webkit.JsResult
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
      * 되돌리: hideBarsAfterPadUp 호출 삭제, onCreate insets 리스너+항상 재숨김으로 복원 */
     private val barGuardHandler = Handler(Looper.getMainLooper())
     private var pendingBarRehide: Runnable? = null
+    private var barRehideUntilElapsed = 0L
 
     /* JK_PAD_GESTURE: 이 리모컨은 좌표 클릭이 아니라 눌림-뗌 사이 경과시간·이동거리로 구분되는
      * 제스처(탭·상하 스와이프)를 보낸다. 위 버튼은 좌표 없는 단독 ACTION_OUTSIDE로만 온다
@@ -77,8 +80,9 @@ class MainActivity : AppCompatActivity() {
         private const val SCAN_SKIP = 320
         /* JK_HID_PAD_LOCK */
         private const val CROSS_INPUT_LOCK_MS = 400L
-        /* JK_HID_BAR_GUARD */
-        private const val BAR_REHIDE_DELAY_MS = 280L
+        /* JK_HID_BAR_GUARD: 위 판정 직후 짧게 반복 숨김. OS가 늦게 켜도 한 프레임 안에 닫음 */
+        private const val BAR_REHIDE_TICK_MS = 16L
+        private const val BAR_REHIDE_WINDOW_MS = 200L
         /* JK_PAD_GESTURE: 탭(가운데)=250ms 이내·화면 긴 축 8% 이내 이동. 스와이프(아래)=20% 이상 이동 */
         private const val PAD_GESTURE_TAP_MAX_MS = 250L
         private const val PAD_GESTURE_TAP_MAX_DY_FRAC = 0.08f
@@ -155,6 +159,7 @@ class MainActivity : AppCompatActivity() {
         fun beginMarks() {
             runOnUiThread {
                 alignStep = 1
+                applyPadPointerHide()
                 boardJs("jkPadNote('mid')")
             }
         }
@@ -164,6 +169,7 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 alignStep = 0
                 padPrefs().edit().clear().apply()
+                applyPadPointerHide()
                 boardJs("jkPadNote('off')")
             }
         }
@@ -267,6 +273,12 @@ class MainActivity : AppCompatActivity() {
         )
 
         webView.loadUrl("https://appassets.androidplatform.net/assets/www/jokgu_scoreboard.html")
+        /* JK_PAD_POINTER_HIDE: 맞춤이 이미 켜져 있으면 커서 숨김. 되돌리: 이 호출·hover 리스너 삭제 */
+        applyPadPointerHide()
+        webView.setOnHoverListener { _, _ ->
+            applyPadPointerHide()
+            false
+        }
         requestBleAndStart()
     }
 
@@ -292,17 +304,37 @@ class MainActivity : AppCompatActivity() {
         lastUndoSignalAt = System.currentTimeMillis()
     }
 
-    /* JK_HID_BAR_GUARD: 위 버튼 판정 직후 숨김. OS가 바를 한 박자 늦게 켜면 짧은 지연으로 한 번 더. */
+    /* JK_HID_BAR_GUARD: 위 버튼 판정 직후 숨김. OS가 바를 늦게 켜면 짧은 간격으로 창이 끝날 때까지 다시 숨김. */
     private fun scheduleBarRehide() {
         pendingBarRehide?.let { barGuardHandler.removeCallbacks(it) }
-        val task = Runnable { applyImmersive() }
+        barRehideUntilElapsed = SystemClock.uptimeMillis() + BAR_REHIDE_WINDOW_MS
+        val task = object : Runnable {
+            override fun run() {
+                applyImmersive()
+                if (SystemClock.uptimeMillis() < barRehideUntilElapsed) {
+                    barGuardHandler.postDelayed(this, BAR_REHIDE_TICK_MS)
+                }
+            }
+        }
         pendingBarRehide = task
-        barGuardHandler.postDelayed(task, BAR_REHIDE_DELAY_MS)
+        barGuardHandler.post(task)
     }
 
     private fun hideBarsAfterPadUp() {
         applyImmersive()
+        webView.post { applyImmersive() }
         scheduleBarRehide()
+    }
+
+    /* JK_PAD_POINTER_HIDE: 맞춤이 켜진 뒤에만 3버튼 리모컨 마우스 커서를 숨김. 맞추기 중·끈 상태는 기본 커서.
+     * 되돌리: 이 함수·호출부 삭제 */
+    private fun applyPadPointerHide() {
+        if (!::webView.isInitialized) return
+        val hide = padPrefs().getBoolean("on", false) && alignStep == 0
+        val type = if (hide) PointerIcon.TYPE_NULL else PointerIcon.TYPE_ARROW
+        val icon = PointerIcon.getSystemIcon(this, type)
+        window.decorView.pointerIcon = icon
+        webView.pointerIcon = icon
     }
 
     private fun phoneSideKeys(device: InputDevice?): Boolean {
@@ -374,6 +406,7 @@ class MainActivity : AppCompatActivity() {
                 .putBoolean("on", true)
                 .apply()
             alignStep = 0
+            applyPadPointerHide()
             boardJs("jkPadNote('ok')")
             return true
         }
@@ -463,9 +496,11 @@ class MainActivity : AppCompatActivity() {
             padGestureActive = true
             padGestureStartY = event.rawY
             padGestureStartAt = System.currentTimeMillis()
+            applyPadPointerHide()
             return true
         }
         if (masked == MotionEvent.ACTION_MOVE) {
+            if (padGestureActive) applyPadPointerHide()
             return padGestureActive
         }
         if (masked == MotionEvent.ACTION_UP ||
@@ -621,12 +656,16 @@ class MainActivity : AppCompatActivity() {
      * 되돌리: 이 오버라이드 삭제 */
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) applyImmersive()
+        if (hasFocus) {
+            applyImmersive()
+            applyPadPointerHide()
+        }
     }
 
     override fun onResume() {
         super.onResume()
         applyImmersive()
+        applyPadPointerHide()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S ||
             (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) ==
                 PackageManager.PERMISSION_GRANTED &&

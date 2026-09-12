@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-12  
-**현재 설치 APK:** `app-debug-0912_1620-baruphide.apk`
+**현재 설치 APK:** `app-debug-0912_1635-barcursor.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -42,6 +42,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 심플 서브 원 맨 위·원 안 숫자 1.5배 | 완료 |
 | 밝은 백 칸(기본·경기장·링) 검은 서브 바 | 완료 |
 | 위 버튼 뒤에만 시스템 바 닫기 | 완료 |
+| 위 버튼 바 빠른 재숨김 · 패드 커서 숨김 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
@@ -66,7 +67,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_MID_FIT`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_SERVE_BAR`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_PAD_POINTER_HIDE`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_MID_FIT`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_SERVE_BAR`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 
