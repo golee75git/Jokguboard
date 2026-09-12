@@ -7,7 +7,7 @@
 `app-debug-0912_1701-barwatch.apk`를 실기기에서 확인한 결과 포인터가 다시 보이고, 위 버튼 점수가 안 오르고, 시스템 바가 그대로였다. decorView `setOnApplyWindowInsetsListener`와 800ms 창이 `FLAG_WATCH_OUTSIDE_TOUCH` 위 버튼 경로를 깨뜨린 것으로 보고 제거. `JK_PAD_POINTER_HIDE`와 위 판정 뒤 200ms 반복 숨김(`BAR_REHIDE_WINDOW_MS = 200`)은 `barcursor`와 같게 복원. 가운데·아래·득점 규칙은 그대로.
 
 ### APK
-`app-debug-0912_1711-barback.apk`
+`app-debug-0912_1711-barback.apk` (`0b1ce44`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK.
