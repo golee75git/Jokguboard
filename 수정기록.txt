@@ -7,7 +7,7 @@
 3버튼 리모컨 위 버튼은 좌표 없는 단독 `ACTION_OUTSIDE`로 판정된 뒤에만 `applyImmersive()`를 바로 호출하고, OS가 바를 한 박자 늦게 켜는 경우에만 짧은 지연으로 한 번 더 숨김. 바가 보이기만 하면 닫던 insets 리스너는 제거. 손가락으로 연 상태·내비 바는 그대로 둠. 가운데·아래 제스처와 득점 규칙은 그대로.
 
 ### APK
-`app-debug-0912_1620-baruphide.apk`
+`app-debug-0912_1620-baruphide.apk` (`f1a9b90`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0 (`core-ktx` 1.12.0, `appcompat` 1.6.1, `webkit` 1.10.0). Play 스토어 제출용이 아닌 debug APK.

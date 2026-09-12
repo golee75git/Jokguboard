@@ -46,7 +46,7 @@
 | `app-debug-0910_1356-barwhite.apk` | 13:56 | 서브 바 흰칸만 검정·나머지 흰색 | `9e34bbe` |
 | `app-debug-0910_1405-servetop.apk` | 14:05 | 심플 서브 원 맨 위·숫자 1.5배 | `9dad1d6` |
 | `app-debug-0910_1512-barlight.apk` | 15:12 | 밝은 백 칸 검은 서브 바 | `9523717` |
-| `app-debug-0912_1620-baruphide.apk` | 16:20 | 위 버튼 뒤에만 시스템 바 닫기 | (이 커밋) |
+| `app-debug-0912_1620-baruphide.apk` | 16:20 | 위 버튼 뒤에만 시스템 바 닫기 | `f1a9b90` |
 
 ## 현재 버전에서 쓰는 것
 
