@@ -29,7 +29,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -81,9 +80,9 @@ class MainActivity : AppCompatActivity() {
         private const val SCAN_SKIP = 320
         /* JK_HID_PAD_LOCK */
         private const val CROSS_INPUT_LOCK_MS = 400L
-        /* JK_HID_BAR_GUARD: 위 판정 뒤 0.8초만 바가 켜지면 즉시 닫음. 열림 애니 끝난 뒤에도 잡음 */
+        /* JK_HID_BAR_GUARD: 위 판정 직후 짧게 반복 숨김. OS가 늦게 켜도 한 프레임 안에 닫음 */
         private const val BAR_REHIDE_TICK_MS = 16L
-        private const val BAR_REHIDE_WINDOW_MS = 800L
+        private const val BAR_REHIDE_WINDOW_MS = 200L
         /* JK_PAD_GESTURE: 탭(가운데)=250ms 이내·화면 긴 축 8% 이내 이동. 스와이프(아래)=20% 이상 이동 */
         private const val PAD_GESTURE_TAP_MAX_MS = 250L
         private const val PAD_GESTURE_TAP_MAX_DY_FRAC = 0.08f
@@ -196,16 +195,6 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         applyImmersive()
-        /* JK_HID_BAR_GUARD: 위 판정 창 안에서만 바가 보이면 닫음. 손가락으로 연 바는 창 밖이라 그대로.
-         * 되돌리: 이 리스너 삭제 */
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
-            if (SystemClock.uptimeMillis() < barRehideUntilElapsed &&
-                insets.isVisible(WindowInsetsCompat.Type.systemBars())
-            ) {
-                applyImmersive()
-            }
-            insets
-        }
         /* JK_PAD_GESTURE: 위 버튼 눌림이 상태 바 제스처로 앱 밖까지 나가도 단독 ACTION_OUTSIDE로
          * 받기 위함. 되돌리: 이 한 줄 삭제 */
         window.addFlags(WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH)
@@ -315,7 +304,7 @@ class MainActivity : AppCompatActivity() {
         lastUndoSignalAt = System.currentTimeMillis()
     }
 
-    /* JK_HID_BAR_GUARD: 위 버튼 판정 직후 숨김. OS 열림이 끝난 뒤 0.8초 창 안에서 바가 켜지면 다시 숨김. */
+    /* JK_HID_BAR_GUARD: 위 버튼 판정 직후 숨김. OS가 바를 늦게 켜면 짧은 간격으로 창이 끝날 때까지 다시 숨김. */
     private fun scheduleBarRehide() {
         pendingBarRehide?.let { barGuardHandler.removeCallbacks(it) }
         barRehideUntilElapsed = SystemClock.uptimeMillis() + BAR_REHIDE_WINDOW_MS
@@ -329,7 +318,6 @@ class MainActivity : AppCompatActivity() {
         }
         pendingBarRehide = task
         barGuardHandler.post(task)
-        ViewCompat.requestApplyInsets(window.decorView)
     }
 
     private fun hideBarsAfterPadUp() {
