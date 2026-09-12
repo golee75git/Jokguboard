@@ -1,5 +1,36 @@
 # 수정기록 — Jokguboard
 
+## 2026-09-12 위 버튼 바 0.8초 창·켜진 즉시 닫기 (JK_HID_BAR_GUARD)
+
+족구 보드 자체 Kotlin만 변경. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
+
+이전 200ms 반복 `hide()`는 OS 상태 바 열림 애니(대략 300~400ms)보다 먼저 끝나 호출이 씹히고, 이후 OS 일시 바가 수 초 뒤에 내려가 체감이 그대로였음. 위 버튼 판정 직후 0.8초 창만 열고, 그 안에서 시스템 바가 보이면 insets로 즉시 `applyImmersive()`, 같은 창에서 16ms 재시도. 창이 끝나면 손가락으로 연 바는 닫지 않음. 커서 숨김(`JK_PAD_POINTER_HIDE`)과 득점 규칙은 그대로.
+
+### APK
+`app-debug-0912_1701-barwatch.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0 (`core-ktx` 1.12.0, `appcompat` 1.6.1, `webkit` 1.10.0). Play 스토어 제출용이 아닌 debug APK. 신규 외부 라이브러리 없음.
+
+### 보안
+카메라·마이크 없음. `evaluateJavascript`는 고정 리터럴. 팀명 `textContent`. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `MainActivity.kt`, help 3종, `index.html`, docs, Android assets www
+- 신규 파일: `downloads/app-debug-0912_1701-barwatch.apk`
+- 재사용: 기존 `applyImmersive` / `hideBarsAfterPadUp` / `JK_PAD_POINTER_HIDE`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+`BAR_REHIDE_WINDOW_MS` 800 + 위 판정 창 안의 `setOnApplyWindowInsetsListener` 묶음은 이 저장소 전용(검색일 2026-09-12). `WindowInsetsCompat.isVisible` / `ViewCompat.setOnApplyWindowInsetsListener`는 Android 관용 API.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+- 화면 좌우 점수 BLE GATT notify
+- HID 미디어/음량 키를 점수·되돌리기에 연결
+- 좌표 없는 단독 시스템 터치-아웃사이드 신호를 위 버튼으로 해석
+- 위 버튼 판정 뒤 짧은 시간 창 안에서만 시스템 바가 보이면 다시 숨김
+
+---
 ## 2026-09-12 위 버튼 바 빠른 닫힘·패드 커서 숨김 (JK_HID_BAR_GUARD / JK_PAD_POINTER_HIDE)
 
 족구 보드 자체 Kotlin만 변경. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.

@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-09-12  
-**현재 설치 APK:** `app-debug-0912_1635-barcursor.apk`
+**현재 설치 APK:** `app-debug-0912_1701-barwatch.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -43,6 +43,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 | 밝은 백 칸(기본·경기장·링) 검은 서브 바 | 완료 |
 | 위 버튼 뒤에만 시스템 바 닫기 | 완료 |
 | 위 버튼 바 빠른 재숨김 · 패드 커서 숨김 | 완료 |
+| 위 버튼 바 0.8초 창·켜진 즉시 닫기 | 완료 |
 | 심플 · OFL 4종 · TTS · BLE | 완료 |
 | 스킨 CSS 연결 (PNG·카메라 없음) | 완료 |
 | Play 스토어 release APK | 미함 (debug만) |
