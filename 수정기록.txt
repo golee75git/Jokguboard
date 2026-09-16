@@ -7,7 +7,7 @@
 `applyDelta`에서 `sourceTag === "hid"`이면 `flashScoreBump`를 호출하지 않음. 3버튼 패드·외부 음량 +1은 숫자만 바뀌고 커짐·+1 표식이 없음. 화면 터치 `"tap"` +1은 기존 애니 유지. 연속 득점 1.5초 쿨다운·위/아래 제스처 판정은 그대로.
 
 ### APK
-`app-debug-0916_1253-hidnobump.apk`
+`app-debug-0916_1253-hidnobump.apk` (`3506070`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron. AndroidX Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 신규 외부 라이브러리 없음.

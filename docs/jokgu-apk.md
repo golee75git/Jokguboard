@@ -50,7 +50,7 @@
 | `app-debug-0912_1635-barcursor.apk` | 16:35 | 위 버튼 바 빠른 닫힘·패드 커서 숨김 | `ef6247c` |
 | `app-debug-0912_1701-barwatch.apk` | 17:01 | 위 버튼 바 0.8초 창·켜진 즉시 닫기 | `d4de65f` |
 | `app-debug-0912_1711-barback.apk` | 17:11 | barwatch 되돌림(위 득점·커서·바) | `0b1ce44` |
-| `app-debug-0916_1253-hidnobump.apk` | 12:53 | HID +1은 숫자만 (애니 없음) |  |
+| `app-debug-0916_1253-hidnobump.apk` | 12:53 | HID +1은 숫자만 (애니 없음) | `3506070` |
 
 ## 현재 버전에서 쓰는 것
 
