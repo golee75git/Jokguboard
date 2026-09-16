@@ -196,10 +196,17 @@ APK: `app-debug-0912_1635-barcursor.apk`
 실기기에서 포인터가 다시 보이고, 위 버튼 점수가 안 오르고, 시스템 바가 그대로여서 바로 되돌림.  
 APK: `app-debug-0912_1701-barwatch.apk`
 
-### 오후 17:11 — barwatch 되돌림 (현재)
+### 오후 17:11 — barwatch 되돌림
 
 `JK_PAD_POINTER_HIDE`와 위 버튼 200ms 재숨김만 남기고, decorView insets 창·800ms 감시는 제거. 보드 규칙·가운데·아래는 그대로.  
-APK: `app-debug-0912_1711-barback.apk` ← **현재 설치**
+APK: `app-debug-0912_1711-barback.apk`
+
+## 2026-09-16
+
+### 오후 12:53 — HID +1은 숫자만 (현재)
+
+3버튼·외부 음량 HID +1은 커짐·+1 표식 없이 숫자만 변경. 화면 터치 +1 애니는 그대로. 연속 득점 1.5초·제스처 판정은 그대로.  
+APK: `app-debug-0916_1253-hidnobump.apk` ← **현재 설치**
 
 ### 문서만 (소스 없음) — 2026-09-02
 

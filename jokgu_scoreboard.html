@@ -4832,7 +4832,8 @@
       paint();
       setStatus(fill(delta > 0 ? "plus" : "minus", { name: nameFor(team === "white" ? "white" : "blue") }));
       if (delta > 0) {
-        flashScoreBump(team, delta);
+        /* JK_HID_NO_BUMP: HID +1은 숫자만. 되돌리: sourceTag !== "hid" 조건 삭제 */
+        if (sourceTag !== "hid") flashScoreBump(team, delta);
         var setsBefore = setBlue + setWhite;
         maybeFinishGame();
         if (setBlue + setWhite === setsBefore) speakScoreNow();
