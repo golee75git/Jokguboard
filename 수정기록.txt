@@ -11,7 +11,7 @@
 팀 따라가기는 3버튼 설정에만 있고 기본 꺼짐이다. 켜는 순간 화면 오른쪽 팀의 `blue` 또는 `white`만 `jokgu_pad_follow`에 저장한다. 위 버튼이 그 팀, 아래 버튼이 반대 팀이다. `emitPadZone`이 부르는 `jkHidPoint(side, true)`에만 적용한다. 음량 키는 표식 없이 화면 좌우다. 새 경기의 `runFreshMatch`에서 교대를 푼 뒤에만 다시 묶는다. `resetMatchKeepPrefs`는 다시 묶지 않는다. 서브 원은 크기를 키우지 않고 배경과 테두리만 깜빡인다.
 
 ### APK
-`app-debug-1015_1640-pinrow.apk`
+`app-debug-1015_1640-pinrow.apk` (`f293f1d`)
 
 ### 라이선스
 신규 npm 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). AndroidX Core/AppCompat/WebKit · Kotlin · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
