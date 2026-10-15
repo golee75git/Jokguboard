@@ -1,5 +1,6 @@
 package com.jokgu.scoreboard
 
+import android.app.ActivityManager
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +12,7 @@ import android.os.Looper
 import android.os.SystemClock
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.util.Log
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -63,6 +65,10 @@ class MainActivity : AppCompatActivity() {
     private var pendingBarRehide: Runnable? = null
     private var barRehideUntilElapsed = 0L
 
+    /* JK_PIN_HOLD: 맞춘 3버튼 눌림에만 화면 고정. 되돌리: 이 2필드·holdBoardOnRemoteDown·releaseBoardPin 삭제 */
+    private var boardPinHeld = false
+    private var pinRequestOpen = false
+
     /* JK_PAD_GESTURE: 이 리모컨은 좌표 클릭이 아니라 눌림-뗌 사이 경과시간·이동거리로 구분되는
      * 제스처(탭·상하 스와이프)를 보낸다. 위 버튼은 좌표 없는 단독 ACTION_OUTSIDE로만 온다
      * (FLAG_WATCH_OUTSIDE_TOUCH 필요). 되돌리: 이 3필드·classifyPadGesture/maybePadEvent 삭제,
@@ -80,7 +86,9 @@ class MainActivity : AppCompatActivity() {
         private const val SCAN_SKIP = 320
         /* JK_HID_PAD_LOCK */
         private const val CROSS_INPUT_LOCK_MS = 400L
-        /* JK_HID_BAR_GUARD: 위 판정 직후 짧게 반복 숨김. OS가 늦게 켜도 한 프레임 안에 닫음 */
+        /* JK_HID_BAR_GUARD: 위 판정 직후 짧게 반복 숨김. OS가 늦게 켜도 한 프레임 안에 닫음.
+         * 8L/400L로 튜닝해봤으나 실기기에서 체감 변화 없어 원복(전역 insets 리스너 방식은 d4de65f에서
+         * 시도했다가 0b1ce44에서 되돌림 — 위 득점·커서·바가 깨졌음. 폴링 방식만 건드릴 것) */
         private const val BAR_REHIDE_TICK_MS = 16L
         private const val BAR_REHIDE_WINDOW_MS = 200L
         /* JK_PAD_GESTURE: 탭(가운데)=250ms 이내·화면 긴 축 8% 이내 이동. 스와이프(아래)=20% 이상 이동 */
@@ -92,6 +100,11 @@ class MainActivity : AppCompatActivity() {
     inner class AndroidShellBridge {
         @JavascriptInterface
         fun ping(): String = "ok"
+
+        @JavascriptInterface
+        fun askExit() {
+            runOnUiThread { showExitConfirm() }
+        }
     }
 
     inner class AndroidTtsBridge {
@@ -263,11 +276,7 @@ class MainActivity : AppCompatActivity() {
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    AlertDialog.Builder(this@MainActivity)
-                        .setMessage(R.string.exit_confirm)
-                        .setNegativeButton(R.string.common_cancel, null)
-                        .setPositiveButton(R.string.common_ok) { _, _ -> finish() }
-                        .show()
+                    showExitConfirm()
                 }
             }
         )
@@ -321,9 +330,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideBarsAfterPadUp() {
+        Log.d("JK_BAR_DIAG", "hideBarsAfterPadUp enter now=${SystemClock.uptimeMillis()}")
         applyImmersive()
         webView.post { applyImmersive() }
         scheduleBarRehide()
+    }
+
+    private fun showExitConfirm() {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.exit_confirm)
+            .setNegativeButton(R.string.common_cancel, null)
+            .setPositiveButton(R.string.common_ok) { _, _ ->
+                releaseBoardPin()
+                finish()
+            }
+            .show()
+    }
+
+    /* JK_PIN_HOLD: 이미 고정이면 다시 걸지 않는다. 실패해도 호출부는 득점을 계속한다. */
+    private fun boardAlreadyPinned(): Boolean {
+        val am = getSystemService(ActivityManager::class.java) ?: return false
+        return am.lockTaskModeState != ActivityManager.LOCK_TASK_MODE_NONE
+    }
+
+    private fun holdBoardOnRemoteDown() {
+        if (!hasWindowFocus() || isFinishing) return
+        if (boardAlreadyPinned()) {
+            boardPinHeld = true
+            pinRequestOpen = false
+            return
+        }
+        if (pinRequestOpen) return
+        pinRequestOpen = true
+        try {
+            startLockTask()
+            boardPinHeld = true
+        } catch (_: RuntimeException) {
+            pinRequestOpen = false
+        }
+    }
+
+    private fun releaseBoardPin() {
+        boardPinHeld = false
+        pinRequestOpen = false
+        try {
+            if (boardAlreadyPinned()) stopLockTask()
+        } catch (_: RuntimeException) {
+        }
     }
 
     /* JK_PAD_POINTER_HIDE: 맞춤이 켜진 뒤에만 3버튼 리모컨 마우스 커서를 숨김. 맞추기 중·끈 상태는 기본 커서.
@@ -447,11 +500,11 @@ class MainActivity : AppCompatActivity() {
             }
             "L" -> if (!scoreLocked()) {
                 markScored()
-                boardJs("jkHidPoint('L')")
+                boardJs("jkHidPoint('L',true)")
             }
             "R" -> if (!scoreLocked()) {
                 markScored()
-                boardJs("jkHidPoint('R')")
+                boardJs("jkHidPoint('R',true)")
             }
             else -> return false
         }
@@ -476,7 +529,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (masked == MotionEvent.ACTION_OUTSIDE) {
+            /* JK_BAR_DIAG: 진단용 임시 로그. 되돌리: 이 Log.d 3곳 + import android.util.Log 삭제 */
+            Log.d(
+                "JK_BAR_DIAG",
+                "ACTION_OUTSIDE recv eventTime=${event.eventTime} now=${SystemClock.uptimeMillis()} " +
+                    "dispatchDelayMs=${SystemClock.uptimeMillis() - event.eventTime}"
+            )
             if (!padPrefs().getBoolean("on", false)) return false
+            holdBoardOnRemoteDown()
             if (padGestureActive) {
                 padGestureActive = false
                 val elapsed = System.currentTimeMillis() - padGestureStartAt
@@ -497,6 +557,7 @@ class MainActivity : AppCompatActivity() {
             padGestureStartY = event.rawY
             padGestureStartAt = System.currentTimeMillis()
             applyPadPointerHide()
+            if (padPrefs().getBoolean("on", false)) holdBoardOnRemoteDown()
             return true
         }
         if (masked == MotionEvent.ACTION_MOVE) {
@@ -645,6 +706,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyImmersive() {
+        Log.d("JK_BAR_DIAG", "applyImmersive call now=${SystemClock.uptimeMillis()}")
         WindowInsetsControllerCompat(window, window.decorView).apply {
             hide(WindowInsetsCompat.Type.systemBars())
             systemBarsBehavior =
@@ -659,6 +721,10 @@ class MainActivity : AppCompatActivity() {
         if (hasFocus) {
             applyImmersive()
             applyPadPointerHide()
+            if (boardPinHeld && !boardAlreadyPinned()) {
+                pinRequestOpen = false
+                holdBoardOnRemoteDown()
+            }
         }
     }
 
@@ -666,6 +732,10 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         applyImmersive()
         applyPadPointerHide()
+        if (boardPinHeld && hasWindowFocus() && !boardAlreadyPinned()) {
+            pinRequestOpen = false
+            holdBoardOnRemoteDown()
+        }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S ||
             (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) ==
                 PackageManager.PERMISSION_GRANTED &&

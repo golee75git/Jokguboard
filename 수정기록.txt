@@ -1,5 +1,39 @@
 # 수정기록 — Jokguboard
 
+## 2026-10-15 화면 고정·아래 줄·팀 따라가기 (JK_PIN_HOLD / JK_DOCK_NOTE / JK_VOICE_ARM / JK_PAD_FOLLOW / JK_SERVER_BLINK)
+
+족구 보드 자체 HTML과 `MainActivity.kt`만 변경. `applyDelta` 본문·승패 규칙은 그대로. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
+
+맞춘 3버튼의 눌림이 창이 보일 때 들어오면 `startLockTask`로 화면을 고정한다. 이미 고정이면 다시 걸지 않는다. 예외가 나도 득점 호출은 계속한다. 앱이 다시 포커스를 얻고 고정이 풀려 있을 때만 다시 건다. 푸는 곳은 기존 종료 확인에서 확인을 누른 뒤뿐이다. 이 앱에는 파일 선택·블루투스 설정·캐스트로 나가는 화면이 없어 그 출구는 추가하지 않았다. 시스템 “앱 고정됨” 안내창은 그대로 둔다. 위 버튼 뒤 상태 바 재숨김은 유지한다.
+
+아래 줄은 알림·되돌리기·심플·설정이다. 도움말은 설정 시트 안이다. Android에서만 설정 맨 아래 종료가 보이고, 기존 “앱을 종료할까요?” 확인 뒤에 고정을 풀고 닫는다. 웹에서는 종료를 숨긴다. 음성 사용은 기본 꺼짐이고 `jokgu_voice_use`에 `1` 또는 `0`만 저장한다. 꺼지면 세 버튼이 화면 가운데이고 알림은 왼쪽, 오른쪽은 같은 너비의 빈 칸이다. 켜지면 음성 상태, 알림, 버튼 순서다. 알림 글자만 `clamp(1.05rem, 2.4vmin, 1.25rem)`이다. 시작은 음성 사용이 켜져 있을 때만 반응하고 `getUserMedia`는 호출하지 않는다. 점수 읽기(TTS)와 별개다. 모습 변경은 `applyLook`만 하고 「스킨 변경」 알림은 없다.
+
+팀 따라가기는 3버튼 설정에만 있고 기본 꺼짐이다. 켜는 순간 화면 오른쪽 팀의 `blue` 또는 `white`만 `jokgu_pad_follow`에 저장한다. 위 버튼이 그 팀, 아래 버튼이 반대 팀이다. `emitPadZone`이 부르는 `jkHidPoint(side, true)`에만 적용한다. 음량 키는 표식 없이 화면 좌우다. 새 경기의 `runFreshMatch`에서 교대를 푼 뒤에만 다시 묶는다. `resetMatchKeepPrefs`는 다시 묶지 않는다. 서브 원은 크기를 키우지 않고 배경과 테두리만 깜빡인다.
+
+### APK
+`app-debug-1015_1640-pinrow.apk`
+
+### 라이선스
+신규 npm 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). AndroidX Core/AppCompat/WebKit · Kotlin · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
+
+### 보안
+`evaluateJavascript`는 `jkHidPoint('L',true)` / `jkHidPoint('R',true)` 고정 리터럴. 팀 식별자는 `blue`/`white`만 저장. 팀명 `textContent`. 사용자 HTML 삽입 없음. `RECORD_AUDIO` 없음. 화면 고정은 일반 앱의 `startLockTask`이며 기기 관리자 권한이 아니다. 종료 확인 전 `stopLockTask`를 호출하지 않는다.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, `MainActivity.kt`, help 3종, `index.html`, docs, `수정기록.txt`, Android assets www
+- 신규 파일: `downloads/app-debug-1015_1640-pinrow.apk`
+- 재사용: `applyDelta`, `jkHidPoint`, `emitPadZone`, `hideBarsAfterPadUp`, 종료 확인 문구
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-10-15 `gh search code`로 `JK_PIN_HOLD`, `jokgu_pad_follow`, `jkServerBlink`를 검색했다. 일치 결과가 없었다. 웹 검색도 같은 문자열의 공개 구현을 찾지 못했다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다.
+- 맞춘 외부 포인터의 눌림으로 화면을 고정하는 것. 기존 리모컨 입력 처리와 같은 검토 항목.
+- 그 포인터의 위·아래를 화면 좌우가 아니라 저장된 팀 식별자에 묶는 것. 기존 리모컨 입력 처리와 같은 검토 항목.
+
+---
 ## 2026-09-16 HID +1은 숫자만 (JK_HID_NO_BUMP)
 
 족구 보드 자체 HTML/JS만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.

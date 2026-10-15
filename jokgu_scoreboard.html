@@ -42,23 +42,46 @@
       gap: 8px;
       padding: calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
     }
-    /* JK_DOCK: 메뉴를 보드 아래 한 줄 오른쪽. 되돌리: .shell 안 .topbar를 보드 위로, lang-pack 복원 */
+    /* JK_DOCK: 메뉴를 보드 아래 한 줄. 되돌리: .topbar를 보드 위로, 알림은 보드 위 .hint-line */
+    /* JK_DOCK_NOTE: 알림은 버튼과 같은 줄. 음성 끔이면 버튼이 화면 가운데. 되돌리: 이 그리드·.dock-* 삭제 */
     .topbar {
-      display: flex;
-      gap: 6px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      grid-template-areas: "note buttons gap";
       align-items: center;
-      flex-wrap: nowrap;
-      justify-content: flex-end;
+      gap: 8px;
       flex-shrink: 0;
-      margin-left: auto;
+      width: 100%;
       max-width: 100%;
-      overflow-x: auto;
       background: rgba(10, 14, 26, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       color: #fff;
       padding: 8px 10px;
     }
+    body.is-voice .topbar {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas: "voice note buttons";
+    }
+    .dock-voice {
+      display: none;
+      grid-area: voice;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+    body.is-voice .dock-voice { display: flex; }
+    .dock-btns {
+      grid-area: buttons;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+    }
+    .dock-gap { grid-area: gap; min-width: 0; }
+    body.is-voice .dock-gap { display: none; }
     .topbar button {
       font: inherit;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,12 +92,18 @@
       cursor: pointer;
       white-space: nowrap;
     }
+    .dock-voice button { font-size: 13px; }
     .topbar button:hover { background: rgba(34, 211, 238, 0.16); }
     .hint-line {
+      grid-area: note;
+      min-width: 0;
       min-height: 1.3em;
       padding: 2px 6px;
       color: #94a3b8;
-      font-size: 13px;
+      font-size: clamp(1.05rem, 2.4vmin, 1.25rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .board-wrap {
       flex: 1;
@@ -156,16 +185,32 @@
       background: linear-gradient(155deg, #312e81, #1e1b4b);
       color: #eef2ff;
     }
+    /* JK_SERVER_BLINK: 서브 원은 크기 그대로, 배경·테두리만 깜빡임. 되돌리: 이 블록을 큰 원 크기로 */
     .rot-dot.is-server,
     .side.ivory .rot-dot.is-server {
-      width: clamp(72px, 17vmin, 120px);
-      height: clamp(72px, 17vmin, 120px);
-      font-size: clamp(34px, 8vmin, 56px);
       z-index: 4;
+      border-width: 3px;
       border-color: #fde68a;
       color: #1a1408;
       background: linear-gradient(155deg, #fbbf24, #b45309);
-      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.45);
+      animation: jkServerBlink 1s steps(2, end) infinite;
+    }
+    @keyframes jkServerBlink {
+      0%, 100% {
+        background: linear-gradient(155deg, #fde68a, #d97706);
+        border-color: #fff7d6;
+        box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.7);
+      }
+      50% {
+        background: linear-gradient(155deg, #451a03, #1c1004);
+        border-color: #92400e;
+        box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.08);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rot-dot.is-server,
+      .side.ivory .rot-dot.is-server { animation: none; }
     }
     .rot-dot.is-bench { opacity: 0.38; cursor: default; }
     body.players-1 .rot-dot[data-slot="2"],
@@ -714,7 +759,13 @@
     body.is-simple .rot-dot,
     body.is-simple .serve-lr,
     body.is-simple .serve-guide,
-    body.is-simple .hint-line { display: none; }
+    body.is-simple .hint-line,
+    body.is-simple .dock-voice,
+    body.is-simple .dock-gap { display: none; }
+    body.is-simple .topbar {
+      display: flex;
+      justify-content: flex-end;
+    }
     body.is-simple .point-num { font-size: clamp(144px, 36vw, 420px); }
     body.is-simple .set-row { font-size: clamp(40px, 8vw, 88px); }
     body.is-simple .team-title { font-size: clamp(36px, 6vw, 64px); }
@@ -3782,7 +3833,6 @@
 </head>
 <body>
   <div class="shell">
-    <div class="hint-line" id="statusLine"></div>
     <div class="board-wrap" id="boardWrap">
     <div class="court boards" id="court">
       <section class="team blue side cyan pos-swap-start" id="sideBlue" data-team="blue">
@@ -3827,11 +3877,18 @@
       </section>
     </div>
     </div>
-    <div class="topbar">
-      <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
-      <button type="button" id="btnSimple" data-i18n="simple">심플</button>
-      <button type="button" id="btnSetup" data-i18n="setup">설정</button>
-      <button type="button" id="btnHelp" data-i18n="help">도움말</button>
+    <div class="topbar" id="dockRow">
+      <div class="dock-voice" id="voiceLine" hidden>
+        <span id="voiceState" data-i18n="voiceWait">음성 대기</span>
+        <button type="button" id="btnVoiceStart" data-i18n="voiceStart">시작</button>
+      </div>
+      <div class="hint-line" id="statusLine"></div>
+      <div class="dock-btns">
+        <button type="button" id="btnUndo" data-i18n="undo">되돌리기</button>
+        <button type="button" id="btnSimple" data-i18n="simple">심플</button>
+        <button type="button" id="btnSetup" data-i18n="setup">설정</button>
+      </div>
+      <div class="dock-gap" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -3934,18 +3991,26 @@
         <option value="arena3d" data-i18n="look.arena3d">링</option>
       </select>
       <label class="chk"><input type="checkbox" id="inTts" /> <span data-i18n="tts">점수 읽기</span></label>
+      <label class="chk"><input type="checkbox" id="inVoiceUse" /> <span data-i18n="voiceUse">음성 사용</span></label>
       <div id="padBox">
         <h3 data-i18n="pad.title">위·가운데·아래 버튼 리모컨</h3>
         <p id="padRound" data-i18n="pad.round">원형은 해당 없음</p>
         <p id="padHint"></p>
+        <label class="chk"><input type="checkbox" id="inPadFollow" /> <span data-i18n="pad.follow">팀 따라가기</span></label>
         <div class="pad-row">
           <button type="button" id="padAlign" data-i18n="pad.align">가운데·아래 위치 맞추기</button>
           <button type="button" class="ghost" id="padClear" data-i18n="pad.reset">다시 맞추기</button>
         </div>
       </div>
       <div class="row-btns">
+        <button type="button" id="btnHelp" data-i18n="help">도움말</button>
+      </div>
+      <div class="row-btns">
         <button type="button" class="ghost" id="setupCancel" data-i18n="cancel">취소</button>
         <button type="submit" data-i18n="save">저장</button>
+      </div>
+      <div class="row-btns">
+        <button type="button" id="setupExit" data-i18n="exitApp" hidden>종료</button>
       </div>
     </form>
   </div>
@@ -4027,6 +4092,10 @@
         "font.dohyeon": "도현 (Do Hyeon)",
         "font.orbitron": "오비트론 (Orbitron)",
         tts: "점수 읽기",
+        voiceUse: "음성 사용",
+        voiceWait: "음성 대기",
+        voiceStart: "시작",
+        exitApp: "종료",
         simple: "심플",
         simpleOff: "전체표시",
         simpleNeedServe: "선서브를 고른 뒤에 심플을 켤 수 있습니다.",
@@ -4051,7 +4120,8 @@
         "pad.lo": "아래 버튼을 짧게 한 번 누르세요.",
         "pad.gap": "가운데·아래가 너무 가깝습니다. 아래를 다시 누르세요.",
         "pad.ok": "이 기기에 위치를 저장했습니다.",
-        "pad.off": "저장한 위치를 지웠습니다."
+        "pad.off": "저장한 위치를 지웠습니다.",
+        "pad.follow": "팀 따라가기"
       },
       en: {
         undo: "Undo",
@@ -4117,6 +4187,10 @@
         "font.dohyeon": "Do Hyeon",
         "font.orbitron": "Orbitron",
         tts: "Read scores",
+        voiceUse: "Use voice row",
+        voiceWait: "Voice idle",
+        voiceStart: "Start",
+        exitApp: "Exit",
         simple: "Simple",
         simpleOff: "Full view",
         simpleNeedServe: "Choose first serve before simple mode.",
@@ -4141,7 +4215,8 @@
         "pad.lo": "Short-press the down button once.",
         "pad.gap": "Middle and down are too close. Press down again.",
         "pad.ok": "Positions saved on this device.",
-        "pad.off": "Saved positions cleared."
+        "pad.off": "Saved positions cleared.",
+        "pad.follow": "Follow teams"
       },
       zh: {
         undo: "撤销",
@@ -4207,6 +4282,10 @@
         "font.dohyeon": "Do Hyeon",
         "font.orbitron": "Orbitron",
         tts: "朗读分数",
+        voiceUse: "使用语音行",
+        voiceWait: "语音待机",
+        voiceStart: "开始",
+        exitApp: "退出",
         simple: "简洁",
         simpleOff: "完整显示",
         simpleNeedServe: "请先选择发球后再开启简洁模式。",
@@ -4231,11 +4310,16 @@
         "pad.lo": "请短按下键一次。",
         "pad.gap": "中、下太近。请再按下键。",
         "pad.ok": "已将位置保存在本机。",
-        "pad.off": "已清除保存的位置。"
+        "pad.off": "已清除保存的位置。",
+        "pad.follow": "跟随队伍"
       }
     };
 
     var LS_KEY = "jokgu_scoreboard_state_v1";
+    /* JK_VOICE_ARM: 음성 줄만 "1"/"0". 점수 읽기·TTS와 별개. 되돌리: 이 키·applyVoiceArm 삭제 */
+    var VOICE_USE_KEY = "jokgu_voice_use";
+    /* JK_PAD_FOLLOW: 3버튼에 묶는 팀 식별자만. 되돌리: 이 키·teamForPadSide 삭제 */
+    var PAD_FOLLOW_KEY = "jokgu_pad_follow";
     /* JK_SPORT_RULES: 족구/Futnet 규칙 표. 되돌리: 이 객체·sportType·isSetWon 삭제 */
     var SPORT_RULES = {
       jokgu: { players: 4, pointsToWin: 15, maxPoints: null, serverType: "sideout" },
@@ -4669,6 +4753,7 @@
       applyFont();
       applyLang();
       applySimpleMode();
+      applyVoiceArm();
       if (isFreshBannerOpen()) paintFreshServeBtns();
       pushBle(false);
     }
@@ -4952,6 +5037,7 @@
       serveAnchor = null;
       matchClockAt = 0;
       resetRotation();
+      rebindFollowAfterFresh();
       persistState();
       paint();
       closeWinBanner();
@@ -4984,8 +5070,50 @@
       };
       el.textContent = t(map[jkPadCode] || "pad.idle");
     }
-    function jkHidPoint(side) {
-      var team = side === "R" ? rightTeam() : leftTeam();
+    function readVoiceOn() {
+      try { return localStorage.getItem(VOICE_USE_KEY) === "1"; } catch (err) { return false; }
+    }
+    function writeVoiceOn(on) {
+      try { localStorage.setItem(VOICE_USE_KEY, on ? "1" : "0"); } catch (err) {}
+    }
+    function readFollowId() {
+      var v = "0";
+      try { v = localStorage.getItem(PAD_FOLLOW_KEY) || "0"; } catch (err) { v = "0"; }
+      return v === "blue" || v === "white" ? v : "";
+    }
+    function writeFollowId(id) {
+      try {
+        localStorage.setItem(PAD_FOLLOW_KEY, id === "blue" || id === "white" ? id : "0");
+      } catch (err) {}
+    }
+    function applyVoiceArm() {
+      var on = readVoiceOn();
+      document.body.classList.toggle("is-voice", on);
+      var line = document.getElementById("voiceLine");
+      if (line) line.hidden = !on;
+      var state = document.getElementById("voiceState");
+      if (state && on) state.textContent = t("voiceWait");
+    }
+    /* 마이크는 열지 않는다. 이 앱에 마이크 권한이 없고, 득점은 기존 경로만 쓴다. */
+    function beginVoiceListen() {
+      if (!readVoiceOn()) return;
+      var state = document.getElementById("voiceState");
+      if (state) state.textContent = t("voiceWait");
+    }
+    function rebindFollowAfterFresh() {
+      if (!readFollowId()) return;
+      writeFollowId(rightTeam());
+    }
+    function teamForPadSide(side) {
+      var bound = readFollowId();
+      if (bound !== "blue" && bound !== "white") {
+        return side === "R" ? rightTeam() : leftTeam();
+      }
+      if (side === "R") return bound;
+      return bound === "blue" ? "white" : "blue";
+    }
+    function jkHidPoint(side, fromPad) {
+      var team = fromPad === true ? teamForPadSide(side) : (side === "R" ? rightTeam() : leftTeam());
       if (isFreshBannerOpen() || isMatchWinBannerOpen() || isNameBannerOpen()) return;
       clearSetWinNotice();
       if (isServePickPending()) {
@@ -5243,6 +5371,11 @@
       document.getElementById("inLook").value = boardLook;
       document.getElementById("inLang").value = (lang === "en" || lang === "zh") ? lang : "ko";
       document.getElementById("inTts").checked = ttsOn === true;
+      document.getElementById("inVoiceUse").checked = readVoiceOn();
+      var followBox = document.getElementById("inPadFollow");
+      if (followBox) followBox.checked = !!readFollowId();
+      var exitBtn = document.getElementById("setupExit");
+      if (exitBtn) exitBtn.hidden = !window.AndroidShell;
       syncSetupSportUi();
       refreshPadBox();
       elSetupBanner.classList.add("is-open");
@@ -5267,6 +5400,7 @@
       var nextLang = document.getElementById("inLang").value;
       lang = nextLang === "en" || nextLang === "zh" ? nextLang : "ko";
       ttsOn = document.getElementById("inTts").checked === true;
+      writeVoiceOn(document.getElementById("inVoiceUse").checked === true);
       sportType = nextSport;
       futnetDiscipline = nextSport === "futnet" ? nextDisc : "double";
       if (sportChanged) resetMatchKeepPrefs();
@@ -5292,6 +5426,21 @@
       simpleMode = !simpleMode;
       persistState();
       paint();
+    });
+
+    document.getElementById("inVoiceUse").addEventListener("change", function () {
+      writeVoiceOn(this.checked === true);
+      applyVoiceArm();
+    });
+    document.getElementById("inPadFollow").addEventListener("change", function () {
+      if (this.checked) writeFollowId(rightTeam());
+      else writeFollowId("");
+    });
+    document.getElementById("btnVoiceStart").addEventListener("click", function () {
+      beginVoiceListen();
+    });
+    document.getElementById("setupExit").addEventListener("click", function () {
+      if (window.AndroidShell && AndroidShell.askExit) AndroidShell.askExit();
     });
 
     document.getElementById("btnHelp").addEventListener("click", function () {
