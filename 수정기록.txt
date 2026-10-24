@@ -1,5 +1,37 @@
 # 수정기록 — Jokguboard
 
+## 2026-10-24 경기 시간 밀리초 (JK_CLOCK_MS)
+
+족구 보드 자체 HTML만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
+
+경기 시작 시각 `matchClockAt`을 저장·복원할 때 `| 0`으로 32비트 정수로 잘랐다. `Date.now()`는 약 1.79조 ms라 하위 32비트만 남고, 새로고침·되돌리기 뒤 경과는 약 497500시간으로 보였다. 잘린 값이 음수인 구간에서는 시작 시각이 0이 되어 진행 중에도 `00:00:00`이었다.
+
+`keepMatchClockAt`은 1조 ms 이상이고 현재보다 하루를 넘지 않는 정수만 남긴다. `snapshot`은 그 값을 그대로 저장한다. `reopenMatchClock`은 잘린 옛 값을 버리고, 선서브·득점·세트가 있으면 연 시각부터 다시 센다. 경기가 없으면 `00:00:00`이다. 고친 값은 `loadState`에서 한 번 다시 저장한다. 되돌리기는 이 두 함수를 지우고 `matchClockAt | 0`으로 되돌리면 된다.
+
+### APK
+`app-debug-1024_1630-clockms.apk` (`CLOCKHASH`)
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX Core 1.12.0 / AppCompat 1.6.1 / WebKit 1.10.0 · Kotlin 1.9.22 · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
+
+### 보안
+시작 시각은 숫자만 검사한다. 팀명 `textContent`. 사용자 HTML 삽입 없음. `localStorage` 키 `jokgu_scoreboard_state_v1`만 갱신하고 서버로 보내지 않는다. 권한 추가 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, help 3종, `index.html`, docs, `수정기록.txt`, Android assets www
+- 신규 파일: `downloads/app-debug-1024_1630-clockms.apk`
+- 재사용: `formatMatchClock`, `paintMidClocks`, `snapshot`, `restore`, `loadState`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-10-24 `gh search code`로 `keepMatchClockAt`, `JK_CLOCK_MS`를 검색했다. 일치 결과가 없었다. 웹 검색은 이 이름과 무관한 Jedi Academy 점수판 코드를 집었다. 그 코드는 사용하지 않았다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 기기에 저장된 시작 시각으로 경기 경과를 다시 표시하는 것. 기존 `JK_MID_FIT` 시계의 저장 폭만 고친 것이며, 새 입력 방식은 아니다.
+
+---
 ## 2026-10-15 화면 고정·아래 줄·팀 따라가기 (JK_PIN_HOLD / JK_DOCK_NOTE / JK_VOICE_ARM / JK_PAD_FOLLOW / JK_SERVER_BLINK)
 
 족구 보드 자체 HTML과 `MainActivity.kt`만 변경. `applyDelta` 본문·승패 규칙은 그대로. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.

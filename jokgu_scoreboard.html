@@ -4537,8 +4537,21 @@
         serveIdxWhite: serveIdxWhite,
         rotBlue: rotBlue.slice(),
         rotWhite: rotWhite.slice(),
-        matchClockAt: matchClockAt | 0
+        matchClockAt: keepMatchClockAt(matchClockAt)
       };
+    }
+    /* JK_CLOCK_MS: 경기 시작은 밀리초 전체. | 0 은 32비트라 경과가 수십만 시간. 되돌리: 이 두 함수 삭제, snapshot·restore 의 matchClockAt | 0 복원, loadState 의 kept 줄 삭제 */
+    function keepMatchClockAt(ms) {
+      var n = Math.floor(Number(ms) || 0);
+      if (n >= 1000000000000 && n <= Date.now() + 86400000) return n;
+      return 0;
+    }
+    function reopenMatchClock(s) {
+      var kept = keepMatchClockAt(s && s.matchClockAt);
+      if (kept) return kept;
+      if (!s) return 0;
+      var live = s.serveChoice === "blue" || s.serveChoice === "white" || s.serveAnchor === "blue" || s.serveAnchor === "white" || (s.scoreBlue | 0) || (s.scoreWhite | 0) || (s.setBlue | 0) || (s.setWhite | 0);
+      return live ? Date.now() : 0;
     }
     function normalizeRot(v) {
       if (!v || !v.length) return [1, 2, 3, 4];
@@ -4689,7 +4702,7 @@
       serveIdxWhite = s.serveIdxWhite | 0;
       rotBlue = normalizeRot(s.rotBlue);
       rotWhite = normalizeRot(s.rotWhite);
-      matchClockAt = s.matchClockAt > 0 ? (s.matchClockAt | 0) : 0;
+      matchClockAt = reopenMatchClock(s);
       clampServeIndexes();
     }
     function pushHistory() {
@@ -4705,7 +4718,10 @@
       try {
         var raw = localStorage.getItem(LS_KEY);
         if (!raw) return;
-        restore(JSON.parse(raw));
+        var saved = JSON.parse(raw);
+        var kept = keepMatchClockAt(saved && saved.matchClockAt);
+        restore(saved);
+        if (!kept && matchClockAt) persistState();
       } catch (err) {}
     }
 
