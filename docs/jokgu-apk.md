@@ -52,7 +52,7 @@
 | `app-debug-0912_1711-barback.apk` | 17:11 | barwatch 되돌림(위 득점·커서·바) | `0b1ce44` |
 | `app-debug-0916_1253-hidnobump.apk` | 12:53 | HID +1은 숫자만 (애니 없음) | `3506070` |
 | `app-debug-1015_1640-pinrow.apk` | 16:40 | 3버튼 화면 고정·아래 줄 알림·팀 따라가기 | `f293f1d` |
-| `app-debug-1024_1630-clockms.apk` | 16:30 | 경기 시작 시각을 밀리초로 유지 | `CLOCKHASH` |
+| `app-debug-1024_1630-clockms.apk` | 16:30 | 경기 시작 시각을 밀리초로 유지 | `180c38a` |
 
 ## 현재 버전에서 쓰는 것
 

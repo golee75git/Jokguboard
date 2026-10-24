@@ -9,7 +9,7 @@
 `keepMatchClockAt`은 1조 ms 이상이고 현재보다 하루를 넘지 않는 정수만 남긴다. `snapshot`은 그 값을 그대로 저장한다. `reopenMatchClock`은 잘린 옛 값을 버리고, 선서브·득점·세트가 있으면 연 시각부터 다시 센다. 경기가 없으면 `00:00:00`이다. 고친 값은 `loadState`에서 한 번 다시 저장한다. 되돌리기는 이 두 함수를 지우고 `matchClockAt | 0`으로 되돌리면 된다.
 
 ### APK
-`app-debug-1024_1630-clockms.apk` (`CLOCKHASH`)
+`app-debug-1024_1630-clockms.apk` (`180c38a`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX Core 1.12.0 / AppCompat 1.6.1 / WebKit 1.10.0 · Kotlin 1.9.22 · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
