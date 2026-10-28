@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
-**정리일:** 2026-10-24  
-**현재 설치 APK:** `app-debug-1024_1630-clockms.apk`
+**정리일:** 2026-10-28  
+**현재 설치 APK:** `app-debug-1028_1643-freshset.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
@@ -23,12 +23,12 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 |------|------|
 | 웹 정적 + `/play` + Vercel | 완료 |
 | Android WebView `com.jokgu.scoreboard` | 완료 |
-| 족구 15점 듀스 · 3세트 2선승 | 완료 |
+| 족구 15점 듀스 · 3세트 2선승 · 새 경기 11/15/21 · 5세트 3선승 | 완료 |
 | 족구 4인 · 랠리 득점 · 사이드아웃 1→2→3→4 | 완료 |
-| Futnet 11점 캡 15 · 득점자 서브 | 완료 |
+| Futnet 11점 캡 15 · 15/21은 상한 없음 · 득점자 서브 | 완료 |
 | 원 점수 위·아래 2×2 · 왼쪽 3·4/2·1 · 오른쪽 1·2/4·3 · 선서브 1번 | 완료 |
 | 원·숫자 확대, 서브 원 더 큼·금색, 숫자 고정 | 완료 |
-| 새 경기 보드 확인, 사이버·링 클릭 | 완료 |
+| 새 경기 보드 확인, 형식·선승·목표, 사이버·링 클릭 | 완료 |
 | 팀명 세트쪽·2배·터치수정, 새경기 선서브 | 완료 |
 | 원 간격 점수 가운데·점수 칸 맞춤 | 완료 |
 | 점수 굵기·층 그림자·+1 확대/표식 | 완료 |
@@ -74,7 +74,7 @@ APK: [jokgu-apk.md](jokgu-apk.md)
 
 ## 마커
 
-`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_PAD_POINTER_HIDE`, `JK_HID_NO_BUMP`, `JK_PIN_HOLD`, `JK_PAD_FOLLOW`, `JK_VOICE_ARM`, `JK_DOCK_NOTE`, `JK_SERVER_BLINK`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_MID_FIT`, `JK_CLOCK_MS`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_SERVE_BAR`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
+`JK_CORE`, `JK_DELTA`, `JK_APK_LR`, `JK_HID_PAD`, `JK_PAD_ALIGN`, `JK_PAD_CAL_MIDLOW`, `JK_PAD_GESTURE`, `JK_HID_PAD_LOCK`, `JK_HID_BAR_GUARD`, `JK_PAD_POINTER_HIDE`, `JK_HID_NO_BUMP`, `JK_PIN_HOLD`, `JK_PAD_FOLLOW`, `JK_VOICE_ARM`, `JK_DOCK_NOTE`, `JK_SERVER_BLINK`, `JK_IMMERSIVE_REAPPLY`, `JK_NO_WEBVIEW_CACHE`, `JK_I18N`, `JK_DISK_GLYPH`, `JK_NET_COL`, `JK_COURT_DISC`, `JK_DISC_GAP`, `JK_SCORE_FILL`, `JK_SCORE_DEPTH`, `JK_SCORE_BUMP`, `JK_CYBER_HIT`, `JK_MID_FIT`, `JK_CLOCK_MS`, `JK_SERVE_ONE`, `JK_WIN_FLOW`, `JK_OFL_FONTS`, `JK_SERVE`, `JK_LOOK_PACK`, `JK_SKIN_REMAP`, `JK_SIMPLE`, `JK_SERVE_BAR`, `JK_TTS`, `JK_BLE_PUSH`, `JK_BLE_SPIKE`, `JK_FRAME_SVG`, `JK_BOARD_DEPTH`, `JK_ROTATE`, `JK_SPORT_RULES`, `JK_FRESH_BANNER`, `JK_FRESH_SETUP`, `JK_FRESH_HIT`, `JK_NAME_MID`, `JK_NAME_EDIT`, `JK_SCORE_SKIN_CSS`, `JK_SCORE_SKIN_BRIDGE`, `JK_DOCK`, `JK_MID_PANEL`
 
 문제 시 해당 마커 블록만 되돌린다.
 

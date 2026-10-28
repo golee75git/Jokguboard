@@ -1,5 +1,42 @@
 # 수정기록 — Jokguboard
 
+## 2026-10-28 새 경기 형식·선승·목표 (JK_FRESH_SETUP)
+
+족구 보드 자체 HTML만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. 탁구 점수판의 화면 구조·이름·문구를 가져오지 않았다.
+
+가운데 새 경기를 누르면 기존 카드에서 경기형식, 선승, 목표점수를 고르고, 청 또는 백 선서브를 누르면 그 값으로 점수를 지우고 시작한다. 취소하면 진행 중인 경기는 그대로다.
+
+- 경기형식: 족구 4인, Futnet 싱글·더블·트리플. 족구와 Futnet을 바꾸면 목표를 그 종목 기본값으로 맞춘다. Futnet 안에서 인원만 바꾸면 고른 목표는 유지한다.
+- 선승: 3세트 2선승 또는 5세트 3선승. 저장 키 `series`는 `bo3_2` / `bo5_3`.
+- 목표점수: 11, 15, 21. 기본은 족구 15, Futnet 11. 2점 차는 유지하고 듀스는 목표보다 1점 낮을 때부터다. Futnet의 상한 15(15:14 종료)는 목표가 11일 때만 쓴다. 15와 21은 상한 없이 2점 차다.
+- 고른 값은 `localStorage`의 `target`에 11·15·21만 남긴다. 없는 옛 저장은 종목 기본값으로 연다.
+
+되돌리기: `JK_FRESH_SETUP` 블록, `#freshSetup`, `freshPick`, `setMatchGoal`을 지우고 `GAME_TARGET` 15, `DEUCE_FLOOR` 14, `SERIES_WINS`는 `bo3_2`만 남긴다.
+
+### APK
+`app-debug-1028_1643-freshset.apk`
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX Core 1.12.0 / AppCompat 1.6.1 / WebKit 1.10.0 · Kotlin 1.9.22 · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
+
+### 보안
+목표와 선승은 허용된 값만 남긴다. 팀명 `textContent`. 사용자 HTML 삽입 없음. `localStorage` 키 `jokgu_scoreboard_state_v1`만 갱신하고 서버로 보내지 않는다. 권한 추가 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`, `scripts/check-win-rules.js`, help 3종, `index.html`, docs, `수정기록.txt`, Android assets www
+- 신규 파일: `downloads/app-debug-1028_1643-freshset.apk`
+- 재사용: `#freshBanner`, `runFreshMatch`, `setServeChoice`, `isGameWin`, `snapshot`, `restore`
+- 미수정: `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-10-28 `gh search code`로 `JK_FRESH_SETUP`, `freshPick jokgu`는 일치가 없었다. `applyPointTarget`은 Unity 메쉬·산포 코드에만 있어 그 이름은 쓰지 않고 `setMatchGoal`로 두었다. 그 코드는 사용하지 않았다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 경기 시작 전에 인원, 선승 수, 한 세트 목표 점수를 고르는 확인 카드. 점수 표시와 2점 차 종료는 종목 규칙의 관용적 구현이다.
+
+---
 ## 2026-10-24 경기 시간 밀리초 (JK_CLOCK_MS)
 
 족구 보드 자체 HTML만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
