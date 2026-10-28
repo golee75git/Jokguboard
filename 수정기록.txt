@@ -14,7 +14,7 @@
 되돌리기: `JK_FRESH_SETUP` 블록, `#freshSetup`, `freshPick`, `setMatchGoal`을 지우고 `GAME_TARGET` 15, `DEUCE_FLOOR` 14, `SERIES_WINS`는 `bo3_2`만 남긴다.
 
 ### APK
-`app-debug-1028_1643-freshset.apk`
+`app-debug-1028_1643-freshset.apk` (`27b1a94`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1: Noto Sans KR · Jua · Do Hyeon · Orbitron (`LICENSE-FONTS.txt`, Google Fonts CSS만, 오프라인은 시스템 글꼴). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX Core 1.12.0 / AppCompat 1.6.1 / WebKit 1.10.0 · Kotlin 1.9.22 · AGP 8.2.2는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 마이크·카메라 권한 추가 없음.
