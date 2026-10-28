@@ -4874,7 +4874,7 @@
       jkPadNote(jkPadCode);
     }
 
-    /* JK_CYBER_MID_BAND: 큰 점수 칸과 같은 높이. 되돌리: 이 함수·paint·resize 호출 삭제 */
+    /* JK_CYBER_MID_BAND: 아래는 큰 점수 칸, 위는 큰 숫자. 되돌리: 이 함수·paint·resize 호출 삭제 */
     function fitCyberMid() {
       var mid = document.querySelector(".mid");
       var court = document.getElementById("court");
@@ -4890,8 +4890,11 @@
       }
       var courtBox = court.getBoundingClientRect();
       var scoreBox = score.getBoundingClientRect();
-      var top = scoreBox.top - courtBox.top;
-      var h = scoreBox.height;
+      var glyph = score.querySelector(".score-glyph");
+      var glyphBox = glyph ? glyph.getBoundingClientRect() : scoreBox;
+      var top = Math.max(scoreBox.top, glyphBox.top) - courtBox.top;
+      var bottom = scoreBox.bottom - courtBox.top;
+      var h = bottom - top;
       if (h < 48) {
         mid.classList.remove("jk-mid-band");
         mid.style.height = "";

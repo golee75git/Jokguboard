@@ -1,7 +1,7 @@
 # 족구 점수판 구현 계획
 
 **정리일:** 2026-10-28  
-**현재 설치 APK:** `app-debug-1028_1738-cybermid.apk`
+**현재 설치 APK:** `app-debug-1028_1751-cybertop.apk`
 
 PRD: [jokgu-prd.md](jokgu-prd.md)  
 날짜별: [jokgu-changelog.md](jokgu-changelog.md)  
