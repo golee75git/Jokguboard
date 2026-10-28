@@ -7,7 +7,7 @@
 `#freshBanner`만 검정 막 위의 검정 카드다. 고르지 않은 단추는 어두운 면, 고른 항목과 선서브 단추는 기존 금색 `#e8a317`이다. 취소는 테두리만 있다. 설정 시트와 팀명 카드는 밝은 배경을 유지한다. 되돌리기는 `JK_FRESH_DARK` 블록만 지우면 된다.
 
 ### APK
-`app-debug-1028_1719-freshdark.apk`
+`app-debug-1028_1719-freshdark.apk` (`5a466b4`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
