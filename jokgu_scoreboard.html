@@ -504,6 +504,35 @@
     #freshSetup .row-btns { margin-top: 0; }
     #freshSetup .row-btns button { min-height: 40px; min-width: 0; flex: 1 1 22%; font-size: 15px; }
     #freshSetup .row-btns button.is-pick { background: #e8a317; color: #1a1408; }
+    /* JK_FRESH_DARK: 새 경기 카드만 검정. 되돌리: 이 블록 삭제 */
+    #freshBanner { background: rgba(0, 0, 0, 0.88); }
+    #freshBanner .banner-card {
+      background: #0c0e12;
+      color: #f4f4f5;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 18px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.62);
+    }
+    #freshBanner .banner-card h2 { color: #fafafa; letter-spacing: -0.02em; }
+    #freshBanner .banner-card > p { color: #a1a1aa; margin: 0 0 6px; }
+    #freshSetup .fresh-k { color: #d4d4d8; letter-spacing: 0.06em; }
+    #freshBanner .row-btns button {
+      background: #171a20;
+      color: #f4f4f5;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    #freshBanner .row-btns button.ghost {
+      background: transparent;
+      color: #d4d4d8;
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    #freshSetup .row-btns button.is-pick,
+    #freshBanner #freshServeBlue,
+    #freshBanner #freshServeWhite {
+      background: #e8a317;
+      color: #1a1408;
+      border-color: transparent;
+    }
     /* JK_NAME_EDIT: 팀명 터치 수정 카드. 되돌리: 이 블록·#nameBanner 삭제 */
     #nameBanner { z-index: 46; }
     #nameBanner .banner-card { text-align: center; padding: 28px 22px; }

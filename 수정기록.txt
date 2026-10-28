@@ -1,5 +1,35 @@
 # 수정기록 — Jokguboard
 
+## 2026-10-28 새 경기 카드 검정 (JK_FRESH_DARK)
+
+족구 보드 자체 CSS만 변경. 점수 규칙·저장 형식은 그대로. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. 외부 화면의 클래스 이름·스타일 블록은 가져오지 않았다.
+
+`#freshBanner`만 검정 막 위의 검정 카드다. 고르지 않은 단추는 어두운 면, 고른 항목과 선서브 단추는 기존 금색 `#e8a317`이다. 취소는 테두리만 있다. 설정 시트와 팀명 카드는 밝은 배경을 유지한다. 되돌리기는 `JK_FRESH_DARK` 블록만 지우면 된다.
+
+### APK
+`app-debug-1028_1719-freshdark.apk`
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
+
+### 보안
+색만 바꿨다. 입력·저장·권한은 이전과 같다. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`의 `JK_FRESH_DARK`, help 3종, `index.html`, docs, `수정기록.txt`, Android assets www
+- 신규 파일: `downloads/app-debug-1028_1719-freshdark.apk`
+- 재사용: `#freshBanner`, `#freshSetup`, 금색 `#e8a317`
+- 미수정: `MainActivity.kt`, 승패 규칙
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-10-28 `gh search code`로 `JK_FRESH_DARK`를 검색했다. 일치 결과가 없었다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 확인 카드를 어두운 면과 금색 선택으로 그리는 것. 일반 화면 꾸미기다.
+
+---
 ## 2026-10-28 새 경기 형식·선승·목표 (JK_FRESH_SETUP)
 
 족구 보드 자체 HTML만 변경. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. 탁구 점수판의 화면 구조·이름·문구를 가져오지 않았다.
