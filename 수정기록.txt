@@ -7,7 +7,7 @@
 사이버 모습(`skin-cyber3d`)에서 좌우가 가로로 놓일 때만, 가운데 칸의 위쪽과 높이를 왼쪽 큰 점수 칸과 같게 둔다. 다른 모습과 좁은 화면의 세로 배치는 이전처럼 칸 전체를 쓴다. 새 경기 버튼의 클릭은 그대로다. 되돌리기는 `JK_CYBER_MID_BAND` 블록과 `fitCyberMid` 호출을 지우면 된다.
 
 ### APK
-`app-debug-1028_1738-cybermid.apk` (pending)
+`app-debug-1028_1738-cybermid.apk` (`2d18d2d`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
