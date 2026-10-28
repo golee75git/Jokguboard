@@ -3864,6 +3864,27 @@
     body.skin-arena3d #btnFresh {
       pointer-events: auto !important;
     }
+    /* JK_CYBER_MID_BAND: 사이버 가운데 칸을 큰 점수 높이에 맞춤. 되돌리: 이 블록과 fitCyberMid 삭제 */
+    body.skin-cyber3d .mid.jk-mid-band {
+      align-self: flex-start;
+      box-sizing: border-box;
+      min-height: 0;
+    }
+    body.skin-cyber3d .mid.jk-mid-band .set-label {
+      font-size: clamp(18px, 14cqh, 60px);
+    }
+    body.skin-cyber3d .mid.jk-mid-band .set-row {
+      font-size: clamp(28px, 22cqh, 122px);
+    }
+    body.skin-cyber3d .mid.jk-mid-band .mid-clocks {
+      font-size: clamp(12px, 8cqh, 26px);
+    }
+    body.skin-cyber3d .mid.jk-mid-band #btnFresh {
+      min-height: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: clamp(14px, 10cqh, 22px);
+    }
 
   </style>
 </head>
@@ -4853,6 +4874,35 @@
       jkPadNote(jkPadCode);
     }
 
+    /* JK_CYBER_MID_BAND: 큰 점수 칸과 같은 높이. 되돌리: 이 함수·paint·resize 호출 삭제 */
+    function fitCyberMid() {
+      var mid = document.querySelector(".mid");
+      var court = document.getElementById("court");
+      var score = document.getElementById("scoreBlue");
+      if (!mid || !court || !score) return;
+      var row = window.getComputedStyle(court).flexDirection === "row";
+      var cyber = document.body.classList.contains("skin-cyber3d");
+      if (!cyber || !row) {
+        mid.classList.remove("jk-mid-band");
+        mid.style.height = "";
+        mid.style.marginTop = "";
+        return;
+      }
+      var courtBox = court.getBoundingClientRect();
+      var scoreBox = score.getBoundingClientRect();
+      var top = scoreBox.top - courtBox.top;
+      var h = scoreBox.height;
+      if (h < 48) {
+        mid.classList.remove("jk-mid-band");
+        mid.style.height = "";
+        mid.style.marginTop = "";
+        return;
+      }
+      mid.classList.add("jk-mid-band");
+      mid.style.marginTop = Math.round(top) + "px";
+      mid.style.height = Math.round(h) + "px";
+    }
+
     function paint() {
       var gBlue = elScoreBlue.querySelector(".score-glyph");
       var gWhite = elScoreWhite.querySelector(".score-glyph");
@@ -4892,6 +4942,7 @@
       applyVoiceArm();
       if (isFreshBannerOpen()) paintFreshServeBtns();
       pushBle(false);
+      fitCyberMid();
     }
 
     /* JK_BLE_PUSH: 화면 좌·우 점수를 시계 GATT로. 되돌리: pushBle·AndroidBleScore 호출 삭제 */
@@ -5643,6 +5694,8 @@
 
     loadState();
     paint();
+    window.addEventListener("resize", fitCyberMid);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCyberMid);
     refreshPadBox();
     if (isServePickPending()) setStatus(t("needServe"));
     /* JK_MID_FIT: 시각·경기시간 갱신. 되돌리: 이 타이머·paintMidClocks 삭제 */

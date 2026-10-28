@@ -1,5 +1,35 @@
 # 수정기록 — Jokguboard
 
+## 2026-10-28 사이버 가운데 칸 높이 (JK_CYBER_MID_BAND)
+
+족구 보드 자체 코드만 변경. 점수 규칙·저장 형식은 그대로. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. 외부 화면의 클래스 이름·스타일 블록은 가져오지 않았다.
+
+사이버 모습(`skin-cyber3d`)에서 좌우가 가로로 놓일 때만, 가운데 칸의 위쪽과 높이를 왼쪽 큰 점수 칸과 같게 둔다. 다른 모습과 좁은 화면의 세로 배치는 이전처럼 칸 전체를 쓴다. 새 경기 버튼의 클릭은 그대로다. 되돌리기는 `JK_CYBER_MID_BAND` 블록과 `fitCyberMid` 호출을 지우면 된다.
+
+### APK
+`app-debug-1028_1738-cybermid.apk` (pending)
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0. Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
+
+### 보안
+칸 높이만 화면에서 읽는다. 입력·저장·권한은 이전과 같다. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `jokgu_scoreboard.html`의 `JK_CYBER_MID_BAND`, help 3종, `index.html`, docs, `수정기록.txt`, Android assets www
+- 신규 파일: `downloads/app-debug-1028_1738-cybermid.apk`
+- 재사용: `.mid`, `#scoreBlue`, `paint`
+- 미수정: `MainActivity.kt`, 승패 규칙
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-10-28 `gh search code`로 `JK_CYBER_MID_BAND`를 검색했다. 일치 결과가 없었다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 가운데 칸을 옆 점수 칸 높이에 맞추는 것. 일반 화면 배치다.
+
+---
 ## 2026-10-28 새 경기 카드 검정 (JK_FRESH_DARK)
 
 족구 보드 자체 CSS만 변경. 점수 규칙·저장 형식은 그대로. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사. 외부 화면의 클래스 이름·스타일 블록은 가져오지 않았다.
