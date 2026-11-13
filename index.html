@@ -34,6 +34,12 @@
       border-radius: 10px;
       margin: 6px 8px 6px 0;
     }
+    /* VISIT_STATS_PV: 허브 하단. 되돌리: 이 규칙·#appVisitStats·initVisitStats 삭제 */
+    .app-visit-stats {
+      margin: 8px 0 0;
+      color: rgba(243, 239, 228, 0.72);
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -59,6 +65,73 @@
         <a href="/help_zh.html">中文</a>
       </p>
     </div>
+    <p class="app-visit-stats" id="appVisitStats" hidden aria-hidden="true"></p>
   </main>
+  <script>
+    /* VISIT_STATS_PV: Vercel /api/visit·/api/stats. 되돌리: 이 스크립트 삭제 */
+    (function initVisitStats() {
+      var el = document.getElementById("appVisitStats");
+      if (!el) return;
+      var host = location.hostname;
+      var isLocal = host === "localhost" || host === "127.0.0.1";
+
+      function fmt(n) {
+        var x = parseInt(n, 10);
+        return isNaN(x) || x < 0 ? "0" : String(x);
+      }
+
+      function render(data) {
+        if (!data || !data.domestic || !data.foreign) {
+          el.hidden = true;
+          el.setAttribute("aria-hidden", "true");
+          return;
+        }
+        el.textContent =
+          "국내전체: " +
+          fmt(data.domestic.total) +
+          ", 국내오늘: " +
+          fmt(data.domestic.today) +
+          ", 국외전체: " +
+          fmt(data.foreign.total) +
+          ", 국외오늘: " +
+          fmt(data.foreign.today);
+        el.hidden = false;
+        el.setAttribute("aria-hidden", "false");
+      }
+
+      function loadStats() {
+        fetch("/api/stats", { cache: "no-store" })
+          .then(function (r) {
+            return r.ok ? r.json() : null;
+          })
+          .then(render)
+          .catch(function () {
+            el.hidden = true;
+          });
+      }
+
+      if (!isLocal) {
+        var dayKey = "jokgu-visit-day";
+        var today = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Seoul",
+        }).format(new Date());
+        var counted = "";
+        try {
+          counted = localStorage.getItem(dayKey) || "";
+        } catch (e) {}
+        if (counted !== today) {
+          fetch("/api/visit", { method: "POST", keepalive: true })
+            .then(function (r) {
+              if (!r || !r.ok) return;
+              try {
+                localStorage.setItem(dayKey, today);
+              } catch (e) {}
+            })
+            .catch(function () {});
+        }
+        loadStats();
+      }
+    })();
+  </script>
 </body>
 </html>
