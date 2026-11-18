@@ -1,5 +1,34 @@
 # 수정기록 — Jokguboard
 
+## 2026-11-18 랜딩 상단 이미지 (HERO_GIF)
+
+웹 랜딩 `index.html`만 변경. 점수판·도움말·Android·점수 규칙은 그대로. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
+
+상단 이미지를 저장소에 있던 `home.gif`로 바꿨다. 이전 파일 `jokgu-argument-fast.gif`는 삭제하지 않았다. 되돌리기는 `index.html`의 `HERO_GIF` 주석대로 `src`를 `/jokgu-argument-fast.gif`로 두면 된다.
+
+### APK
+없음. 이 이미지는 웹 랜딩에만 있다. Android WebView는 `jokgu_scoreboard.html`을 연다. 현재 배포 APK 파일명은 그대로 `app-debug-1028_1751-cybertop.apk`.
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron, `LICENSE-FONTS.txt`). 이번 수정은 글꼴을 바꾸지 않았다. Play 스토어 권한·매니페스트 변경 없음.
+
+### 보안
+같은 출처의 정적 이미지 경로만 바꿨다. 사용자 입력·저장·권한은 이전과 같다. 사용자 HTML 삽입 없음.
+
+### 신규 / 재사용 / 변경
+- 변경: `index.html`의 상단 `src`, `수정기록.txt`
+- 재사용: 저장소 루트의 `home.gif` (기존 미추적 파일을 이번 커밋에 포함)
+- 미수정: `jokgu_scoreboard.html`, help 3종, Android, docs, `jokgu-argument-fast.gif`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+2026-11-18 `gh search code`로 `HERO_GIF`를 검색했다. 나온 항목은 다른 저장소의 `hero_gif()` 함수 이름뿐이고, 이 랜딩 주석이나 `/home.gif` 경로와 같은 구현은 없었다. 새 함수는 없다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 이번 변경에 특허 검토가 필요한 새 기술 구성은 없다. 정적 이미지 교체다.
+
+---
 ## 2026-10-28 사이버 가운데 칸 위쪽 (JK_CYBER_MID_BAND)
 
 족구 보드 자체 코드만 변경. 점수 규칙·저장 형식은 그대로. `MainActivity.kt` 미수정. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
