@@ -1,8 +1,8 @@
 # 족구 점수판 PRD
 
 **제품:** Jokguboard  
-**정리일:** 2026-10-28  
-**현재 설치 APK:** `app-debug-1028_1751-cybertop.apk`  
+**정리일:** 2026-11-20  
+**현재 설치 APK:** `app-debug-1120_0954-jokicon.apk`  
 **웹:** https://jokguboard.vercel.app  
 **저장소:** https://github.com/golee75git/Jokguboard.git  
 
@@ -63,6 +63,7 @@ APK 버전: [jokgu-apk.md](jokgu-apk.md)
 - Vercel 정적 (`/` 랜딩, `/play` → `jokgu_scoreboard.html`)
 - TTS: 득점·서브·세트·경기. Android `AndroidTTS`, 웹 `speechSynthesis`. 음성 사용 스위치와 별개. 시작 버튼은 음성 사용이 켜져 있을 때만 반응하고 마이크는 열지 않음. MP3 팩·마이크 권한 없음
 - BLE: 기존 Score 시계와 같은 GATT 패킷 v2. Android 12+ 연결·advertise 권한
+- 런처 아이콘: 저장소 `jokicon.png`를 투명 여백 없이 칸에 채움. 빈 픽셀은 검정(`JK_APP_ICON`). 이전 원 벡터는 `drawable/ic_app.xml`에 남겨 되돌릴 수 있다.
 - 보드 모습: 자체 look + Score 스킨 CSS를 족구 DOM에 연결. 탁구장 PNG·카메라·liverec 없음
 
 ## 제외 · 나중

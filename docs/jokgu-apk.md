@@ -1,9 +1,9 @@
 # APK 버전별 수정사항
 
 **제품:** Jokguboard  
-**정리일:** 2026-10-28  
-**현재 설치:** `app-debug-1028_1751-cybertop.apk`  
-**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-1028_1751-cybertop.apk  
+**정리일:** 2026-11-20  
+**현재 설치:** `app-debug-1120_0954-jokicon.apk`  
+**다운로드:** https://jokguboard.vercel.app/downloads/app-debug-1120_0954-jokicon.apk  
 
 랜딩(`/`)과 도움말 3종 상단에 현재 파일명을 표시한다. 모두 debug 빌드이며 Play 스토어 제출용이 아니다.
 
@@ -57,10 +57,11 @@
 | `app-debug-1028_1719-freshdark.apk` | 17:19 | 새 경기 카드 검정 | `5a466b4` |
 | `app-debug-1028_1738-cybermid.apk` | 17:38 | 사이버 가운데 칸을 큰 점수 높이에 맞춤 | `2d18d2d` |
 | `app-debug-1028_1751-cybertop.apk` | 17:51 | 사이버 가운데 칸 위를 큰 숫자에 맞춤 | `6be2058` |
+| `app-debug-1120_0954-jokicon.apk` | 09:54 | 런처 아이콘을 jokicon.png로 채움 | |
 
 ## 현재 버전에서 쓰는 것
 
-`app-debug-1028_1751-cybertop.apk`가 위 표를 모두 이은 최신이다.
+`app-debug-1120_0954-jokicon.apk`가 위 표를 모두 이은 최신이다.
 
 - 족구 랠리 득점, 사이드아웃 시 직전 서브 팀만 1→2→3→4
 - Futnet 기본 11점 캡 15. 목표 15·21은 상한 없이 2점 차. 득점자 서브
@@ -75,5 +76,7 @@
 - APK 전용 가운데·아래 버튼 패드 위치 맞추기(실측 결과 이 리모컨은 좌표 클릭이 아니라 제스처를
   보냄: 가운데·아래는 눌림·뗌 사이 경과시간·이동거리, 위는 좌표 없는 단독 시스템 신호로 인식),
   외부 BT 음량 좌우 득점, 갤럭시 탭 S9+(SM-X816N) 실기기 확인 완료
+
+- 런처 아이콘은 저장소 `jokicon.png`를 칸에 채운다(`JK_APP_ICON`). 빈 픽셀은 검정이고 흰 여백은 없다.
 
 이전 APK는 `downloads/`에 보관한다. 설치 안내는 최신 파일명만 가리킨다.

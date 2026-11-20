@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JK_APP_ICON: 루트 jokicon.png 를 검은 바탕에 맞춰 런처 칸에 채운다. 되돌리: 이 파일과 drawable-nodpi/jk_mark.png 를 지우고 매니페스트 icon·roundIcon 을 @drawable/ic_app 로. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/jk_mark" />
+    <foreground android:drawable="@drawable/jk_mark" />
+</adaptive-icon>
