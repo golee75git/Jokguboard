@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- JK_APP_ICON: 루트 jokicon1.png 전체를 검정 칸 가운데 안전 영역에 둔다. 잘림·흰 여백 없음. 되돌리: 이 파일과 drawable-nodpi/jk_mark.png 를 지우고 매니페스트 icon·roundIcon 을 @drawable/ic_app 로. -->
+<!-- JK_APP_ICON: 루트 jokicon1.png 전체를 흰 칸 가운데 안전 영역에 둔다. 그림은 잘리지 않는다. 되돌리: 이 파일과 drawable-nodpi/jk_mark.png 를 지우고 매니페스트 icon·roundIcon 을 @drawable/ic_app 로. -->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@drawable/jk_mark" />
     <foreground android:drawable="@drawable/jk_mark" />

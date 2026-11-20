@@ -251,10 +251,15 @@ APK: `app-debug-1028_1751-cybertop.apk`
 런처 아이콘을 저장소의 `jokicon.png`로 바꿈. 투명 여백을 잘라 그림을 칸에 채우고, 빈 곳은 검정이다. 점수판 동작은 그대로.  
 APK: `app-debug-1120_0954-jokicon.apk`
 
-### 오전 10:20 — 앱 아이콘 jokicon1 (현재)
+### 오전 10:20 — 앱 아이콘 jokicon1
 
 런처 아이콘을 `jokicon1.png`로 바꿈. 그림 전체를 검정 칸 가운데에 두어 잘리지 않게 하고, 바깥은 검정이다. 점수판 동작은 그대로.  
-APK: `app-debug-1120_1020-jokicon1.apk` ← **현재 설치**
+APK: `app-debug-1120_1020-jokicon1.apk`
+
+### 오전 10:26 — 앱 아이콘 흰 배경 (현재)
+
+같은 `jokicon1.png` 전체를 유지하고 칸 배경만 흰색으로 바꿈. 점수판 동작은 그대로.  
+APK: `app-debug-1120_1026-iconwhite.apk` ← **현재 설치**
 
 ### 문서만 (소스 없음) — 2026-09-02
 
