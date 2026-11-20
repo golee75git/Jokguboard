@@ -1,5 +1,35 @@
 # 수정기록 — Jokguboard
 
+## 2026-11-20 앱 아이콘 jokicon1 (JK_APP_ICON)
+
+족구 보드 동작은 그대로. 런처 그림만 저장소 루트의 `jokicon1.png`로 바꿨다. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
+
+원본은 1254×1254이고 가장자리가 투명이다. 공·궤적·네트·글자 픽셀을 모두 포함해 런처가 자르는 원 안쪽에 두고, 그 바깥은 검정으로 채웠다. 그림을 잘라내지 않았고 흰 여백은 넣지 않았다. 매니페스트 연결 `@mipmap/ic_app`은 그대로다. 되돌리기는 `mipmap-anydpi-v26/ic_app.xml` 주석대로 매니페스트를 `@drawable/ic_app`로 두면 된다.
+
+### APK
+`app-debug-1120_1020-jokicon1.apk`
+
+### 라이선스
+신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. 아이콘은 이 저장소의 `jokicon1.png`만 가공했다. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron, `LICENSE-FONTS.txt`). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0(core-ktx, appcompat, webkit). Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
+
+### 보안
+런처 비트맵만 바꿨다. 네트워크·사용자 입력·저장·권한은 이전과 같다. 사용자 HTML 삽입 없음. cleartext는 그대로 꺼져 있다.
+
+### 신규 / 재사용 / 변경
+- 신규: `jokicon1.png`, `downloads/app-debug-1120_1020-jokicon1.apk`
+- 변경: `drawable-nodpi/jk_mark.png`, `mipmap-anydpi-v26/ic_app.xml` 주석, help 3종과 Android assets 사본, `index.html`, docs 4종, `수정기록.txt`
+- 재사용: `JK_APP_ICON` 리소스 이름 `jk_mark`, 매니페스트 `@mipmap/ic_app`, 이전 아이콘 `drawable/ic_app.xml`
+- 미수정: `jokgu_scoreboard.html`, 점수 규칙, `MainActivity.kt`
+- 외부 미수정: `C:\Score`, `C:\PickleBoard`, `C:\sports_scoreboard`
+
+### GitHub 코드 검색
+리소스 이름 `jk_mark`는 직전 커밋에서 이미 확인했다. 이번엔 그림 파일만 바꿨고 새 식별자를 만들지 않았다. 다른 저장소의 런처 XML은 가져오지 않았다.
+
+### 특허 (검토 여지 · 비침해 보장 아님)
+법률 자문이 아니다. 침해 없음을 보장하지 않는다. 청구항 문장을 코드·문구에 넣지 않았다.
+- 이번 변경에 특허 검토가 필요한 새 기술 구성은 없다. 기존 그림 파일을 앱 런처 칸에 넣는 것이다.
+
+---
 ## 2026-11-20 앱 아이콘 (JK_APP_ICON)
 
 족구 보드 동작은 그대로. 런처 아이콘만 저장소 루트의 `jokicon.png`로 바꿨다. `C:\Score` · `C:\PickleBoard` · `C:\sports_scoreboard` 미수정·미복사.
