@@ -7,7 +7,7 @@
 매니페스트 연결 `@mipmap/ic_app`은 그대로다. 되돌리기는 `mipmap-anydpi-v26/ic_app.xml` 주석대로 매니페스트를 `@drawable/ic_app`로 두면 된다.
 
 ### APK
-`app-debug-1120_1026-iconwhite.apk`
+`app-debug-1120_1026-iconwhite.apk` (`4866d67`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. 아이콘은 이 저장소의 `jokicon1.png`만 다시 그렸다. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron, `LICENSE-FONTS.txt`). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0(core-ktx, appcompat, webkit). Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
