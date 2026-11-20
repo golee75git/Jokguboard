@@ -7,7 +7,7 @@
 원본은 1254×1254 RGB이고 알파 채널이 없다. 그림 전체를 512×512로 줄여 `drawable-nodpi/jk_mark.png`에 넣었다. 투명 칸이 없어 검정으로 덮을 픽셀은 없다. 기기 런처 마스크는 모양에 따라 바깥 가장자리를 가릴 수 있다. 공과 「족구」는 가운데에 있다. 매니페스트 연결 `@mipmap/ic_app`은 그대로다. 되돌리기는 `mipmap-anydpi-v26/ic_app.xml` 주석대로 매니페스트를 `@drawable/ic_app`로 두면 된다.
 
 ### APK
-`app-debug-1120_1137-jokicon.apk`
+`app-debug-1120_1137-jokicon.apk` (`230dc01`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. 아이콘은 이 저장소의 `jokicon.png`만 줄였다. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron, `LICENSE-FONTS.txt`). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0(core-ktx 1.12.0, appcompat 1.6.1, webkit 1.10.0). Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.

@@ -60,7 +60,7 @@
 | `app-debug-1120_0954-jokicon.apk` | 09:54 | 런처 아이콘을 jokicon.png로 채움 | `2ec1578` |
 | `app-debug-1120_1020-jokicon1.apk` | 10:20 | jokicon1.png 전체를 검정 칸에 표시 | `5f01982` |
 | `app-debug-1120_1026-iconwhite.apk` | 10:26 | jokicon1.png 전체를 흰 칸에 표시 | `4866d67` |
-| `app-debug-1120_1137-jokicon.apk` | 11:37 | jokicon.png 전체를 칸에 채움 | |
+| `app-debug-1120_1137-jokicon.apk` | 11:37 | jokicon.png 전체를 칸에 채움 | `230dc01` |
 
 ## 현재 버전에서 쓰는 것
 
