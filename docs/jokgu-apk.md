@@ -57,7 +57,7 @@
 | `app-debug-1028_1719-freshdark.apk` | 17:19 | 새 경기 카드 검정 | `5a466b4` |
 | `app-debug-1028_1738-cybermid.apk` | 17:38 | 사이버 가운데 칸을 큰 점수 높이에 맞춤 | `2d18d2d` |
 | `app-debug-1028_1751-cybertop.apk` | 17:51 | 사이버 가운데 칸 위를 큰 숫자에 맞춤 | `6be2058` |
-| `app-debug-1120_0954-jokicon.apk` | 09:54 | 런처 아이콘을 jokicon.png로 채움 | |
+| `app-debug-1120_0954-jokicon.apk` | 09:54 | 런처 아이콘을 jokicon.png로 채움 | `2ec1578` |
 
 ## 현재 버전에서 쓰는 것
 

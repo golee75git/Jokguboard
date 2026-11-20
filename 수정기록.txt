@@ -7,7 +7,7 @@
 원본은 1254×1254이고 가장자리가 투명이다. 그 투명 칸을 잘라 그림이 정사각형을 채우게 맞춘 뒤, 남은 투명 픽셀은 검정으로 덮어 불투명 PNG로 저장했다. 흰 여백은 넣지 않았다. 매니페스트 `android:icon`·`android:roundIcon`은 `@mipmap/ic_app`이다. 이전 원 벡터 `drawable/ic_app.xml`은 삭제하지 않았다. 되돌리기는 `mipmap-anydpi-v26/ic_app.xml` 주석대로 매니페스트를 `@drawable/ic_app`로 두면 된다.
 
 ### APK
-`app-debug-1120_0954-jokicon.apk`
+`app-debug-1120_0954-jokicon.apk` (`2ec1578`)
 
 ### 라이선스
 신규 npm 없음. `package.json` 없음. GPL 없음. 새 라이브러리 없음. 아이콘은 이 저장소의 `jokicon.png`만 가공했다. SIL OFL 1.1 글꼴은 그대로(Noto Sans KR · Jua · Do Hyeon · Orbitron, `LICENSE-FONTS.txt`). 이번 수정은 글꼴을 바꾸지 않았다. AndroidX는 기존 Apache-2.0(core-ktx, appcompat, webkit). Play 스토어 제출용이 아닌 debug APK. 권한 추가 없음.
